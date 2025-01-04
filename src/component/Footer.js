@@ -10,8 +10,9 @@ const Footer = () => {
   const chatGPTItems = ['Overview', 'Enterprise', 'Try ChatGPT'];
   const companyItems = ['About', 'Blog', 'Careers', 'Residency', 'Charter', 'Security', 'Customer Stories'];
 
-  const footer = ['OpenAI © 2015-2023', 'Terms & policies', 'Privacy policy', 'Brand guidlines']
-  const footer2 = ['Twitter', 'YouTube', 'GitHub', 'SoundCloud', 'Linkedin']
+  const footer = ['Copyright Qureka. All rights reserved']
+  // const footer = ['Copyright Qureka. All rights reserved', 'Terms & policies', 'Privacy policy', 'Brand guidlines']
+  // const footer2 = ['Twitter', 'YouTube', 'GitHub', 'SoundCloud', 'Linkedin']
 
   return(
     <>
@@ -49,33 +50,24 @@ const Footer = () => {
         </Row>
       </Container>
       
-      <hr class="separator"></hr>
+      {/* <hr class="separator"></hr> */}
 
-      <Container style = {{marginTop: '1vh', width: '60vw'}}>
-        <Row> 
-          <Col className = "footer" style = {{textAlign: 'left'}}>
-            {
-            footer.map((item, i) => (
-            <div>{item}</div> 
-            ))
-            }
-          </Col>
-          <Col className = "footer">
-            <div style = {{display: 'flex', justifyContent: 'flex-end'}}>
-            {
-              footer2.map((item, i) => (
-              <div style = {{marginRight: i !== footer.length ? '1vw' : '0'}}>{item}</div>
-              ))
-            }
-            </div>
-        
-            <div  style={{ marginTop: '3.5vh', display: 'flex', justifyContent: 'flex-end', cursor: 'pointer'}} 
-            onClick ={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Back to top</div>
-          </Col>
-        </Row>
-      </Container>
-      
-      <div style={{ backgroundColor: 'black', height: '2vh' }}></div>
+      <div style = {{backgroundColor: 'black'}}>
+        <Container style = {{marginTop: '1vh', width: '60vw'}}>
+          <Row> 
+            <Col className = "footer" style = {{textAlign: 'left'}}>
+              <div>
+                Copyright Qureka. All rights reserved
+              </div>
+            </Col>
+            <Col className = "footer">
+              <div  style={{display: 'flex', justifyContent: 'flex-end', cursor: 'pointer'}} 
+              onClick ={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Back to top</div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+
     </>
   )
 };

@@ -2,9 +2,9 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import bg from '../img/universe.jpg'
-import img1 from '../img/nuclear_fusion.jpg';
-import img2 from '../img/quantum_computer.jpg';
-import img3 from '../img/quantum_biden.jpg';
+import img1 from '../img/autonomous.jpg';
+import img2 from '../img/manufacturing.png';
+import img3 from '../img/ar_vr.jpg';
 import ai_safety from '../img/ai_safety.jpg';
 import career from '../img/career.jpg';
 import feynman from '../img/feynman.jpg';
@@ -25,42 +25,67 @@ const Homepage = () => {
 
   return(
     <div>
+      <div style = {{marginTop: '60px'}}>
+        <p style = {{marginTop: '60px'}}>"Your Vision, Perfectly Simulated"</p>
+      </div>
       <img style = {{width: '60vw', backgroundPosition: 'center'}} src={bg} alt = ""/>
       <div className="container" style = {{marginBottom: '3vh', marginTop: '3vh', width: '60vw'}}>
         <div className="row">
-          <div className="col-md-4"><p>Pioneering research on the <br/> path to Quantum AI</p></div>
-          <div className="col-md-4"><p>Transforming work and <br/> creativity with Quantum AI</p></div>
-          <div className="col-md-4"><p>Join us in shaping the future of <br/> technology</p></div>
+          <div className="col-md-4"><p>Predict performance before making</p></div>
+          <div className="col-md-4"><p>Hello</p></div>
+          <div className="col-md-4"><p>Find the right balance between size, cost and performance</p></div>
         </div>
       </div>
 
       <hr class="separator"></hr>
 
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Latest updates</div>
+        <div className="left-text">Products</div>
         <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
         </div>
       </div>
 
       <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
+
+      </div>
+
+      <hr class="separator"></hr>
+
+      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+        <div className="left-text">Use cases</div>
+        {/* <div className="right-text">
+          <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
+        </div> */}
+      </div>
+
+      <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <img style = {{width: '18vw', height: '18vw', backgroundPosition: 'left'}} src={img1} alt=""/>
+            <p>
+              Autonomous systems
+            </p>
+            <img style = {{width: '18vw', height: '10vw', backgroundPosition: 'left'}} src={img1} alt=""/>
             <p style={{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Breathrough in nuclear fusion technology. South Korea's nuclear reactor sets a new world record of 100s running time
+              Validate AI algorithms on a virtual hardware for testing system-level performance
             </p>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <img style = {{width: '18vw', height: '18vw', backgroundPosition: 'center'}} src={img2} alt = ""/>
+            <p>
+              Visual Inspection in Manufacturing
+            </p>
+            <img style = {{width: '18vw', height: '10vw', backgroundPosition: 'center'}} src={img2} alt = ""/>
             <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Quantum computer shows quantum supremacy over world's fastest supercomputer 
+              Test the performance of Inspection algorithms in different light settings
             </p>  
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <img style = {{width: '18vw', height: '18vw', backgroundPosition: 'center'}} src={img3} alt = ""/>
+            <p>
+              Augmented/Virtual Reality
+            </p>
+            <img style = {{width: '18vw', height: '10vw', backgroundPosition: 'center'}} src={img3} alt = ""/>
             <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Joe Biden visits Google's quantum computing center before U.S. quantum initiatives
+              Find the best hardware for your specific algorithm needs
             </p>  
           </div>
         </div>
@@ -141,11 +166,12 @@ const Homepage = () => {
       
       <hr class="separator"></hr>
       
+      
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Careers at OpenAI</div>
+        <div className="left-text">Careers at Qureka</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div>
-            Developing safe and beneficial Quantum AI requires people from a wide range of disciplines and backgrounds.
+            Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, computer vision engineers
           </div>
           <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
             <p>View careers</p>

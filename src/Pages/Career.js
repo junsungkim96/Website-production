@@ -20,7 +20,7 @@ const Careers = () => {
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
-            <p style = {{fontSize: '50px'}}>Careers at QuantumAI</p> <br/>
+            <p style = {{fontSize: '50px'}}>Careers at Qureka</p> <br/>
           </div>
           <div>
             <Button variant = "light" size = "lg" style = {{marginBottom: '50px', marginRight: '1%'}} className = "px-4">
@@ -30,9 +30,9 @@ const Careers = () => {
               <div style = {{fontSize: '20px', fontWeight: 'bold'}}>All locations</div> 
             </Button>
           </div>
-          <div>
+          {/* <div>
             <DownloadButton/>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -10,10 +10,10 @@ import {useNavigate} from 'react-router-dom';
 const Menubar = () => {
   const navigate = useNavigate();
 
-  const researchItems = ['Overview', 'Index', 'GPT-4', 'DALLE-3'];
-  const apiItems = ['Overview', 'Data privacy', 'Pricing', 'Docs'];
-  const chatGPTItems = ['Overview', 'Enterprise', 'Try ChatGPT'];
-  const companyItems = ['About', 'Blog', 'Careers', 'Residency', 'Charter', 'Security', 'Customer Stories'];
+  // const productItems = [];
+  // const researchItems = ['Overview', 'Index', 'GPT-4', 'DALLE-3'];
+  // const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories'];
+  const companyItems = ['About', 'Blog', 'Careers'];
 
   return(
     <>
@@ -26,36 +26,16 @@ const Menubar = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav" style = {{color: 'white'}}>
         <Nav className="me-auto">
-        <NavDropdown title= {<span style = {{color: 'white'}}>Research </span>} id="collapsible-nav-dropdown" className = "navbar-item">
-          {researchItems.map((item, i) => (
-          <NavDropdown.Item key = {i} href = {`#Research/${i}`}>
-            {item}
-          </NavDropdown.Item>
-          )
-          )}
-        </NavDropdown>
+          <Nav.Link href="#Research" style={{ color: 'white' }}>
+            Product
+          </Nav.Link>
+        </Nav>
 
-        <div style = {{marginRight: '0.1vw'}}></div>
-        
-        <NavDropdown title= {<span style = {{color: 'white'}}>API</span>} id="collapsible-nav-dropdown" className = "navbar-item">
-          {apiItems.map((item, i) => (
-          <NavDropdown.Item key = {i} href = {`#API/${i}`}>
-            {item}
-          </NavDropdown.Item>
-          )
-          )}
-        </NavDropdown>
-        
-        <NavDropdown title= {<span style = {{color: 'white'}}>ChatGPT</span>} id="collapsible-nav-dropdown" className = "navbar-item">
-          {chatGPTItems.map((item, i) => (
-          <NavDropdown.Item key = {i} href = {`#ChatGPT/${i}`}>
-            {item}
-          </NavDropdown.Item>
-          ) 
-          )}
-        </NavDropdown>
-
-        <Nav.Link href="#safety">{<span className = "navbar-item" style = {{marginRight: '10px'}}>Safety</span>}</Nav.Link>
+        <Nav className="me-auto">
+          <Nav.Link href="#Research" style={{ color: 'white' }}>
+            Research
+          </Nav.Link>
+        </Nav>
 
         <NavDropdown title={<span style = {{color: 'white'}}>Company</span>} id="collapsible-nav-dropdown" className = "navbar-item">
           {companyItems.map((item, i) => (
@@ -70,9 +50,8 @@ const Menubar = () => {
           )}
         </NavDropdown>
 
-        <Nav.Link href="#Log in" onClick = {()=>{navigate('/login')}}>{<span className = "navbar-item">Login↗</span>}</Nav.Link>
+        <div style = {{marginRight: '10vw'}}></div>
 
-        </Nav>
       </Navbar.Collapse>
 
       </Container>
