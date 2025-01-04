@@ -1,0 +1,159 @@
+.App {
+  text-align: center;
+  background-color:black;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.underline{
+  text-decoration: underline;
+  text-underline-offset: 7px;
+  text-decoration-thickness: 1px;
+}
+
+.background{
+  background-color: black;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff; 
+  padding: 10px; 
+}
+
+.navbar-item{
+  margin-right: 3px;
+  font-size: 18px;
+  color: white;
+}
+
+.update-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+.left-text {
+  text-align: center;
+  order: 1; 
+  font-size: 3.3vh; 
+  padding-left: 20%;
+  font-weight: bold;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.right-text {
+  order: 2; 
+  font-size: 1.5vh; 
+  padding-right: 20%;
+  font-weight: bold; 
+  color: white;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
+
+.separator{
+  border-color: white;
+  border-width: 1.5px;
+}
+
+.thick-separator{
+  border-color: white;
+  border-width: 3px;
+}
+
+.box{
+  display: flex;
+  flex-direction: column;
+}
+
+.black-text{
+  color: black;
+}
+
+.footer{
+  color: white;
+  font-size: 1.15vh;
+}
+
+#collapsible-nav-dropdown{
+  color: white;
+}
+
+.padded-button{
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.career-left-text{
+    text-align: left;
+    order: 1; 
+    font-size: 20px; 
+    padding-left: 20%;
+    font-weight: bold;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.body{
+  background-color: black;
+}
+
+p{
+  color: white;
+  font-size: 1.8vh;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+p2{
+  color: white;
+  font-size: 80%;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  padding-top: 10%
+}
+
+.account{
+  align-items: 'center';
+}
