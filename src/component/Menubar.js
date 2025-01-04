@@ -18,44 +18,47 @@ const Menubar = () => {
   return(
     <>
     <Navbar collapseOnSelect className="body" 
-    style={{ position: 'fixed', top: 0, left: 0, width: '100%', backgroundColor: 'black', height: '60px', zIndex: 1, marginBottom: '50px'}}>
-      <Container style = {{position: 'fixed', left: 0, paddingLeft: '20vw'}}>
-      <img src={logo} alt = "" style = {{marginRight: '0.2vw', width: '30px'}}/>
-      <Navbar.Brand href="#home" style = {{color: 'white', marginRight: '4vw'}} 
-      onClick = {()=> navigate('/')}>Qureka</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav" style = {{color: 'white'}}>
-        <Nav className="me-auto">
-          <Nav.Link href="#Research" style={{ color: 'white' }}>
-            Product
-          </Nav.Link>
-        </Nav>
+      style={{ position: 'fixed', top: 0, left: 0, width: '100%', backgroundColor: 'black', height: '60px', zIndex: 1, marginBottom: '50px' }}>
+      <Container style={{ position: 'fixed', left: 0, paddingLeft: '20vw' }}>
+        <img src={logo} alt="" style={{ marginRight: '0.2vw', width: '30px' }} />
+        <Navbar.Brand style={{ color: 'white', marginRight: '4vw', cursor: 'pointer' }} onClick={() => navigate('/')}>
+          Qureka
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav" style={{ color: 'white' }}>
+          <Nav className="me-auto">
+            {/* Removed href and used only onClick for navigate */}
+            <Nav.Link style={{ color: 'white' }} onClick={() => navigate('/product')}>
+              Product
+            </Nav.Link>
+          </Nav>
 
-        <Nav className="me-auto">
-          <Nav.Link href="#Research" style={{ color: 'white' }}>
-            Research
-          </Nav.Link>
-        </Nav>
+          <Nav className="me-auto">
+            <Nav.Link style={{ color: 'white' }}>
+              Research
+            </Nav.Link>
+          </Nav>
 
-        <NavDropdown title={<span style = {{color: 'white'}}>Company</span>} id="collapsible-nav-dropdown" className = "navbar-item">
-          {companyItems.map((item, i) => (
-          <NavDropdown.Item key = {i} href = {`#Company/${i}`} onClick = {()=>{
-            if (item === 'Careers'){
-              navigate('/careers');
-            }
-          }}>
-            {item}
-          </NavDropdown.Item>
-          )
-          )}
-        </NavDropdown>
+          <NavDropdown title={<span style={{ color: 'white' }}>Company</span>} id="collapsible-nav-dropdown" className="navbar-item">
+            {companyItems.map((item, i) => (
+              <NavDropdown.Item
+                key={i}
+                onClick={() => {
+                  if (item === 'Careers') {
+                    navigate('/careers');
+                  }
+                }}
+              >
+                {item}
+              </NavDropdown.Item>
+            ))}
+          </NavDropdown>
 
-        <div style = {{marginRight: '10vw'}}></div>
-
-      </Navbar.Collapse>
-
+          <div style={{ marginRight: '1vw' }}></div>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
+
 
     </>
   )

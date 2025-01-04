@@ -8,12 +8,9 @@ import img3 from '../img/ar_vr.jpg';
 import ai_safety from '../img/ai_safety.jpg';
 import career from '../img/career.jpg';
 import feynman from '../img/feynman.jpg';
-import product1 from '../img/superconductor.jpg';
-import product2 from '../img/arc_reactor.jpg';
-import product3 from '../img/material.jpg';
-import product4 from '../img/vaccine.jpg';
 import {useNavigate} from 'react-router-dom';
 import {useLayoutEffect} from 'react';
+import videoSource from '../video/Quasar_simulator.mp4';
 
 
 const Homepage = () => {
@@ -25,15 +22,20 @@ const Homepage = () => {
 
   return(
     <div>
-      <div style = {{marginTop: '60px'}}>
-        <p style = {{marginTop: '60px'}}>"Your Vision, Perfectly Simulated"</p>
+      <div style = {{marginTop: '60px', marginBottom: '100px', height: '100px'}}>
+        <p>"Your Vision, Perfectly Simulated"</p>
       </div>
-      <img style = {{width: '60vw', backgroundPosition: 'center'}} src={bg} alt = ""/>
+      {/* <img style = {{width: '60vw', backgroundPosition: 'center'}} src={bg} alt = ""/> */}
+
+      <video style={{ width: '60vw', backgroundPosition: 'center' }} autoPlay loop muted>
+        <source src={videoSource} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       <div className="container" style = {{marginBottom: '3vh', marginTop: '3vh', width: '60vw'}}>
         <div className="row">
-          <div className="col-md-4"><p>Predict performance before making</p></div>
-          <div className="col-md-4"><p>Hello</p></div>
-          <div className="col-md-4"><p>Find the right balance between size, cost and performance</p></div>
+          <div className="col-md-6"><p>Predict performance without a physical prototype</p></div>
+          <div className="col-md-6"><p>Find the right balance between size, cost and performance</p></div>
         </div>
       </div>
 
@@ -124,45 +126,39 @@ const Homepage = () => {
       <hr class="separator"></hr>
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Products</div>
+        <div className="left-text">Strengths</div>
         <div className="right-text" style = {{width: '45vw'}}>
-          <div>
-            Our API platform offers our latest models and guides for safety best practices.
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              World Class Accuracy
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Recognized by computer vision engineers as the most complete computer vision system available
+            </div>
           </div>
-          <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}}>
-            <p>Explore our products</p>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Customizable
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              The system is so flexbible that you can simulate any vision hardware you want
+            </div>
+          </div>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Secure and Private
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Ensure the security and confidentiality of your design specifications by utilizing on-premise deployment, 
+              which keeps your data and intellectual property within your own infrastructure
+            </div>
           </div>
         </div>
       </div>
 
-      <div style = {{marginBottom: '3.5vh', marginTop: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
-        <div className="row" style = {{marginBottom: '7vh', display: 'flex', alignItems: 'flex-start'}}>
-          <div className="col-md-3">
-            <img style = {{width: '14vw', height: '10vw', overflow: 'hidden'}} src={product1} alt = ""/>
-            <p style = {{textAlign: 'center', marginTop: '1.5vh'}}>
-              Room-temperature superconductor
-            </p>  
-          </div>
-          <div className="col-md-3">
-            <img style = {{width: '14vw', height: '10vw'}} src={product2} alt = ""/>
-            <p style = {{textAlign: 'center', marginTop: '1.5vh'}}>
-              Miniaturized arc reactor
-            </p>  
-          </div>
-          <div className="col-md-3">
-            <img style = {{width: '14vw', height: '10vw'}} src={product3} alt = ""/>
-            <p style = {{textAlign: 'center', marginTop: '1.5vh'}}>
-              Material synthesis simulation software
-            </p>  
-          </div>
-          <div className="col-md-3">
-            <img style = {{width: '14vw', height: '10vw'}} src={product4} alt = ""/>
-            <p style = {{textAlign: 'center', marginTop: '1.5vh'}}>
-              Vaccine simulation software
-            </p>  
-          </div>
-        </div>
-      </div>
       
       <hr class="separator"></hr>
       
@@ -181,19 +177,17 @@ const Homepage = () => {
 
       <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '5vh'}} src={career} alt = "" />
       
-      <hr class="separator"></hr>
+      {/* <hr class="separator"></hr> */}
 
-      <div className = "container" style = {{marginTop: '5vh', marginBottom: '5vh', width: '60vw'}}>
+      {/* <div className = "container" style = {{marginTop: '5vh', marginBottom: '5vh', width: '60vw'}}>
         <div className = "row" style = {{display: 'flex', alignItems: 'center'}}>
-          <div className="col-md-6">
-            <p style = {{fontSize: '2.3vh', textAlign: 'left'}}>Nature isn't classical, dammit, and if you want to make a simulation of nature, 
-            you better make it quantum mechanical.</p>
-          </div>
-          <div className="col-md-6">
-            <img style = {{width: '30vw'}} src={feynman} alt = ""/>    
+          <div className="col-md-12">
+            <p style = {{fontSize: '2.3vh', textAlign: 'left'}}>
+              We make computer vision systems accessible to everyone!
+            </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
 
@@ -206,6 +200,9 @@ const Homepage = () => {
           View Careers 
         </Button>
       </div>
+
+      <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
+
     </div>
   )
 };

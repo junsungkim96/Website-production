@@ -1,7 +1,7 @@
 import '../App.css';
 import Button from 'react-bootstrap/Button';
 import React, {useLayoutEffect, useState} from 'react';
-import DownloadButton from '../component/DownloadBtn';
+// import DownloadButton from '../component/DownloadBtn';
 import data from '../data/Career_data.js';
 import {MdArrowDropDown} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
