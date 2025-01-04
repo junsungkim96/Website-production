@@ -22,7 +22,7 @@ const Menubar = () => {
       <Container style = {{position: 'fixed', left: 0, paddingLeft: '20vw'}}>
       <img src={logo} alt = "" style = {{marginRight: '0.2vw', width: '30px'}}/>
       <Navbar.Brand href="#home" style = {{color: 'white', marginRight: '4vw'}} 
-      onClick = {()=> navigate('/')}>QuantumAI</Navbar.Brand>
+      onClick = {()=> navigate('/')}>Qureka</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav" style = {{color: 'white'}}>
         <Nav className="me-auto">
