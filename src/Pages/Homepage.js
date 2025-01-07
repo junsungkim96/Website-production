@@ -1,13 +1,12 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import bg from '../img/universe.jpg'
 import img1 from '../img/autonomous.jpg';
 import img2 from '../img/manufacturing.png';
 import img3 from '../img/ar_vr.jpg';
-import ai_safety from '../img/ai_safety.jpg';
+import img4 from '../img/physics_simulation.jpg';
+import img5 from '../img/ai_algorithm.jpg';
 import career from '../img/career.jpg';
-import feynman from '../img/feynman.jpg';
 import {useNavigate} from 'react-router-dom';
 import {useLayoutEffect} from 'react';
 import videoSource from '../video/Quasar_simulator.mp4';
@@ -22,30 +21,145 @@ const Homepage = () => {
 
   return(
     <div>
-      <div style = {{marginTop: '60px', marginBottom: '100px', height: '100px'}}>
-        <p>"Your Vision, Perfectly Simulated"</p>
+      
+      <div style = {{height: '150px'}}>
+
       </div>
-      {/* <img style = {{width: '60vw', backgroundPosition: 'center'}} src={bg} alt = ""/> */}
+
+      <div style = {{/*marginTop: '60px',*/ marginBottom: '100px', height: '100px'}}>
+        <p style = {{fontSize: '45px'}}></p>
+      </div>
+
+      <div className="container" style={{ marginBottom: '3vh', marginTop: '3vh', width: '60vw' }}>
+        <div className="row">
+          {/* First Image */}
+          <div className="col-md-6" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{
+                width: '100%',
+                height: '400px', // Set a fixed height
+                objectFit: 'cover', // Maintain aspect ratio and crop as needed
+                backgroundPosition: 'center',
+              }}
+              src={img4}
+              alt=""
+            />
+            <p>Physics-based Image Simulation</p>
+          </div>
+
+          {/* Second Image */}
+          <div className="col-md-6" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img
+              style={{
+                width: '100%',
+                height: '400px', // Match the height of the first image
+                objectFit: 'cover', // Maintain aspect ratio and crop as needed
+                backgroundPosition: 'center',
+              }}
+              src={img5}
+              alt=""
+            />
+            <p>Image-based AI algorithms</p>
+          </div>
+        </div>
+      </div>
+
+      <div style = {{marginTop: '60px', marginBottom: '100px', height: '100px'}}>
+        <p style = {{fontSize: '45px'}}>"Your Vision, Perfectly Simulated"</p>
+      </div>
+
+      <hr class="separator"></hr>
+
+      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+        <div className="left-text">Benefits</div>
+        <div className="right-text" style = {{width: '45vw'}}>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Save Time
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Achieve system validation 100x faster with virtual hardware simulations.
+            </div>
+          </div>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Save Money
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Reduce system validation costs to 1/100 with virtual hardware simulations.
+            </div>
+          </div>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Optimize
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Find the right balance between size, cost and performance  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="container" style = {{marginBottom: '3vh', marginTop: '3vh', width: '60vw'}}>
+        <div className="row">
+          <div className="col-md-6"><p>Predict performance without a physical prototype</p></div>
+          <div className="col-md-6"><p>Find the right balance between size, cost and performance</p></div>
+        </div>
+      </div> */}
+
+      <hr class="separator"></hr>
+
+      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+        <div className="left-text">Product</div>
+        <div className="right-text">
+          <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
+        </div>
+      </div>
 
       <video style={{ width: '60vw', backgroundPosition: 'center' }} autoPlay loop muted>
         <source src={videoSource} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      <div className="container" style = {{marginBottom: '3vh', marginTop: '3vh', width: '60vw'}}>
-        <div className="row">
-          <div className="col-md-6"><p>Predict performance without a physical prototype</p></div>
-          <div className="col-md-6"><p>Find the right balance between size, cost and performance</p></div>
-        </div>
+      <div style = {{marginBottom: '3vh'}}>
+        <p style = {{fontSize: '1.7vw'}}></p>
       </div>
 
-      <hr class="separator"></hr>
+      {/* <div class = "container" style = {{marginBottom: '10vh'}}>
+        <Button variant = "light" size = "lg" className = "px-4"
+        onClick = {()=> navigate('/product')}>
+          View detailed product features
+        </Button>
+      </div> */}
 
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Products</div>
-        <div className="right-text">
-          <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
-        </div>
+      <div className="container" style={{ marginBottom: '10vh' }}>
+        <Button
+          variant="light"
+          size="lg"
+          className="px-4"
+          style={{
+            transition: 'all 0.3s ease', // Smooth transition for hover effect
+            backgroundColor: '#f8f9fa', // Light gray background (Bootstrap light variant default)
+            color: 'black', // Default text color
+            border: '1px solid #ccc', // Default border
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = '#d6d8db'; // Darker background on hover
+            e.target.style.color = '#000'; // Ensure text remains visible
+            e.target.style.borderColor = '#6c757d'; // Even darker border for hover
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = '#f8f9fa'; // Reset background color
+            e.target.style.color = 'black'; // Reset text color
+            e.target.style.borderColor = '#ccc'; // Reset border color
+          }}
+          onClick={() => navigate('/product')}
+        >
+          View detailed product features
+        </Button>
       </div>
 
       <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
@@ -95,7 +209,7 @@ const Homepage = () => {
 
       <hr class="separator"></hr>
 
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+      {/* <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Safety & Responsibility</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div>
@@ -105,17 +219,16 @@ const Homepage = () => {
             <p>Learn about safety</p>
           </div>
         </div>
-      </div>
+      </div> */}
+      {/* <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '3.5vh'}}  src={ai_safety} alt = "" /> */}
 
-      <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '3.5vh'}}  src={ai_safety} alt = "" />
-
-      <hr class="separator"></hr>
+      {/* <hr class="separator"></hr> */}
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Research</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div>
-            We research generative models and how to align them with human values.
+            We research deep learning based computer vision system optimization.
           </div>
           <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}}>
             <p>Learn about our research</p>

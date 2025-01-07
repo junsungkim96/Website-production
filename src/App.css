@@ -96,6 +96,8 @@
 .separator{
   border-color: white;
   border-width: 1.5px;
+  width: 80vw;
+  margin: 10px auto;
 }
 
 .thick-separator{
