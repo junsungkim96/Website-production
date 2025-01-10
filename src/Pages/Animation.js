@@ -8,7 +8,23 @@ const ParticleBackground = () => {
   };
 
   return (
-    <div style={{ position: 'relative', top: 0, left: 0, height: '100vh', width: '90%', marginLeft: 'auto', marginRight: 'auto' }}>
+    <div style={{ position: 'relative', height: '95vh', width: '90%', marginLeft: 'auto', marginRight: 'auto' }}>
+      
+      <div style={{height: '20vh'}}>
+
+      </div>
+
+      {/* Text Content */}
+      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white' }}>
+        <div style={{ marginTop: '60px', marginBottom: '100px', height: '10px' }}>
+          <p style={{ fontSize: '70px' }}>Your Vision, Perfectly Simulated</p>
+        </div>
+
+        <div style={{ marginTop: '60px', marginBottom: '100px', height: '100px' }}>
+          <p style={{ fontSize: '30px' }}>The ultimate digital twin simulator for computer vision</p>
+        </div>
+      </div>
+      
       {/* Particles background */}
       <Particles
         id="particles-js"
@@ -124,23 +140,18 @@ const ParticleBackground = () => {
           retina_detect: true,
           fullScreen: false,
         }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+        }}
       />
 
-      {/* Text Content */}
-      <div style = {{height: '200px'}}>
-
-      </div>
-      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white' }}>
-        <div style={{ marginTop: '60px', marginBottom: '100px', height: '10px' }}>
-          <p style={{ fontSize: '70px' }}>Your Vision, Perfectly Simulated</p>
-        </div>
-
-        <div style={{ marginTop: '60px', marginBottom: '100px', height: '100px' }}>
-          <p style={{ fontSize: '30px' }}>The ultimate digital twin simulator for computer vision</p>
-        </div>
-      </div>
     </div>
   );
 };
+
 
 export default ParticleBackground;

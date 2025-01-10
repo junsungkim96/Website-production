@@ -30,7 +30,7 @@ const Homepage = () => {
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Product</div>
         <div className="right-text">
-          <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
+          <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product')}>View all product features</p>
         </div>
       </div>
 
@@ -50,7 +50,7 @@ const Homepage = () => {
         </Button>
       </div> */}
 
-      <div className="container" style={{ marginBottom: '10vh' }}>
+      {/* <div className="container" style={{ marginBottom: '10vh' }}>
         <Button
           variant="light"
           size="lg"
@@ -75,7 +75,76 @@ const Homepage = () => {
         >
           View detailed product features
         </Button>
+      </div> */}
+
+      <div style = {{marginTop: '7vh', marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
+        <div className="row">
+          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '100px', paddingBottom: '100px', paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#0693e3' }}>
+              <p style={{fontSize: '2.5vh'}}> 
+                Save Time
+              </p>
+              <p style={{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
+                Achieve system validation ~100x faster <br/> with virtual hardware simulations.
+              </p>
+            </div>
+          </div>
+          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '100px', paddingBottom: '100px', paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#0693e3' }}>
+              <p style={{fontSize: '2.5vh'}}>
+                Save Money
+              </p>
+              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
+              Reduce system validation costs to ~1/100 <br/> with virtual hardware simulations.
+              </p>  
+            </div>
+          </div>
+          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '100px', paddingBottom: '100px', paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#0693e3' }}>
+              <p style={{fontSize: '2.5vh'}}>
+                Optimize
+              </p>
+              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
+                Find the right balance <br/> between size, cost and performance  
+              </p>  
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+        <div className="left-text">Benefits</div>
+        <div className="right-text" style = {{width: '45vw'}}>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Save Time
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Achieve system validation ~100x faster with virtual hardware simulations.
+            </div>
+          </div>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Save Money
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Reduce system validation costs to ~1/100 with virtual hardware simulations.
+            </div>
+          </div>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Optimize
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Find the right balance between size, cost and performance  
+            </div>
+          </div>
+        </div>
+      </div> */}
+
 
       <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
 
@@ -138,41 +207,6 @@ const Homepage = () => {
       {/* <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '3.5vh'}}  src={ai_safety} alt = "" /> */}
 
       {/* <hr class="separator"></hr> */}
-
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Benefits</div>
-        <div className="right-text" style = {{width: '45vw'}}>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Save Time
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Achieve system validation ~100x faster with virtual hardware simulations.
-            </div>
-          </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Save Money
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Reduce system validation costs to ~1/100 with virtual hardware simulations.
-            </div>
-          </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Optimize
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Find the right balance between size, cost and performance  
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <hr class="separator"></hr>
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Strengths</div>
