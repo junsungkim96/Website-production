@@ -5,19 +5,28 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Footer = () => {
-  const researchItems = ['Overview', 'Index', 'GPT-4', 'DALLE-3'];
-  const apiItems = ['Overview', 'Data privacy', 'Pricing', 'Docs'];
-  const chatGPTItems = ['Overview', 'Enterprise', 'Try ChatGPT'];
-  const companyItems = ['About', 'Blog', 'Careers', 'Residency', 'Charter', 'Security', 'Customer Stories'];
+  const productItems = ['Overview', 'Illuminant', 'Scene', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+  const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+  const blogItems = ['Blog'];
+  const companyItems = ['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
 
-  const footer = ['Copyright Qureka. All rights reserved']
+  // const footer = ['© Copyright Qureka. All rights reserved']
   // const footer = ['Copyright Qureka. All rights reserved', 'Terms & policies', 'Privacy policy', 'Brand guidlines']
   // const footer2 = ['Twitter', 'YouTube', 'GitHub', 'SoundCloud', 'Linkedin']
 
   return(
     <>
+      <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
+
       <Container style = {{marginBottom: '3.5vh', marginTop: '10vh', width: '60vw'}}>
         <Row className = "footer">
+          <Col xs = {3}>
+            <div>{productItems[0]}</div>
+            {productItems.slice(1).map((item, i) => (
+              <div style = {{marginTop: '0.2vh'}}> {item} </div>
+              )
+            )}
+          </Col>
           <Col xs = {3}>
             <div>{researchItems[0]}</div>
             {researchItems.slice(1).map((item, i) => (
@@ -26,15 +35,8 @@ const Footer = () => {
             )}
           </Col>
           <Col xs = {3}>
-            <div>{apiItems[0]}</div>
-            {apiItems.slice(1).map((item, i) => (
-              <div style = {{marginTop: '0.2vh'}}> {item} </div>
-              )
-            )}
-          </Col>
-          <Col xs = {3}>
-            <div>{chatGPTItems[0]}</div>
-            {chatGPTItems.slice(1).map((item, i) => (
+            <div>{blogItems[0]}</div>
+            {blogItems.slice(1).map((item, i) => (
               <div style = {{marginTop: '0.2vh'}}> {item} </div>
               )
             )}
@@ -57,7 +59,7 @@ const Footer = () => {
           <Row> 
             <Col className = "footer" style = {{textAlign: 'left'}}>
               <div>
-                Copyright Qureka. All rights reserved
+                © Copyright VisionQ. All rights reserved
               </div>
             </Col>
             <Col className = "footer">

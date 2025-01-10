@@ -4,12 +4,13 @@ import Button from 'react-bootstrap/Button';
 import img1 from '../img/autonomous.jpg';
 import img2 from '../img/manufacturing.png';
 import img3 from '../img/ar_vr.jpg';
-import img4 from '../img/physics_simulation.jpg';
-import img5 from '../img/ai_algorithm.jpg';
+// import img4 from '../img/physics_simulation.jpg';
+// import img5 from '../img/ai_algorithm.jpg';
 import career from '../img/career.jpg';
 import {useNavigate} from 'react-router-dom';
 import {useLayoutEffect} from 'react';
 import videoSource from '../video/Quasar_simulator.mp4';
+import AnimatedBackground from './Animation';
 
 
 const Homepage = () => {
@@ -22,93 +23,7 @@ const Homepage = () => {
   return(
     <div>
       
-      <div style = {{height: '150px'}}>
-
-      </div>
-
-      <div style = {{/*marginTop: '60px',*/ marginBottom: '100px', height: '100px'}}>
-        <p style = {{fontSize: '45px'}}></p>
-      </div>
-
-      <div className="container" style={{ marginBottom: '3vh', marginTop: '3vh', width: '60vw' }}>
-        <div className="row">
-          {/* First Image */}
-          <div className="col-md-6" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <img
-              style={{
-                width: '100%',
-                height: '400px', // Set a fixed height
-                objectFit: 'cover', // Maintain aspect ratio and crop as needed
-                backgroundPosition: 'center',
-              }}
-              src={img4}
-              alt=""
-            />
-            <p>Physics-based Image Simulation</p>
-          </div>
-
-          {/* Second Image */}
-          <div className="col-md-6" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <img
-              style={{
-                width: '100%',
-                height: '400px', // Match the height of the first image
-                objectFit: 'cover', // Maintain aspect ratio and crop as needed
-                backgroundPosition: 'center',
-              }}
-              src={img5}
-              alt=""
-            />
-            <p>Image-based AI algorithms</p>
-          </div>
-        </div>
-      </div>
-
-      <div style = {{marginTop: '60px', marginBottom: '100px', height: '100px'}}>
-        <p style = {{fontSize: '45px'}}>"Your Vision, Perfectly Simulated"</p>
-      </div>
-
-      <hr class="separator"></hr>
-
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Benefits</div>
-        <div className="right-text" style = {{width: '45vw'}}>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Save Time
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Achieve system validation 100x faster with virtual hardware simulations.
-            </div>
-          </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Save Money
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Reduce system validation costs to 1/100 with virtual hardware simulations.
-            </div>
-          </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Optimize
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Find the right balance between size, cost and performance  
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <div className="container" style = {{marginBottom: '3vh', marginTop: '3vh', width: '60vw'}}>
-        <div className="row">
-          <div className="col-md-6"><p>Predict performance without a physical prototype</p></div>
-          <div className="col-md-6"><p>Find the right balance between size, cost and performance</p></div>
-        </div>
-      </div> */}
+      <AnimatedBackground/>
 
       <hr class="separator"></hr>
 
@@ -223,19 +138,40 @@ const Homepage = () => {
       {/* <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '3.5vh'}}  src={ai_safety} alt = "" /> */}
 
       {/* <hr class="separator"></hr> */}
-      
+
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Research</div>
+        <div className="left-text">Benefits</div>
         <div className="right-text" style = {{width: '45vw'}}>
-          <div>
-            We research deep learning based computer vision system optimization.
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Save Time
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Achieve system validation ~100x faster with virtual hardware simulations.
+            </div>
           </div>
-          <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}}>
-            <p>Learn about our research</p>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Save Money
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Reduce system validation costs to ~1/100 with virtual hardware simulations.
+            </div>
+          </div>
+          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
+              Optimize
+            </p>
+            <div style={{ fontSize: '1em', color: 'black' }}>
+              Find the right balance between size, cost and performance  
+            </div>
           </div>
         </div>
       </div>
-      
+
       <hr class="separator"></hr>
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
@@ -274,10 +210,23 @@ const Homepage = () => {
 
       
       <hr class="separator"></hr>
+
+      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+        <div className="left-text">Research</div>
+        <div className="right-text" style = {{width: '45vw'}}>
+          <div>
+            We research deep learning based computer vision system optimization.
+          </div>
+          <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('research')}>
+            <p>Learn about our research</p>
+          </div>
+        </div>
+      </div>
       
+      <hr class="separator"></hr>
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Careers at Qureka</div>
+        <div className="left-text">Careers at VisionQ</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div>
             Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, computer vision engineers
@@ -302,7 +251,7 @@ const Homepage = () => {
         </div>
       </div> */}
 
-      <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
+      {/* <hr class="separator" style = {{marginBottom: '3vh'}}></hr> */}
 
       <div style = {{marginBottom: '3vh'}}>
         <p style = {{fontSize: '1.7vw'}}>Join us in shaping the future of technology</p>
@@ -313,8 +262,6 @@ const Homepage = () => {
           View Careers 
         </Button>
       </div>
-
-      <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
 
     </div>
   )

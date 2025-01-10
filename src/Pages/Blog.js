@@ -1,7 +1,7 @@
 import '../App.css';
 import React, {useLayoutEffect} from 'react';
 
-const Research = () => {
+const Blog = () => {
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
   }, []);
@@ -14,7 +14,7 @@ const Research = () => {
         <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px'}}>
-              Cutting-edge Research
+              Technology Blog
             </p>
             <br/>
           </div>
@@ -45,4 +45,4 @@ const Research = () => {
 };
 
 
-export default Research;
+export default Blog;

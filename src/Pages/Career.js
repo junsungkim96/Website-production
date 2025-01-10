@@ -1,7 +1,6 @@
 import '../App.css';
 import Button from 'react-bootstrap/Button';
 import React, {useLayoutEffect, useState} from 'react';
-// import DownloadButton from '../component/DownloadBtn';
 import data from '../data/Career_data.js';
 import {MdArrowDropDown} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
@@ -20,7 +19,7 @@ const Careers = () => {
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
-            <p style = {{fontSize: '50px'}}>Careers at Qureka</p> <br/>
+            <p style = {{fontSize: '50px'}}>Careers at VisionQ</p> <br/>
           </div>
           <div>
             <Button variant = "light" size = "lg" style = {{marginBottom: '50px', marginRight: '1%'}} className = "px-4">

@@ -11,21 +11,41 @@ import {useState, useEffect} from 'react';
 const Menubar = () => {
   const navigate = useNavigate();
 
-  // const productItems = [];
-  // const researchItems = ['Overview', 'Index', 'GPT-4', 'DALLE-3'];
+  const productItems = ['Overview', 'Illuminant', 'Scene', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+  const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
   // const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories'];
-  const companyItems = ['About', 'Blog', 'Careers', 'Invester Relations', 'News'];
+  const companyItems = ['About', 'Careers', 'Invester Relations', 'News'];
+
   const [scrolled, setScrolled] = useState(false);
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  // Separate dropdown states for each menu
+  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
+  const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
+  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
 
-  const handleMouseEnter = () => {
-    setDropdownOpen(true);
-  }
+  const handleProductMouseEnter = () => {
+    setProductDropdownOpen(true);
+  };
 
-  const handleMouseLeave = () => {
-    setDropdownOpen(false);
-  }
+  const handleProductMouseLeave = () => {
+    setProductDropdownOpen(false);
+  };
+
+  const handleResearchMouseEnter = () => {
+    setResearchDropdownOpen(true);
+  };
+
+  const handleResearchMouseLeave = () => {
+    setResearchDropdownOpen(false);
+  };
+
+  const handleCompanyMouseEnter = () => {
+    setCompanyDropdownOpen(true);
+  };
+
+  const handleCompanyMouseLeave = () => {
+    setCompanyDropdownOpen(false);
+  };
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -49,26 +69,81 @@ const Menubar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease' }}>
-          <Nav className="me-auto">
-            {/* Removed href and used only onClick for navigate */}
-            <Nav.Link style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease' }} onClick={() => navigate('/product')}>
+          
+          <NavDropdown
+            title={<span style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease',
+              fontSize: '1.1rem', // Consistent font size for both
+             }}>
               Product
-            </Nav.Link>
-          </Nav>
+            </span>}
+            id="collapsible-nav-dropdown"
+            className = "navbar-item"
+            show={productDropdownOpen}
+            onMouseEnter={handleProductMouseEnter}
+            onMouseLeave={handleProductMouseLeave}
+            style={{ marginRight: '3.5vw' }}
+          >
+            {productItems.map((item, i) => (
+              <NavDropdown.Item
+                key={i}
+                onClick={() => {
+                  if (item === 'Careers') {
+                    navigate('/careers');
+                  }
+                }}
+              >
+                {item}
+              </NavDropdown.Item>
+            ))}
+          </NavDropdown>
+
+          <NavDropdown
+            title={<span style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease',
+              fontSize: '1.1rem', // Consistent font size for both
+             }}>
+              Research
+            </span>}
+            id="collapsible-nav-dropdown"
+            className="navbar-item"
+            show={researchDropdownOpen}
+            onMouseEnter={handleResearchMouseEnter}
+            onMouseLeave={handleResearchMouseLeave}
+            style={{ marginRight: '3.5vw' }}
+          >
+            {researchItems.map((item, i) => (
+              <NavDropdown.Item
+                key={i}
+                onClick={() => {
+                  if (item === 'Careers') {
+                    navigate('/careers');
+                  }
+                }}
+              >
+                {item}
+              </NavDropdown.Item>
+            ))}
+          </NavDropdown>
 
           <Nav className="me-auto">
-            <Nav.Link style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease' }} onClick={() => navigate('/research')}>
-              Research
+            <Nav.Link style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease', 
+              fontSize: '1.1rem', // Consistent font size for both
+              marginRight: '3.5vw'
+            }} onClick={() => navigate('/blog')}>
+              Blog
             </Nav.Link>
           </Nav>
 
           <NavDropdown
-            title={<span style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease' }}>Company</span>}
+            title={<span style={{ color: scrolled ? 'black' : 'white', transition: 'color 0.3s ease',
+              fontSize: '1.1rem', // Consistent font size for both
+             }}>
+              Company
+            </span>}
             id="collapsible-nav-dropdown"
             className="navbar-item"
-            show={dropdownOpen}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            show={companyDropdownOpen}
+            onMouseEnter={handleCompanyMouseEnter}
+            onMouseLeave={handleCompanyMouseLeave}
           >
             {companyItems.map((item, i) => (
               <NavDropdown.Item

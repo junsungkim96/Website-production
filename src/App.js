@@ -7,6 +7,7 @@ import Footer from './component/Footer';
 import Homepage from './Pages/Homepage';
 import Product from './Pages/Product';
 import Research from './Pages/Research';
+import Blog from './Pages/Blog';
 import Careers from './Pages/Career';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
@@ -24,13 +25,14 @@ const App = () => (
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<MainLayout><Homepage /></MainLayout>} />
-        <Route path="/product" element={<MainLayout><Product /></MainLayout>}/>
-        <Route path="/research" element={<MainLayout><Research /></MainLayout>}/>
-        <Route path="/careers" element={<MainLayout><Careers /></MainLayout>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/apply" element={<ApplicationFrom />} />
+        <Route path="/" element={<MainLayout>< Homepage /></MainLayout>} />
+        <Route path="/product" element={<MainLayout>< Product /></MainLayout>}/>
+        <Route path="/research" element={<MainLayout>< Research /></MainLayout>}/>
+        <Route path="/blog" element={<MainLayout>< Blog /></MainLayout>}/>
+        <Route path="/careers" element={<MainLayout>< Careers /></MainLayout>} />
+        <Route path="/login" element={< Login />} />
+        <Route path="/signup" element={< Signup />} />
+        <Route path="/apply" element={< ApplicationFrom />} />
       </Routes>
     </Suspense>
   </Router>
