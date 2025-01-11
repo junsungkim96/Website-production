@@ -18,7 +18,7 @@ const Footer = () => {
     <>
       <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
 
-      <Container style = {{marginBottom: '3.5vh', marginTop: '10vh', width: '60vw'}}>
+      <Container style = {{marginBottom: '10vh', marginTop: '5vh', width: '60vw'}}>
         <Row className = "footer">
           <Col xs = {3}>
             <div>{productItems[0]}</div>

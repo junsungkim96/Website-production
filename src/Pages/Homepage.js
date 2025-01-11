@@ -11,6 +11,12 @@ import {useNavigate} from 'react-router-dom';
 import {useLayoutEffect} from 'react';
 import videoSource from '../video/Quasar_simulator.mp4';
 import AnimatedBackground from './Animation';
+import money from '../img/cash_save.svg';
+import time from '../img/hourglass.svg';
+import optimize from '../img/optimization.svg';
+import img4 from '../img/security-safe.svg';
+import img5 from '../img/settings-gear.svg';
+import img6 from '../img/specificity.svg';
 
 
 const Homepage = () => {
@@ -77,34 +83,55 @@ const Homepage = () => {
         </Button>
       </div> */}
 
-      <div style = {{marginTop: '7vh', marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
+      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+        <div className="left-text" style = {{fontSize: '2vh'}}>End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
+      </div>
+
+
+      <div style = {{marginTop: '7vh', marginBottom: '10vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '100px', paddingBottom: '100px', paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#0693e3' }}>
-              <p style={{fontSize: '2.5vh'}}> 
-                Save Time
-              </p>
-              <p style={{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', borderRadius: '15px', backgroundColor: '#FFFFFF'}}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <div>
+                  <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={time} alt=""/>
+                </div>
+                <p style={{fontSize: '2.5vh', color: 'rgba(0, 0, 0, 1)', textAlign: 'left', fontFamily: 'Roboto, sans-serif'}}>
+                  Save Time
+                </p>
+              </div>
+
+              <p style={{textAlign: 'left', fontSize: '1.5vh', width: '18vw', color: 'rgba(0, 0, 0, 1)'}}>
                 Achieve system validation ~100x faster <br/> with virtual hardware simulations.
               </p>
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '100px', paddingBottom: '100px', paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#0693e3' }}>
-              <p style={{fontSize: '2.5vh'}}>
-                Save Money
-              </p>
-              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Reduce system validation costs to ~1/100 <br/> with virtual hardware simulations.
+            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', borderRadius: '15px', backgroundColor: '#FFFFFF' }}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <div>
+                  <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={money} alt=""/>
+                </div>
+                <p style={{fontSize: '2.5vh', color: 'rgba(0, 0, 0, 1)', textAlign: 'left', fontFamily: 'Roboto, sans-serif'}}>
+                  Save Money
+                </p>
+              </div>
+              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw', color: 'rgba(0, 0, 0, 1)'}}>
+                Reduce system validation costs to ~1/100 <br/> with virtual hardware simulations.
               </p>  
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '100px', paddingBottom: '100px', paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#0693e3' }}>
-              <p style={{fontSize: '2.5vh'}}>
-                Optimize
-              </p>
-              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', borderRadius: '15px', backgroundColor: '#FFFFFF' }}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <div>
+                  <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={optimize} alt=""/>
+                </div>
+                <p style={{fontSize: '2.5vh', color: 'rgba(0, 0, 0, 1)', textAlign: 'left', fontFamily: 'Roboto, sans-serif'}}>
+                  Optimize
+                </p>
+              </div>
+              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw', color: 'rgba(0, 0, 0, 1)'}}>
                 Find the right balance <br/> between size, cost and performance  
               </p>  
             </div>
@@ -112,43 +139,8 @@ const Homepage = () => {
         </div>
       </div>
 
-      {/* <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Benefits</div>
-        <div className="right-text" style = {{width: '45vw'}}>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Save Time
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Achieve system validation ~100x faster with virtual hardware simulations.
-            </div>
-          </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Save Money
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Reduce system validation costs to ~1/100 with virtual hardware simulations.
-            </div>
-          </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Optimize
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Find the right balance between size, cost and performance  
-            </div>
-          </div>
-        </div>
-      </div> */}
 
-
-      <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
-
-      </div>
+      <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}/>
 
       <hr class="separator"></hr>
 
@@ -159,7 +151,7 @@ const Homepage = () => {
         </div> */}
       </div>
 
-      <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
+      <div style = {{marginBottom: '8vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
             <p>
@@ -193,50 +185,60 @@ const Homepage = () => {
 
       <hr class="separator"></hr>
 
-      {/* <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Safety & Responsibility</div>
-        <div className="right-text" style = {{width: '45vw'}}>
-          <div>
-            Our work to create safe and beneficial AI requires a deep understanding of the potential risks and benefits, as well as careful consideration of the impact
-          </div>
-          <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}}>
-            <p>Learn about safety</p>
-          </div>
-        </div>
-      </div> */}
-      {/* <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '3.5vh'}}  src={ai_safety} alt = "" /> */}
-
-      {/* <hr class="separator"></hr> */}
-      
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+      <div class="update-container" style = {{marginBottom: '10vh', marginTop: '10vh'}}>
         <div className="left-text">Strengths</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
             paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              World Class Accuracy
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Recognized by computer vision engineers as the most complete computer vision system available
+            
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div>
+                <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={img6} alt=""/>
+              </div>
+              <p style={{ fontWeight: 'bold', fontSize: '2.5vh', color: 'black', fontFamily: 'Roboto, sans-serif'}}>
+                World Class Accuracy
+              </p>
+            </div>
+            
+            <div style={{ fontSize: '1.5vh', color: 'black' }}>
+              Recognized by computer vision engineers as the most complete simulation system available
             </div>
           </div>
           <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
             paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Customizable
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
+            
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div>
+                <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={img5} alt=""/>
+              </div>
+              <p style={{ fontWeight: 'bold', fontSize: '2.5vh', color: 'black', fontFamily: 'Roboto, sans-serif' }}>
+                Customizable
+              </p>
+            </div>
+            
+            <div style={{ fontSize: '1.5vh', color: 'black' }}>
               The system is so flexbible that you can simulate any vision hardware you want
             </div>
           </div>
           <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
             paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2em', color: 'black' }}>
-              Secure and Private
-            </p>
-            <div style={{ fontSize: '1em', color: 'black' }}>
-              Ensure the security and confidentiality of your design specifications by utilizing on-premise deployment, 
-              which keeps your data and intellectual property within your own infrastructure
+            
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div>
+                <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={img4} alt=""/>
+              </div>
+              <p style={{ fontWeight: 'bold', fontSize: '2.5vh', color: 'black', fontFamily: 'Roboto, sans-serif' }}>
+                Secure and Private
+              </p>
+            </div>
+            
+            <div style={{ fontSize: '1.5vh', color: 'black' }}>
+              <div style={{marginBottom: '0.7vh'}}>
+                Ensure the security and confidentiality of your design specifications by utilizing on-premise deployment <br/>
+              </div>
+              <div>
+                Keep your data and intellectual property within your own infrastructure
+              </div>
             </div>
           </div>
         </div>
@@ -263,7 +265,7 @@ const Homepage = () => {
         <div className="left-text">Careers at VisionQ</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div>
-            Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, computer vision engineers
+            Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision
           </div>
           <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
             <p>View careers</p>
@@ -273,20 +275,6 @@ const Homepage = () => {
 
       <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '5vh'}} src={career} alt = "" />
       
-      {/* <hr class="separator"></hr> */}
-
-      {/* <div className = "container" style = {{marginTop: '5vh', marginBottom: '5vh', width: '60vw'}}>
-        <div className = "row" style = {{display: 'flex', alignItems: 'center'}}>
-          <div className="col-md-12">
-            <p style = {{fontSize: '2.3vh', textAlign: 'left'}}>
-              We make computer vision systems accessible to everyone!
-            </p>
-          </div>
-        </div>
-      </div> */}
-
-      {/* <hr class="separator" style = {{marginBottom: '3vh'}}></hr> */}
-
       <div style = {{marginBottom: '3vh'}}>
         <p style = {{fontSize: '1.7vw'}}>Join us in shaping the future of technology</p>
       </div>

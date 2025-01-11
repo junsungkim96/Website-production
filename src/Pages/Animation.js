@@ -1,5 +1,6 @@
 import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
+import eye from '../img/eye.png';
 
 const ParticleBackground = () => {
   const particlesInit = async (main) => {
@@ -8,20 +9,24 @@ const ParticleBackground = () => {
   };
 
   return (
-    <div style={{ position: 'relative', height: '95vh', width: '90%', marginLeft: 'auto', marginRight: 'auto' }}>
+    <div style={{ position: 'relative', height: '95vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
       
       <div style={{height: '20vh'}}>
 
       </div>
 
       {/* Text Content */}
-      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white' }}>
-        <div style={{ marginTop: '60px', marginBottom: '100px', height: '10px' }}>
-          <p style={{ fontSize: '70px' }}>Your Vision, Perfectly Simulated</p>
+      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white', pointerEvents: 'auto'}}>
+        <div style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
+          <p style={{ fontSize: '7vh' }}>Your Vision, Perfectly Simulated</p>
         </div>
 
-        <div style={{ marginTop: '60px', marginBottom: '100px', height: '100px' }}>
-          <p style={{ fontSize: '30px' }}>The ultimate digital twin simulator for computer vision</p>
+        <div style={{ marginTop: '2vh', marginBottom: '2vh', height: 'auto' }}>
+          <p style={{ fontSize: '3vh' }}>The ultimate digital twin simulator for Computer Vision</p>
+        </div>
+
+        <div>
+          <img style = {{width: '18vw', height: '18vw', backgroundPosition: 'center'}} src={eye} alt = ""/>
         </div>
       </div>
       
