@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Footer = () => {
-  const productItems = ['Overview', 'Illuminant', 'Scene', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+  const productItems = ['Overview', 'Pricing'];
   const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
   const blogItems = ['Blog'];
   const companyItems = ['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];

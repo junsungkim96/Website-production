@@ -11,7 +11,7 @@ import {useState, useEffect} from 'react';
 const Menubar = () => {
   const navigate = useNavigate();
 
-  const productItems = ['Overview', 'Illuminant', 'Scene', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+  const productItems = ['Overview', 'Pricing'];
   const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
   // const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories'];
   const companyItems = ['About', 'Careers', 'Invester Relations', 'News'];
