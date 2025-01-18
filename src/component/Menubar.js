@@ -7,45 +7,45 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/atom-logo.png';
 import {useNavigate} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import {company_name} from '../data/Company_data';
 
 const Menubar = () => {
   const navigate = useNavigate();
 
   const productItems = ['Overview', 'Pricing'];
   const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
-  // const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories'];
-  const companyItems = ['About', 'Careers', 'Invester Relations', 'News'];
+  const companyItems = ['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
 
   const [scrolled, setScrolled] = useState(false);
 
   // Separate dropdown states for each menu
-  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
-  const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
-  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
+  // const [productDropdownOpen, setProductDropdownOpen] = useState(false);
+  // const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
+  // const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
 
-  const handleProductMouseEnter = () => {
-    setProductDropdownOpen(true);
-  };
+  // const handleProductMouseEnter = () => {
+  //   setProductDropdownOpen(true);
+  // };
 
-  const handleProductMouseLeave = () => {
-    setProductDropdownOpen(false);
-  };
+  // const handleProductMouseLeave = () => {
+  //   setProductDropdownOpen(false);
+  // };
 
-  const handleResearchMouseEnter = () => {
-    setResearchDropdownOpen(true);
-  };
+  // const handleResearchMouseEnter = () => {
+  //   setResearchDropdownOpen(true);
+  // };
 
-  const handleResearchMouseLeave = () => {
-    setResearchDropdownOpen(false);
-  };
+  // const handleResearchMouseLeave = () => {
+  //   setResearchDropdownOpen(false);
+  // };
 
-  const handleCompanyMouseEnter = () => {
-    setCompanyDropdownOpen(true);
-  };
+  // const handleCompanyMouseEnter = () => {
+  //   setCompanyDropdownOpen(true);
+  // };
 
-  const handleCompanyMouseLeave = () => {
-    setCompanyDropdownOpen(false);
-  };
+  // const handleCompanyMouseLeave = () => {
+  //   setCompanyDropdownOpen(false);
+  // };
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -65,7 +65,7 @@ const Menubar = () => {
       <Container style={{ position: 'fixed', left: 0, paddingLeft: '20vw' }}>
         <img src={logo} alt="" style={{ marginRight: '0.1vw', width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
         <Navbar.Brand style={{ color: scrolled ? 'white' : 'white', marginRight: '10vw', cursor: 'pointer', transition: 'color 0.3s ease' }} onClick={() => navigate('/')}>
-          VisionQ
+          {company_name}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease' }}>
@@ -87,9 +87,12 @@ const Menubar = () => {
               <NavDropdown.Item
                 key={i}
                 onClick={() => {
-                  if (item === 'Careers') {
-                    navigate('/careers');
+                  if (item === 'Overview') {
+                    navigate('/product_overview');
                   }
+                  else if (item === 'Pricing'){
+                    navigate('/product_pricing');
+                  }                  
                 }}
               >
                 {item}
@@ -114,8 +117,20 @@ const Menubar = () => {
               <NavDropdown.Item
                 key={i}
                 onClick={() => {
-                  if (item === 'Careers') {
-                    navigate('/careers');
+                  if (item === 'Overview') {
+                    navigate('/research');
+                  }
+                  else if (item === 'Optics') {
+                    navigate('/optics');
+                  } 
+                  else if (item === 'Sensor') {
+                    navigate('/sensor');
+                  }
+                  else if (item === 'ISP') {
+                    navigate('/isp');
+                  }
+                  else if (item === 'Algorithms') {
+                    navigate('/algorithms');
                   }
                 }}
               >
@@ -148,8 +163,20 @@ const Menubar = () => {
               <NavDropdown.Item
                 key={i}
                 onClick={() => {
-                  if (item === 'Careers') {
+                  if (item === 'About') {
+                    navigate('/company');
+                  }
+                  else if (item === 'Careers') {
                     navigate('/careers');
+                  }
+                  else if (item === 'Customer Stories') {
+                    navigate('/stories');
+                  }
+                  else if (item === 'Investor Relations') {
+                    navigate('/ir');
+                  }
+                  else if (item === 'News') {
+                    navigate('/news');
                   }
                 }}
               >

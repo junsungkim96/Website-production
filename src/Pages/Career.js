@@ -1,5 +1,5 @@
 import '../App.css';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import React, {useLayoutEffect, useState} from 'react';
 import data from '../data/Career_data.js';
 import {MdArrowDropDown} from 'react-icons/md';
@@ -15,7 +15,7 @@ const Careers = () => {
   let [tab, setTab] = useState(null)
 
   return(
-    <div style = {{marginBottom: '200px', paddingTop: '10vh'}}>
+    <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>

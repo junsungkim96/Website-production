@@ -17,6 +17,7 @@ import optimize from '../img/optimization.svg';
 import img4 from '../img/security-safe.svg';
 import img5 from '../img/settings-gear.svg';
 import img6 from '../img/specificity.svg';
+import {company_name} from '../data/Company_data';
 
 
 const Homepage = () => {
@@ -36,7 +37,7 @@ const Homepage = () => {
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Product</div>
         <div className="right-text">
-          <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product')}>View all product features</p>
+          <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product_overview')}>View all product features</p>
         </div>
       </div>
 
@@ -49,44 +50,9 @@ const Homepage = () => {
         <p style = {{fontSize: '1.7vw'}}></p>
       </div>
 
-      {/* <div class = "container" style = {{marginBottom: '10vh'}}>
-        <Button variant = "light" size = "lg" className = "px-4"
-        onClick = {()=> navigate('/product')}>
-          View detailed product features
-        </Button>
-      </div> */}
-
-      {/* <div className="container" style={{ marginBottom: '10vh' }}>
-        <Button
-          variant="light"
-          size="lg"
-          className="px-4"
-          style={{
-            transition: 'all 0.3s ease', // Smooth transition for hover effect
-            backgroundColor: '#f8f9fa', // Light gray background (Bootstrap light variant default)
-            color: 'black', // Default text color
-            border: '1px solid #ccc', // Default border
-          }}
-          onMouseOver={(e) => {
-            e.target.style.backgroundColor = '#d6d8db'; // Darker background on hover
-            e.target.style.color = '#000'; // Ensure text remains visible
-            e.target.style.borderColor = '#6c757d'; // Even darker border for hover
-          }}
-          onMouseOut={(e) => {
-            e.target.style.backgroundColor = '#f8f9fa'; // Reset background color
-            e.target.style.color = 'black'; // Reset text color
-            e.target.style.borderColor = '#ccc'; // Reset border color
-          }}
-          onClick={() => navigate('/product')}
-        >
-          View detailed product features
-        </Button>
-      </div> */}
-
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text" style = {{fontSize: '2vh'}}>End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
       </div>
-
 
       <div style = {{marginTop: '7vh', marginBottom: '10vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
         <div className="row">
@@ -262,7 +228,7 @@ const Homepage = () => {
       <hr class="separator"></hr>
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Careers at VisionQ</div>
+        <div className="left-text">Careers at {company_name}</div>
         <div className="right-text" style = {{width: '45vw'}}>
           <div>
             Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision

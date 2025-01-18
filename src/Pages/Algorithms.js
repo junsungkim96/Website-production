@@ -1,7 +1,7 @@
 import '../App.css';
 import React, {useLayoutEffect} from 'react';
 
-const Research = () => {
+const Algorithms = () => {
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
   }, []);
@@ -9,33 +9,38 @@ const Research = () => {
 //   let [tab, setTab] = useState(null)
 
   return(
-    <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
+    <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px'}}>
-              Cutting-edge Research
+                Algorithms
             </p>
             <br/>
           </div>
           <div>
             <p>
-              Lens Design Optimization for Downstream Tasks
+                Your imagination is the limit. Whatever you can think of is possible in this platform
             </p>
           </div>
           <div style = {{paddingTop: '10vh'}}>
             <p>
-              Physical sensor simulation
+              Test how your computer vision algorithm will perform on an actual physical hardware
             </p>
           </div>
           <div style = {{paddingTop: '10vh'}}>
             <p>
-              Active illumination methods
+              Change the light to whatever spectrum you want at the right intensity
             </p>
           </div>
           <div style = {{paddingTop: '10vh'}}>
             <p>
-              AI recommendation for Image Signal Processing
+              Determine the sensor specifications for your needs
+            </p>
+          </div>
+          <div style = {{paddingTop: '10vh'}}>
+            <p>
+              Get instant AI recommendation for Image Signal Processing
             </p>
           </div>
         </div>
@@ -45,4 +50,4 @@ const Research = () => {
 };
 
 
-export default Research;
+export default Algorithms;

@@ -9,7 +9,7 @@ const Blog = () => {
 //   let [tab, setTab] = useState(null)
 
   return(
-    <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh'}}>
+    <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
@@ -20,22 +20,7 @@ const Blog = () => {
           </div>
           <div>
             <p>
-              Lens Design Optimization for Downstream Tasks
-            </p>
-          </div>
-          <div style = {{paddingTop: '10vh'}}>
-            <p>
-              Physical sensor simulation
-            </p>
-          </div>
-          <div style = {{paddingTop: '10vh'}}>
-            <p>
-              Active illumination methods
-            </p>
-          </div>
-          <div style = {{paddingTop: '10vh'}}>
-            <p>
-              AI recommendation for Image Signal Processing
+              Coming Soon...
             </p>
           </div>
         </div>
