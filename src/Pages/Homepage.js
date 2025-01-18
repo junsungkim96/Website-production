@@ -154,7 +154,7 @@ const Homepage = () => {
       <div class="update-container" style = {{marginBottom: '10vh', marginTop: '10vh'}}>
         <div className="left-text">Strengths</div>
         <div className="right-text" style = {{width: '45vw'}}>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+          <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',
             paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
             
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
@@ -167,10 +167,10 @@ const Homepage = () => {
             </div>
             
             <div style={{ fontSize: '1.5vh', color: 'black' }}>
-              Recognized by computer vision engineers as the most complete simulation system available
+              Recognized by computer vision engineers for its high accuracy
             </div>
           </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+          <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',
             paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
             
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
@@ -186,7 +186,7 @@ const Homepage = () => {
               The system is so flexbible that you can simulate any vision hardware you want
             </div>
           </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '120px', paddingBottom: '120px',
+          <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',
             paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
             
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
@@ -233,9 +233,9 @@ const Homepage = () => {
           <div>
             Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision
           </div>
-          <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
+          {/* <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
             <p>View careers</p>
-          </div>
+          </div> */}
         </div>
       </div>
 

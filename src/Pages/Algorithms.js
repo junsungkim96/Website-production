@@ -14,33 +14,23 @@ const Algorithms = () => {
         <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px'}}>
-                Algorithms
+              Algorithms
             </p>
             <br/>
           </div>
           <div>
             <p>
-                Your imagination is the limit. Whatever you can think of is possible in this platform
+              Image Segmentation
             </p>
           </div>
           <div style = {{paddingTop: '10vh'}}>
             <p>
-              Test how your computer vision algorithm will perform on an actual physical hardware
+              Depth Estimation
             </p>
           </div>
           <div style = {{paddingTop: '10vh'}}>
             <p>
-              Change the light to whatever spectrum you want at the right intensity
-            </p>
-          </div>
-          <div style = {{paddingTop: '10vh'}}>
-            <p>
-              Determine the sensor specifications for your needs
-            </p>
-          </div>
-          <div style = {{paddingTop: '10vh'}}>
-            <p>
-              Get instant AI recommendation for Image Signal Processing
+              Object Detection
             </p>
           </div>
         </div>

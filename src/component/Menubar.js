@@ -64,7 +64,7 @@ const Menubar = () => {
       style={{ position: 'fixed', top: 0, left: 0, width: '100%', backgroundColor: scrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 1)', height: '60px', zIndex: 9999, marginBottom: '50px', transition : 'background-color 0.3s ease' }}>
       <Container style={{ position: 'fixed', left: 0, paddingLeft: '20vw' }}>
         <img src={logo} alt="" style={{ marginRight: '0.1vw', width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
-        <Navbar.Brand style={{ color: scrolled ? 'white' : 'white', marginRight: '10vw', cursor: 'pointer', transition: 'color 0.3s ease' }} onClick={() => navigate('/')}>
+        <Navbar.Brand style={{ color: scrolled ? 'white' : 'white', marginRight: '15vw', cursor: 'pointer', transition: 'color 0.3s ease' }} onClick={() => navigate('/')}>
           {company_name}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -81,7 +81,7 @@ const Menubar = () => {
             // show={productDropdownOpen}
             // onMouseEnter={handleProductMouseEnter}
             // onMouseLeave={handleProductMouseLeave}
-            style={{ marginRight: '3.5vw' }}
+            style={{ marginRight: '3vw' }}
           >
             {productItems.map((item, i) => (
               <NavDropdown.Item
@@ -111,7 +111,7 @@ const Menubar = () => {
             // show={researchDropdownOpen}
             // onMouseEnter={handleResearchMouseEnter}
             // onMouseLeave={handleResearchMouseLeave}
-            style={{ marginRight: '3.5vw' }}
+            style={{ marginRight: '3vw' }}
           >
             {researchItems.map((item, i) => (
               <NavDropdown.Item

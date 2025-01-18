@@ -21,40 +21,6 @@ const Footer = () => {
   return(
     <>
       <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
-
-      {/* <Container style = {{marginBottom: '10vh', marginTop: '5vh', width: '60vw'}}>
-        <Row className = "footer">
-          <Col xs = {3}>
-            <div>{productItems[0]}</div>
-            {productItems.slice(1).map((item, i) => (
-              <div style = {{marginTop: '0.2vh'}}> {item} </div>
-              )
-            )}
-          </Col>
-          <Col xs = {3}>
-            <div>{researchItems[0]}</div>
-            {researchItems.slice(1).map((item, i) => (
-              <div style = {{marginTop: '0.2vh'}}> {item} </div>
-              )
-            )}
-          </Col>
-          <Col xs = {3}>
-            <div>{blogItems[0]}</div>
-            {blogItems.slice(1).map((item, i) => (
-              <div style = {{marginTop: '0.2vh'}}> {item} </div>
-              )
-            )}
-
-          </Col>
-          <Col xs = {3}>
-            <div>{companyItems[0]}</div>
-            {companyItems.slice(1).map((item, i) => (
-              <div style = {{marginTop: '0.2vh'}}> {item} </div>
-              )
-            )}
-          </Col>
-        </Row>
-      </Container> */}
       
       <Container style={{ marginBottom: '10vh', marginTop: '5vh', width: '60vw' }}>
         <Row className="footer">

@@ -11,12 +11,10 @@ const ParticleBackground = () => {
   return (
     <div style={{ position: 'relative', height: '95vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
       
-      <div style={{height: '20vh'}}>
-
-      </div>
+      <div style={{height: '20vh'}}/>
 
       {/* Text Content */}
-      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white', pointerEvents: 'auto'}}>
+      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white', pointerEvents: 'none'}}>
         <div style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
           <p style={{ fontSize: '7vh' }}>Your Vision, Perfectly Simulated</p>
         </div>
