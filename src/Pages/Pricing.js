@@ -1,6 +1,7 @@
 import '../App.css';
 import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap';
+import handleTrialDownload from '../component/Download';
 
 const Pricing = () => {
   useLayoutEffect(() => {
@@ -18,6 +19,7 @@ const Pricing = () => {
         'Option to upgrade to any paid tier at the end of the trial',
       ],
       buttonText: 'Start Trial',
+      onClick: handleTrialDownload,
     },
     {
       name: 'Basic',
@@ -96,7 +98,7 @@ const Pricing = () => {
                     ))}
                   </ul>
                   <div className="d-grid">
-                    <Button variant="success" size="lg">
+                    <Button variant="success" size="lg" onClick={plan.onClick}>
                       {plan.buttonText}
                     </Button>
                   </div>
