@@ -58,7 +58,7 @@ const Pricing = () => {
     },
     {
       name: 'Educational',
-      price: '$[9/month',
+      price: '$[9]/month',
       features: [
         'Designed for students and educators',
         'Access to core simulator functionalities',

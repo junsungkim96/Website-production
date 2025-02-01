@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-react\" \"npm run start-backend\"",
-    "start-react": "react-scripts start",
+    "start-react": "cross-env HOST=0.0.0.0 PORT=3000 react-scripts start",
     "start-backend": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3"
   }
 }

@@ -1,7 +1,15 @@
+
+
 const express = require("express");
 const path = require("path");
 const app = express();
+const cors = require("cors");
 const PORT = 5000;
+
+// Enable CORS for requests from localhost:3000 and other ports
+app.use(cors({
+  origin: '*'
+}))
 
 // Serve static files for React
 app.use(express.static(path.join(__dirname, "public")));
