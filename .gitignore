@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # video
-/src/video/Quasar_simulator.mp4
+/public/video/Quasar_simulator.mp4
