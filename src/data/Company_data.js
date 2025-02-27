@@ -1,1 +1,1 @@
-export const company_name = 'QBlack AI';
+export const company_name = 'Qblack AI';

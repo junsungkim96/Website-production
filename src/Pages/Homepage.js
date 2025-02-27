@@ -9,7 +9,7 @@ import img3 from '../img/ar_vr.jpg';
 import career from '../img/career.jpg';
 import {useNavigate} from 'react-router-dom';
 import {useLayoutEffect} from 'react';
-import videoSource from '../../public/video/Quasar_simulator.mp4';
+// import videoSource from '../../public/video/Quasar_simulator.mp4';
 import AnimatedBackground from './Animation';
 import money from '../img/cash_save.svg';
 import time from '../img/hourglass.svg';
