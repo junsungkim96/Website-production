@@ -41,14 +41,11 @@ const Homepage = () => {
         </div>
       </div>
 
-      <video style={{ width: '60vw', backgroundPosition: 'center' }} autoPlay loop muted>
+      <video className="video-container" autoPlay loop muted
+        style = {{marginBottom: '3vh'}}>
         <source src="/video/Quasar_simulator.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-
-      <div style = {{marginBottom: '3vh'}}>
-        <p style = {{fontSize: '1.7vw'}}></p>
-      </div>
 
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text" style = {{fontSize: '2vh'}}>End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
@@ -104,7 +101,6 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
 
       <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}/>
 
@@ -183,7 +179,7 @@ const Homepage = () => {
             </div>
             
             <div style={{ fontSize: '1.5vh', color: 'black' }}>
-              The system is so flexbible that you can simulate any vision hardware you want
+              The system is so flexible that you can simulate any vision hardware you want
             </div>
           </div>
           <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',

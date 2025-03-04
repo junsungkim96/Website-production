@@ -160,3 +160,32 @@ p2{
 .account{
   align-items: 'center';
 }
+
+
+
+/* Default for desktop */
+.video-container {
+  width: 60vw; 
+  background-position: center;
+}
+
+/* Laptop (up to 1366px) */
+@media (max-width: 1366px) {
+  .video-container {
+    width: 70vw;
+  }
+}
+
+/* Tablet (up to 1024px) */
+@media (max-width: 1024px) {
+  .video-container {
+    width: 80vw;
+  }
+}
+
+/* Mobile (up to 768px) */
+@media (max-width: 768px) {
+  .video-container {
+    width: 90vw;
+  }
+}
