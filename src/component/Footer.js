@@ -37,7 +37,7 @@ const Footer = () => {
                     navigate('/product_pricing');
                   }
                 }}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer' }}
+                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
               >
                 {item}
               </div>
@@ -65,7 +65,7 @@ const Footer = () => {
                     navigate('/algorithms');
                   }
                 }}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer' }}
+                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
               >
                 {item}
               </div>
@@ -77,7 +77,7 @@ const Footer = () => {
               <div
                 key={i}
                 onClick={() => navigate('/blog')}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer' }}
+                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
               >
                 {item}
               </div>
@@ -105,7 +105,7 @@ const Footer = () => {
                     navigate('/news');
                   }
                 }}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer' }}
+                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
               >
                 {item}
               </div>
@@ -120,13 +120,13 @@ const Footer = () => {
       <div style = {{backgroundColor: 'black'}}>
         <Container style = {{marginTop: '1vh', width: '60vw'}}>
           <Row> 
-            <Col className = "footer" style = {{textAlign: 'left'}}>
+            <Col className = "footer" style = {{textAlign: 'left', fontSize: '1.5vh'}}>
               <div>
                 © Copyright {company_name}. All Rights Reserved
               </div>
             </Col>
             <Col className = "footer">
-              <div  style={{display: 'flex', justifyContent: 'flex-end', cursor: 'pointer'}} 
+              <div  style={{display: 'flex', justifyContent: 'flex-end', cursor: 'pointer', fontSize: '1.5vh'}} 
               onClick ={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Back to top</div>
             </Col>
           </Row>

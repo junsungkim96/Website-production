@@ -65,7 +65,7 @@ const Menubar = () => {
       >
         <Container style={{ paddingLeft: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className="logo-container" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logo} alt="logo" style={{ width: '30px', filter: 'invert(1)', transition: 'filter 0.3s ease' }} />
+            <img src={logo} alt="logo" style={{ width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
             <Navbar.Brand
               style={{ color: 'white', marginLeft: '10px', cursor: 'pointer', transition: 'color 0.3s ease' }}
               onClick={() => closeOffcanvasAndNavigate('/')}
