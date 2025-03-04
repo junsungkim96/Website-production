@@ -60,6 +60,8 @@
 }
 
 .navbar-item{
+  display: flex;
+  align-items: center;
   margin-right: 3vw;
   font-size: 18px;
   color: white;
@@ -159,6 +161,26 @@ p2{
 
 .account{
   align-items: 'center';
+}
+
+
+
+@media (max-width: 991px){
+  .desktop-nav{
+    display: none;
+  }
+  .mobile-nav{
+    display: flex;
+  }
+}
+
+@media (min-width: 992px){
+  .desktop-nav{
+    display: flex;
+  }
+  .mobile-nav{
+    display: none;
+  }
 }
 
 

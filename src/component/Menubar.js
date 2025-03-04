@@ -2,6 +2,7 @@ import '../App.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/atom-logo.png';
@@ -10,6 +11,39 @@ import { useState, useEffect } from 'react';
 import { company_name } from '../data/Company_data';
 
 const Menubar = () => {
+  const productItems = ['Overview', 'Pricing'];
+  const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+  const companyItems = ['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
+
+  // Separate dropdown states for each menu
+  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
+  const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
+  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
+
+  const handleProductMouseEnter = () => {
+    setProductDropdownOpen(true);
+  };
+
+  const handleProductMouseLeave = () => {
+    setProductDropdownOpen(false);
+  };
+
+  const handleResearchMouseEnter = () => {
+    setResearchDropdownOpen(true);
+  };
+
+  const handleResearchMouseLeave = () => {
+    setResearchDropdownOpen(false);
+  };
+
+  const handleCompanyMouseEnter = () => {
+    setCompanyDropdownOpen(true);
+  };
+
+  const handleCompanyMouseLeave = () => {
+    setCompanyDropdownOpen(false);
+  };
+
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
