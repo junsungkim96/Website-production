@@ -122,7 +122,7 @@ const Footer = () => {
           <Row> 
             <Col className = "footer" style = {{textAlign: 'left'}}>
               <div>
-                © Copyright {company_name}. All rights reserved
+                © Copyright {company_name}. All Rights Reserved
               </div>
             </Col>
             <Col className = "footer">

@@ -19,33 +19,33 @@ const Menubar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   // Separate dropdown states for each menu
-  // const [productDropdownOpen, setProductDropdownOpen] = useState(false);
-  // const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
-  // const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
+  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
+  const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
+  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
 
-  // const handleProductMouseEnter = () => {
-  //   setProductDropdownOpen(true);
-  // };
+  const handleProductMouseEnter = () => {
+    setProductDropdownOpen(true);
+  };
 
-  // const handleProductMouseLeave = () => {
-  //   setProductDropdownOpen(false);
-  // };
+  const handleProductMouseLeave = () => {
+    setProductDropdownOpen(false);
+  };
 
-  // const handleResearchMouseEnter = () => {
-  //   setResearchDropdownOpen(true);
-  // };
+  const handleResearchMouseEnter = () => {
+    setResearchDropdownOpen(true);
+  };
 
-  // const handleResearchMouseLeave = () => {
-  //   setResearchDropdownOpen(false);
-  // };
+  const handleResearchMouseLeave = () => {
+    setResearchDropdownOpen(false);
+  };
 
-  // const handleCompanyMouseEnter = () => {
-  //   setCompanyDropdownOpen(true);
-  // };
+  const handleCompanyMouseEnter = () => {
+    setCompanyDropdownOpen(true);
+  };
 
-  // const handleCompanyMouseLeave = () => {
-  //   setCompanyDropdownOpen(false);
-  // };
+  const handleCompanyMouseLeave = () => {
+    setCompanyDropdownOpen(false);
+  };
 
   useEffect(()=>{
     const handleScroll = () => {
@@ -78,9 +78,9 @@ const Menubar = () => {
             </span>}
             id="collapsible-nav-dropdown"
             className = "navbar-item"
-            // show={productDropdownOpen}
-            // onMouseEnter={handleProductMouseEnter}
-            // onMouseLeave={handleProductMouseLeave}
+            show={productDropdownOpen}
+            onMouseEnter={handleProductMouseEnter}
+            onMouseLeave={handleProductMouseLeave}
             style={{ marginRight: '3vw' }}
           >
             {productItems.map((item, i) => (
@@ -108,9 +108,9 @@ const Menubar = () => {
             </span>}
             id="collapsible-nav-dropdown"
             className="navbar-item"
-            // show={researchDropdownOpen}
-            // onMouseEnter={handleResearchMouseEnter}
-            // onMouseLeave={handleResearchMouseLeave}
+            show={researchDropdownOpen}
+            onMouseEnter={handleResearchMouseEnter}
+            onMouseLeave={handleResearchMouseLeave}
             style={{ marginRight: '3vw' }}
           >
             {researchItems.map((item, i) => (
@@ -155,9 +155,9 @@ const Menubar = () => {
             </span>}
             id="collapsible-nav-dropdown"
             className="navbar-item"
-            // show={companyDropdownOpen}
-            // onMouseEnter={handleCompanyMouseEnter}
-            // onMouseLeave={handleCompanyMouseLeave}
+            show={companyDropdownOpen}
+            onMouseEnter={handleCompanyMouseEnter}
+            onMouseLeave={handleCompanyMouseLeave}
           >
             {companyItems.map((item, i) => (
               <NavDropdown.Item
