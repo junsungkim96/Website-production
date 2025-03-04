@@ -73,21 +73,141 @@ const Menubar = () => {
               {company_name}
             </Navbar.Brand>
           </div>
+          
+          <div className="desktop-nav">
+            <NavDropdown
+              title={<span style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease', 
+                fontSize: '1.1rem', // Consistent font size for both
+              }}>
+                Product
+              </span>}
+              id="collapsible-nav-dropdown"
+              className = "navbar-item"
+              show={productDropdownOpen}
+              onMouseEnter={handleProductMouseEnter}
+              onMouseLeave={handleProductMouseLeave}
+              style={{ marginRight: '3vw' }}
+            >
+              {productItems.map((item, i) => (
+                <NavDropdown.Item
+                  key={i}
+                  onClick={() => {
+                    if (item === 'Overview') {
+                      navigate('/product_overview');
+                    }
+                    else if (item === 'Pricing'){
+                      navigate('/product_pricing');
+                    }                  
+                  }}
+                >
+                  {item}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
 
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '30px', height: '22px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
-            {isOpen ? (
-              <>
-                <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
-                <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
-              </>
-            ) : (
-              <>
-                <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
-                <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
-                <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
-              </>
-            )}
-          </Navbar.Toggle>
+            <NavDropdown
+              title={<span style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease', 
+                fontSize: '1.1rem', // Consistent font size for both
+              }}>
+                Research
+              </span>}
+              id="collapsible-nav-dropdown"
+              className="navbar-item"
+              show={researchDropdownOpen}
+              onMouseEnter={handleResearchMouseEnter}
+              onMouseLeave={handleResearchMouseLeave}
+              style={{ marginRight: '3vw' }}
+            >
+              {researchItems.map((item, i) => (
+                <NavDropdown.Item
+                  key={i}
+                  onClick={() => {
+                    if (item === 'Overview') {
+                      navigate('/research');
+                    }
+                    else if (item === 'Optics') {
+                      navigate('/optics');
+                    } 
+                    else if (item === 'Sensor') {
+                      navigate('/sensor');
+                    }
+                    else if (item === 'ISP') {
+                      navigate('/isp');
+                    }
+                    else if (item === 'Algorithms') {
+                      navigate('/algorithms');
+                    }
+                  }}
+                >
+                  {item}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
+
+            <Nav className="navbar-item">
+              <Nav.Link style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease', 
+                fontSize: '1.1rem', // Consistent font size for both
+              }} onClick={() => navigate('/blog')}>
+                Blog
+              </Nav.Link>
+            </Nav>
+
+            <NavDropdown
+              title={<span style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease',
+                fontSize: '1.1rem', // Consistent font size for both
+              }}>
+                Company
+              </span>}
+              id="collapsible-nav-dropdown"
+              className="navbar-item"
+              show={companyDropdownOpen}
+              onMouseEnter={handleCompanyMouseEnter}
+              onMouseLeave={handleCompanyMouseLeave}
+            >
+              {companyItems.map((item, i) => (
+                <NavDropdown.Item
+                  key={i}
+                  onClick={() => {
+                    if (item === 'About') {
+                      navigate('/company');
+                    }
+                    else if (item === 'Careers') {
+                      navigate('/careers');
+                    }
+                    else if (item === 'Customer Stories') {
+                      navigate('/stories');
+                    }
+                    else if (item === 'Investor Relations') {
+                      navigate('/ir');
+                    }
+                    else if (item === 'News') {
+                      navigate('/news');
+                    }
+                  }}
+                >
+                  {item}
+                </NavDropdown.Item>
+              ))}
+            </NavDropdown>
+          </div>
+
+          <div className="mobile-nav">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '30px', height: '22px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
+              {isOpen ? (
+                <>
+                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
+                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
+                </>
+              ) : (
+                <>
+                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
+                </>
+              )}
+            </Navbar.Toggle>
+          </div>
+
         </Container>
       </Navbar>
 
