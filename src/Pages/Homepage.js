@@ -235,7 +235,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '0.5vh', marginBottom: '3vh'}} src={career} alt = "" />
+      <img className = "career-image" src={career} alt = "" />
       <div style = {{marginBottom: '3vh'}}>
         <p className = "career-join">Join us in shaping the future of technology</p>
       </div>

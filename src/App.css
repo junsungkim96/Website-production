@@ -12,6 +12,13 @@
   background-color: black;
 }
 
+.career-image{
+  width: 60vw;
+  background-position: center;
+  margin-top: 0.5vh;
+  margin-bottom: 3vh;
+}
+
 .career-button{
   font-size: 1vw;
   padding: 0.2vh 1vw;
@@ -258,7 +265,7 @@ p2{
   .left-text {
     text-align: left;
     order: 1; 
-    font-size: 3.3vh; 
+    font-size: 5vh; 
     padding-left: 5%;
     font-weight: bold;
     color: white;
@@ -268,7 +275,7 @@ p2{
   
   .right-text {
     order: 2; 
-    font-size: 1.5vh;
+    font-size: 2vh;
     padding-left: 5%; 
     padding-right: 5%;
     font-weight: bold; 
@@ -338,12 +345,22 @@ p2{
   }
 
   .career-join{
-    font-size: 4vw;
+    font-size: 4.3vw;
+    display: block;
+    width: 90vw;
+    /* text-align: right; */
   }
 
   .responsive-container{
     padding-left: 5%;
     padding-right: 5%;
+  }
+
+  .career-image{
+    width: 90vw;
+    background-position: center;
+    margin-top: 0.5vh;
+    margin-bottom: 3vh;
   }
 
   .career-button{
