@@ -14,8 +14,8 @@ const Menubar = () => {
 
   const [scrolled, setScrolled] = useState(false);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // State to track the icon state
-  const [productExpanded, setProductExpanded] = useState(false); // State to track product menu expansion
+  const [isOpen, setIsOpen] = useState(false);
+  const [productExpanded, setProductExpanded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,13 +28,25 @@ const Menubar = () => {
     };
   }, []);
 
+  const resetMenus = () => {
+    setProductExpanded(false);
+  };
+
   const handleToggleOffcanvas = () => {
-    setIsOpen(!isOpen); // Toggle the hamburger icon state
+    setIsOpen(!isOpen);
     setShowOffcanvas(!showOffcanvas);
+    if (!showOffcanvas) resetMenus(); // Reset menus when closing
+  };
+
+  const closeOffcanvasAndNavigate = (path) => {
+    navigate(path);
+    setShowOffcanvas(false);
+    setIsOpen(false);
+    resetMenus(); // Reset all menus
   };
 
   const toggleProductMenu = () => {
-    setProductExpanded(!productExpanded); // Toggle the product menu expansion
+    setProductExpanded(!productExpanded);
   };
 
   return (
@@ -51,7 +63,6 @@ const Menubar = () => {
           backgroundColor: scrolled ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 1)',
           height: '60px',
           zIndex: 9999,
-          marginBottom: '50px',
           transition: 'background-color 0.3s ease',
         }}
       >
@@ -61,7 +72,6 @@ const Menubar = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            position: 'relative',
             width: '100%',
           }}
         >
@@ -82,13 +92,12 @@ const Menubar = () => {
                 cursor: 'pointer',
                 transition: 'color 0.3s ease',
               }}
-              onClick={() => navigate('/')}
+              onClick={() => closeOffcanvasAndNavigate('/')}
             >
               {company_name}
             </Navbar.Brand>
           </div>
 
-          {/* Toggle button for Offcanvas (Hamburger Menu) */}
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"
             onClick={handleToggleOffcanvas}
@@ -105,49 +114,20 @@ const Menubar = () => {
           >
             {isOpen ? (
               <>
-                <div style={{
-                  width: '30px',
-                  height: '4px',
-                  backgroundColor: 'white',
-                  position: 'absolute',
-                  top: '50%',
-                  transform: 'rotate(45deg)',
-                  transformOrigin: 'center',
-                }} />
-                <div style={{
-                  width: '30px',
-                  height: '4px',
-                  backgroundColor: 'white',
-                  position: 'absolute',
-                  top: '50%',
-                  transform: 'rotate(-45deg)',
-                  transformOrigin: 'center',
-                }} />
+                <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
+                <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
               </>
             ) : (
               <>
-                <div style={{
-                  width: '30px',
-                  height: '4px',
-                  backgroundColor: 'white',
-                }} />
-                <div style={{
-                  width: '30px',
-                  height: '4px',
-                  backgroundColor: 'white',
-                }} />
-                <div style={{
-                  width: '30px',
-                  height: '4px',
-                  backgroundColor: 'white',
-                }} />
+                <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
+                <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
+                <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
               </>
             )}
           </Navbar.Toggle>
         </Container>
       </Navbar>
 
-      {/* Offcanvas component for mobile with black background and white text */}
       <Offcanvas
         show={showOffcanvas}
         onHide={handleToggleOffcanvas}
@@ -170,74 +150,50 @@ const Menubar = () => {
                 fontSize: '1.1rem',
                 backgroundColor: 'black',
                 display: 'flex',
-                alignItems: 'center', // Align text and triangle
-                justifyContent: 'space-between',
+                alignItems: 'center',
                 paddingRight: '10px',
               }}
             >
-              <span>Product</span>
-              <span style={{ fontSize: '0.8rem', marginLeft: '5px' }}>{productExpanded ? '▲' : '▼'}</span>
+              <span style={{ marginRight: '5px' }}>Product</span>
+              <span style={{ fontSize: '0.8rem' }}>{productExpanded ? '▲' : '▼'}</span>
             </Nav.Link>
 
             {/* Expandable sub-menu under Product */}
             {productExpanded && (
-              <div style={{ paddingLeft: '15px' }}> {/* Indentation for dropdown */}
-                <Nav.Link
-                  onClick={() => navigate('/overview')}
-                  style={{
-                    color: 'white',
-                    fontSize: '0.9rem', // Smaller font size for sub-menu items
-                    backgroundColor: 'black',
-                    paddingLeft: '15px', // Further indentation
-                  }}
-                >
-                  Overview
-                </Nav.Link>
-                <Nav.Link
-                  onClick={() => navigate('/pricing')}
-                  style={{
-                    color: 'white',
-                    fontSize: '0.9rem', // Smaller font size for sub-menu items
-                    backgroundColor: 'black',
-                    paddingLeft: '15px',
-                  }}
-                >
-                  Pricing
-                </Nav.Link>
+              <div style={{ paddingLeft: '15px' }}>
+                {['Overview', 'Pricing'].map((item, i) => (
+                  <Nav.Link
+                    key={i}
+                    onClick={() => closeOffcanvasAndNavigate(
+                      item === 'Overview' ? '/product_overview' : '/product_pricing'
+                    )}
+                    style={{
+                      color: 'white',
+                      fontSize: '0.9rem',
+                      backgroundColor: 'black',
+                      paddingLeft: '15px',
+                    }}
+                  >
+                    {item}
+                  </Nav.Link>
+                ))}
               </div>
             )}
 
             {/* Direct links */}
-            <Nav.Link
-              onClick={() => navigate('/research')}
-              style={{
-                color: 'white',
-                fontSize: '1.1rem',
-                backgroundColor: 'black',
-              }}
-            >
-              Research
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => navigate('/blog')}
-              style={{
-                color: 'white',
-                fontSize: '1.1rem',
-                backgroundColor: 'black',
-              }}
-            >
-              Blog
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => navigate('/company')}
-              style={{
-                color: 'white',
-                fontSize: '1.1rem',
-                backgroundColor: 'black',
-              }}
-            >
-              Company
-            </Nav.Link>
+            {['Research', 'Blog', 'Company'].map((item, i) => (
+              <Nav.Link
+                key={i}
+                onClick={() => closeOffcanvasAndNavigate(`/${item.toLowerCase()}`)}
+                style={{
+                  color: 'white',
+                  fontSize: '1.1rem',
+                  backgroundColor: 'black',
+                }}
+              >
+                {item}
+              </Nav.Link>
+            ))}
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>
