@@ -1,41 +1,27 @@
+/* ---------------------DESKTOP (Default)---------------------- */
+
+.desktop-nav{
+  display: flex;
+}
+.mobile-nav{
+  display: none;
+}
+
 .App {
   text-align: center;
   background-color: black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.career-button{
+  font-size: 1vw;
+  padding: 0.2vh 1vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.catch-phrase{
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-size: 7vh;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
 .underline{
@@ -47,16 +33,6 @@
 
 .background{
   background-color: black;
-}
-
-.caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff; 
-  padding: 10px; 
 }
 
 .navbar-item{
@@ -71,18 +47,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10vw;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 
 .left-text {
-  text-align: center;
+  text-align: left;
   order: 1; 
   font-size: 3.3vh; 
   padding-left: 20%;
   font-weight: bold;
   color: white;
   font-family: 'Poppins', sans-serif;
+  width: 50vw;
 }
 
 .right-text {
@@ -91,7 +69,17 @@
   padding-right: 20%;
   font-weight: bold; 
   color: white;
-  text-align: left;
+  text-align: right;
+  font-family: 'Poppins', sans-serif;
+  width: 70vw;
+}
+
+.center-text{
+  font-size: 2vh;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  width: 100%;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -118,7 +106,33 @@
 
 .footer{
   color: white;
-  font-size: 1.15vh;
+  font-size: 10vw;
+}
+
+.footer-container{
+  margin-bottom: 10vh;
+  margin-top: 5vh;
+  width: 60vw;
+}
+
+.footer-font{
+  margin-top: 0.2vh;
+  cursor: pointer;
+  font-size: 0.6vw;
+}
+
+.footer-left{
+  color: white;
+  text-align: left;
+  font-size: 0.6vw;
+}
+
+.footer-right{
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  font-size: 0.6vw;
 }
 
 #collapsible-nav-dropdown{
@@ -131,13 +145,13 @@
 }
 
 .career-left-text{
-    text-align: left;
-    order: 1; 
-    font-size: 20px; 
-    padding-left: 20%;
-    font-weight: bold;
-    color: white;
-    font-family: 'Poppins', sans-serif;
+  text-align: left;
+  order: 1; 
+  font-size: 20px; 
+  padding-left: 20%;
+  font-weight: bold;
+  color: white;
+  font-family: 'Poppins', sans-serif;
 }
 
 .body{
@@ -159,55 +173,189 @@ p2{
   padding-top: 10%
 }
 
+.career-join{
+  font-size: 1.7vw;
+}
+
 .account{
   align-items: 'center';
 }
 
-
-
-@media (max-width: 991px){
-  .desktop-nav{
-    display: none;
-  }
-  .mobile-nav{
-    display: flex;
-  }
-}
-
-@media (min-width: 992px){
-  .desktop-nav{
-    display: flex;
-  }
-  .mobile-nav{
-    display: none;
-  }
-}
-
-
-
-/* Default for desktop */
 .video-container {
   width: 60vw; 
   background-position: center;
 }
 
-/* Laptop (up to 1366px) */
+.eye{
+  width: 18vw; 
+  height: 18vw; 
+  background-position: center;
+}
+
+/* ---------------------LAPTOP (up to 1366px)---------------------- */
+
 @media (max-width: 1366px) {
   .video-container {
     width: 70vw;
   }
+
+
+
 }
 
-/* Tablet (up to 1024px) */
+/* ---------------------TABLET (up to 1024px)---------------------- */
+
 @media (max-width: 1024px) {
   .video-container {
     width: 80vw;
   }
+
+  .desktop-nav{
+    display: none;
+  }
+
+  .mobile-nav{
+    display: flex;
+  }
+
+  .footer-font{
+    margin-top: 0.2vh;
+    cursor: pointer;
+    font-size: 1.7vw;
+  }
 }
 
-/* Mobile (up to 768px) */
+/* ---------------------MOBILE (up to 768px)---------------------- */
+
 @media (max-width: 768px) {
   .video-container {
     width: 90vw;
   }
+
+  .career-left-text{
+    text-align: left;
+    order: 1; 
+    font-size: 20px; 
+    padding-left: 5%;
+    font-weight: bold;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .update-container{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .underline{
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 1px;
+    text-align: left;
+    margin-top: 2vh;
+  }
+
+  .left-text {
+    text-align: left;
+    order: 1; 
+    font-size: 3.3vh; 
+    padding-left: 5%;
+    font-weight: bold;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    width: 80vw;
+  }
+  
+  .right-text {
+    order: 2; 
+    font-size: 1.5vh;
+    padding-left: 5%; 
+    padding-right: 5%;
+    font-weight: bold; 
+    color: white;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+  }
+
+  .center-text{
+    font-size: 2vh;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 5%;
+    color: white;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .eye{
+    width: 30vw; 
+    height: 30vw; 
+    background-position: center;
+  }
+
+  .footer{
+    color: white;
+    font-size: 10vw;
+    margin-top: 0.2vh;
+    cursor: pointer;
+    font-size: 3vw;
+  }
+
+  .footer-container{
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 95vw;
+  }
+
+  .footer-font{
+    margin-top: 0.2vh;
+    cursor: pointer;
+    font-size: 2.5vw;
+  }
+  
+  .footer-left{
+    color: white;
+    text-align: left;
+    font-size: 1vh;
+  }
+
+  .footer-left div{
+    display: block;
+  }
+
+  .footer-left div{
+    content: "\A All Rights Reserved";
+    white-space: pre;
+    font-size: 2.5vw;
+  }
+
+  .footer-right{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    font-size: 2.5vw;
+  }
+
+  .career-join{
+    font-size: 4vw;
+  }
+
+  .responsive-container{
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .career-button{
+    font-size: 4vw;
+    padding: 0.2vh 1vw;
+  }
+
+  .catch-phrase{
+    color: white;
+    font-size: 7vh;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+  }
+
 }

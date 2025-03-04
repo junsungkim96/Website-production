@@ -22,7 +22,7 @@ const Footer = () => {
     <>
       <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
       
-      <Container style={{ marginBottom: '10vh', marginTop: '5vh', width: '60vw' }}>
+      <Container className = "footer-container">
         <Row className="footer">
           <Col xs={3}>
             {productItems.map((item, i) => (
@@ -37,7 +37,7 @@ const Footer = () => {
                     navigate('/product_pricing');
                   }
                 }}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
+                className = "footer-font"
               >
                 {item}
               </div>
@@ -65,7 +65,7 @@ const Footer = () => {
                     navigate('/algorithms');
                   }
                 }}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
+                className = "footer-font"
               >
                 {item}
               </div>
@@ -77,7 +77,7 @@ const Footer = () => {
               <div
                 key={i}
                 onClick={() => navigate('/blog')}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
+                className = "footer-font"
               >
                 {item}
               </div>
@@ -105,7 +105,7 @@ const Footer = () => {
                     navigate('/news');
                   }
                 }}
-                style={{ marginTop: i === 0 ? '0' : '0.2vh', cursor: 'pointer', fontSize: '1.5vh' }}
+                className = "footer-font"
               >
                 {item}
               </div>
@@ -118,16 +118,15 @@ const Footer = () => {
       {/* <hr class="separator"></hr> */}
 
       <div style = {{backgroundColor: 'black'}}>
-        <Container style = {{marginTop: '1vh', width: '60vw'}}>
+        <Container style = {{marginTop: '1vh'}}>
           <Row> 
-            <Col className = "footer" style = {{textAlign: 'left', fontSize: '1.5vh'}}>
+            <Col className = "footer-left">
               <div>
                 © Copyright {company_name}. All Rights Reserved
               </div>
             </Col>
-            <Col className = "footer">
-              <div  style={{display: 'flex', justifyContent: 'flex-end', cursor: 'pointer', fontSize: '1.5vh'}} 
-              onClick ={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Back to top</div>
+            <Col>
+              <div  className = "footer-right" onClick ={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Back to top</div>
             </Col>
           </Row>
         </Container>

@@ -48,7 +48,7 @@ const Homepage = () => {
       </video>
 
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text" style = {{fontSize: '2vh'}}>End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
+        <div className="center-text">End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
       </div>
 
       <div style = {{marginTop: '7vh', marginBottom: '10vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
@@ -211,7 +211,7 @@ const Homepage = () => {
 
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Research</div>
-        <div className="right-text" style = {{width: '45vw'}}>
+        <div className="right-text">
           <div>
             We research deep learning based computer vision system optimization.
           </div>
@@ -225,25 +225,25 @@ const Homepage = () => {
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Careers at {company_name}</div>
-        <div className="right-text" style = {{width: '45vw'}}>
+        <div className="right-text">
           <div>
             Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision
           </div>
-          {/* <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
+          <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
             <p>View careers</p>
-          </div> */}
+          </div>
         </div>
       </div>
 
-      <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '1.5vh', marginBottom: '5vh'}} src={career} alt = "" />
-      
+      <img style = {{width: '60vw', backgroundPosition: 'center', marginTop: '0.5vh', marginBottom: '3vh'}} src={career} alt = "" />
       <div style = {{marginBottom: '3vh'}}>
-        <p style = {{fontSize: '1.7vw'}}>Join us in shaping the future of technology</p>
+        <p className = "career-join">Join us in shaping the future of technology</p>
       </div>
-      <div class = "container" style = {{marginBottom: '10vh'}}>
-        <Button variant = "light" size = "lg" className = "px-4"
+      
+      <div style = {{marginBottom: '5vh'}}>
+        <Button variant = "light" size = "lg"
         onClick = {()=> navigate('/careers')}>
-          View Careers 
+          <div className = "career-button">View Careers</div> 
         </Button>
       </div>
 

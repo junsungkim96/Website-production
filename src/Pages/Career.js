@@ -19,7 +19,7 @@ const Careers = () => {
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
-            <p style = {{fontSize: '50px'}}>Careers at VisionQ</p> <br/>
+            <p style = {{fontSize: '50px'}}>Careers at Qblack AI</p> <br/>
           </div>
           <div>
             <p style = {{fontSize: '40px', marginBottom: '10vh'}}>If you are passionate about revolutionizing computer vision, come join us!</p>
