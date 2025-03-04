@@ -14,7 +14,8 @@ const Menubar = () => {
 
   const [scrolled, setScrolled] = useState(false);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);  // State to track the icon state
+  const [isOpen, setIsOpen] = useState(false); // State to track the icon state
+  const [productExpanded, setProductExpanded] = useState(false); // State to track product menu expansion
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,8 +29,12 @@ const Menubar = () => {
   }, []);
 
   const handleToggleOffcanvas = () => {
-    setIsOpen(!isOpen);  // Toggle the hamburger icon state
+    setIsOpen(!isOpen); // Toggle the hamburger icon state
     setShowOffcanvas(!showOffcanvas);
+  };
+
+  const toggleProductMenu = () => {
+    setProductExpanded(!productExpanded); // Toggle the product menu expansion
   };
 
   return (
@@ -56,7 +61,7 @@ const Menubar = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            position: 'relative', // Ensuring layout stays intact
+            position: 'relative',
             width: '100%',
           }}
         >
@@ -88,18 +93,17 @@ const Menubar = () => {
             aria-controls="responsive-navbar-nav"
             onClick={handleToggleOffcanvas}
             style={{
-              border: 'none', // Remove the border around the hamburger
-              width: '30px', // Set width of the hamburger icon
-              height: '22px', // Set the height of the hamburger icon
+              border: 'none',
+              width: '30px',
+              height: '22px',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between', // Space the lines evenly
-              padding: '0', // Remove any padding
-              marginLeft: 'auto', // Ensure the hamburger stays to the right without affecting other elements
+              justifyContent: 'space-between',
+              padding: '0',
+              marginLeft: 'auto',
             }}
           >
             {isOpen ? (
-              // 'X' icon
               <>
                 <div style={{
                   width: '30px',
@@ -121,7 +125,6 @@ const Menubar = () => {
                 }} />
               </>
             ) : (
-              // Hamburger menu
               <>
                 <div style={{
                   width: '30px',
@@ -150,8 +153,8 @@ const Menubar = () => {
         onHide={handleToggleOffcanvas}
         placement="start"
         style={{
-          width: '250px', // Adjust the width of the Offcanvas
-          backgroundColor: 'black', // Set the background to black
+          width: '250px',
+          backgroundColor: 'black',
         }}
       >
         <Offcanvas.Header closeButton>
@@ -159,27 +162,79 @@ const Menubar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body style={{ backgroundColor: 'black', color: 'white' }}>
           <Nav className="flex-column">
+            {/* Product dropdown */}
             <Nav.Link
-              onClick={() => navigate('/product_overview')}
-              style={{ color: 'white', fontSize: '1.1rem' }}
+              onClick={toggleProductMenu}
+              style={{
+                color: 'white',
+                fontSize: '1.1rem',
+                backgroundColor: 'black',
+                display: 'flex',
+                alignItems: 'center', // Align text and triangle
+                justifyContent: 'space-between',
+                paddingRight: '10px',
+              }}
             >
-              Product
+              <span>Product</span>
+              <span style={{ fontSize: '0.8rem', marginLeft: '5px' }}>{productExpanded ? '▲' : '▼'}</span>
             </Nav.Link>
+
+            {/* Expandable sub-menu under Product */}
+            {productExpanded && (
+              <div style={{ paddingLeft: '15px' }}> {/* Indentation for dropdown */}
+                <Nav.Link
+                  onClick={() => navigate('/overview')}
+                  style={{
+                    color: 'white',
+                    fontSize: '0.9rem', // Smaller font size for sub-menu items
+                    backgroundColor: 'black',
+                    paddingLeft: '15px', // Further indentation
+                  }}
+                >
+                  Overview
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => navigate('/pricing')}
+                  style={{
+                    color: 'white',
+                    fontSize: '0.9rem', // Smaller font size for sub-menu items
+                    backgroundColor: 'black',
+                    paddingLeft: '15px',
+                  }}
+                >
+                  Pricing
+                </Nav.Link>
+              </div>
+            )}
+
+            {/* Direct links */}
             <Nav.Link
               onClick={() => navigate('/research')}
-              style={{ color: 'white', fontSize: '1.1rem' }}
+              style={{
+                color: 'white',
+                fontSize: '1.1rem',
+                backgroundColor: 'black',
+              }}
             >
               Research
             </Nav.Link>
             <Nav.Link
               onClick={() => navigate('/blog')}
-              style={{ color: 'white', fontSize: '1.1rem' }}
+              style={{
+                color: 'white',
+                fontSize: '1.1rem',
+                backgroundColor: 'black',
+              }}
             >
               Blog
             </Nav.Link>
             <Nav.Link
               onClick={() => navigate('/company')}
-              style={{ color: 'white', fontSize: '1.1rem' }}
+              style={{
+                color: 'white',
+                fontSize: '1.1rem',
+                backgroundColor: 'black',
+              }}
             >
               Company
             </Nav.Link>
