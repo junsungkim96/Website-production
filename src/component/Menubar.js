@@ -120,9 +120,26 @@ const Menubar = () => {
             {expandedMenu === 'Research' && (
               <div style={{ paddingLeft: '15px' }}>
                 {['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'].map((item, i) => (
-                  <Nav.Link key={i} onClick={() => closeOffcanvasAndNavigate(`/${item.toLowerCase()}`)} style={{ color: 'white', fontSize: '0.9rem' }}>
-                    {item}
-                  </Nav.Link>
+                  <Nav.Link
+                    key={i}
+                    onClick={() => {
+                      if (item === 'Overview') {
+                        closeOffcanvasAndNavigate('/research');
+                      } else if (item === 'Optics') {
+                        closeOffcanvasAndNavigate('/optics');
+                      } else if (item === 'Sensor') {
+                        closeOffcanvasAndNavigate('/sensor');
+                      } else if (item === 'ISP') {
+                        closeOffcanvasAndNavigate('/isp');
+                      } else if (item === 'Algorithms') {
+                        closeOffcanvasAndNavigate('/algorithms');
+                      }
+                    }}
+                    style={{ color: 'white', fontSize: '0.9rem' }}
+                  >
+                  {item}
+                </Nav.Link>
+                
                 ))}
               </div>
             )}
@@ -140,7 +157,23 @@ const Menubar = () => {
             {expandedMenu === 'Company' && (
               <div style={{ paddingLeft: '15px' }}>
                 {['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'].map((item, i) => (
-                  <Nav.Link key={i} onClick={() => closeOffcanvasAndNavigate(item === 'About' ? '/company' : `/${item.toLowerCase().replace(' ', '_')}`)} style={{ color: 'white', fontSize: '0.9rem' }}>
+                  <Nav.Link
+                    key={i}
+                    onClick={() => {
+                      if (item === 'About') {
+                        closeOffcanvasAndNavigate('/company');
+                      } else if (item === 'Careers') {
+                        closeOffcanvasAndNavigate('/careers');
+                      } else if (item === 'Customer Stories') {
+                        closeOffcanvasAndNavigate('/stories');
+                      } else if (item === 'Investor Relations') {
+                        closeOffcanvasAndNavigate('/ir');
+                      } else if (item === 'News') {
+                        closeOffcanvasAndNavigate('/news');
+                      }
+                    }}
+                    style={{ color: 'white', fontSize: '0.9rem' }}
+                  >
                     {item}
                   </Nav.Link>
                 ))}
