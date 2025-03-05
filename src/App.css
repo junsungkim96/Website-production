@@ -499,10 +499,9 @@ p2{
   }
 
   .career-join{
-    font-size: 4.3vw;
+    font-size: 7vw;
     display: block;
     width: 90vw;
-    text-align: ;
   }
 
   .responsive-container{
@@ -552,10 +551,10 @@ p2{
   }
 
   .use-case-text-title{
-    text-align: left;
+    text-align: center;
     width: 100%;
     color: white;
-    font-size: 2.6vh;
+    font-size: 5vw;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     margin-bottom: 2vh;
@@ -565,7 +564,7 @@ p2{
     text-align: center;
     width: 100%;
     color: white;
-    font-size: 1.8vh;
+    font-size: 4vw;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 2vh;
@@ -614,15 +613,16 @@ p2{
 
   .strength-title{
     font-weight: bold;
-    font-size: 2.5vh;
+    font-size: 5vw;
     color: black;
     font-family: 'Roboto', sans-serif;
   }
 
   .strength-text{
-    font-size: 2vh;
+    font-size: 4vw;
     color: black;
     text-align: left;
+    font-weight: bold;
   }
 
   .footer-title{
@@ -634,6 +634,7 @@ p2{
 
   .right-small-text{
     text-align: left;
+    font-size: 5vw;
   }
 
   .product-card{
@@ -653,7 +654,7 @@ p2{
   
   .product-text{
     text-align: left;
-    font-size: 2vh;
+    font-size: 4vw;
     width: 100%;
     color: rgba(0, 0, 0, 1);
     font-weight: bold;
@@ -669,7 +670,7 @@ p2{
   }
 
   .product-center-text{
-    font-size: 2vh;
+    font-size: 4vw;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -680,5 +681,7 @@ p2{
     padding-right: 5%;
   }
 
-
+  p{
+    font-size: 4vw;
+  }
 }
