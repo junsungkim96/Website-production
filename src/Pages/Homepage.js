@@ -34,6 +34,8 @@ const Homepage = () => {
 
       <hr class="separator"></hr>
 
+      {/* -----------------------------------------------------------Product-------------------------------------------------------- */}
+
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Product</div>
         <div className="right-text">
@@ -106,8 +108,10 @@ const Homepage = () => {
 
       <hr class="separator"></hr>
 
+      {/* -----------------------------------------------------------Use Cases-------------------------------------------------------- */}
+
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="left-text">Use cases</div>
+        <div className="left-text">Use Cases</div>
         {/* <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
         </div> */}
@@ -147,6 +151,8 @@ const Homepage = () => {
 
       <hr class="separator"></hr>
 
+      {/* -----------------------------------------------------------Strengths-------------------------------------------------------- */}
+
       <div class="update-container" style = {{marginBottom: '10vh', marginTop: '10vh'}}>
         <div className="left-text">Strengths</div>
         <div className="right-text" style = {{width: '45vw'}}>
@@ -162,7 +168,7 @@ const Homepage = () => {
               </p>
             </div>
             
-            <div style={{ fontSize: '1.5vh', color: 'black' }}>
+            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left' }}>
               Recognized by computer vision engineers for its high accuracy
             </div>
           </div>
@@ -178,7 +184,7 @@ const Homepage = () => {
               </p>
             </div>
             
-            <div style={{ fontSize: '1.5vh', color: 'black' }}>
+            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left' }}>
               The system is so flexible that you can simulate any vision hardware you want
             </div>
           </div>
@@ -194,7 +200,7 @@ const Homepage = () => {
               </p>
             </div>
             
-            <div style={{ fontSize: '1.5vh', color: 'black' }}>
+            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left'}}>
               <div style={{marginBottom: '0.7vh'}}>
                 Ensure the security and confidentiality of your design specifications by utilizing on-premise deployment <br/>
               </div>
@@ -208,6 +214,8 @@ const Homepage = () => {
 
       
       <hr class="separator"></hr>
+      
+      {/* -----------------------------------------------------------Research-------------------------------------------------------- */}
 
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Research</div>
@@ -222,6 +230,8 @@ const Homepage = () => {
       </div>
       
       <hr class="separator"></hr>
+
+      {/* -----------------------------------------------------------Career-------------------------------------------------------- */}
       
       <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
         <div className="left-text">Careers at {company_name}</div>

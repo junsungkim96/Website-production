@@ -13,7 +13,7 @@ import { company_name } from '../data/Company_data';
 const Menubar = () => {
   const productItems = ['Overview', 'Pricing'];
   const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
-  const companyItems = ['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
+  const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
 
   // Separate dropdown states for each menu
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
@@ -92,7 +92,7 @@ const Menubar = () => {
           left: 0,
           width: '100%',
           backgroundColor: 'rgba(0, 0, 0, 1)',
-          height: '60px',
+          height: '65px',
           zIndex: 9999,
           transition: 'background-color 0.3s ease',
         }}
@@ -101,7 +101,7 @@ const Menubar = () => {
           <div className="logo-container" style={{ display: 'flex', alignItems: 'center' }}>
             <img src={logo} alt="logo" style={{ width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
             <Navbar.Brand
-              style={{ color: 'white', marginLeft: '3px', cursor: 'pointer', transition: 'color 0.3s ease' }}
+              style={{ color: 'white', marginLeft: '3px', cursor: 'pointer', transition: 'color 0.3s ease', fontSize: '1.25rem' }}
               onClick={() => closeOffcanvasAndNavigate('/')}
             >
               {company_name}
@@ -110,13 +110,14 @@ const Menubar = () => {
           
           <div className="desktop-nav">
             <NavDropdown
-              title={<span style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease', 
-                fontSize: '1.1rem', // Consistent font size for both
-              }}>
-                Product
-              </span>}
+              title={
+                <span className="custom-dropdown-title">
+                  Product
+                  <span className={`custom-dropdown-icon ${productDropdownOpen ? 'open' : ''}`} style = {{marginLeft: '10px'}}>›</span>
+                </span>
+              }
               id="collapsible-nav-dropdown"
-              className = "navbar-item"
+              className="navbar-item"
               show={productDropdownOpen}
               onMouseEnter={handleProductMouseEnter}
               onMouseLeave={handleProductMouseLeave}
@@ -140,10 +141,9 @@ const Menubar = () => {
             </NavDropdown>
 
             <NavDropdown
-              title={<span style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease', 
-                fontSize: '1.1rem', // Consistent font size for both
-              }}>
+              title={<span className="custom-dropdown-title">
                 Research
+                <span className={`custom-dropdown-icon ${productDropdownOpen ? 'open' : ''}`} style = {{marginLeft: '10px'}}>›</span>
               </span>}
               id="collapsible-nav-dropdown"
               className="navbar-item"
@@ -178,19 +178,10 @@ const Menubar = () => {
               ))}
             </NavDropdown>
 
-            <Nav className="navbar-item">
-              <Nav.Link style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease', 
-                fontSize: '1.1rem', // Consistent font size for both
-              }} onClick={() => navigate('/blog')}>
-                Blog
-              </Nav.Link>
-            </Nav>
-
             <NavDropdown
-              title={<span style={{ color: scrolled ? 'white' : 'white', transition: 'color 0.3s ease',
-                fontSize: '1.1rem', // Consistent font size for both
-              }}>
+              title={<span className="custom-dropdown-title">
                 Company
+                <span className={`custom-dropdown-icon ${productDropdownOpen ? 'open' : ''}`} style = {{marginLeft: '10px'}}>›</span>
               </span>}
               id="collapsible-nav-dropdown"
               className="navbar-item"
@@ -204,6 +195,9 @@ const Menubar = () => {
                   onClick={() => {
                     if (item === 'About') {
                       navigate('/company');
+                    }
+                    else if (item === 'Blog'){
+                      navigate('/blog');
                     }
                     else if (item === 'Careers') {
                       navigate('/careers');
@@ -229,14 +223,14 @@ const Menubar = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '30px', height: '22px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
               {isOpen ? (
                 <>
-                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
-                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
+                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
+                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
                 </>
               ) : (
                 <>
-                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
-                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
-                  <div style={{ width: '30px', height: '4px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white' }} />
                 </>
               )}
             </Navbar.Toggle>
@@ -252,14 +246,24 @@ const Menubar = () => {
         <Offcanvas.Body style={{ backgroundColor: 'black', color: 'white' }}>
           <Nav className="flex-column">
             {/* Product Dropdown */}
-            <Nav.Link onClick={() => toggleMenu('Product')} style={{ color: 'white', fontSize: '1.1rem', display: 'flex', alignItems: 'center' }}>
+            <Nav.Link onClick={() => toggleMenu('Product')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Product</span>
               <span style={{ fontSize: '0.7rem' }}>{expandedMenu === 'Product' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Product' && (
               <div style={{ paddingLeft: '15px' }}>
-                {['Overview', 'Pricing'].map((item, i) => (
-                  <Nav.Link key={i} onClick={() => closeOffcanvasAndNavigate(item === 'Overview' ? '/product_overview' : '/product_pricing')} style={{ color: 'white', fontSize: '0.9rem' }}>
+                {productItems.map((item, i) => (
+                  <Nav.Link 
+                    key={i} 
+                    onClick={() => {
+                      if (item === 'Overview'){
+                        closeOffcanvasAndNavigate('/product_overview');
+                      } else if (item === 'Pricing'){
+                        closeOffcanvasAndNavigate('/product_pricing');
+                      }
+                    }}
+                    style={{ color: 'white', fontSize: '0.9rem' }}
+                  >
                     {item}
                   </Nav.Link>
                 ))}
@@ -267,13 +271,13 @@ const Menubar = () => {
             )}
 
             {/* Research Dropdown */}
-            <Nav.Link onClick={() => toggleMenu('Research')} style={{ color: 'white', fontSize: '1.1rem', display: 'flex', alignItems: 'center' }}>
+            <Nav.Link onClick={() => toggleMenu('Research')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Research</span>
               <span style={{ fontSize: '0.7rem' }}>{expandedMenu === 'Research' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Research' && (
               <div style={{ paddingLeft: '15px' }}>
-                {['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'].map((item, i) => (
+                {researchItems.map((item, i) => (
                   <Nav.Link
                     key={i}
                     onClick={() => {
@@ -299,23 +303,25 @@ const Menubar = () => {
             )}
 
             {/* Blog */}
-            <Nav.Link onClick={() => closeOffcanvasAndNavigate('/blog')} style={{ color: 'white', fontSize: '1.1rem' }}>
+            {/* <Nav.Link onClick={() => closeOffcanvasAndNavigate('/blog')} style={{ color: 'white', fontSize: '1.1rem' }}>
               Blog
-            </Nav.Link>
+            </Nav.Link> */}
 
             {/* Company Dropdown */}
-            <Nav.Link onClick={() => toggleMenu('Company')} style={{ color: 'white', fontSize: '1.1rem', display: 'flex', alignItems: 'center' }}>
+            <Nav.Link onClick={() => toggleMenu('Company')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Company</span>
               <span style={{ fontSize: '0.7rem' }}>{expandedMenu === 'Company' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Company' && (
               <div style={{ paddingLeft: '15px' }}>
-                {['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'].map((item, i) => (
+                {companyItems.map((item, i) => (
                   <Nav.Link
                     key={i}
                     onClick={() => {
                       if (item === 'About') {
                         closeOffcanvasAndNavigate('/company');
+                      } else if (item === 'Blog'){
+                        closeOffcanvasAndNavigate('/blog');
                       } else if (item === 'Careers') {
                         closeOffcanvasAndNavigate('/careers');
                       } else if (item === 'Customer Stories') {

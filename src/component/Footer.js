@@ -5,18 +5,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useNavigate} from 'react-router-dom';
 import {company_name} from '../data/Company_data';
+import linkedin from '../img/linkedin_white.png';
+import youtube from '../img/youtube_white.png'; 
 
 const Footer = () => {
   const productItems = ['Overview', 'Pricing'];
   const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
-  const blogItems = ['Blog'];
-  const companyItems = ['About', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
+  const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
 
   const navigate = useNavigate();
-
-  // const footer = ['© Copyright Qureka. All rights reserved']
-  // const footer = ['Copyright Qureka. All rights reserved', 'Terms & policies', 'Privacy policy', 'Brand guidlines']
-  // const footer2 = ['Twitter', 'YouTube', 'GitHub', 'SoundCloud', 'Linkedin']
 
   return(
     <>
@@ -25,6 +22,9 @@ const Footer = () => {
       <Container className = "footer-container">
         <Row className="footer">
           <Col xs={3}>
+            <div style = {{fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif'}}>
+              Product
+            </div>
             {productItems.map((item, i) => (
               <div
                 key={i}
@@ -45,6 +45,9 @@ const Footer = () => {
           </Col>
 
           <Col xs={3}>
+            <div style = {{fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif'}}>
+              Research
+            </div>
             {researchItems.map((item, i) => (
               <div
                 key={i}
@@ -73,18 +76,9 @@ const Footer = () => {
           </Col>
           
           <Col xs={3}>
-            {blogItems.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => navigate('/blog')}
-                className = "footer-font"
-              >
-                {item}
-              </div>
-            ))}
-          </Col>
-          
-          <Col xs={3}>
+            <div style = {{fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif'}}>
+              Company
+            </div>
             {companyItems.map((item, i) => (
               <div
                 key={i}
@@ -111,11 +105,21 @@ const Footer = () => {
               </div>
             ))}
           </Col>
+
+          <Col xs={3} sytle = {{textAlign: 'center'}}>
+            <div style={{ fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif' }}>
+              Follow Us
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5vw' }}>
+              <img style={{ width: '1vw', height: '1vw' }} src={linkedin} alt="LinkedIn" />
+              <img style={{ width: '1vw', height: '1vw' }} src={youtube} alt="YouTube" />
+            </div>
+          </Col>
+
         </Row>
       </Container>
 
 
-      {/* <hr class="separator"></hr> */}
 
       <div style = {{backgroundColor: 'black'}}>
         <Container style = {{marginTop: '1vh'}}>

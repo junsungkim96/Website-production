@@ -48,11 +48,9 @@ const App = () => (
         <Route path="/isp" element={<MainLayout>< ISP /></MainLayout>}/>
         <Route path="/algorithms" element={<MainLayout>< Algorithms /></MainLayout>}/>
         
-        {/* Blog */}
-        <Route path="/blog" element={<MainLayout>< Blog /></MainLayout>}/>
-        
         {/* Company */}
         <Route path="/company" element={<MainLayout>< Company /></MainLayout>} />
+        <Route path="/blog" element={<MainLayout>< Blog /></MainLayout>}/>
         <Route path="/careers" element={<MainLayout>< Careers /></MainLayout>} />
         <Route path="/stories" element={<MainLayout>< Stories /></MainLayout>} />
         <Route path="/ir" element={<MainLayout>< IR /></MainLayout>} />

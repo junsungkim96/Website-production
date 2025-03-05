@@ -12,6 +12,29 @@
   background-color: black;
 }
 
+/* Hide Bootstrap's default dropdown arrow */
+.navbar-item .dropdown-toggle::after {
+  display: none !important;
+}
+
+/* Style the custom dropdown title */
+.custom-dropdown-title {
+  display: flex;
+  align-items: center;
+  font-size: 1rem; /* Adjust font size */
+  color: white;
+  transition: color 0.3s ease;
+}
+
+/* Custom thin arrow */
+.custom-dropdown-icon {
+  font-size: 1rem; /* Adjust arrow size */
+  margin-left: 5px; /* Space between text and arrow */
+  transform: rotate(90deg); /* Initially point arrow to the right */
+  transition: transform 0.1s ease; /* Smooth transition for flip */
+  display: inline-block;
+}
+
 .career-image{
   width: 60vw;
   background-position: center;
@@ -375,4 +398,7 @@ p2{
     font-family: 'Poppins', sans-serif;
   }
 
+  
+
+  
 }
