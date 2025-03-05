@@ -36,7 +36,7 @@ const Homepage = () => {
 
       {/* -----------------------------------------------------------Product-------------------------------------------------------- */}
 
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+      <div class="update-container">
         <div className="left-text">Product</div>
         <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product_overview')}>View all product features</p>
@@ -49,60 +49,57 @@ const Homepage = () => {
         Your browser does not support the video tag.
       </video>
 
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
-        <div className="center-text">End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
-      </div>
+      <div className="product-center-text">End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
+      
 
-      <div style = {{marginTop: '7vh', marginBottom: '10vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
+      <div className = "product-card">
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', borderRadius: '15px', backgroundColor: '#FFFFFF'}}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+                          borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh'}}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <div>
-                  <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={time} alt=""/>
-                </div>
-                <p style={{fontSize: '2.5vh', color: 'rgba(0, 0, 0, 1)', textAlign: 'left', fontFamily: 'Roboto, sans-serif'}}>
+                <img className="product-image" src={time} alt=""/>
+                <div className = "product-text-title">
                   Save Time
-                </p>
+                </div>
               </div>
 
-              <p style={{textAlign: 'left', fontSize: '1.5vh', width: '18vw', color: 'rgba(0, 0, 0, 1)'}}>
-                Achieve system validation ~100x faster <br/> with virtual hardware simulations.
-              </p>
+              <div className = "product-text">
+                Achieve system validation ~100x faster with virtual hardware simulations.
+              </div>
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', borderRadius: '15px', backgroundColor: '#FFFFFF' }}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+                          borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <div>
-                  <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={money} alt=""/>
-                </div>
-                <p style={{fontSize: '2.5vh', color: 'rgba(0, 0, 0, 1)', textAlign: 'left', fontFamily: 'Roboto, sans-serif'}}>
+                <img className="product-image" src={money} alt=""/>
+                <div className = "product-text-title">
                   Save Money
-                </p>
+                </div>
               </div>
-              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw', color: 'rgba(0, 0, 0, 1)'}}>
-                Reduce system validation costs to ~1/100 <br/> with virtual hardware simulations.
-              </p>  
+              <div className = "product-text">
+                Reduce system validation costs to ~1/100 with virtual hardware simulations.
+              </div>  
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', borderRadius: '15px', backgroundColor: '#FFFFFF' }}>
+            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+                          borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <div>
-                  <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={optimize} alt=""/>
-                </div>
-                <p style={{fontSize: '2.5vh', color: 'rgba(0, 0, 0, 1)', textAlign: 'left', fontFamily: 'Roboto, sans-serif'}}>
+                <img className="product-image" src={optimize} alt=""/>
+                <div className = "product-text-title">
                   Optimize
-                </p>
+                </div>
               </div>
-              <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw', color: 'rgba(0, 0, 0, 1)'}}>
-                Find the right balance <br/> between size, cost and performance  
-              </p>  
+              <div className = "product-text">
+                Find the right balance between size, cost and performance  
+              </div>  
             </div>
           </div>
         </div>
       </div>
+
 
       <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}/>
 
@@ -110,42 +107,40 @@ const Homepage = () => {
 
       {/* -----------------------------------------------------------Use Cases-------------------------------------------------------- */}
 
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+      <div class="update-container">
         <div className="left-text">Use Cases</div>
         {/* <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
         </div> */}
       </div>
 
-      <div style = {{marginBottom: '8vh', paddingLeft: '20vw', paddingRight: '20vw'}}>
-        <div className="row">
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <p>
-              Autonomous systems
-            </p>
-            <img style = {{width: '18vw', height: '10vw', backgroundPosition: 'left'}} src={img1} alt=""/>
-            <p style={{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Validate AI algorithms on a virtual hardware for testing system-level performance
-            </p>
+      <div className="use-case">
+        <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+          <div className="use-case-text-title">
+            Autonomous systems
           </div>
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <p>
-              Visual Inspection in Manufacturing
-            </p>
-            <img style = {{width: '18vw', height: '10vw', backgroundPosition: 'center'}} src={img2} alt = ""/>
-            <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Test the performance of Inspection algorithms in different light settings
-            </p>  
+          <img className="use-case-image" src={img1} alt=""/>
+          <div className="use-case-text">
+            Validate AI algorithms on a virtual hardware for testing system-level performance
           </div>
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <p>
-              Augmented/Virtual Reality
-            </p>
-            <img style = {{width: '18vw', height: '10vw', backgroundPosition: 'center'}} src={img3} alt = ""/>
-            <p style = {{textAlign: 'left', fontSize: '1.5vh', width: '18vw'}}>
-              Find the best hardware for your specific algorithm needs
-            </p>  
+        </div>
+        <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+          <div className="use-case-text-title">
+            Visual Inspection in Manufacturing
           </div>
+          <img className="use-case-image" src={img2} alt = ""/>
+          <div className="use-case-text">
+            Test the performance of Inspection algorithms in different light settings
+          </div>  
+        </div>
+        <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+          <div className="use-case-text-title">
+            Augmented/Virtual Reality
+          </div>
+          <img className="use-case-image" src={img3} alt = ""/>
+          <div className="use-case-text">
+            Find the best hardware for your specific algorithm needs
+          </div>  
         </div>
       </div>
 
@@ -155,56 +150,52 @@ const Homepage = () => {
 
       <div class="update-container" style = {{marginBottom: '10vh', marginTop: '10vh'}}>
         <div className="left-text">Strengths</div>
-        <div className="right-text" style = {{width: '45vw'}}>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
-            
+        <div className="right-text">
+          <div className = "strengths-card">
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
               <div>
-                <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={img6} alt=""/>
+                <img className="strength-image" src={img6} alt=""/>
               </div>
-              <p style={{ fontWeight: 'bold', fontSize: '2.5vh', color: 'black', fontFamily: 'Roboto, sans-serif'}}>
+              <p className="strength-title">
                 World Class Accuracy
               </p>
             </div>
             
-            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left' }}>
+            <div className="strength-text">
               Recognized by computer vision engineers for its high accuracy
             </div>
           </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+          <div className = "strengths-card">
             
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
               <div>
-                <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={img5} alt=""/>
+                <img className="strength-image" src={img5} alt=""/>
               </div>
-              <p style={{ fontWeight: 'bold', fontSize: '2.5vh', color: 'black', fontFamily: 'Roboto, sans-serif' }}>
+              <p className="strength-title">
                 Customizable
               </p>
             </div>
             
-            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left' }}>
+            <div className="strength-text">
               The system is so flexible that you can simulate any vision hardware you want
             </div>
           </div>
-          <div style={{ marginBottom: '0.5vh', paddingTop: '7vh', paddingBottom: '7vh',
-            paddingLeft: '50px', paddingRight: '50px', borderRadius: '15px', backgroundColor: '#f9f9f9' }}>
+          <div className = "strengths-card">
             
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
               <div>
-                <img style = {{width: '3vw', height: '3vw', backgroundPosition: 'left', marginRight: '1vw', marginBottom: '2vh'}} src={img4} alt=""/>
+                <img className="strength-image" src={img4} alt=""/>
               </div>
-              <p style={{ fontWeight: 'bold', fontSize: '2.5vh', color: 'black', fontFamily: 'Roboto, sans-serif' }}>
+              <p className="strength-title">
                 Secure and Private
               </p>
             </div>
             
             <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left'}}>
-              <div style={{marginBottom: '0.7vh'}}>
+              <div className="strength-text" style={{marginBottom: '0.7vh'}}>
                 Ensure the security and confidentiality of your design specifications by utilizing on-premise deployment <br/>
               </div>
-              <div>
+              <div className="strength-text">
                 Keep your data and intellectual property within your own infrastructure
               </div>
             </div>
@@ -217,10 +208,10 @@ const Homepage = () => {
       
       {/* -----------------------------------------------------------Research-------------------------------------------------------- */}
 
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+      <div class="update-container" style = {{marginBottom: '6vh', marginTop: '6vh'}}>
         <div className="left-text">Research</div>
         <div className="right-text">
-          <div>
+          <div className="right-small-text">
             We research deep learning based computer vision system optimization.
           </div>
           <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('research')}>
@@ -233,10 +224,10 @@ const Homepage = () => {
 
       {/* -----------------------------------------------------------Career-------------------------------------------------------- */}
       
-      <div class="update-container" style = {{marginBottom: '3.5vh', marginTop: '3.5vh'}}>
+      <div class="update-container" style = {{marginBottom: '6vh', marginTop: '6vh'}}>
         <div className="left-text">Careers at {company_name}</div>
         <div className="right-text">
-          <div>
+          <div className="right-small-text">
             Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision
           </div>
           <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
@@ -246,8 +237,14 @@ const Homepage = () => {
       </div>
 
       <img className = "career-image" src={career} alt = "" />
-      <div style = {{marginBottom: '3vh'}}>
-        <p className = "career-join">Join us in shaping the future of technology</p>
+      {/* <div style = {{marginBottom: '3vh'}}>
+        <p className = "career-join" style ={{textAlign: 'center'}}>Join us in shaping the future of technology</p>
+      </div> */}
+
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '3vh'}}>
+        <p className="career-join" style={{ textAlign: 'center' }}>
+          Join us in shaping the future of technology
+        </p>
       </div>
       
       <div style = {{marginBottom: '5vh'}}>

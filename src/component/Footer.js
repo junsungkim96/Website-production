@@ -21,8 +21,8 @@ const Footer = () => {
       
       <Container className = "footer-container">
         <Row className="footer">
-          <Col xs={3}>
-            <div style = {{fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif'}}>
+          <Col xs={6} md={3} className="mb-5">
+            <div className = "footer-title">
               Product
             </div>
             {productItems.map((item, i) => (
@@ -44,8 +44,8 @@ const Footer = () => {
             ))}
           </Col>
 
-          <Col xs={3}>
-            <div style = {{fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif'}}>
+          <Col xs={6} md={3} className="mb-5">
+            <div className = "footer-title">
               Research
             </div>
             {researchItems.map((item, i) => (
@@ -75,8 +75,8 @@ const Footer = () => {
             ))}
           </Col>
           
-          <Col xs={3}>
-            <div style = {{fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif'}}>
+          <Col xs={6} md={3}>
+            <div className = "footer-title">
               Company
             </div>
             {companyItems.map((item, i) => (
@@ -106,13 +106,13 @@ const Footer = () => {
             ))}
           </Col>
 
-          <Col xs={3} sytle = {{textAlign: 'center'}}>
-            <div style={{ fontSize: '1.4vh', marginBottom: '0.9vh', fontFamily: 'Helvetica, sans-serif' }}>
+          <Col xs={6} md={3} style = {{textAlign: 'center'}}>
+            <div className = "footer-title">
               Follow Us
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5vw' }}>
-              <img style={{ width: '1vw', height: '1vw' }} src={linkedin} alt="LinkedIn" />
-              <img style={{ width: '1vw', height: '1vw' }} src={youtube} alt="YouTube" />
+              <img className="social-media" src={linkedin} alt="LinkedIn" />
+              <img className="social-media" src={youtube} alt="YouTube" />
             </div>
           </Col>
 
