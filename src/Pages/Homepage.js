@@ -1,5 +1,6 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import img1 from '../img/autonomous.jpg';
 import img2 from '../img/manufacturing.png';
@@ -23,6 +24,16 @@ import {company_name} from '../data/Company_data';
 const Homepage = () => {
   const navigate = useNavigate();
 
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
   }, []);
@@ -37,7 +48,9 @@ const Homepage = () => {
       {/* -----------------------------------------------------------Product-------------------------------------------------------- */}
 
       <div class="update-container">
-        <div className="left-text">Product</div>
+        <div className="left-text">
+          Product
+        </div>
         <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product_overview')}>View all product features</p>
         </div>
@@ -52,12 +65,12 @@ const Homepage = () => {
       <div className="product-center-text">End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
       
 
-      <div className = "product-card">
+      <div className = "product-card" style ={{marginTop: '35vh', marginBottom: '35vh'}}>
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '10vh', marginTop: '10vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh'}}>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={time} alt=""/>
                 <div className = "product-text-title">
                   Save Time
@@ -70,9 +83,9 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '10vh', marginTop: '10vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={money} alt=""/>
                 <div className = "product-text-title">
                   Save Money
@@ -84,9 +97,9 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '0.5vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '10vh', marginTop: '10vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={optimize} alt=""/>
                 <div className = "product-text-title">
                   Optimize
@@ -106,15 +119,14 @@ const Homepage = () => {
       <hr class="separator"></hr>
 
       {/* -----------------------------------------------------------Use Cases-------------------------------------------------------- */}
-
-      <div class="update-container">
+      <div class="update-container" style={{ marginTop: '25vh'}}>
         <div className="left-text">Use Cases</div>
         {/* <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
         </div> */}
       </div>
 
-      <div className="use-case">
+      <div className="use-case" style = {{marginBottom: '25vh'}}>
         <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
           <div className="use-case-text-title">
             Autonomous systems
@@ -208,7 +220,7 @@ const Homepage = () => {
       
       {/* -----------------------------------------------------------Research-------------------------------------------------------- */}
 
-      <div class="update-container" style = {{marginBottom: '6vh', marginTop: '6vh'}}>
+      <div class="update-container" style = {{marginTop: '50vh', marginBottom: '50vh'}}>
         <div className="left-text">Research</div>
         <div className="right-text">
           <div className="right-small-text">
@@ -224,8 +236,10 @@ const Homepage = () => {
 
       {/* -----------------------------------------------------------Career-------------------------------------------------------- */}
       
-      <div class="update-container" style = {{marginBottom: '6vh', marginTop: '6vh'}}>
-        <div className="left-text">Careers at {company_name}</div>
+      <div class="update-container">
+        <div className="left-text">
+          Careers at {isSmallScreen ? <br/> : null} {company_name}
+        </div>
         <div className="right-text">
           <div className="right-small-text">
             Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision
@@ -236,22 +250,20 @@ const Homepage = () => {
         </div>
       </div>
 
-      <img className = "career-image" src={career} alt = "" />
-      {/* <div style = {{marginBottom: '3vh'}}>
-        <p className = "career-join" style ={{textAlign: 'center'}}>Join us in shaping the future of technology</p>
-      </div> */}
-
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '3vh'}}>
-        <p className="career-join" style={{ textAlign: 'center' }}>
-          Join us in shaping the future of technology
-        </p>
-      </div>
-      
-      <div style = {{marginBottom: '5vh'}}>
-        <Button variant = "light" size = "lg"
-        onClick = {()=> navigate('/careers')}>
-          <div className = "career-button">View Careers</div> 
-        </Button>
+      <div style = {{marginBottom: '10vh'}}>
+        <img className = "career-image" src={career} alt = "" />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '3vh'}}>
+          <p className="career-join" style={{ textAlign: 'center' }}>
+            Join us in shaping the future of technology
+          </p>
+        </div>
+        
+        <div>
+          <Button variant = "light" size = "lg"
+          onClick = {()=> navigate('/careers')}>
+            <div className = "career-button">View Careers</div> 
+          </Button>
+        </div>
       </div>
 
     </div>

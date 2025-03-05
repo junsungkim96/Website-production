@@ -97,7 +97,7 @@ const Menubar = () => {
           transition: 'background-color 0.3s ease',
         }}
       >
-        <Container style={{ paddingLeft: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+        <Container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className="logo-container" style={{ display: 'flex', alignItems: 'center' }}>
             <img src={logo} alt="logo" style={{ width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
             <Navbar.Brand
@@ -301,11 +301,6 @@ const Menubar = () => {
                 ))}
               </div>
             )}
-
-            {/* Blog */}
-            {/* <Nav.Link onClick={() => closeOffcanvasAndNavigate('/blog')} style={{ color: 'white', fontSize: '1.1rem' }}>
-              Blog
-            </Nav.Link> */}
 
             {/* Company Dropdown */}
             <Nav.Link onClick={() => toggleMenu('Company')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>

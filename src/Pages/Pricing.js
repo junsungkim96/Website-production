@@ -86,7 +86,7 @@ const Pricing = () => {
           {plans.map((plan, index) => (
             <Col key={index} md={6} lg={4} className="mb-4">
               <Card className="h-100 shadow">
-                <Card.Body>
+                <Card.Body style={{ display: 'flex', flexDirection: 'column' }}>
                   <Card.Title style={{ textAlign: 'center' }}>{plan.name}</Card.Title>
                   <h3 style={{ textAlign: 'center', marginTop: '1vh' }}>{plan.price}</h3>
                   <ul className="list-unstyled mt-3 mb-4" style={{ textAlign: 'left', minHeight: '15vh' }}>
@@ -97,7 +97,7 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
-                  <div className="d-grid">
+                  <div className="d-grid" style={{ marginTop: 'auto', marginBottom: '2vh' }}>
                     <Button variant="success" size="lg" onClick={plan.onClick}>
                       {plan.buttonText}
                     </Button>

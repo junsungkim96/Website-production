@@ -110,7 +110,7 @@ const Footer = () => {
             <div className = "footer-title">
               Follow Us
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5vw' }}>
+            <div className = "social-icons">
               <img className="social-media" src={linkedin} alt="LinkedIn" />
               <img className="social-media" src={youtube} alt="YouTube" />
             </div>
@@ -121,11 +121,11 @@ const Footer = () => {
 
 
 
-      <div style = {{backgroundColor: 'black'}}>
+      <div style = {{backgroundColor: 'black', paddingBottom: '1vh'}}>
         <Container style = {{marginTop: '1vh'}}>
           <Row> 
-            <Col className = "footer-left">
-              <div>
+            <Col>
+              <div className = "footer-left">
                 © Copyright {company_name}. All Rights Reserved
               </div>
             </Col>
