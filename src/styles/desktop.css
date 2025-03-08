@@ -53,6 +53,13 @@
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
   }
+
+  .catch-phrase2{
+    color: white;
+    font-size: 3vh;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
   
   .underline{
     text-decoration: underline;

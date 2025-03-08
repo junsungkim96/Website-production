@@ -151,8 +151,15 @@
     .catch-phrase{
       color: white;
       font-size: 7vh;
-      font-weight: 200;
+      font-weight: 600;
       font-family: 'Helvetica', sans-serif;
+    }
+
+    .catch-phrase2{
+        color: white;
+        font-size: 3vh;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
     }
   
     .use-case{
@@ -291,12 +298,11 @@
     }
   
     .product-center-text{
-      font-size: 4vw;
-      /* font-weight: bold; */
+      font-size: 5vw;
       text-align: left;
       color: white;
       width: 100%;
-      font-family: 'Rubik'; 
+      font-family: 'Helvetica', sans-serif; 
       margin-bottom: 20vh;
       padding-left: 5%;
       padding-right: 5%;

@@ -20,7 +20,7 @@ const ParticleBackground = () => {
         </div>
 
         <div style={{ marginTop: '2vh', marginBottom: '2vh', height: 'auto' }}>
-          <p style={{ fontSize: '3vh' }}>The ultimate digital twin simulator for Computer Vision</p>
+          <div className="catch-phrase2">The ultimate digital twin simulator for Computer Vision</div>
         </div>
 
         <div>
