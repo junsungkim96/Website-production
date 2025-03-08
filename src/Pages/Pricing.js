@@ -101,7 +101,12 @@ const Pricing = () => {
                     ))}
                   </ul>
                   <div className="d-grid" style={{ marginTop: 'auto', marginBottom: '2vh' }}>
-                    <Button variant="success" size="lg" onClick={plan.onClick}>
+                    <Button
+                      variant="success"
+                      size="lg"
+                      onClick={plan.onClick}
+                      style={{ backgroundColor: "#008B8B", borderColor: '#008B8B' }}
+                    >
                       {plan.buttonText}
                     </Button>
                   </div>
