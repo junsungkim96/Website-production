@@ -26,7 +26,7 @@ const Footer = () => {
         <Row className="footer">
           <Col xs={6} md={3} className="mb-5">
             <div className = "footer-title">
-              Product
+              PRODUCT
             </div>
             {productItems.map((item, i) => (
               <div
@@ -49,7 +49,7 @@ const Footer = () => {
 
           <Col xs={6} md={3} className="mb-5">
             <div className = "footer-title">
-              Research
+              RESEARCH
             </div>
             {researchItems.map((item, i) => (
               <div
@@ -80,7 +80,7 @@ const Footer = () => {
           
           <Col xs={6} md={3}>
             <div className = "footer-title">
-              Company
+              COMPANY
             </div>
             {companyItems.map((item, i) => (
               <div
@@ -109,9 +109,9 @@ const Footer = () => {
             ))}
           </Col>
 
-          <Col xs={6} md={3} style = {{textAlign: 'center'}}>
+          <Col xs={6} md={3}>
             <div className = "footer-title">
-              Follow Us
+              FOLLOW US
             </div>
             <div className = "social-icons">
               <img className="social-media" src={linkedin} alt="LinkedIn" />

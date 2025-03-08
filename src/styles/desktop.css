@@ -24,6 +24,7 @@
     font-size: 1rem; /* Adjust font size */
     color: white;
     transition: color 0.3s ease;
+    font-family: 'Helvetica', sans-serif;
   }
   
   /* Custom thin arrow */
@@ -140,20 +141,17 @@
   
   .use-case-text-title{
     text-align: center;
-    /* width: 20vw; */
     color: white;
     font-size: 1.8vh;
-    /* font-weight: bold; */
     font-family: 'Roboto', sans-serif;
     margin-bottom: 1vh;
   }
   
   .use-case-text{
-    text-align: center;
+    text-align: left;
     width: 18vw;
     color: white;
     font-size: 1.5vh;
-    /* font-weight: bold; */
     font-family: 'Helvetica', sans-serif;
   }
   
@@ -215,25 +213,42 @@
   .footer{
     color: white;
     font-size: 10vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
   
   .footer-container{
     margin-bottom: 10vh;
     margin-top: 5vh;
-    width: 60vw;
+    width: 100%;
+  }
+
+  .footer-title{
+    font-size: 1.3vh;
+    margin-bottom: 0.9vh;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 4vw;
   }
   
   .footer-font{
     margin-top: 0.2vh;
     cursor: pointer;
-    font-size: 0.6vw;
+    font-size: 0.65vw;
     margin-bottom: 1vh;
+    text-align: left;
+    font-family: 'Helvetica', sans-serif;
+    margin-left: 4vw;
   }
   
   .footer-left{
     color: white;
     text-align: left;
     font-size: 0.6vw;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 300;
   }
   
   .footer-right{
@@ -242,6 +257,20 @@
     justify-content: flex-end;
     cursor: pointer;
     font-size: 0.6vw;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 300;
+  }
+
+  .social-media{
+    width: 1vw;
+    height: 1vw;
+  }
+  
+  .social-icons{
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    margin-left: 4vw;
   }
   
   #collapsible-nav-dropdown{
@@ -305,17 +334,6 @@
     background-position: center;
   }
   
-  .social-media{
-    width: 1vw;
-    height: 1vw;
-  }
-  
-  .social-icons{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
   .strengths-card{
     margin-bottom: 3vh;
     padding-top: 10%;
@@ -339,7 +357,7 @@
     color: black;
     text-align: left;
     font-family: 'Helvetica', sans-serif;
-    font-weight: bold;
+    font-weight: 500;
   }
   
   .strength-image {
@@ -348,13 +366,6 @@
     background-position: left;
     margin-right: 1vw;
     margin-bottom: 2vh;
-  }
-  
-  .footer-title{
-    font-size: 1.3vh;
-    margin-bottom: 0.9vh;
-    font-family: 'Helvetica', sans-serif;
-    font-weight: bold;
   }
   
   .right-small-text{

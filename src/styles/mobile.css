@@ -97,12 +97,15 @@
       padding-top: 1vh;
       cursor: pointer;
       font-size: 3.5vw;
+      font-family: 'Helvetica', sans-serif;
     }
     
     .footer-left{
       color: white;
       text-align: left;
-      font-size: 2vw;
+      font-size: 2.2vw;
+      font-family: 'Helvetica', sans-serif;
+      font-weight: 300;
     }
   
     .footer-left div{
@@ -119,7 +122,9 @@
       display: flex;
       justify-content: flex-end;
       cursor: pointer;
-      font-size: 2vw;
+      font-size: 2.2vw;
+      font-family: 'Helvetica', sans-serif;
+      font-weight: 300;
     }
   
     .career-join{
@@ -197,7 +202,7 @@
 
   
     .use-case-text{
-      text-align: center;
+      text-align: left;
       width: 100%;
       color: white;
       font-size: 2.5vh;
@@ -216,8 +221,8 @@
   
     .social-icons {
       display: flex;
-      justify-content: center;
-      gap: 20px;
+      justify-content: left;
+      gap: 10px;
     }
   
     .social-media{
@@ -231,8 +236,8 @@
       padding-top: 20%;
       padding-bottom: 20%;
       text-align: left;
-      padding-left: 10%;
-      padding-right: 10%;
+      padding-left: 5%;
+      padding-right: 5%;
       border-radius: 15px;
       background-color: #f9f9f9;
       width: 100%;
@@ -263,7 +268,7 @@
     }
   
     .footer-title{
-      font-size: 4vw;
+      font-size: 3.5vw;
       font-weight: bold;
       margin-bottom: 1vh;
       font-family: 'Helvetica', sans-serif;
