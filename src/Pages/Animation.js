@@ -1,12 +1,28 @@
 import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
 import eye from '../img/eye.png';
+import React, {useState, useEffect} from 'react';
+import {useLayoutEffect} from 'react';
 
 const ParticleBackground = () => {
   const particlesInit = async (main) => {
     // Initialize the full version of particles.js
     await loadFull(main);
   };
+
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useLayoutEffect(()=>{
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div style={{ position: 'relative', height: '105vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
@@ -20,7 +36,7 @@ const ParticleBackground = () => {
         </div>
 
         <div style={{ marginTop: '2vh', marginBottom: '2vh', height: 'auto' }}>
-          <div className="catch-phrase2">The ultimate digital twin simulator for Computer Vision</div>
+          <div className="catch-phrase2">The ultimate digital twin simulator {isSmallScreen ? <br/> : null} for Computer Vision</div>
         </div>
 
         <div>
