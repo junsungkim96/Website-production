@@ -125,7 +125,7 @@
     .career-join{
         color: white;
         font-size: 8vw;
-        font-weight: 300;
+        font-weight: 500;
         margin-bottom: 1vh;
         font-family: 'Helvetica', sans-serif;  
     }
@@ -245,20 +245,21 @@
       margin-right: 3vw;
       margin-bottom: 2vh;
     }
-  
+
     .strength-title{
       font-weight: bold;
-      font-size: 5vw;
+      font-size: 4vh;
       color: black;
-      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+      font-family: 'Helvetica', sans-serif;
     }
   
     .strength-text{
-      font-size: 4vw;
+      font-size: 2.5vh;
       color: black;
       text-align: left;
       font-family: 'Helvetica', sans-serif;
-      font-weight: 300;
+      font-weight: 500;
     }
   
     .footer-title{

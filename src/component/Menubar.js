@@ -276,7 +276,7 @@ const Menubar = () => {
             {/* Research Dropdown */}
             <Nav.Link onClick={() => toggleMenu('Research')} style={{ color: 'white', fontSize: '4.5vw', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Research</span>
-              <span style={{ fontSize: '4vw' }}>{expandedMenu === 'Research' ? '▲' : '▼'}</span>
+              <span style={{ fontSize: '2vw' }}>{expandedMenu === 'Research' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Research' && (
               <div style={{ paddingLeft: '15px' }}>
@@ -296,7 +296,7 @@ const Menubar = () => {
                         closeOffcanvasAndNavigate('/algorithms');
                       }
                     }}
-                    style={{ color: 'white', fontSize: '3.5vw' }}
+                    style={{ color: 'white', fontSize: '4vw' }}
                   >
                   {item}
                 </Nav.Link>
