@@ -1,4 +1,7 @@
-import '../App.css';
+import '../styles/desktop.css';
+import '../styles/laptop.css';
+import '../styles/tablet.css';
+import '../styles/mobile.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';

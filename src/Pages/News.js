@@ -1,4 +1,7 @@
-import '../App.css';
+import '../styles/desktop.css';
+import '../styles/laptop.css';
+import '../styles/tablet.css';
+import '../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 
 const News = () => {

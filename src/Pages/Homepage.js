@@ -1,4 +1,7 @@
-import '../App.css';
+import '../styles/desktop.css';
+import '../styles/laptop.css';
+import '../styles/tablet.css';
+import '../styles/mobile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';

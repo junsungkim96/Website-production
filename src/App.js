@@ -1,4 +1,7 @@
-import './App.css';
+import './styles/desktop.css';
+import './styles/laptop.css';
+import './styles/tablet.css';
+import './styles/mobile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Suspense} from 'react';

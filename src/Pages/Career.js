@@ -1,4 +1,7 @@
-import '../App.css';
+import '../styles/desktop.css';
+import '../styles/laptop.css';
+import '../styles/tablet.css';
+import '../styles/mobile.css';
 // import Button from 'react-bootstrap/Button';
 import React, {useLayoutEffect, useState} from 'react';
 import data from '../data/Career_data.js';
