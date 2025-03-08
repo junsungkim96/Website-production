@@ -30,9 +30,9 @@ const Product = () => {
             <p>
               Customizable illuminant
             </p>
-            <h>
+            <p>
               Change the spectrum of light and brightness
-            </h>
+            </p>
           </div>
           <div style = {{paddingTop: '10vh'}}>
             <p>

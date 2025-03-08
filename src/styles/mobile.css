@@ -92,11 +92,18 @@
       width: 95vw;
     }
   
+    .footer-title{
+        font-size: 2vh;
+        font-weight: bold;
+        margin-bottom: 1vh;
+        font-family: 'Helvetica', sans-serif;
+    }
+
     .footer-font{
-      margin-top: 1vh;
-      padding-top: 1vh;
+      font-size: 2vh;
+      margin-top: 1.5vw;
+      padding-top: 1vw;
       cursor: pointer;
-      font-size: 3.5vw;
       font-family: 'Helvetica', sans-serif;
     }
     
@@ -267,13 +274,6 @@
       font-weight: 500;
     }
   
-    .footer-title{
-      font-size: 3.5vw;
-      font-weight: bold;
-      margin-bottom: 1vh;
-      font-family: 'Helvetica', sans-serif;
-    }
-  
     .product-card{
       margin-top: 7vh;
       margin-bottom: 10vh;
@@ -323,4 +323,4 @@
       font-family: 'Helvetica', sans-serif;
       font-weight: 300;
     }
-  }
+}

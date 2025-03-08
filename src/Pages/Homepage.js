@@ -118,38 +118,37 @@ const Homepage = () => {
       {/* -----------------------------------------------------------Use Cases-------------------------------------------------------- */}
       <div class="update-container">
         <div className="left-text">Use Cases</div>
-        {/* <div className="right-text">
-          <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
-        </div> */}
       </div>
 
       <div className="use-case" style = {{marginBottom: '25vh'}}>
-        <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-          <div className="use-case-text-title">
-            Autonomous systems
+        <div className="row">
+          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+            <div className="use-case-text-title">
+              Autonomous systems
+            </div>
+            <img className="use-case-image" src={img1} alt=""/>
+            <div className="use-case-text">
+              Validate AI algorithms on a virtual hardware for testing system-level performance
+            </div>
           </div>
-          <img className="use-case-image" src={img1} alt=""/>
-          <div className="use-case-text">
-            Validate AI algorithms on a virtual hardware for testing system-level performance
+          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+            <div className="use-case-text-title">
+              Visual Inspection in Manufacturing
+            </div>
+            <img className="use-case-image" src={img2} alt = ""/>
+            <div className="use-case-text">
+              Test the performance of Inspection algorithms in different light settings
+            </div>  
           </div>
-        </div>
-        <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-          <div className="use-case-text-title">
-            Visual Inspection in Manufacturing
+          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+            <div className="use-case-text-title">
+              Augmented/Virtual Reality
+            </div>
+            <img className="use-case-image" src={img3} alt = ""/>
+            <div className="use-case-text">
+              Find the best hardware for your specific algorithm needs
+            </div>  
           </div>
-          <img className="use-case-image" src={img2} alt = ""/>
-          <div className="use-case-text">
-            Test the performance of Inspection algorithms in different light settings
-          </div>  
-        </div>
-        <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-          <div className="use-case-text-title">
-            Augmented/Virtual Reality
-          </div>
-          <img className="use-case-image" src={img3} alt = ""/>
-          <div className="use-case-text">
-            Find the best hardware for your specific algorithm needs
-          </div>  
         </div>
       </div>
 
@@ -239,7 +238,7 @@ const Homepage = () => {
         </div>
         <div className="right-text">
           <div className="right-small-text">
-            Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and computer vision
+            Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and AI algorithms
           </div>
           <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
             <p>View careers</p>

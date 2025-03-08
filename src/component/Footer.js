@@ -89,6 +89,9 @@ const Footer = () => {
                   if (item === 'About') {
                     navigate('/company');
                   }
+                  else if (item === 'Blog'){
+                    navigate('/blog');
+                  }
                   else if (item === 'Careers') {
                     navigate('/careers');
                   }

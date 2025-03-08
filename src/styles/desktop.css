@@ -125,18 +125,18 @@
   }
   
   .use-case{
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     padding-left: 20%;
     padding-right: 20%;
-    /* padding-top: 5vh; */
-    /* padding-bottom: 10vh; */
   }
   
   .use-case-image{
     width: 18vw;
     height: 10vw;
-    background-position: left;
+    display: block; /* Ensures image is treated as a block element */
+    margin-left: auto; /* Automatically adds left margin to center */
+    margin-right: auto; /* Automatically adds right margin to center */
   }
   
   .use-case-text-title{
@@ -153,6 +153,9 @@
     color: white;
     font-size: 1.5vh;
     font-family: 'Helvetica', sans-serif;
+    display: block; /* Ensures image is treated as a block element */
+    margin-left: auto; /* Automatically adds left margin to center */
+    margin-right: auto; /* Automatically adds right margin to center */
   }
   
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
@@ -225,7 +228,7 @@
   }
 
   .footer-title{
-    font-size: 1.3vh;
+    font-size: 0.7vw;
     margin-bottom: 0.9vh;
     font-family: 'Helvetica', sans-serif;
     font-weight: bold;
@@ -234,9 +237,9 @@
   }
   
   .footer-font{
+    font-size: 0.65vw;
     margin-top: 0.2vh;
     cursor: pointer;
-    font-size: 0.65vw;
     margin-bottom: 1vh;
     text-align: left;
     font-family: 'Helvetica', sans-serif;
@@ -343,13 +346,16 @@
     padding-right: 5%;
     border-radius: 15px;
     background-color: #f9f9f9;
-    width: 25vw;
+    width: 23vw;
+    margin-left: auto;
+    margin-right: 0;
   }
   
   .strength-title{
     font-size: 2.3vh;
     color: black;
     font-family: 'Roboto', sans-serif;
+    text-align: 'left';
   }
   
   .strength-text{

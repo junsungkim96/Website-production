@@ -3,13 +3,24 @@ import '../styles/laptop.css';
 import '../styles/tablet.css';
 import '../styles/mobile.css';
 // import Button from 'react-bootstrap/Button';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState, useEffect} from 'react';
 import data from '../data/Career_data.js';
 import {MdArrowDropDown} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
+import {company_name} from '../data/Company_data';
 
 const Careers = () => {
   const navigate = useNavigate();
+
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
@@ -22,10 +33,10 @@ const Careers = () => {
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
-            <p style = {{fontSize: '50px'}}>Careers at Qblack AI</p> <br/>
+            <p style = {{fontSize: '50px'}}>Careers at {isSmallScreen ? <br/> : null} {company_name} </p> <br/>
           </div>
           <div>
-            <p style = {{fontSize: '40px', marginBottom: '10vh'}}>If you are passionate about revolutionizing computer vision, come join us!</p>
+            <p style = {{fontSize: '30px', marginBottom: '10vh'}}>If you are passionate about revolutionizing computer vision, come join us!</p>
           </div>
           {/* <div>
             <Button variant = "light" size = "lg" style = {{marginBottom: '50px', marginRight: '1%'}} className = "px-4">
