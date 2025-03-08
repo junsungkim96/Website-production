@@ -35,7 +35,7 @@
       order: 1; 
       font-size: 5vh; 
       padding-left: 5%;
-      /* font-weight: bold; */
+      font-weight: 300;
       color: white;
       font-family: 'Helvetica', sans-serif;
       width: 100%;
@@ -58,6 +58,7 @@
         font-size: 4vw;
         color: white;
         font-family: 'Helvetica', sans-serif;
+        font-weight: 300;
         text-align: 'left';
       }
   
@@ -151,7 +152,7 @@
     .catch-phrase{
       color: white;
       font-size: 7vh;
-      font-weight: 600;
+      font-weight: 400;
       font-family: 'Helvetica', sans-serif;
     }
 
@@ -172,7 +173,7 @@
     
     .col-md-4{
       width: 100%;
-      margin-top: 10vh;
+      margin-top: 5vh;
       margin-bottom: 10vh;
     }
   
@@ -188,8 +189,9 @@
       text-align: center;
       width: 100%;
       color: white;
-      font-size: 4.5vw;
+      font-size: 3.5vh;
       font-family: 'Helvetica', sans-serif;
+      font-weight: 400;
       margin-bottom: 2vh;
     }
 
@@ -198,9 +200,10 @@
       text-align: center;
       width: 100%;
       color: white;
-      font-size: 3.5vw;
+      font-size: 2.5vh;
       font-weight: bold;
       font-family: 'Helvetica', sans-serif;
+      font-weight: 400;
       margin-bottom: 2vh;
     }
   
@@ -208,7 +211,7 @@
       border-color: white;
       border-width: 1.5px;
       width: 90vw;
-      margin: 10px auto;
+      /* margin: 10px auto; */
     }
   
     .social-icons {
@@ -302,6 +305,7 @@
       text-align: left;
       color: white;
       width: 100%;
+      font-weight: 300;
       font-family: 'Helvetica', sans-serif; 
       margin-bottom: 20vh;
       padding-left: 5%;
@@ -311,5 +315,6 @@
     p{
       font-size: 4vw;
       font-family: 'Helvetica', sans-serif;
+      font-weight: 300;
     }
   }

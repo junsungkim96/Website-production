@@ -68,7 +68,7 @@ const Homepage = () => {
       <div className = "product-card" style ={{marginTop: '10vh', marginBottom: '10vh'}}>
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '10vh', paddingBottom: '10vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh'}}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={time} alt=""/>
@@ -83,7 +83,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '10vh', paddingBottom: '10vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={money} alt=""/>
@@ -97,7 +97,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '10vh', paddingBottom: '10vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={optimize} alt=""/>
