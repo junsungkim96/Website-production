@@ -231,9 +231,9 @@ const Menubar = () => {
                 </>
               ) : (
                 <>
-                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white' }} />
-                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white' }} />
-                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '2px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '2px', backgroundColor: 'white' }} />
+                  <div style={{ width: '30px', height: '2px', backgroundColor: 'white' }} />
                 </>
               )}
             </Navbar.Toggle>
@@ -249,9 +249,9 @@ const Menubar = () => {
         <Offcanvas.Body style={{ backgroundColor: 'black', color: 'white' }}>
           <Nav className="flex-column">
             {/* Product Dropdown */}
-            <Nav.Link onClick={() => toggleMenu('Product')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>
+            <Nav.Link onClick={() => toggleMenu('Product')} style={{ color: 'white', fontSize: '3.6vw ', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Product</span>
-              <span style={{ fontSize: '0.7rem' }}>{expandedMenu === 'Product' ? '▲' : '▼'}</span>
+              <span style={{ fontSize: '2vw' }}>{expandedMenu === 'Product' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Product' && (
               <div style={{ paddingLeft: '15px' }}>
@@ -265,7 +265,7 @@ const Menubar = () => {
                         closeOffcanvasAndNavigate('/product_pricing');
                       }
                     }}
-                    style={{ color: 'white', fontSize: '0.9rem' }}
+                    style={{ color: 'white', fontSize: '3.2vw' }}
                   >
                     {item}
                   </Nav.Link>
@@ -274,9 +274,9 @@ const Menubar = () => {
             )}
 
             {/* Research Dropdown */}
-            <Nav.Link onClick={() => toggleMenu('Research')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>
+            <Nav.Link onClick={() => toggleMenu('Research')} style={{ color: 'white', fontSize: '3.6vw', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Research</span>
-              <span style={{ fontSize: '0.7rem' }}>{expandedMenu === 'Research' ? '▲' : '▼'}</span>
+              <span style={{ fontSize: '2vw' }}>{expandedMenu === 'Research' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Research' && (
               <div style={{ paddingLeft: '15px' }}>
@@ -296,7 +296,7 @@ const Menubar = () => {
                         closeOffcanvasAndNavigate('/algorithms');
                       }
                     }}
-                    style={{ color: 'white', fontSize: '0.9rem' }}
+                    style={{ color: 'white', fontSize: '3.2vw' }}
                   >
                   {item}
                 </Nav.Link>
@@ -306,9 +306,9 @@ const Menubar = () => {
             )}
 
             {/* Company Dropdown */}
-            <Nav.Link onClick={() => toggleMenu('Company')} style={{ color: 'white', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>
+            <Nav.Link onClick={() => toggleMenu('Company')} style={{ color: 'white', fontSize: '3.6vw', display: 'flex', alignItems: 'center' }}>
               <span style={{ marginRight: '5px' }}>Company</span>
-              <span style={{ fontSize: '0.7rem' }}>{expandedMenu === 'Company' ? '▲' : '▼'}</span>
+              <span style={{ fontSize: '2vw' }}>{expandedMenu === 'Company' ? '▲' : '▼'}</span>
             </Nav.Link>
             {expandedMenu === 'Company' && (
               <div style={{ paddingLeft: '15px' }}>
@@ -330,7 +330,7 @@ const Menubar = () => {
                         closeOffcanvasAndNavigate('/news');
                       }
                     }}
-                    style={{ color: 'white', fontSize: '0.9rem' }}
+                    style={{ color: 'white', fontSize: '3.2vw' }}
                   >
                     {item}
                   </Nav.Link>

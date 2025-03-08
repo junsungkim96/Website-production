@@ -68,10 +68,10 @@ const Homepage = () => {
       <div className="product-center-text">End-to-End image pipeline for illuminant - scene - optics - actuator - sensor - isp  - algorithms</div>
       
 
-      <div className = "product-card" style ={{marginTop: '35vh', marginBottom: '35vh'}}>
+      <div className = "product-card" style ={{marginTop: '10vh', marginBottom: '10vh'}}>
         <div className="row">
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '10vh', marginTop: '10vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh'}}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={time} alt=""/>
@@ -86,7 +86,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '10vh', marginTop: '10vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={money} alt=""/>
@@ -100,7 +100,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '10vh', marginTop: '10vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
+            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '5vh', paddingBottom: '5vh', paddingLeft: '1vw', paddingRight: '1vw', 
                           borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
                 <img className="product-image" src={optimize} alt=""/>
@@ -116,13 +116,10 @@ const Homepage = () => {
         </div>
       </div>
 
-
-      <div style = {{marginBottom: '3.5vh', paddingLeft: '20vw', paddingRight: '20vw'}}/>
-
       <hr class="separator"></hr>
 
       {/* -----------------------------------------------------------Use Cases-------------------------------------------------------- */}
-      <div class="update-container" style={{ marginTop: '25vh'}}>
+      <div class="update-container">
         <div className="left-text">Use Cases</div>
         {/* <div className="right-text">
           <p className = "underline" style = {{cursor: 'pointer'}}>View all updates</p>
@@ -223,7 +220,7 @@ const Homepage = () => {
       
       {/* -----------------------------------------------------------Research-------------------------------------------------------- */}
 
-      <div class="update-container" style = {{marginTop: '50vh', marginBottom: '50vh'}}>
+      <div class="update-container">
         <div className="left-text">Research</div>
         <div className="right-text">
           <div className="right-small-text">
@@ -255,10 +252,8 @@ const Homepage = () => {
 
       <div style = {{marginBottom: '10vh'}}>
         <img className = "career-image" src={career} alt = "" />
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '3vh'}}>
-          <p className="career-join" style={{ textAlign: 'center' }}>
-            Join us in shaping the future of technology
-          </p>
+        <div className="career-join" style={{ textAlign: 'center', marginBottom: '3vh' }}>
+          Join us in shaping the {isSmallScreen ? <br/> : null} future of technology
         </div>
         
         <div>
