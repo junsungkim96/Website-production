@@ -105,7 +105,7 @@ const Pricing = () => {
                       variant="success"
                       size="lg"
                       onClick={plan.onClick}
-                      style={{ backgroundColor: "#008B8B", borderColor: '#008B8B' }}
+                      style={{ backgroundColor: "#008B8B", borderColor: '#2F4F4F', borderWidth: "1px",  borderStyle: "solid"}}
                     >
                       {plan.buttonText}
                     </Button>
