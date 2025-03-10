@@ -136,8 +136,8 @@
   
     .career-join{
         color: white;
-        font-size: 8vw;
-        font-weight: 500;
+        font-size: 7vw;
+        font-weight: 100;
         margin-bottom: 1vh;
         font-family: 'Helvetica', sans-serif;  
     }
@@ -163,7 +163,7 @@
   
     .catch-phrase{
       color: white;
-      font-size: 7vh;
+      font-size: 10vw;
       font-weight: 200;
       font-family: 'Helvetica', sans-serif;
     }
@@ -260,18 +260,18 @@
 
     .strength-title{
       font-weight: bold;
-      font-size: 4vh;
+      font-size: 6vw;
       color: black;
       font-weight: 600;
       font-family: 'Helvetica', sans-serif;
     }
   
     .strength-text{
-      font-size: 2.5vh;
+      font-size: 4vw;
       color: black;
       text-align: left;
       font-family: 'Helvetica', sans-serif;
-      font-weight: 500;
+      font-weight: 300;
     }
   
     .product-card{
@@ -291,10 +291,10 @@
     
     .product-text{
       text-align: left;
-      font-size: 2.5vh;
+      font-size: 4vw;
       width: 100%;
       color: rgba(0, 0, 0, 1);
-      font-weight: 500;
+      font-weight: 300;
       font-family: 'Helvetica', sans-serif;
     }
   

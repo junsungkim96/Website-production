@@ -377,3 +377,13 @@
   .right-small-text{
     text-align: right;
   }
+
+  .role-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .role-text{
+    white-space: nowrap;
+  }

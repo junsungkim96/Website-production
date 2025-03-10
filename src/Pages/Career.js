@@ -5,7 +5,7 @@ import '../styles/mobile.css';
 // import Button from 'react-bootstrap/Button';
 import React, {useLayoutEffect, useState, useEffect} from 'react';
 import data from '../data/Career_data.js';
-import {MdArrowDropDown} from 'react-icons/md';
+import {MdArrowDropDown, MdArrowDropUp} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 import {company_name} from '../data/Company_data';
 
@@ -54,66 +54,65 @@ const Careers = () => {
 
       <hr class="separator"></hr>
       
-      {/* {
-        data.map((a, i) => (
-          <>
-          {i !== 0 && <hr class="separator"></hr>}
-          <div class="update-container" style = {{marginBottom: '30px', marginTop: '30px', cursor: 'pointer'}} 
-          onClick = {()=>setTab(i === tab ? null : i)}>
-            <div className="career-left-text">
-              {tab === i && <MdArrowDropDown color = 'white' size = '1.2em'/>}
-              { a.role} <br/>
-              <p2>{a.location}</p2>
+      {data.map((a, i) => (
+        <React.Fragment key={i}>
+          {i !== 0 && <hr className="separator" />}
+          <div
+            className="update-container"
+            style={{ marginBottom: '30px', marginTop: '30px', cursor: 'pointer' }}
+            onClick={() => setTab(tab === i ? null : i)} // Click toggles expansion
+          >
+            <div className="career-left-text" style={{ cursor: 'pointer' }}>
+              <span className="role-container" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                {tab === i ? (
+                  <MdArrowDropUp color="white" size="1.2em" />
+                ) : (
+                  <MdArrowDropDown color="white" size="1.2em" />
+                )}
+                <span className="role-text">{a.role}</span>
+              </span>
+              <p style={{ margin: 0 }}>{a.location}</p> {/* a.location on a separate line */}
             </div>
-            <div className="right-text" onClick = {()=>{navigate('/apply')}}>
-              <span className = "underline" style = {{cursor: 'pointer'}}>Apply now</span> ↗
-            </div>
-          </div>
-          {tab === i && <div style = {{textAlign: 'left', fontSize: '20px', paddingLeft: '20%', paddingRight: '20%', marginBottom: '3.5vh'}}>
-            <p2>{a.description}</p2></div>}
-          </>
-        ))
-      } */}
-      {
-        data.map((a, i) => (
-          <React.Fragment key={i}>
-            {i !== 0 && <hr className="separator" />}
-            <div
-              className="update-container"
-              style={{ marginBottom: '30px', marginTop: '30px', cursor: 'pointer' }}
-              onClick={() => setTab(i === tab ? null : i)}
-            >
-              <div className="career-left-text">
-                {tab === i && <MdArrowDropDown color="white" size="1.2em" />}
-                {a.role} <br />
-                <p2>{a.location}</p2>
-              </div>
-              <div className="right-text" onClick={() => navigate('/apply')}>
-                <span className="underline" style={{ cursor: 'pointer' }}>Apply now</span> ↗
-              </div>
-            </div>
-            {tab === i && (
-              <div
+            <div className="right-text"
+                 style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}>
+              <span
+                className="underline"
                 style={{
-                  textAlign: 'left',
-                  fontSize: '20px',
-                  paddingLeft: '20%',
-                  paddingRight: '20%',
-                  marginBottom: '3.5vh',
+                  padding: '5px 10px', // adjust padding to make the area smaller
+                  borderRadius: '5px',
+                }}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering parent onClick
+                  navigate('/apply');
                 }}
               >
-                <p2
-                  dangerouslySetInnerHTML={{
-                    __html: a.description.replace(/\n/g, '<br/>'),
-                  }}
-                />
-              </div>
-            )}
-          </React.Fragment>
-        ))
-      }
+                Apply now
+              </span> ↗
+            </div>
+          </div>
 
-
+          {/* The expanded part is also clickable */}
+          {tab === i && (
+            <div
+              style={{
+                textAlign: 'left',
+                fontSize: '20px',
+                paddingLeft: '20%',
+                paddingRight: '20%',
+                marginBottom: '3.5vh',
+                cursor: 'pointer', // Add cursor pointer to show that it's clickable
+              }}
+              onClick={() => setTab(tab === i ? null : i)} // Keep the click event here
+            >
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: a.description.replace(/\n/g, '<br/>'),
+                }}
+              />
+            </div>
+          )}
+        </React.Fragment>
+      ))}
       
     </div>
   )
