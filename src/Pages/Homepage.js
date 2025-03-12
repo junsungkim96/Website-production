@@ -65,53 +65,85 @@ const Homepage = () => {
       <div className="product-center-text">End-to-End image pipeline for illuminant, scene, optics, actuator, sensor, ISP and algorithms</div>
       
 
-      <div className = "product-card" style ={{marginTop: '10vh', marginBottom: '10vh'}}>
-        <div className="row">
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '10vh', paddingBottom: '10vh', paddingLeft: '1vw', paddingRight: '1vw', 
-                          borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh'}}>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
-                <img className="product-image" src={time} alt=""/>
-                <div className = "product-text-title">
-                  Save Time
-                </div>
+      <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
+        <div className="row"> {/* Added gap between cards */}
+          
+          {/* Card 1 */}
+          <div className="col-md-4" style={{ display: 'flex' }}>
+            <div
+              className="product-card-content"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '5vh 1vw',  // Reduced padding top and bottom
+                borderRadius: '15px',
+                backgroundColor: '#FFFFFF',
+                minHeight: '25vh',
+                flexGrow: 1,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
+                <img className="product-image" src={time} alt="" />
+                <div className="product-text-title">Save Time</div>
               </div>
-
-              <div className = "product-text">
+              <div className="product-text">
                 Achieve system validation ~100x faster with virtual hardware simulations.
               </div>
             </div>
           </div>
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '10vh', paddingBottom: '10vh', paddingLeft: '1vw', paddingRight: '1vw', 
-                          borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
-                <img className="product-image" src={money} alt=""/>
-                <div className = "product-text-title">
-                  Save Money
-                </div>
+
+          {/* Card 2 */}
+          <div className="col-md-4" style={{ display: 'flex' }}>
+            <div
+              className="product-card-content"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '5vh 1vw',  // Reduced padding top and bottom
+                borderRadius: '15px',
+                backgroundColor: '#FFFFFF',
+                minHeight: '25vh',
+                flexGrow: 1,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
+                <img className="product-image" src={money} alt="" />
+                <div className="product-text-title">Save Money</div>
               </div>
-              <div className = "product-text">
+              <div className="product-text">
                 Reduce system validation costs to ~1/100 with virtual hardware simulations.
-              </div>  
+              </div>
             </div>
           </div>
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div style={{ marginBottom: '3vh', marginTop: '3vh', paddingTop: '10vh', paddingBottom: '10vh', paddingLeft: '1vw', paddingRight: '1vw', 
-                          borderRadius: '15px', backgroundColor: '#FFFFFF', minHeight: '25vh' }}>
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: '10%'}}>
-                <img className="product-image" src={optimize} alt=""/>
-                <div className = "product-text-title">
-                  Optimize
-                </div>
+
+          {/* Card 3 */}
+          <div className="col-md-4" style={{ display: 'flex' }}>
+            <div
+              className="product-card-content"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '5vh 1vw',  // Reduced padding top and bottom
+                borderRadius: '15px',
+                backgroundColor: '#FFFFFF',
+                minHeight: '25vh',
+                flexGrow: 1,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
+                <img className="product-image" src={optimize} alt="" />
+                <div className="product-text-title">Optimize</div>
               </div>
-              <div className = "product-text">
-                Find the right balance between size, cost and performance  
-              </div>  
+              <div className="product-text">
+                Find the right balance between size, cost, and performance.
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+
+
 
       <hr class="separator"></hr>
 

@@ -97,7 +97,7 @@
   }
   
   .product-text-title{
-    font-size: 2.5vh;
+    font-size: 1.7vw;
     font-weight: bold;
     color: rgba(0, 0, 0, 1);
     text-align: left;
@@ -106,10 +106,10 @@
   
   .product-text{
     text-align: left;
-    font-size: 1.5vh;
+    font-size: 1vw;
     width: 18vw;
     color: rgba(0, 0, 0, 1);
-    font-weight: bold;
+    /* font-weight: bold; */
     font-family: 'Helvetica', sans-serif;
     padding-left: 5%;
     padding-right: 5%;
