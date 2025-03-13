@@ -1,6 +1,6 @@
 import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
-import eye from '../img/eye.png';
+// import eye from '../img/eye.png';
 import React, {useState, useEffect} from 'react';
 import {useLayoutEffect} from 'react';
 
@@ -39,9 +39,9 @@ const ParticleBackground = () => {
           <div className="catch-phrase2">The ultimate digital twin simulator {isSmallScreen ? <br/> : null} for Computer Vision</div>
         </div>
 
-        <div>
+        {/* <div>
           <img className = "eye" src={eye} alt = ""/>
-        </div>
+        </div> */}
       </div>
       
       {/* Particles background */}
