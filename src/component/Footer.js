@@ -116,9 +116,13 @@ const Footer = () => {
             <div className = "footer-title">
               FOLLOW US
             </div>
-            <div className = "social-icons">
-              <img className="social-media" src={linkedin} alt="LinkedIn" />
-              <img className="social-media" src={youtube} alt="YouTube" />
+            <div className = "footer-font">
+              <a href="https://www.linkedin.com/company/qblackai/" target="_blank" rel="noreferrer noopener">
+                <img className="social-media" src={linkedin} alt="LinkedIn" />
+              </a>
+              <a href="https://www.youtube.com/@qblackai" target="_blank" rel="noreferrer noopener">
+                <img className="social-media" src={youtube} alt="YouTube" />
+              </a>
             </div>
           </Col>
 
