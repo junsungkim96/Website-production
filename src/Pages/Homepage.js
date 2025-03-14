@@ -64,7 +64,7 @@ const Homepage = () => {
       </video> */}
 
       {/* Video streaming using Vercel Storage Blob Store */}
-      <video className = "video-container" autoPlay loop muted>
+      <video className = "video-container" controls autoPlay loop muted>
         <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/Quasar_simulator-1gup72IZQQ4abyHJdDKh7HoDtHm0cR.mp4" />
         Your browser does not support the video tag.
       </video>

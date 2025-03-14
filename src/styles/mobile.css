@@ -323,4 +323,9 @@
       font-family: 'Helvetica', sans-serif;
       font-weight: 300;
     }
+
+    .body{
+      background-color: white;
+      height: '45px';
+    }
 }
