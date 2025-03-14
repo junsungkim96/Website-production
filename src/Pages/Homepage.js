@@ -56,9 +56,16 @@ const Homepage = () => {
         </div>
       </div>
 
-      <video className="video-container" autoPlay loop muted
+      {/* Video streaming using local source */}
+      {/* <video className="video-container" autoPlay loop muted
         style = {{marginBottom: '3vh'}}>
         <source src="/video/Quasar_simulator.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video> */}
+
+      {/* Video streaming using Vercel Storage Blob Store */}
+      <video className = "video-container" id="video" controls autoPlay loop muted>
+        <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/Quasar_simulator-1gup72IZQQ4abyHJdDKh7HoDtHm0cR.mp4" />
         Your browser does not support the video tag.
       </video>
 

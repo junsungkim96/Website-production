@@ -97,7 +97,7 @@
   }
   
   .product-text-title{
-    font-size: 1.7vw;
+    font-size: 1.4vw;
     font-weight: bold;
     color: rgba(0, 0, 0, 1);
     text-align: left;
@@ -106,7 +106,7 @@
   
   .product-text{
     text-align: left;
-    font-size: 1vw;
+    font-size: 0.85vw;
     width: 18vw;
     color: rgba(0, 0, 0, 1);
     /* font-weight: bold; */
@@ -353,14 +353,14 @@
   }
   
   .strength-title{
-    font-size: 2.3vh;
+    font-size: 1.2vw;
     color: black;
     font-family: 'Roboto', sans-serif;
     text-align: 'left';
   }
   
   .strength-text{
-    font-size: 1.7vh;
+    font-size: 0.85vw;
     color: black;
     text-align: left;
     font-family: 'Helvetica', sans-serif;
