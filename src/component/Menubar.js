@@ -95,7 +95,6 @@ const Menubar = () => {
           left: 0,
           width: '100%',
           backgroundColor: 'rgba(0, 0, 0, 1)',
-          height: '65px',
           zIndex: 9999,
           transition: 'background-color 0.3s ease',
         }}
