@@ -176,7 +176,7 @@ const Homepage = () => {
             </div>
             <img className="use-case-image" src={img2} alt = ""/>
             <div className="use-case-text">
-              Test the performance of Inspection algorithms in different light settings
+              Test the performance of inspection algorithms in different light settings
             </div>  
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
