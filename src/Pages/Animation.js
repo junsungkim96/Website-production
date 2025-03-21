@@ -2,7 +2,7 @@ import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
 // import eye from '../img/eye.png';
 // import eye from '../img/eyemazy.png';
-import eye from '../img/eye_diamond_2.jpg';
+import eye from '../img/eye_diamond_2.png';
 import React, {useState, useEffect} from 'react';
 import {useLayoutEffect} from 'react';
 
