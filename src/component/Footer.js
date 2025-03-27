@@ -8,8 +8,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useNavigate} from 'react-router-dom';
 import {company_name} from '../data/Company_data';
-import linkedin from '../img/linkedin_white.png';
-import youtube from '../img/youtube_white.png'; 
+import linkedin from '../img/sns/linkedin_white.png';
+import youtube from '../img/sns/youtube_white.png'; 
 
 const Footer = () => {
   const productItems = ['Overview', 'Pricing'];
