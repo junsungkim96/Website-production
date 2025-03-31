@@ -1,3 +1,3 @@
 export const productItems = ['Overview', 'Pricing'];
-export const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
+export const researchItems = ['Overview', 'Illuminant', 'Optics', 'Sensor', 'ISP'];
 export const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories'];

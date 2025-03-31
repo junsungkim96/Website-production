@@ -1,10 +1,10 @@
-import '../styles/desktop.css';
-import '../styles/laptop.css';
-import '../styles/tablet.css';
-import '../styles/mobile.css';
+import '../../styles/desktop.css';
+import '../../styles/laptop.css';
+import '../../styles/tablet.css';
+import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap';
-import handleTrialDownload from '../component/Download';
+import handleTrialDownload from '../../component/Download';
 
 const Pricing = () => {
   useLayoutEffect(() => {

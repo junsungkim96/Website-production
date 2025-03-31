@@ -1,10 +1,10 @@
-import '../styles/desktop.css';
-import '../styles/laptop.css';
-import '../styles/tablet.css';
-import '../styles/mobile.css';
+import '../../styles/desktop.css';
+import '../../styles/laptop.css';
+import '../../styles/tablet.css';
+import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 
-const Stories = () => {
+const IR = () => {
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
   }, []);
@@ -17,11 +17,11 @@ const Stories = () => {
         <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px'}}>
-                Customer Stories
+                Investor Relations
             </p>
             <br/>
           </div>
-          Coming Soon...
+          Coming soon...
         </div>
       </div>
     </div>
@@ -29,4 +29,4 @@ const Stories = () => {
 };
 
 
-export default Stories;
+export default IR;

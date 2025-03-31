@@ -286,7 +286,7 @@ const Homepage = () => {
       </div>
 
       <div style = {{marginBottom: '10vh'}}>
-        <img className = "career-image" src={career} alt = "" />
+        <img className = "full-width-image" src={career} alt = "" />
         <div className="career-join" style={{ textAlign: 'center', marginBottom: '3vh' }}>
           Join us in shaping the {isSmallScreen ? <br/> : null} future of technology
         </div>

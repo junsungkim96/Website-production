@@ -100,7 +100,7 @@ const Menubar = () => {
           <div className="logo-container" style={{ display: 'flex', alignItems: 'center' }}>
             <img src={logo} alt="logo" style={{ width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
             <Navbar.Brand
-              style={{ color: 'white', marginLeft: '3px', cursor: 'pointer', transition: 'color 0.3s ease', fontSize: '1.25rem'}}
+              style={{ color: 'white', marginLeft: '3px', cursor: 'pointer', transition: 'color 0.3s ease', fontSize: '1.4rem'}}
               onClick={() => closeOffcanvasAndNavigate('/')}
             >
               {company_name}
@@ -158,6 +158,9 @@ const Menubar = () => {
                     if (item === 'Overview') {
                       navigate('/research');
                     }
+                    else if (item === 'Illuminant') {
+                      navigate('/illuminant');
+                    }
                     else if (item === 'Optics') {
                       navigate('/optics');
                     } 
@@ -166,9 +169,6 @@ const Menubar = () => {
                     }
                     else if (item === 'ISP') {
                       navigate('/isp');
-                    }
-                    else if (item === 'Algorithms') {
-                      navigate('/algorithms');
                     }
                   }}
                 >

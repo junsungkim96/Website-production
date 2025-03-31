@@ -1,9 +1,9 @@
-import '../styles/desktop.css';
-import '../styles/laptop.css';
-import '../styles/tablet.css';
-import '../styles/mobile.css';
+import '../../styles/desktop.css';
+import '../../styles/laptop.css';
+import '../../styles/tablet.css';
+import '../../styles/mobile.css';
 import React, {useLayoutEffect, useState, useEffect} from 'react';
-import illuminant from "../img/product/illuminant.mp4";
+import illuminant from "../../img/product/illuminant.mp4";
 
 
 const Product = () => {
@@ -30,6 +30,7 @@ const Product = () => {
           <div className = "career-left-text" style = {{fontSize: '50px'}}>
             Main Features
           </div>
+
           <div style = {{paddingTop: '10vh'}}>
             <div className="left-text" style = {{marginBottom: '1vh'}}>
               Customizable illuminant
@@ -39,6 +40,7 @@ const Product = () => {
               Your browser does not support the video tag.
             </video>
           </div>
+          
           <div style = {{paddingTop: '10vh'}}>
             <div className="left-text" style = {{marginBottom: '1vh'}}>
               Unlimited support for image type

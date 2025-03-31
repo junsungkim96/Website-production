@@ -1,10 +1,10 @@
-import '../styles/desktop.css';
-import '../styles/laptop.css';
-import '../styles/tablet.css';
-import '../styles/mobile.css';
+import '../../styles/desktop.css';
+import '../../styles/laptop.css';
+import '../../styles/tablet.css';
+import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 
-const News = () => {
+const Stories = () => {
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
   }, []);
@@ -17,11 +17,15 @@ const News = () => {
         <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px'}}>
-                News
+                Customer Stories
             </p>
             <br/>
           </div>
-          Coming soon...
+          <div>
+            <p>
+              Coming Soon...
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -29,4 +33,4 @@ const News = () => {
 };
 
 
-export default News;
+export default Stories;

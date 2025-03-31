@@ -8,22 +8,22 @@ import {Suspense} from 'react';
 import Menubar from './component/Menubar';
 import Footer from './component/Footer';
 import Homepage from './Pages/Homepage';
-import Product from './Pages/Product';
-import Pricing from './Pages/Pricing';
-import Research from './Pages/Research';
-import Optics from './Pages/Optics';
-import Sensor from './Pages/Sensor';
-import ISP from './Pages/ISP';
-import Algorithms from './Pages/Algorithms';
-import Blog from './Pages/Blog';
-import Company from './Pages/Company';
-import Careers from './Pages/Career';
-import Stories from './Pages/Stories';
-import IR from './Pages/IR';
-import News from './Pages/News';
-import Login from './Pages/Login';
-import Signup from './Pages/Signup';
-import ApplicationFrom from './Pages/Apply';
+import Product from './Pages/Product/Product';
+import Pricing from './Pages/Product/Pricing';
+import Research from './Pages/Research/Research';
+import Optics from './Pages/Research/Optics';
+import Sensor from './Pages/Research/Sensor';
+import ISP from './Pages/Research/ISP';
+import Illuminant from './Pages/Research/Illuminant';
+import Blog from './Pages/Company/Blog';
+import Company from './Pages/Company/Company';
+import Careers from './Pages/Company/Career';
+import Stories from './Pages/Company/Stories';
+import IR from './Pages/Company/IR';
+import News from './Pages/Company/News';
+import Login from './Pages/Utils/Login';
+import Signup from './Pages/Utils/Signup';
+import ApplicationFrom from './Pages/Utils/Apply';
 
 const MainLayout = ({ children }) => (
   <div className="App">
@@ -46,10 +46,10 @@ const App = () => (
         
         {/* Research */}
         <Route path="/research" element={<MainLayout>< Research /></MainLayout>}/>
+        <Route path="/illuminant" element={<MainLayout>< Illuminant /></MainLayout>}/>
         <Route path="/optics" element={<MainLayout>< Optics /></MainLayout>}/>
         <Route path="/sensor" element={<MainLayout>< Sensor /></MainLayout>}/>
         <Route path="/isp" element={<MainLayout>< ISP /></MainLayout>}/>
-        <Route path="/algorithms" element={<MainLayout>< Algorithms /></MainLayout>}/>
         
         {/* Company */}
         <Route path="/company" element={<MainLayout>< Company /></MainLayout>} />

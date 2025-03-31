@@ -37,7 +37,7 @@
   display: inline-block;
 }
 
-.career-image{
+.full-width-image{
   width: 60vw;
   background-position: center;
   margin-top: 0.5vh;
@@ -292,6 +292,7 @@
   order: 1; 
   font-size: 20px; 
   padding-left: 20%;
+  padding-right: 20%;
   font-weight: bold;
   color: white;
   font-family: 'Poppins', sans-serif;
