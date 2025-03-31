@@ -55,6 +55,9 @@ const Footer = () => {
                   if (item === 'Overview') {
                     navigate('/research');
                   }
+                  else if (item === 'Illuminant') {
+                    navigate('/illuminant');
+                  }
                   else if (item === 'Optics') {
                     navigate('/optics');
                   } 
@@ -63,9 +66,6 @@ const Footer = () => {
                   }
                   else if (item === 'ISP') {
                     navigate('/isp');
-                  }
-                  else if (item === 'Algorithms') {
-                    navigate('/algorithms');
                   }
                 }}
                 className = "footer-font"
