@@ -10,12 +10,9 @@ import {useNavigate} from 'react-router-dom';
 import {company_name} from '../data/Company_data';
 import linkedin from '../img/sns/linkedin_white.png';
 import youtube from '../img/sns/youtube_white.png'; 
+import {productItems, researchItems, companyItems} from '../data/Menu_data';
 
 const Footer = () => {
-  const productItems = ['Overview', 'Pricing'];
-  const researchItems = ['Overview', 'Optics', 'Sensor', 'ISP', 'Algorithms'];
-  const companyItems = ['About', 'Blog', 'Careers', 'Customer Stories', 'Investor Relations', 'News'];
-
   const navigate = useNavigate();
 
   return(
