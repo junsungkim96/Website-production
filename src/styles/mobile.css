@@ -73,8 +73,8 @@
   }
 
   .eye{
-    width: 30vw; 
-    height: 30vw; 
+    width: 50vw; 
+    height: 50vw; 
     background-position: center;
   }
 
@@ -327,5 +327,12 @@
   .body{
     background-color: white;
     height: '45px';
+  }
+
+  .full-width-image{
+    width: 90vw;
+    background-position: center;
+    margin-top: 0.5vh;
+    margin-bottom: 3vh;
   }
 }
