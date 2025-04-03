@@ -17,7 +17,7 @@ const Research = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
-      <div style = {{display: 'flex', flexDirection: 'column'}}>
+      {/* <div style = {{display: 'flex', flexDirection: 'column'}}> */}
         <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px'}}>
@@ -37,14 +37,77 @@ const Research = () => {
 
             <img className = "full-width-image" style = {{marginTop: '3vh'}} src={imaging_pipeline} alt = "" />
           </div>
-          
-          {/* <Route path="/illuminant" element={<MainLayout>< Illuminant /></MainLayout>}/>
-        <Route path="/optics" element={<MainLayout>< Optics /></MainLayout>}/>
-        <Route path="/sensor" element={<MainLayout>< Sensor /></MainLayout>}/>
-        <Route path="/isp" element={<MainLayout>< ISP /></MainLayout>}/> */}
+        </div>
 
 
-          <div>
+        {/* Research 1 */}
+
+        <div class="update-container" style={{marginBottom: '3vh'}}>
+          <div className="left-text" style = {{width: '70vw'}}>Active Illumination Methods</div>
+          <div className="right-text">
+            <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('/illuminant')}>
+              <p>View in detail</p>
+            </div>
+          </div>
+        </div>
+        <div className ="career-left-text" style={{marginBottom: '20vh'}}>
+          <p style = {{fontSize: '20px'}}>
+            By dynamically adjusting the spectrum of the illuminant, we enhance object recognition, material classification, and imaging
+            performance in diverse environments
+          </p>
+        </div>
+
+        {/* Research 2 */}
+
+        <div class="update-container" style={{marginBottom: '3vh'}}>
+          <div className="left-text" style = {{width: '70vw'}}>Lens Design Optimization for Downstream Tasks</div>
+          <div className="right-text">
+            <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('/optics')}>
+              <p>View in detail</p>
+            </div>
+          </div>
+        </div>
+        <div className ="career-left-text" style={{marginBottom: '20vh'}}>
+          <p style = {{fontSize: '20px'}}>
+            We optimize lens design by considering its impact on AI-driven tasks, ensuring enhanced image quality and improved algorithm performance
+          </p>
+        </div>
+
+        {/* Research 3 */}
+
+        <div class="update-container" style={{marginBottom: '3vh'}}>
+          <div className="left-text" style = {{width: '70vw'}}>Physical Sensor Simulation</div>
+          <div className="right-text">
+            <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('/sensor')}>
+              <p>View in detail</p>
+            </div>
+          </div>
+        </div>
+        <div className ="career-left-text" style={{marginBottom: '20vh'}}>
+          <p style = {{fontSize: '20px'}}>
+            Our sensor simulations accurately model real-world imaging conditions, enabling efficient sensor evaluation and algorithm development
+            without costly hardware iterations
+          </p>
+        </div>
+
+        {/* Research 4 */}
+
+        <div class="update-container" style={{marginBottom: '3vh'}}>
+          <div className="left-text" style = {{width: '70vw'}}>AI Recommendation for Image Signal Processing</div>
+          <div className="right-text">
+            <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('/isp')}>
+              <p>View in detail</p>
+            </div>
+          </div>
+        </div>
+        <div className ="career-left-text" style={{marginBottom: '20vh'}}>
+          <p style = {{fontSize: '20px'}}>
+            We develop AI-driven optimization techniques to automatically fine-tune ISP parameters, acheiving superior image quality tailored
+            to specific applications
+          </p>
+        </div>
+
+          {/* <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '20vh' }}>
               <p style={{ fontSize: '40px' }}>
                 Active Illumination Methods
@@ -57,9 +120,9 @@ const Research = () => {
               By dynamically adjusting the spectrum of the illuminant, we enhance object recognition, material classification, and imaging
               performance in diverse environments
             </p>
-          </div>
+          </div> */}
 
-          <div>
+          {/* <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '20vh' }}>
               <p style={{ fontSize: '40px' }}>
                 Lens Design Optimization for Downstream Tasks
@@ -101,8 +164,9 @@ const Research = () => {
               We develop AI-driven optimization techniques to automatically fine-tune ISP parameters, acheiving superior image quality tailored
               to specific applications
             </p>
-          </div>
+          </div> */}
 
+        <div className="career-left-text">
           <div>
             <p style = {{fontSize: '50px', paddingTop: '20vh'}}>
               Why Our Research Matters  
@@ -149,7 +213,7 @@ const Research = () => {
           </div>
 
         </div>
-      </div>
+      {/* </div> */}
     </div>
   )
 };
