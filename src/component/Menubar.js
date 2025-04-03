@@ -107,6 +107,8 @@ const Menubar = () => {
             </Navbar.Brand>
           </div>
           
+          {/* -----------------------------------------------------------Desktop-------------------------------------------------------- */}
+
           <div className="desktop-nav">
             <NavDropdown
               title={
@@ -219,17 +221,17 @@ const Menubar = () => {
           </div>
 
           <div className="mobile-nav">
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '30px', height: '22px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '25px', height: '18px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
               {isOpen ? (
                 <>
-                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
-                  <div style={{ width: '30px', height: '3px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
+                  <div style={{ width: '25px', height: '2px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(45deg)' }} />
+                  <div style={{ width: '25px', height: '2px', backgroundColor: 'white', position: 'absolute', top: '50%', transform: 'rotate(-45deg)' }} />
                 </>
               ) : (
                 <>
-                  <div style={{ width: '30px', height: '2px', backgroundColor: 'white' }} />
-                  <div style={{ width: '30px', height: '2px', backgroundColor: 'white' }} />
-                  <div style={{ width: '30px', height: '2px', backgroundColor: 'white' }} />
+                  <div style={{ width: '25px', height: '2px', backgroundColor: 'white' }} />
+                  <div style={{ width: '25px', height: '2px', backgroundColor: 'white' }} />
+                  <div style={{ width: '25px', height: '2px', backgroundColor: 'white' }} />
                 </>
               )}
             </Navbar.Toggle>
@@ -238,7 +240,9 @@ const Menubar = () => {
         </Container>
       </Navbar>
 
-      <Offcanvas show={showOffcanvas} onHide={handleToggleOffcanvas} placement="start" style={{ width: '250px', backgroundColor: 'black' }}>
+      {/* -----------------------------------------------------------Mobile-------------------------------------------------------- */}
+
+      <Offcanvas show={showOffcanvas} onHide={handleToggleOffcanvas} placement="start" style={{ width: '300px', backgroundColor: 'black' }}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title style={{ color: 'white' }}>{company_name}</Offcanvas.Title>
         </Offcanvas.Header>
@@ -263,7 +267,7 @@ const Menubar = () => {
                     }}
                     style={{ color: 'white', fontSize: '4vw' }}
                   >
-                    {item}
+                    <span style={{ color: 'white', marginRight: '5px' }}>-</span> {item}
                   </Nav.Link>
                 ))}
               </div>
@@ -282,6 +286,8 @@ const Menubar = () => {
                     onClick={() => {
                       if (item === 'Overview') {
                         closeOffcanvasAndNavigate('/research');
+                      } else if (item === 'Illuminant') {
+                        closeOffcanvasAndNavigate('/illuminant');
                       } else if (item === 'Optics') {
                         closeOffcanvasAndNavigate('/optics');
                       } else if (item === 'Sensor') {
@@ -294,7 +300,7 @@ const Menubar = () => {
                     }}
                     style={{ color: 'white', fontSize: '4vw' }}
                   >
-                  {item}
+                  <span style={{ color: 'white', marginRight: '5px' }}>-</span> {item}
                 </Nav.Link>
                 
                 ))}
@@ -328,7 +334,7 @@ const Menubar = () => {
                     }}
                     style={{ color: 'white', fontSize: '4vw' }}
                   >
-                    {item}
+                    <span style={{ color: 'white', marginRight: '5px' }}>-</span> {item}
                   </Nav.Link>
                 ))}
               </div>
