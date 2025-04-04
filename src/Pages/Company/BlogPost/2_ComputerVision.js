@@ -6,10 +6,12 @@ export const metadata = {
     date: "April 2, 2025",
     image: cv,
     link: "/blog/cv",
-    excerpt: "Computer vision is no longer just a research topic—it’s the backbone of modern technology, quietly powering everything \
-                from autonomous vehicles and industrial robotics to smartphones and healthcare diagnostics. As the demand for smarter \
-                and faster visual intelligence grows, so does the need for a fundamental shift in how we design these systems.",
-  };
+    excerpt: `
+            Computer vision is no longer just a research topic—it’s the backbone of modern technology, quietly powering everything
+            from autonomous vehicles and industrial robotics to smartphones and healthcare diagnostics. As the demand for smarter
+            and faster visual intelligence grows, so does the need for a fundamental shift in how we design these systems.
+            `
+    };
 
 const BlogPost = () => {
     useLayoutEffect(()=>{

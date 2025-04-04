@@ -6,13 +6,15 @@ export const metadata = {
     date: "March 5, 2025",
     image: physics,
     link: "/blog/founding_story",
-    excerpt: "Ever since I was a child, I've been fascinated by science and technology. While my classmates spent thier time playing \
-                games, I was busy asking endless questions about the world around me - how light bends, how machines work, and why things \
-                behave the way they do. This natural curiosity led me to study physics, where I developed a deep appreciation for \
-                how fundamental principles could explain the complexities of the universe"
+    excerpt: `
+            Ever since I was a child, I've been fascinated by science and technology. While my classmates spent thier time playing 
+            games, I was busy asking endless questions about the world around me - how light bends, how machines work, and why things 
+            behave the way they do. This natural curiosity led me to study physics, where I developed a deep appreciation for 
+            how fundamental principles could explain the complexities of the universe
+            `
   };
 
-const Founding_story = () => {
+const FoundingStory = () => {
     useLayoutEffect(()=>{
         window.scrollTo(0, 0);
     }, []);
@@ -117,4 +119,4 @@ const Founding_story = () => {
     );
 }
 
-export default Founding_story;
+export default FoundingStory;
