@@ -62,7 +62,7 @@ const Careers = () => {
             style={{ marginBottom: '30px', marginTop: '30px', cursor: 'pointer' }}
             onClick={() => setTab(tab === i ? null : i)} // Click toggles expansion
           >
-            <div className="career-left-text" style={{ cursor: 'pointer' }}>
+            <div className="career-left-text" style={{ cursor: 'pointer'}}>
               <span className="role-container" style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                 {tab === i ? (
                   <MdArrowDropUp color="white" size="1.2em" />

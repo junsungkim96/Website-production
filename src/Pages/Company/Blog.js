@@ -56,7 +56,7 @@ const Blog = () => {
                               style={{
                                 width: '100%',
                                 height: 'auto',
-                                borderRadius: '8px',
+                                borderRadius: '30px',
                                 marginTop: '1vh',
                                 marginBottom: '1vh',
                               }}

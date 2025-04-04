@@ -19,7 +19,7 @@ const Research = () => {
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh', 
                   overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
       <div style = {{marginBottom: '15vh'}}>
-        <div className="left-text" style = {{fontWeight: '900', fontSize: '4vh'}}>
+        <div className="left-text" style = {{fontSize: '4vh'}}>
           Cutting-edge Research
         </div>
         <br/>

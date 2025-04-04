@@ -111,7 +111,7 @@ const FoundingStory = () => {
                         }}>{post.title}</h1>
 
                         {/* Display the image */}
-                        <img src={post.image} alt="Blog Post" style={{ width: "100%", borderRadius: "10px", marginBottom: "20px" }} />
+                        <img src={post.image} alt="Blog Post" style={{ width: "100%", borderRadius: "30px", marginBottom: "20px" }} />
 
                         {/* Render content with inline styles */}
                         <div style={{ width: "100%", lineHeight: "1.8", fontSize: "20px", fontWeight: '100', 

@@ -61,7 +61,7 @@ let data = [
     
   },
   {
-    role: 'Sensor Characterization Engineer',
+    role: 'Sensor Engineer',
     location: 'Seoul, South Korea',
     description: 
     `We are seeking a Sensor Characterization Engineer to lead the evaluation and optimization of imaging sensors for our state-of-the-art computer vision systems. 
