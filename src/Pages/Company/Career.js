@@ -29,7 +29,7 @@ const Careers = () => {
   let [tab, setTab] = useState(null)
 
   return(
-    <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
+    <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
