@@ -398,3 +398,9 @@ p2{
   background-position: left;
   margin-right: 1vw;
 }
+
+.blog-content{
+  width: 40%;
+  text-align: center;
+  margin-bottom: 200px;
+}

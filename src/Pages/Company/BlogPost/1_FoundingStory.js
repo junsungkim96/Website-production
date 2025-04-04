@@ -1,7 +1,18 @@
 import React, {useLayoutEffect} from 'react';
 import physics from '../../../img/blog/physics.jpg';
 
-const BlogPost = () => {
+export const metadata = {
+    title: "The Story Behind Our Company",
+    date: "March 5, 2025",
+    image: physics,
+    link: "/blog/founding_story",
+    excerpt: "Ever since I was a child, I've been fascinated by science and technology. While my classmates spent thier time playing \
+                games, I was busy asking endless questions about the world around me - how light bends, how machines work, and why things \
+                behave the way they do. This natural curiosity led me to study physics, where I developed a deep appreciation for \
+                how fundamental principles could explain the complexities of the universe"
+  };
+
+const Founding_story = () => {
     useLayoutEffect(()=>{
         window.scrollTo(0, 0);
     }, []);
@@ -10,6 +21,7 @@ const BlogPost = () => {
         date: "March 5, 2025",
         title: "The Story Behind Our Company",
         image: physics,
+        link: "/blog/founding_story",
         content: 
         `
         <p style="font-size: 25px; font-weight: bold; margin-top: 3vh; margin-bottom: 20px;">
@@ -84,7 +96,7 @@ const BlogPost = () => {
 
     return (
         <div style={{ display: "flex", justifyContent: "center", padding: "10vh 0", minHeight: "80vh" }}>
-            <div style={{ width: "40%", textAlign: "center", marginBottom: "200px" }}>
+            <div className = "blog-content">
                 {blog.map((post, index) => (
                     <div key={index}>
                         <p style={{ fontSize: "18px", color: "white" }}>{post.date}</p>
@@ -105,4 +117,4 @@ const BlogPost = () => {
     );
 }
 
-export default BlogPost;
+export default Founding_story;

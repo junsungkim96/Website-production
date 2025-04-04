@@ -17,6 +17,7 @@ import ISP from './Pages/Research/ISP';
 import Illuminant from './Pages/Research/Illuminant';
 import Blog from './Pages/Company/Blog';
 import Founding_story from './Pages/Company/BlogPost/1_FoundingStory';
+import CV from './Pages/Company/BlogPost/2_ComputerVision.js';
 import Company from './Pages/Company/Company';
 import Careers from './Pages/Company/Career';
 import Stories from './Pages/Company/Stories';
@@ -62,6 +63,7 @@ const App = () => (
 
         {/* Company Blog */}
         <Route path="/blog/founding_story" element={<MainLayout>< Founding_story /></MainLayout>}/>
+        <Route path="/blog/cv" element={<MainLayout>< CV /></MainLayout>}/>
         
         {/* Signup & Apply */}
         <Route path="/login" element={< Login />} />
