@@ -56,7 +56,7 @@ const Company = () => {
   ]
 
   return (
-    <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh' }}>
+    <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
       {/* <div className="career-left-text"> */}
         <div>
           <div className="left-text">

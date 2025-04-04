@@ -2,7 +2,7 @@ import React, {useLayoutEffect} from 'react';
 import physics from '../../../img/blog/physics.jpg';
 
 export const metadata = {
-    title: "The Story Behind Our Company",
+    title: "The Story Behind Our Beginning",
     date: "March 5, 2025",
     image: physics,
     link: "/blog/founding_story",
@@ -21,7 +21,7 @@ const FoundingStory = () => {
 
     const blog = [{
         date: "March 5, 2025",
-        title: "The Story Behind Our Company",
+        title: "The Story Behind Our Beginning",
         image: physics,
         link: "/blog/founding_story",
         content: 
@@ -102,7 +102,13 @@ const FoundingStory = () => {
                 {blog.map((post, index) => (
                     <div key={index}>
                         <p style={{ fontSize: "18px", color: "white" }}>{post.date}</p>
-                        <h1 style={{ fontSize: "32px", marginBottom: "20px", color: 'white' }}>{post.title}</h1>
+                        <h1 style={{ fontSize: "32px", marginBottom: "20px", color: 'white', 
+                                    maxWidth: "100%",         // allow full width of parent
+                                    lineHeight: "1.4",        // clean vertical rhythm
+                                    wordBreak: "break-word",  // break long words if needed
+                                    overflowWrap: "break-word", // ensures wrapping even in Firefox
+                                    whiteSpace: "normal",     // allow natural wrapping
+                        }}>{post.title}</h1>
 
                         {/* Display the image */}
                         <img src={post.image} alt="Blog Post" style={{ width: "100%", borderRadius: "10px", marginBottom: "20px" }} />

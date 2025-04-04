@@ -46,7 +46,7 @@ const Blog = () => {
                     <Col md={10} style = {{paddingLeft: '5vw', paddingRight: '5vw'}}>
                       <a href={post.link} style={{ textDecoration: 'none', color: 'white' }}>
                         <Card.Body style={{padding: '0', textAlign: 'left' }}>
-                          <Card.Title style={{ fontSize: '1.5rem', fontWeight: '400', fontFamily: 'Helvetica, Arial, sans-serif'}}>
+                          <Card.Title style={{ fontSize: '1.5rem', textAlign: 'center', fontWeight: '400', fontFamily: 'Helvetica, Arial, sans-serif'}}>
                             {post.title}
                           </Card.Title>
                           <div style={{ width: '100%' }}>
