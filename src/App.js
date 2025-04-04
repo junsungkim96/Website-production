@@ -16,6 +16,7 @@ import Sensor from './Pages/Research/Sensor';
 import ISP from './Pages/Research/ISP';
 import Illuminant from './Pages/Research/Illuminant';
 import Blog from './Pages/Company/Blog';
+import Founding_story from './Pages/Company/BlogPost/1_FoundingStory';
 import Company from './Pages/Company/Company';
 import Careers from './Pages/Company/Career';
 import Stories from './Pages/Company/Stories';
@@ -58,6 +59,9 @@ const App = () => (
         <Route path="/stories" element={<MainLayout>< Stories /></MainLayout>} />
         <Route path="/ir" element={<MainLayout>< IR /></MainLayout>} />
         <Route path="/news" element={<MainLayout>< News /></MainLayout>} />
+
+        {/* Company Blog */}
+        <Route path="/blog/founding_story" element={<MainLayout>< Founding_story /></MainLayout>}/>
         
         {/* Signup & Apply */}
         <Route path="/login" element={< Login />} />

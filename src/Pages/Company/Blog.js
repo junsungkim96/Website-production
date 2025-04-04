@@ -4,6 +4,8 @@ import '../../styles/tablet.css';
 import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card} from 'react-bootstrap';
+import physics from '../../img/blog/physics.jpg';
+
 
 const Blog = () => {
   useLayoutEffect(()=>{
@@ -12,17 +14,20 @@ const Blog = () => {
 
   const blogPosts = [
     {
-      title: "The Founder's Story",
+      title: "The Journey to Innovation: Why I Founded My Company",
       date: "March 5, 2025",
-      excerpt: "Learn how virtual testing environments are revolutionizing the development and validation of vision algorithms and hardware.",
-      image: "/images/founding_story.jpg",
+      excerpt: "Ever since I was a child, I've been fascinated by science and technology. While my classmates spent thier time playing \
+                games, I was busy asking endless questions about the world around me - how light bends, how machines work, and why things \
+                behave the way they do. This natural curiosity led me to study physics, where I developed a deep appreciation for \
+                how fundamental principles could explain the complexities of the universe",
+      image: physics,
       link: "/blog/founding_story"
     },
     {
       title: "The Future of Computer Vision",
       date: "April 2, 2025",
       excerpt: "Explore how deep learning, simulation, and real-time processing are shaping the future of the computer vision industry.",
-      image: "/images/future-cv.jpg",
+      image: physics,
       link: "/blog/future-of-cv"
     },
   ];
@@ -33,7 +38,9 @@ const Blog = () => {
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
       <Container>
         {/* Blog Title */}
-        <h1 style={{ fontSize: '50px', marginBottom: '1vh', color: 'white' }}>Blog</h1>
+        <p style = {{fontSize: '50px'}}>
+          Blog
+        </p>
 
         {/* Subtitle */}
         <p style={{ color: 'lightgray', fontSize: '1.2rem', marginTop: '3vh', marginBottom: '2vh' }}>
@@ -66,20 +73,19 @@ const Blog = () => {
                             src={post.image}
                             alt={post.title}
                             style={{
-                              width: '100%',
+                              width: '90%',
                               height: 'auto',
                               borderRadius: '8px',
                               marginTop: '1vh',
                               marginBottom: '1vh',
                             }}
                           />
-                          <Card.Text style={{ lineHeight: '1.7', color: 'white' }}>
+                          <Card.Text style={{ lineHeight: '1.7', color: 'white', fontSize: '1.3vh'}}>
                             {post.excerpt}
                           </Card.Text>
                           <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh', textAlign: 'left'}}>
                             <p style={{ fontSize: '1rem', margin: 0 }}>Read More</p>
                           </div>
-                          {/* <span style={{ color: 'white', textDecoration: 'underline' }}>Read More</span> */}
                         </Card.Body>
                       </a>
                     </Col>

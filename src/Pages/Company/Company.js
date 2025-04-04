@@ -60,7 +60,7 @@ const Company = () => {
       <div className="career-left-text">
         <div>
           <p style = {{fontSize: '50px'}}>
-            Our Vision
+            Shaping the Future
           </p>
           <br/>
           <p>
@@ -80,7 +80,7 @@ const Company = () => {
         </div>
         <div style = {{marginTop: '15vh'}}>
           <p style = {{fontSize: '50px'}}>
-            Our Core Values
+            5 Core Values
           </p>
           <br/>
           <Row className = "g-4">
