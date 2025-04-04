@@ -63,7 +63,7 @@ const Company = () => {
             Shaping the Future
           </div>
           <br/>
-          <p className = "career-left-text">
+          <p className = "company-text" >
             Accelerate innovation through advanced simulation software solutions
           </p>
         </div>
@@ -72,7 +72,7 @@ const Company = () => {
             Our Mission
           </div>
           <br/>
-          <p className = "career-left-text">
+          <p className = "company-text">
             By advancing computer vision simulation technology, we help industries develop smarter, 
             more efficient vision systems while eliminating the need for physical prototypes, 
             reducing waste, and protecting the environment
