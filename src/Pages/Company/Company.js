@@ -57,33 +57,33 @@ const Company = () => {
 
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh' }}>
-      <div className="career-left-text">
+      {/* <div className="career-left-text"> */}
         <div>
-          <p style = {{fontSize: '50px'}}>
+          <div className="left-text">
             Shaping the Future
-          </p>
+          </div>
           <br/>
-          <p>
+          <p className = "career-left-text">
             Accelerate innovation through advanced simulation software solutions
           </p>
         </div>
         <div style = {{marginTop: '15vh'}}>
-          <p style = {{fontSize: '50px'}}>
+          <div className="left-text">
             Our Mission
-          </p>
+          </div>
           <br/>
-          <p>
+          <p className = "career-left-text">
             By advancing computer vision simulation technology, we help industries develop smarter, 
             more efficient vision systems while eliminating the need for physical prototypes, 
             reducing waste, and protecting the environment
           </p>
         </div>
         <div style = {{marginTop: '15vh'}}>
-          <p style = {{fontSize: '50px'}}>
+          <div className="left-text">
             5 Core Values
-          </p>
+          </div>
           <br/>
-          <Row className = "g-4">
+          <Row className = "g-4 career-left-text">
             {coreValues.map((value, index) => (
               <Col key={index} md={6}>
                 <Card className="h-100 shadow" style={{ backgroundColor: 'transparent', border: 'none' }}>
@@ -105,7 +105,7 @@ const Company = () => {
         </div>
     
       </div>
-    </div>
+    // </div>
   );
 };
 
