@@ -57,55 +57,53 @@ const Company = () => {
 
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
-      {/* <div className="career-left-text"> */}
-        <div>
-          <div className="left-text">
-            Shaping the Future
-          </div>
-          <br/>
-          <p className = "company-text" >
-            Accelerate innovation through advanced simulation software solutions
-          </p>
+      <div>
+        <div className="left-text">
+          Shaping the Future
         </div>
-        <div style = {{marginTop: '15vh'}}>
-          <div className="left-text">
-            Our Mission
-          </div>
-          <br/>
-          <p className = "company-text">
-            By advancing computer vision simulation technology, we help industries develop smarter, 
-            more efficient vision systems while eliminating the need for physical prototypes, 
-            reducing waste, and protecting the environment
-          </p>
-        </div>
-        <div style = {{marginTop: '15vh'}}>
-          <div className="left-text">
-            5 Core Values
-          </div>
-          <br/>
-          <Row className = "g-4 career-left-text">
-            {coreValues.map((value, index) => (
-              <Col key={index} md={6}>
-                <Card className="h-100 shadow" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                  <Card.Body style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                    <div style = {{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
-                      <img src={value.image} alt={value.name} className = "company-image" />
-                      <Card.Title style={{ fontWeight: '900', fontSize: '1.6rem', color: 'white'}}>
-                        {value.name}
-                      </Card.Title>
-                    </div>
-                    <Card.Text style={{lineHeight: '2', fontSize: '1rem', marginTop: '0.5rem', color:'lightgray'}}>
-                      {value.description}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </div>
-    
+        <br/>
+        <p className = "company-text" >
+          Accelerate innovation through advanced simulation software solutions
+        </p>
       </div>
-    // </div>
+      <div style = {{marginTop: '15vh'}}>
+        <div className="left-text">
+          Our Mission
+        </div>
+        <br/>
+        <p className = "company-text">
+          By advancing computer vision simulation technology, we help industries develop smarter, 
+          more efficient vision systems while eliminating the need for physical prototypes, 
+          reducing waste, and protecting the environment
+        </p>
+      </div>
+      <div style = {{marginTop: '15vh'}}>
+        <div className="left-text">
+          5 Core Values
+        </div>
+        <br/>
+        <Row className = "g-4 career-left-text">
+          {coreValues.map((value, index) => (
+            <Col key={index} md={6}>
+              <Card className="h-100 shadow" style={{ backgroundColor: 'transparent', border: 'none' }}>
+                <Card.Body style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                  <div style = {{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
+                    <img src={value.image} alt={value.name} className = "company-image" />
+                    <Card.Title style={{ fontWeight: '900', fontSize: '1.6rem', color: 'white'}}>
+                      {value.name}
+                    </Card.Title>
+                  </div>
+                  <Card.Text style={{lineHeight: '2', fontSize: '1rem', marginTop: '0.5rem', color:'lightgray'}}>
+                    {value.description}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
+  
+    </div>
   );
 };
 

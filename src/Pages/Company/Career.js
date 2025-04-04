@@ -72,34 +72,28 @@ const Careers = () => {
                 <span className="role-text">{a.role}</span>
                 
               </span>
-              <p style={{ margin: 0 }}>{a.location}</p> {/* a.location on a separate line */}
+              <p style={{ margin: 0, color: 'lightgray'}}>{a.location}</p> {/* a.location on a separate line */}
             </div>
-            <div className="right-text"
-                 style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}>
-              <span
-                className="underline"
-                style={{
-                  padding: '5px 10px', // adjust padding to make the area smaller
-                  borderRadius: '5px',
-                }}
+            <div className="right-text" style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}>
+              <span className="underline" style={{ padding: '5px 10px', // adjust padding to make the area smaller
+                                                  borderRadius: '5px',}}
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent triggering parent onClick
                   navigate('/apply');
                 }}
               >
-                Apply now
-              </span> ↗
+                <p>Apply now</p>
+              </span>
             </div>
           </div>
 
           {/* The expanded part is also clickable */}
           {tab === i && (
             <div
+              className = "career-description"
               style={{
                 textAlign: 'left',
                 fontSize: '20px',
-                paddingLeft: '20%',
-                paddingRight: '20%',
                 marginBottom: '3.5vh',
                 cursor: 'pointer', // Add cursor pointer to show that it's clickable
               }}

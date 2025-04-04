@@ -421,3 +421,8 @@ p2{
   color: white;
   font-family: 'Poppins', sans-serif;
 }
+
+.career-description{
+  padding-left: 20%;
+  padding-right: 20%;
+}

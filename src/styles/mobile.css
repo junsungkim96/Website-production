@@ -365,4 +365,13 @@
     padding-left: 5vw;
     padding-right: 15vw;
   }
+
+  .role-text{
+    width: 50vw;
+  }
+
+  .career-description{
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
