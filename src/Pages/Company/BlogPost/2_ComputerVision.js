@@ -30,7 +30,7 @@ const BlogPost = () => {
         the demand for smarter and faster visual intelligence grows, so does the need for a fundamental shift in 
         how we design these systems.
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 1vh;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             The Old Paradigm: Trial, Error, and Endless Data
         </p>
         Traditionally, designing computer vision systems has involved a lot of trial and error. Engineers collect 
@@ -42,7 +42,7 @@ const BlogPost = () => {
         robotics—this guesswork becomes unacceptable.
 
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 1vh;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Design, Simulate, Optimize
         </p>
         The future of computer vision design lies in precision—in understanding the full imaging pipeline, not 
@@ -55,7 +55,7 @@ const BlogPost = () => {
         a whole new level of insight and control.
 
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 1vh;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             A Shift from Data-Centric to Design-Centric
         </p>
         We are now entering a design-centric era of computer vision, where the focus shifts from just collecting 
@@ -73,7 +73,7 @@ const BlogPost = () => {
         and AI-driven design tools.
 
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 1vh;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Bridging Physics and Deep Learning
         </p>
         One of the most exciting frontiers is the fusion of physics-based modeling with data-driven AI. By incorporating 
@@ -84,7 +84,7 @@ const BlogPost = () => {
         how noise is generated, and how images are processed. The result? A model that’s not only accurate but grounded in the physical world it’s meant to interpret.
 
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 1vh;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Conclusion: Vision by Design, Not by Accident
         </p>
         The future of computer vision design will be defined by simulation, co-optimization, and system-level intelligence. 

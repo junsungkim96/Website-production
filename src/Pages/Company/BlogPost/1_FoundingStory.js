@@ -26,7 +26,7 @@ const FoundingStory = () => {
         link: "/blog/founding_story",
         content: 
         `
-        <p style="font-size: 25px; font-weight: bold; margin-top: 3vh; margin-bottom: 20px;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             The Journey to Innovation: Why I Founded My Company
         </p>
 
@@ -41,7 +41,7 @@ const FoundingStory = () => {
         fusion of physics and software could open doors to incredible possibilities.
 
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 20px;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             The Camera Industry and the Problems I Couldn't Ignore
         </p>
 
@@ -62,7 +62,7 @@ const FoundingStory = () => {
         repeat the cycle, tweaking parameters through trial and error, with no structured way to predict the outcome. It was 
         clear to me that there had to be a better way.
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 20px;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             A Vision for Change: Building the Future of Computer Vision
         </p>
         
@@ -82,7 +82,7 @@ const FoundingStory = () => {
         The industry didn’t need another incremental improvement—it needed a fundamental shift.
 
 
-        <p style="font-size: 25px; font-weight: bold; margin-top: 5vh; margin-bottom: 20px;">
+        <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Looking Ahead: Redefining Computer Vision
         </p>
         

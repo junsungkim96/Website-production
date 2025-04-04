@@ -43,7 +43,7 @@ const Blog = () => {
                     </Col>
 
                     {/* Right: Content (clickable) */}
-                    <Col md={10} style = {{paddingLeft: '5vw'}}>
+                    <Col md={10} style = {{paddingLeft: '5vw', paddingRight: '5vw'}}>
                       <a href={post.link} style={{ textDecoration: 'none', color: 'white' }}>
                         <Card.Body style={{ padding: '1rem', textAlign: 'left' }}>
                           <Card.Title style={{ fontSize: '1.5rem', fontWeight: '400', fontFamily: 'Helvetica, Arial, sans-serif'}}>
@@ -61,11 +61,7 @@ const Blog = () => {
                                 marginBottom: '1vh',
                               }}
                             />
-                            <Card.Text style={{
-                              lineHeight: '1.7',
-                              color: 'white',
-                              fontSize: '1.3vh',
-                            }}>
+                            <Card.Text className = "excerpt-text">
                               {post.excerpt}
                             </Card.Text>
                           </div>
