@@ -18,7 +18,7 @@ const Research = () => {
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
       {/* <div style = {{display: 'flex', flexDirection: 'column'}}> */}
-        <div className="career-left-text">
+        <div className="career-left-text" style = {{marginBottom: '20vh'}}>
           <div>
             <p style = {{fontSize: '50px'}}>
               Cutting-edge Research

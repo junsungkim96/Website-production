@@ -391,3 +391,10 @@ p2{
 .role-text{
   white-space: nowrap;
 }
+
+.company-image{
+  width: 3vw;
+  height: 3vw;
+  background-position: left;
+  margin-right: 1vw;
+}

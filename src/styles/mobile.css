@@ -335,4 +335,12 @@
     margin-top: 0.5vh;
     margin-bottom: 3vh;
   }
+
+  .company-image{
+    width: 20vw;
+    height: 20vw;
+    background-position: left;
+    margin-right: 5vw;
+    margin-bottom: 2vh;
+  }
 }
