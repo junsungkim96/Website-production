@@ -70,6 +70,7 @@ const Careers = () => {
                   <MdArrowDropDown color="white" size="1.2em" />
                 )}
                 <span className="role-text">{a.role}</span>
+                
               </span>
               <p style={{ margin: 0 }}>{a.location}</p> {/* a.location on a separate line */}
             </div>

@@ -11,20 +11,37 @@ const Company = () => {
 
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh' }}>
-      <div style = {{display: 'flex', flexDirection: 'column'}}>
-        <div className="career-left-text">
-          <div>
-            <p style = {{fontSize: '50px'}}>
-                Company
-            </p>
-            <br/>
-          </div>
-          <div>
-            <p>
-              Coming Soon...
-            </p>
-          </div>
+      <div className="career-left-text">
+        <div>
+          <p style = {{fontSize: '50px'}}>
+            Our Vision
+          </p>
+          <br/>
+          <p>
+            Accelerate innovation through advanced simulation software solutions
+          </p>
         </div>
+        <div style = {{marginTop: '15vh'}}>
+          <p style = {{fontSize: '50px'}}>
+            Our Mission
+          </p>
+          <br/>
+          <p>
+            By advancing computer vision simulation technology, we help industries develop smarter, 
+            more efficient vision systems while eliminating the need for physical prototypes, 
+            reducing waste, and protecting the environment
+          </p>
+        </div>
+        <div style = {{marginTop: '15vh'}}>
+          <p style = {{fontSize: '50px'}}>
+            Our Core Values
+          </p>
+          <br/>
+          <p>
+            
+          </p>
+        </div>
+    
       </div>
     </div>
   );
