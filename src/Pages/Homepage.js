@@ -91,7 +91,7 @@ const Homepage = () => {
             >
               <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
                 <img className="product-image" src={time} alt="" />
-                <div className="product-text-title">Save Time</div>
+                <p className="strength-title">Save Time</p>
               </div>
               <div className="product-text">
                 Achieve system validation ~100x faster with virtual hardware simulations.
@@ -115,7 +115,7 @@ const Homepage = () => {
             >
               <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
                 <img className="product-image" src={money} alt="" />
-                <div className="product-text-title">Save Money</div>
+                <p className="strength-title">Save Money</p>
               </div>
               <div className="product-text">
                 Reduce system validation costs to ~1/100 with virtual hardware simulations.
@@ -139,7 +139,7 @@ const Homepage = () => {
             >
               <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
                 <img className="product-image" src={optimize} alt="" />
-                <div className="product-text-title">Optimize</div>
+                <p className="strength-title">Optimize</p>
               </div>
               <div className="product-text">
                 Find the right balance between size, cost, and performance.
