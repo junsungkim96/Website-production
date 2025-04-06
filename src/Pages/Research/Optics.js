@@ -25,9 +25,9 @@ const Optics = () => {
         </p>
         <div className = "left-text" style = {{width: '100vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
-            <li>Optimizing focal length, aperture, and coatings for AI-driven perception</li>
-            <li>Simulating real-world conditions to evaluate lens performance</li>
-            <li>Enhancing robustness in low-light, high-speed, and harsh environments</li>
+            <li style={{ marginBottom: '12px' }}>Optimizing focal length, aperture, and coatings for AI-driven perception</li>
+            <li style={{ marginBottom: '12px' }}>Simulating real-world conditions to evaluate lens performance</li>
+            <li style={{ marginBottom: '12px' }}>Enhancing robustness in low-light, high-speed, and harsh environments</li>
             <li>Balancing optical and computational elements for task-specific imaging</li>
           </ul>
         </div>

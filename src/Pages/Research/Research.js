@@ -145,9 +145,9 @@ const Research = () => {
           <br/>
           <br/>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
-            <li>Better AI Performance - By understanding how lens and sensor characteristics affect AI, we ensure
+            <li style={{ marginBottom: '12px' }}>Better AI Performance - By understanding how lens and sensor characteristics affect AI, we ensure
             that vision algorithms operate at peak efficiency.</li>
-            <li>Cost-Effective Solutions - Joint optimization reduces the need for expensive hardware by leveraging
+            <li style={{ marginBottom: '12px' }}>Cost-Effective Solutions - Joint optimization reduces the need for expensive hardware by leveraging
             computational enhancements</li>
             <li>Real-World Robustness - Our research leads to imaging solutions that are adaptable to diverse 
             lighting environments and conditions</li>

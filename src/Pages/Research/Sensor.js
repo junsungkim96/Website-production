@@ -25,9 +25,9 @@ const Sensor = () => {
         </p>
         <div className = "left-text" style = {{width: '100vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
-            <li>Quantum Efficiency</li>
-            <li>Noise Characteristics</li>
-            <li>Color filter array responses</li>
+            <li style={{ marginBottom: '12px' }}>Quantum Efficiency</li>
+            <li style={{ marginBottom: '12px' }}>Noise Characteristics</li>
+            <li style={{ marginBottom: '12px' }}>Color filter array responses</li>
             <li>Pixel-level signal dynamics</li>
           </ul>
         </div>

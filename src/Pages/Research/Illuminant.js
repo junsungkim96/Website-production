@@ -25,9 +25,9 @@ const Illuminant = () => {
         </p>
         <div className = "left-text" style = {{width: '100vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
-            <li>Improved object recognition and material classification</li>
-            <li>Enhanced depth estimation through spectral tuning</li>
-            <li>Optimized visibility in low-light or complex environments</li>
+            <li style={{ marginBottom: '12px' }}>Improved object recognition and material classification</li>
+            <li style={{ marginBottom: '12px' }}>Enhanced depth estimation through spectral tuning</li>
+            <li style={{ marginBottom: '12px' }}>Optimized visibility in low-light or complex environments</li>
             <li>Applications in hyperspectral imaging, autonomous vision, and inspection</li>
           </ul>
         </div>

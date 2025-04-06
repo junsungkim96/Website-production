@@ -26,10 +26,10 @@ const ISP = () => {
         </p>
         <div className = "left-text" style = {{width: '100vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
-            <li>Color Accuracy</li>
-            <li>Noise reduction</li>
-            <li>Dynamic range</li>
-            <li>Tailored ISP paramters for light spectrum</li>
+            <li style={{ marginBottom: '12px' }}>Color Accuracy</li>
+            <li style={{ marginBottom: '12px' }}>Noise reduction</li>
+            <li style={{ marginBottom: '12px' }}>Dynamic range</li>
+            <li >Tailored ISP paramters for light spectrum</li>
           </ul>
         </div>
       </div>
