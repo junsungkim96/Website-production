@@ -58,7 +58,7 @@ const Company = () => {
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
       <div>
-        <div className="left-text">
+        <div className="left-text" style = {{fontSize: '40px'}}>
           Shaping the Future
         </div>
         <br/>
@@ -67,7 +67,7 @@ const Company = () => {
         </p>
       </div>
       <div style = {{marginTop: '15vh'}}>
-        <div className="left-text">
+        <div className="left-text" style = {{fontSize: '40px'}}>
           Our Mission
         </div>
         <br/>
@@ -78,7 +78,7 @@ const Company = () => {
         </p>
       </div>
       <div style = {{marginTop: '15vh'}}>
-        <div className="left-text">
+        <div className="left-text" style = {{fontSize: '40px'}}>
           5 Core Values
         </div>
         <br/>
