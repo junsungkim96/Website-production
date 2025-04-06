@@ -116,6 +116,7 @@ const Research = () => {
             <p>View in detail</p>
           </div>
         </div>
+      </div>
       <p className = "company-text" style={{marginBottom: '20vh'}}>
         We explore the integration of Quantum Processing Units (QPUs) for accelerating the joint optimization of imaging pipelines.
       </p>
