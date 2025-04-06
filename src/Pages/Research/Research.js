@@ -52,13 +52,11 @@ const Research = () => {
           </div>
         </div>
       </div>
-      <div className ="career-left-text" style={{marginBottom: '20vh'}}>
-        <p style = {{fontSize: '20px'}}>
-          By dynamically adjusting the spectrum of the illuminant, we enhance object recognition, material classification, and imaging
-          performance in diverse environments
-        </p>
-      </div>
-
+      <p className = "company-text" style={{marginBottom: '20vh'}}>
+        By dynamically adjusting the spectrum of the illuminant, we enhance object recognition, material classification, and imaging
+        performance in diverse environments
+      </p>
+      
       {/* Research 2 */}
 
       <div class="update-container" style={{marginBottom: '3vh'}}>
@@ -72,11 +70,9 @@ const Research = () => {
           </div>
         </div>
       </div>
-      <div className ="career-left-text" style={{marginBottom: '20vh'}}>
-        <p style = {{fontSize: '20px'}}>
-          We optimize lens design by considering its impact on AI-driven tasks, ensuring enhanced image quality and improved algorithm performance
-        </p>
-      </div>
+      <p className = "company-text" style={{marginBottom: '20vh'}}>
+        We optimize lens design by considering its impact on AI-driven tasks, ensuring enhanced image quality and improved algorithm performance
+      </p>
 
       {/* Research 3 */}
 
@@ -91,13 +87,11 @@ const Research = () => {
           </div>
         </div>
       </div>
-      <div className ="career-left-text" style={{marginBottom: '20vh'}}>
-        <p style = {{fontSize: '20px'}}>
-          Our sensor simulations accurately model real-world imaging conditions, enabling efficient sensor evaluation and algorithm development
-          without costly hardware iterations
-        </p>
-      </div>
-
+      <p className = "company-text" style={{marginBottom: '20vh'}}>
+        Our sensor simulations accurately model real-world imaging conditions, enabling efficient sensor evaluation and algorithm development
+        without costly hardware iterations
+      </p>
+      
       {/* Research 4 */}
 
       <div class="update-container" style={{marginBottom: '3vh'}}>
@@ -108,12 +102,10 @@ const Research = () => {
           </div>
         </div>
       </div>
-      <div className ="career-left-text" style={{marginBottom: '20vh'}}>
-        <p style = {{fontSize: '20px'}}>
-          We develop AI-driven optimization techniques to automatically fine-tune ISP parameters, acheiving superior image quality tailored
-          to specific applications
-        </p>
-      </div>
+      <p className = "company-text" style={{marginBottom: '20vh'}}>
+        We develop AI-driven optimization techniques to automatically fine-tune ISP parameters, acheiving superior image quality tailored
+        to specific applications
+      </p>
 
       {/* Research 5 */}
 
@@ -124,13 +116,10 @@ const Research = () => {
             <p>View in detail</p>
           </div>
         </div>
-      </div>
-      <div className="career-left-text" style={{ marginBottom: '20vh' }}>
-        <p style={{ fontSize: '20px' }}>
-          We explore the integration of Quantum Processing Units (QPUs) for accelerating the joint optimization of imaging pipelines.
-        </p>
-      </div>
-
+      <p className = "company-text" style={{marginBottom: '20vh'}}>
+        We explore the integration of Quantum Processing Units (QPUs) for accelerating the joint optimization of imaging pipelines.
+      </p>
+      
 
       <hr class="separator"></hr>
 

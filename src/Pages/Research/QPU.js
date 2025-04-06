@@ -22,12 +22,12 @@ const QPU = () => {
                 Our research explores the use of Quantum Processing Units (QPUs) to accelerate joint optimization across optics, sensors, ISP, and AI.
                 Leveraging quantum algorithms allows us to:
                 </p>
-                <div className="left-text" style={{ width: '100vw' }}>
-                <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white' }}>
-                    <li style={{ marginBottom: '12px' }}>Achieve faster convergence in multi-parameter optimization</li>
-                    <li style={{ marginBottom: '12px' }}>Escape local minima and find globally optimal solutions</li>
-                    <li style={{ marginBottom: '12px' }}>Enable scalable co-design across hardware and software components</li>
-                </ul>
+                <div className="left-text" style={{ width: '90vw' }}>
+                    <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white' }}>
+                        <li style={{ marginBottom: '12px' }}>Achieve faster convergence in multi-parameter optimization</li>
+                        <li style={{ marginBottom: '12px' }}>Escape local minima and find globally optimal solutions</li>
+                        <li style={{ marginBottom: '12px' }}>Enable scalable co-design across hardware and software components</li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ const Optics = () => {
           However, for computer vision, it's crucial to evaluate lenses based on how they affect downstream AI tasks like object detection
           and segmentation. Our research takes this into account to design lenses that enhance vision system performance. This includes:
         </p>
-        <div className = "left-text" style = {{width: '100vw'}}>
+        <div className = "left-text" style = {{width: '90vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
             <li style={{ marginBottom: '12px' }}>Optimizing focal length, aperture, and coatings for AI-driven perception</li>
             <li style={{ marginBottom: '12px' }}>Simulating real-world conditions to evaluate lens performance</li>

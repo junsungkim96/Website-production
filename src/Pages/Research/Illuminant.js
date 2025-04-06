@@ -23,7 +23,7 @@ const Illuminant = () => {
           improve imaging performance. Unlike passive imaging, which relies on ambient or uncontrolled lighting conditions, 
           active illumination allows precise control over spectral composition, intensity, and directionality. This enables:
         </p>
-        <div className = "left-text" style = {{width: '100vw'}}>
+        <div className = "left-text" style = {{width: '90vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
             <li style={{ marginBottom: '12px' }}>Improved object recognition and material classification</li>
             <li style={{ marginBottom: '12px' }}>Enhanced depth estimation through spectral tuning</li>

@@ -24,7 +24,7 @@ const ISP = () => {
           ISP optimization, where models learn to adjust processing parameters dynamically based on scene content. 
           This approach improves:
         </p>
-        <div className = "left-text" style = {{width: '100vw'}}>
+        <div className = "left-text" style = {{width: '90vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
             <li style={{ marginBottom: '12px' }}>Color Accuracy</li>
             <li style={{ marginBottom: '12px' }}>Noise reduction</li>

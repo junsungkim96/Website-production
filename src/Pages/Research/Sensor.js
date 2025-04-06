@@ -23,7 +23,7 @@ const Sensor = () => {
           quantum efficiency, noise characteristics, and signal processing pipelines. Our research aims to build highly 
           accurate sensor simulation models that replicate real-world sensor behavior. This includes:
         </p>
-        <div className = "left-text" style = {{width: '100vw'}}>
+        <div className = "left-text" style = {{width: '90vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
             <li style={{ marginBottom: '12px' }}>Quantum Efficiency</li>
             <li style={{ marginBottom: '12px' }}>Noise Characteristics</li>
