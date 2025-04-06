@@ -63,7 +63,7 @@ const Company = () => {
         </div>
         <br/>
         <p className = "company-text" >
-          Accelerate innovation through advanced simulation software solutions
+          Our vision is to accelerate innovation through advanced simulation software solutions
         </p>
       </div>
       <div style = {{marginTop: '15vh'}}>

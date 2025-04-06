@@ -14,7 +14,7 @@ const Sensor = () => {
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
       <div style = {{marginBottom: '15vh'}}>
-        <div className="left-text">
+        <div className="left-text" style = {{fontSize: '40px'}}>
           Physical sensor simulation
         </div>
         <br/>

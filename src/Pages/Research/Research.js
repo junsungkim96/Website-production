@@ -5,6 +5,10 @@ import '../../styles/mobile.css';
 import {useNavigate} from 'react-router-dom';
 import React, {useLayoutEffect} from 'react';
 import imaging_pipeline from '../../img/research/research_overview.png';
+// import light from '../../img/research/lamp.svg';
+// import optics from '../../img/research/optics.png';
+// import microchip from '../../img/research/microchip.png';
+
 
 const Research = () => {
   const navigate = useNavigate();
@@ -33,11 +37,15 @@ const Research = () => {
         <img className = "full-width-image" style = {{marginTop: '3vh'}} src={imaging_pipeline} alt = "" />
       </div>
       
+      <hr class="separator"></hr>
 
       {/* Research 1 */}
 
       <div class="update-container" style={{marginBottom: '3vh'}}>
-        <div className="left-text" style = {{width: '90vw'}}>Active Illumination Methods</div>
+        <div className="left-text" style = {{width: '90vw'}}>
+          {/* <img className = "company-image" style = {{backgroundColor: 'white', borderRadius: '8px', padding: '3px', filter: 'contrast(80%) brightness(105%)'}} src={light} alt = "" /> */}
+          Active Illumination Methods
+        </div>
         <div className="right-text">
           <div className = "underline" style = {{cursor: 'pointer'}} onClick = {()=>navigate('/illuminant')}>
             <p>View in detail</p>
@@ -54,7 +62,10 @@ const Research = () => {
       {/* Research 2 */}
 
       <div class="update-container" style={{marginBottom: '3vh'}}>
-        <div className="left-text" style = {{width: '90vw'}}>Lens Design Optimization for Downstream Tasks</div>
+        <div className="left-text" style = {{width: '90vw'}}>
+          {/* <img className = "company-image" style = {{backgroundColor: 'white', borderRadius: '8px', padding: '3px'}} src={optics} alt = "" /> */}
+          Lens Design Optimization
+        </div>
         <div className="right-text">
           <div className = "underline" style = {{cursor: 'pointer'}} onClick = {()=>navigate('/optics')}>
             <p>View in detail</p>
@@ -70,7 +81,10 @@ const Research = () => {
       {/* Research 3 */}
 
       <div class="update-container" style={{marginBottom: '3vh'}}>
-        <div className="left-text" style = {{width: '90vw'}}>Physical Sensor Simulation</div>
+        <div className="left-text" style = {{width: '90vw'}}>
+          {/* <img className = "company-image" style = {{backgroundColor: 'white', borderRadius: '8px', padding: '3px'}} src={microchip} alt = "" /> */}
+          Physical Sensor Simulation
+        </div>
         <div className="right-text">
           <div className = "underline" style = {{cursor: 'pointer'}} onClick = {()=>navigate('/sensor')}>
             <p>View in detail</p>
@@ -101,9 +115,9 @@ const Research = () => {
         </p>
       </div>
 
+      <hr class="separator"></hr>
 
-
-      <div style = {{marginBottom: '20vh'}}>
+      <div style = {{marginBottom: '20vh', marginTop: '10vh'}}>
         <div className="left-text">
           Why Our Research Matters  
         </div>
@@ -130,7 +144,9 @@ const Research = () => {
         </p>
       </div>
 
-      <div>
+      <hr class="separator"></hr>
+
+      <div style = {{marginTop: '10vh'}}>
         <div className="left-text">
           Collaborate With Us
         </div>

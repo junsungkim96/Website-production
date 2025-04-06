@@ -33,10 +33,10 @@ const Careers = () => {
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>
-            <p style = {{fontSize: '50px'}}>Careers at {isSmallScreen ? <br/> : null} {company_name} </p> <br/>
+            <p style = {{fontSize: '40px'}}>Careers at {isSmallScreen ? <br/> : null} {company_name} </p> <br/>
           </div>
           <div>
-            <p style = {{fontSize: '30px', marginBottom: '10vh'}}>If you are passionate about revolutionizing computer vision, come join us!</p>
+            <p style = {{fontSize: '20px', marginBottom: '10vh'}}>If you are passionate about revolutionizing computer vision, come join us!</p>
           </div>
           {/* <div>
             <Button variant = "light" size = "lg" style = {{marginBottom: '50px', marginRight: '1%'}} className = "px-4">
