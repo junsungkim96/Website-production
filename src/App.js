@@ -14,6 +14,7 @@ import Research from './Pages/Research/Research';
 import Optics from './Pages/Research/Optics';
 import Sensor from './Pages/Research/Sensor';
 import ISP from './Pages/Research/ISP';
+import QPU from './Pages/Research/QPU';
 import Illuminant from './Pages/Research/Illuminant';
 import Blog from './Pages/Company/Blog';
 import FoundingStory from './Pages/Company/BlogPost/1_FoundingStory';
@@ -52,6 +53,7 @@ const App = () => (
         <Route path="/optics" element={<MainLayout>< Optics /></MainLayout>}/>
         <Route path="/sensor" element={<MainLayout>< Sensor /></MainLayout>}/>
         <Route path="/isp" element={<MainLayout>< ISP /></MainLayout>}/>
+        <Route path="/qpu" element={<MainLayout>< QPU /></MainLayout>}/>
         
         {/* Company */}
         <Route path="/company" element={<MainLayout>< Company /></MainLayout>} />

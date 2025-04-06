@@ -44,7 +44,7 @@ const Research = () => {
       <div class="update-container" style={{marginBottom: '3vh'}}>
         <div className="left-text" style = {{width: '90vw'}}>
           {/* <img className = "company-image" style = {{backgroundColor: 'white', borderRadius: '8px', padding: '3px', filter: 'contrast(80%) brightness(105%)'}} src={light} alt = "" /> */}
-          Active Illumination Methods
+          Active Illumination
         </div>
         <div className="right-text">
           <div className = "underline" style = {{cursor: 'pointer'}} onClick = {()=>navigate('/illuminant')}>
@@ -101,7 +101,7 @@ const Research = () => {
       {/* Research 4 */}
 
       <div class="update-container" style={{marginBottom: '3vh'}}>
-        <div className="left-text" style = {{width: '90vw'}}>AI Recommendation for Image Signal Processing</div>
+        <div className="left-text" style = {{width: '90vw'}}>AI-Based ISP Automation</div>
         <div className="right-text">
           <div className = "underline" style = {{cursor: 'pointer'}} onClick = {()=>navigate('/isp')}>
             <p>View in detail</p>
@@ -115,6 +115,23 @@ const Research = () => {
         </p>
       </div>
 
+      {/* Research 5 */}
+
+      <div className="update-container" style={{ marginBottom: '3vh' }}>
+        <div className="left-text" style={{ width: '90vw' }}>QPU-Based Optimization</div>
+        <div className="right-text">
+          <div className="underline" style={{ cursor: 'pointer' }} onClick={() => navigate('/qpu')}>
+            <p>View in detail</p>
+          </div>
+        </div>
+      </div>
+      <div className="career-left-text" style={{ marginBottom: '20vh' }}>
+        <p style={{ fontSize: '20px' }}>
+          We explore the integration of Quantum Processing Units (QPUs) for accelerating the joint optimization of imaging pipelines.
+        </p>
+      </div>
+
+
       <hr class="separator"></hr>
 
       <div style = {{marginBottom: '20vh', marginTop: '10vh'}}>
@@ -127,20 +144,14 @@ const Research = () => {
           we focus on the interdependent effects across the entire system. This enables:
           <br/>
           <br/>
-          <div>
-            Better AI Performance - By understanding how lens and sensor characteristics affect AI, we ensure
-            that vision algorithms operate at peak efficiency.
-          </div>
-          <br/>
-          <div>
-            Cost-Effective Solutions - Joint optimization reduces the need for expensive hardware by leveraging
-            computational enhancements
-          </div>
-          <br/>
-          <div>
-            Real-World Robustness - Our research leads to imaging solutions that are adaptable to diverse 
-            lighting environments and conditions
-          </div>
+          <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
+            <li>Better AI Performance - By understanding how lens and sensor characteristics affect AI, we ensure
+            that vision algorithms operate at peak efficiency.</li>
+            <li>Cost-Effective Solutions - Joint optimization reduces the need for expensive hardware by leveraging
+            computational enhancements</li>
+            <li>Real-World Robustness - Our research leads to imaging solutions that are adaptable to diverse 
+            lighting environments and conditions</li>
+          </ul>
         </p>
       </div>
 

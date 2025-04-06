@@ -172,6 +172,9 @@ const Menubar = () => {
                     else if (item === 'ISP') {
                       navigate('/isp');
                     }
+                    else if (item === 'QPU') {
+                      navigate('/qpu');
+                    }
                   }}
                 >
                   {item}

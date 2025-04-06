@@ -67,6 +67,9 @@ const Footer = () => {
                   else if (item === 'ISP') {
                     navigate('/isp');
                   }
+                  else if (item === 'QPU') {
+                    navigate('/qpu');
+                  }
                 }}
                 className = "footer-font"
               >

@@ -19,13 +19,18 @@ const Optics = () => {
         </div>
         <br/>
         <p className = "company-text" >
-          Traditional lens design prioritizes optical performance metrics such as aberration minimization and resolution. 
-          However, in computer vision applications, lens performance should be evaluated in the context of downstream tasks 
-          such as object detection, segmentation, and recognition. Our research focuses on optimizing lens parameters—including 
-          focal length, aperture, and optical coatings—not just for conventional imaging performance but for their impact on 
-          AI-driven vision systems. By simulating real-world conditions, we develop lenses that enhance machine perception, 
-          improving accuracy in low-light environments, adverse weather conditions, and high-speed imaging scenarios.
+          Traditional lens design focuses on maximizing optical performance—such as reducing aberrations and increasing resolution.
+          However, for computer vision, it's crucial to evaluate lenses based on how they affect downstream AI tasks like object detection
+          and segmentation. Our research takes this into account to design lenses that enhance vision system performance. This includes:
         </p>
+        <div className = "left-text" style = {{width: '100vw'}}>
+          <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
+            <li>Optimizing focal length, aperture, and coatings for AI-driven perception</li>
+            <li>Simulating real-world conditions to evaluate lens performance</li>
+            <li>Enhancing robustness in low-light, high-speed, and harsh environments</li>
+            <li>Balancing optical and computational elements for task-specific imaging</li>
+          </ul>
+        </div>
       </div>
     </div>
   )

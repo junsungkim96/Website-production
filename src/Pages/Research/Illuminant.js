@@ -21,12 +21,16 @@ const Illuminant = () => {
         <p className = "company-text" >
           Active illumination involves dynamically altering the spectrum of the illuminant to enhance scene perception and 
           improve imaging performance. Unlike passive imaging, which relies on ambient or uncontrolled lighting conditions, 
-          active illumination allows precise control over spectral composition, intensity, and directionality. Our research 
-          explores the impact of spectral tuning on object recognition, material classification, and depth estimation. 
-          By optimizing the illuminant spectrum based on scene characteristics, we enhance visibility in challenging environments, 
-          improve AI model accuracy, and enable advanced computational imaging techniques. Applications include hyperspectral 
-          imaging, adaptive lighting for autonomous systems, and real-time spectral optimization for industrial inspection.
+          active illumination allows precise control over spectral composition, intensity, and directionality. This enables:
         </p>
+        <div className = "left-text" style = {{width: '100vw'}}>
+          <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
+            <li>Improved object recognition and material classification</li>
+            <li>Enhanced depth estimation through spectral tuning</li>
+            <li>Optimized visibility in low-light or complex environments</li>
+            <li>Applications in hyperspectral imaging, autonomous vision, and inspection</li>
+          </ul>
+        </div>
       </div>
     </div>
   )
