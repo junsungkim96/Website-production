@@ -62,7 +62,10 @@ const ApplicationForm = () => {
               <ErrorMessage name="resume" component="div" className="invalid-feedback" />
             </div>
             <div className="form-group" style = {{display: 'flex', justifyContent: 'center'}}>
-              <button type="submit" className="btn btn-primary mr-2">Submit Application</button>
+              <button type="submit" className="btn btn-primary mr-2" 
+                style={{ backgroundColor: "#008B8B", borderColor: "#008B8B", borderWidth: "1px",  borderStyle: "solid"}}>
+                Submit Application
+              </button>
             </div>
           </Form>
         )}
