@@ -69,10 +69,10 @@ const Careers = () => {
                 ) : (
                   <MdArrowDropDown color="white" size="1.2em" />
                 )}
-                <span className="role-text">{a.role}</span>
+                <span className="role-text" >{a.role}</span>
                 
               </span>
-              <p style={{ margin: 0, color: 'lightgray'}}>{a.location}</p> {/* a.location on a separate line */}
+              <p style={{ margin: 0, color: 'lightgray', whiteSpace:'nowrap'}}>{a.location}</p> {/* a.location on a separate line */}
             </div>
             <div className="right-text" style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}>
               <span className="underline" style={{ padding: '5px 10px', // adjust padding to make the area smaller
@@ -93,13 +93,13 @@ const Careers = () => {
               className = "career-description"
               style={{
                 textAlign: 'left',
-                fontSize: '20px',
                 marginBottom: '3.5vh',
                 cursor: 'pointer', // Add cursor pointer to show that it's clickable
               }}
               onClick={() => setTab(tab === i ? null : i)} // Keep the click event here
             >
               <p
+                className = "description-text"
                 dangerouslySetInnerHTML={{
                   __html: a.description.replace(/\n/g, '<br/>'),
                 }}

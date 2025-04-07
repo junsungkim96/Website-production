@@ -30,7 +30,7 @@ const Research = () => {
         <p className = "company-text" >
           At Qblack AI, we conduct cutting-edge research at the intersection of optics, imaging and artificial intelligence. <br/>
           Our focus is on understanding and optimizing interdependent effects of light, scene, lens, sensor, actuator, 
-          image signal processing(isp) and AI algorithms. 
+          image signal processing(ISP) and AI algorithms. 
           By taking a holistic approach to the entire imaging pipeline, 
           we develop solutions that push the boundaries of computer vision performance. 
         </p>

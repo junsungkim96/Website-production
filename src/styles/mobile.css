@@ -363,11 +363,21 @@
     font-family: 'Helvetica', sans-serif;
     font-weight: 300;
     padding-left: 5vw;
-    padding-right: 15vw;
+    padding-right: 5vw;
   }
 
   .career-description{
     padding-left: 5%;
     padding-right: 5%;
+  }
+
+  .description-text{
+    font-size: 20px;
+  }
+
+  .apply{
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-top: 20vh;
   }
 }

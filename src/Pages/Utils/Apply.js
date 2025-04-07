@@ -18,7 +18,7 @@ const ApplicationForm = () => {
   });
 
   return (
-    <div style = {{paddingLeft: '35vw', paddingRight: '35vw', paddingTop: '20vh'}}>
+    <div className = "apply">
       <div style = {{fontSize: '3.3vh', fontWeight: 'bold', marginBottom: '2vh'}}>
         Apply for this job
       </div>

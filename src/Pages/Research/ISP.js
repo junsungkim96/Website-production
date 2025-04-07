@@ -21,14 +21,14 @@ const ISP = () => {
         <p className = "company-text" >
           The traditional Image Signal Processing (ISP) pipeline is designed with fixed parameters, often requiring 
           manual tuning for different imaging conditions. Our research leverages deep learning to develop AI-driven 
-          ISP optimization, where models learn to adjust processing parameters dynamically based on scene content. 
+          ISP optimization, where models learn to adjust processing parameters dynamically based on lighting conditions and scene content. 
           This approach improves:
         </p>
         <div className = "left-text" style = {{width: '90vw'}}>
           <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '1rem', color: 'white  ' }}>
             <li style={{ marginBottom: '12px' }}>Color Accuracy</li>
-            <li style={{ marginBottom: '12px' }}>Noise reduction</li>
-            <li style={{ marginBottom: '12px' }}>Dynamic range</li>
+            <li style={{ marginBottom: '12px' }}>Noise Reduction</li>
+            <li style={{ marginBottom: '12px' }}>Dynamic Range</li>
             <li >Tailored ISP paramters for light spectrum</li>
           </ul>
         </div>
