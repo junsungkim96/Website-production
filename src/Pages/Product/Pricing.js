@@ -90,7 +90,7 @@ const Pricing = () => {
             <Col key={index} md={6} lg={4} className="mb-4">
               <Card className="h-100 shadow">
                 <Card.Body style={{ display: 'flex', flexDirection: 'column' }}>
-                  <Card.Title style={{ textAlign: 'center', fontSize: '30px', fontWeight: '600'}}>{plan.name}</Card.Title>
+                  <Card.Title style={{ textAlign: 'center', fontSize: '30px', fontWeight: '500'}}>{plan.name}</Card.Title>
                   <h3 style={{ textAlign: 'center', marginTop: '1vh', fontSize: '23px' }}>{plan.price}</h3>
                   <ul className="list-unstyled mt-3 mb-4" style={{ textAlign: 'left', minHeight: '15vh' }}>
                     {plan.features.map((feature, i) => (

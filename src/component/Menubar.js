@@ -5,7 +5,6 @@ import '../styles/mobile.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/qblackai-logo.png';
@@ -14,35 +13,10 @@ import { useState, useEffect } from 'react';
 import { company_name } from '../data/Company_data';
 import {productItems, researchItems, companyItems} from '../data/Menu_data';
 
+
 const Menubar = () => {
-  // Separate dropdown states for each menu
-  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
-  const [researchDropdownOpen, setResearchDropdownOpen] = useState(false);
-  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);  
-
-  const handleProductMouseEnter = () => {
-    setProductDropdownOpen(true);
-  };
-
-  const handleProductMouseLeave = () => {
-    setProductDropdownOpen(false);
-  };
-
-  const handleResearchMouseEnter = () => {
-    setResearchDropdownOpen(true);
-  };
-
-  const handleResearchMouseLeave = () => {
-    setResearchDropdownOpen(false);
-  };
-
-  const handleCompanyMouseEnter = () => {
-    setCompanyDropdownOpen(true);
-  };
-
-  const handleCompanyMouseLeave = () => {
-    setCompanyDropdownOpen(false);
-  };
+  // Inside your Menubar component
+  const [hoveredMenu, setHoveredMenu] = useState(null);
 
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -110,118 +84,73 @@ const Menubar = () => {
           {/* -----------------------------------------------------------Desktop-------------------------------------------------------- */}
 
           <div className="desktop-nav">
-            <NavDropdown
-              title={
-                <span className="custom-dropdown-title">
-                  Product
-                  <span className={`custom-dropdown-icon ${productDropdownOpen ? 'open' : ''}`} style = {{marginLeft: '10px'}}>›</span>
+          {[
+            {
+              title: 'Product',
+              items: productItems,
+              onClick: (item) => {
+                if (item === 'Overview') navigate('/product_overview');
+                else if (item === 'Pricing') navigate('/product_pricing');
+              },
+            },
+            {
+              title: 'Research',
+              items: researchItems,
+              onClick: (item) => {
+                if (item === 'Overview') navigate('/research');
+                else if (item === 'Illuminant') navigate('/illuminant');
+                else if (item === 'Optics') navigate('/optics');
+                else if (item === 'Sensor') navigate('/sensor');
+                else if (item === 'ISP') navigate('/isp');
+                else if (item === 'QPU') navigate('/qpu');
+              },
+            },
+            {
+              title: 'Company',
+              items: companyItems,
+              onClick: (item) => {
+                if (item === 'About') navigate('/company');
+                else if (item === 'Blog') navigate('/blog');
+                else if (item === 'Careers') navigate('/careers');
+                else if (item === 'Customer Stories') navigate('/stories');
+                else if (item === 'Investor Relations') navigate('/ir');
+                else if (item === 'News') navigate('/news');
+              },
+            },
+          ].map((menu, idx) => (
+            <div
+              className="navbar-item"
+              style = {{cursor: 'pointer'}}
+              key={idx}
+              onMouseEnter={() => setHoveredMenu(menu.title)}
+              onMouseLeave={() => setHoveredMenu(null)}
+            >
+              <span className="custom-dropdown-title">
+                {menu.title}
+                <span
+                  className={`custom-dropdown-icon ${hoveredMenu === menu.title ? 'open' : ''}`}
+                  style={{ marginLeft: '10px' }}
+                >
+                  ›
                 </span>
-              }
-              id="collapsible-nav-dropdown"
-              className="navbar-item"
-              show={productDropdownOpen}
-              onMouseEnter={handleProductMouseEnter}
-              onMouseLeave={handleProductMouseLeave}
-              style={{ marginRight: '3vw' }}
-            >
-              {productItems.map((item, i) => (
-                <NavDropdown.Item
-                  key={i}
-                  onClick={() => {
-                    if (item === 'Overview') {
-                      navigate('/product_overview');
-                    }
-                    else if (item === 'Pricing'){
-                      navigate('/product_pricing');
-                    }                  
-                  }}
-                >
-                  {item}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-
-            <NavDropdown
-              title={<span className="custom-dropdown-title">
-                Research
-                <span className={`custom-dropdown-icon ${productDropdownOpen ? 'open' : ''}`} style = {{marginLeft: '10px'}}>›</span>
-              </span>}
-              id="collapsible-nav-dropdown"
-              className="navbar-item"
-              show={researchDropdownOpen}
-              onMouseEnter={handleResearchMouseEnter}
-              onMouseLeave={handleResearchMouseLeave}
-              style={{ marginRight: '3vw' }}
-            >
-              {researchItems.map((item, i) => (
-                <NavDropdown.Item
-                  key={i}
-                  onClick={() => {
-                    if (item === 'Overview') {
-                      navigate('/research');
-                    }
-                    else if (item === 'Illuminant') {
-                      navigate('/illuminant');
-                    }
-                    else if (item === 'Optics') {
-                      navigate('/optics');
-                    } 
-                    else if (item === 'Sensor') {
-                      navigate('/sensor');
-                    }
-                    else if (item === 'ISP') {
-                      navigate('/isp');
-                    }
-                    else if (item === 'QPU') {
-                      navigate('/qpu');
-                    }
-                  }}
-                >
-                  {item}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-
-            <NavDropdown
-              title={<span className="custom-dropdown-title">
-                Company
-                <span className={`custom-dropdown-icon ${productDropdownOpen ? 'open' : ''}`} style = {{marginLeft: '10px'}}>›</span>
-              </span>}
-              id="collapsible-nav-dropdown"
-              className="navbar-item"
-              show={companyDropdownOpen}
-              onMouseEnter={handleCompanyMouseEnter}
-              onMouseLeave={handleCompanyMouseLeave}
-            >
-              {companyItems.map((item, i) => (
-                <NavDropdown.Item
-                  key={i}
-                  onClick={() => {
-                    if (item === 'About') {
-                      navigate('/company');
-                    }
-                    else if (item === 'Blog'){
-                      navigate('/blog');
-                    }
-                    else if (item === 'Careers') {
-                      navigate('/careers');
-                    }
-                    else if (item === 'Customer Stories') {
-                      navigate('/stories');
-                    }
-                    else if (item === 'Investor Relations') {
-                      navigate('/ir');
-                    }
-                    else if (item === 'News') {
-                      navigate('/news');
-                    }
-                  }}
-                >
-                  {item}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-          </div>
+              </span>
+              <div className="dropdown-menu">
+                {menu.items.map((item, i) => (
+                  <div
+                    className="dropdown-item"
+                    key={i}
+                    onClick={() => {
+                      setHoveredMenu(null);
+                      setTimeout(() => menu.onClick(item), 100);
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
           <div className="mobile-nav">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '25px', height: '18px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
