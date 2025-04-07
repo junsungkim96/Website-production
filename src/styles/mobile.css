@@ -378,6 +378,11 @@
   .apply{
     padding-left: 10vw;
     padding-right: 10vw;
-    padding-top: 20vh;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
   }
+
+  /* .role-text{
+    font-weight: 900;
+  } */
 }

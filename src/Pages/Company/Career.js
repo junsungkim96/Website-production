@@ -69,10 +69,10 @@ const Careers = () => {
                 ) : (
                   <MdArrowDropDown color="white" size="1.2em" />
                 )}
-                <span className="role-text" >{a.role}</span>
+                <p className="role-text" style={{ margin: 0 }}>{a.role}</p> {/* Changed span to p */}
                 
               </span>
-              <p style={{ margin: 0, color: 'lightgray', whiteSpace:'nowrap'}}>{a.location}</p> {/* a.location on a separate line */}
+              <p style={{ margin: 0, color: 'lightgray', whiteSpace:'nowrap', fontSize: '18px'}}>{a.location}</p> {/* a.location on a separate line */}
             </div>
             <div className="right-text" style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }}>
               <span className="underline" style={{ padding: '5px 10px', // adjust padding to make the area smaller
