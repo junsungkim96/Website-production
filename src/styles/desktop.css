@@ -88,7 +88,7 @@
 /* Dropdown menu container */
 .navbar-item .dropdown-menu {
   padding: 0 !important;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   background-color: black;
   opacity: 0;
@@ -123,28 +123,28 @@
   box-sizing: border-box;
   opacity: 0;
   transform: translateY(-10px);
-  animation: dropdown-fade-in 10s forwards;
+  animation: dropdown-fade-in 0.6s forwards;
   font-family: 'Helvetica', sans-serif;
 }
 
 /* Staggered animation: add delays based on item order using nth-child */
 .navbar-item .dropdown-item:nth-child(1) {
-  animation-delay: 2s;
+  animation-delay: 0.1s;
 }
 .navbar-item .dropdown-item:nth-child(2) {
-  animation-delay: 4s;
+  animation-delay: 0.2s;
 }
 .navbar-item .dropdown-item:nth-child(3) {
-  animation-delay: 6s;
+  animation-delay: 0.3s;
 }
 .navbar-item .dropdown-item:nth-child(4) {
-  animation-delay: 8s;
+  animation-delay: 0.4s;
 }
 .navbar-item .dropdown-item:nth-child(5) {
-  animation-delay: 10s;
+  animation-delay: 0.5s;
 }
 .navbar-item .dropdown-item:nth-child(6) {
-  animation-delay: 12s;
+  animation-delay: 0.6s;
 }
 /* Add more if needed */
 
