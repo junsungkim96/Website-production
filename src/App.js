@@ -27,6 +27,7 @@ import News from './Pages/Company/News';
 import Login from './Pages/Utils/Login';
 import Signup from './Pages/Utils/Signup';
 import ApplicationFrom from './Pages/Utils/Apply';
+import Submit from './Pages/Utils/Submit';
 
 const MainLayout = ({ children }) => (
   <div className="App">
@@ -71,6 +72,7 @@ const App = () => (
         <Route path="/login" element={< Login />} />
         <Route path="/signup" element={< Signup />} />
         <Route path="/apply" element={< ApplicationFrom />} />
+        <Route path="/submit" element={< Submit /> } />
       </Routes>
     </Suspense>
   </Router>

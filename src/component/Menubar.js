@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../img/qblackai-logo.png';
+import logo from '../img/qblackai_logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { company_name } from '../data/Company_data';
