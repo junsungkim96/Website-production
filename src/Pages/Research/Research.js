@@ -21,7 +21,7 @@ const Research = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh', 
-                  overflowX: 'hidden', width: '100vw', boxSizing: 'border-box'}}>
+                  overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
       <div style = {{marginBottom: '15vh'}}>
         <div className="left-text" style = {{fontSize: '50px'}}>
           Cutting-edge Research
