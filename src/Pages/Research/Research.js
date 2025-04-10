@@ -3,7 +3,8 @@ import '../../styles/laptop.css';
 import '../../styles/tablet.css';
 import '../../styles/mobile.css';
 import {useNavigate} from 'react-router-dom';
-import React, {useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
+import Button from 'react-bootstrap/Button';
 import imaging_pipeline from '../../img/research/research_overview.png';
 // import light from '../../img/research/lamp.svg';
 // import optics from '../../img/research/optics.png';
@@ -13,11 +14,19 @@ import imaging_pipeline from '../../img/research/research_overview.png';
 const Research = () => {
   const navigate = useNavigate();
 
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
   }, []);
-
-//   let [tab, setTab] = useState(null)
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh', 
@@ -28,11 +37,9 @@ const Research = () => {
         </div>
         <br/>
         <p className = "company-text" >
-          At Qblack AI, we conduct cutting-edge research at the intersection of optics, imaging and artificial intelligence. <br/>
-          Our focus is on understanding and optimizing interdependent effects of light, scene, lens, sensor, actuator, 
-          image signal processing(ISP) and AI algorithms. 
-          By taking a holistic approach to the entire imaging pipeline, 
-          we develop solutions that push the boundaries of computer vision performance. 
+          At Qblack AI, we conduct cutting-edge research at the intersection of optics, imaging and artificial intelligence. {isSmallScreen && (<><br /></>)}
+          Our focus is on understanding and optimizing interdependent effects of light, scene, lens, sensor, actuator, image signal processing(ISP) and AI algorithms. {isSmallScreen && (<><br /></>)}
+          By taking a holistic approach to the entire imaging pipeline, we develop solutions that push the boundaries of computer vision performance. 
         </p>
         <img className = "full-width-image" style = {{marginTop: '3vh'}} src={imaging_pipeline} alt = "" />
       </div>
@@ -152,12 +159,18 @@ const Research = () => {
           Collaborate With Us
         </div>
         <br/>
-        <p className = "company-text" >
+        <p className = "company-text" style ={{marginBottom: '5vh'}}>
           We believe that true innovation happens through collaboration. Whether you are a computer vision researcher, camera manufacturer, or system integrator, 
           we invite you to work with us in pushing the boundaries of computational imaging and AI-driven vision systems.
           <br/><br/>
           Contact us to learn more about our research and partnership opportunities.
         </p>
+        <div>
+          <Button variant = "light" size = "lg"
+          onClick = {()=> navigate('/contact')}>
+            <div className = "career-button">Contact Us</div> 
+          </Button>
+        </div>
       </div>
 
     </div>
