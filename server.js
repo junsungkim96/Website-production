@@ -31,6 +31,42 @@ const transporter = nodemailer.createTransport({
   }
 })
 
+// CONTACT
+app.post('/api/contact', async(req, res) => {
+  try{
+    const {questionType, companyName, firstName, lastName, email, subject, message} = req.body;
+
+    // Email to internal team
+    await transporter.sendMail({
+      from: process.env.MAIL_USER,
+      to: process.env.MAIL_USER,
+      subject: `Contact from ${companyName}`,
+      text: `
+        Name: ${firstName}, ${lastName}
+        Email: ${email}
+        Question Type: ${questionType}
+        Subject: ${subject}
+        Message: ${message}
+      `,
+      replyTo: email
+    });
+
+    // Confirmation email to sender
+    await transporter.sendMail({
+      from: process.env.MAIL_USER,
+      to: email,
+      subject: `Thanks for contacting Qblack AI`,
+      text: `Hi ${firstName},\n\nThank you for reaching out to us!\nWe've received your message and will get back to you shortly.\n\nBest regards,\nQblack AI Team`
+    });
+
+    res.status(200).json({message: 'Message sent successfully'});
+  } catch (error) {
+    console.error('Mail send error:', error);
+    res.status(500).json({message: 'Failed to send message'});
+  }
+})
+
+// APPLY
 app.post('/api/apply', upload.single('resume'), async(req, res) => {
   try{
     const {firstName, lastName, email, phone} = req.body;

@@ -28,6 +28,9 @@ import Login from './Pages/Utils/Login';
 import Signup from './Pages/Utils/Signup';
 import ApplicationFrom from './Pages/Utils/Apply';
 import Submit from './Pages/Utils/Submit';
+import Contact from './Pages/Utils/Contact';
+import Terms from './Pages/Utils/Terms';
+import Privacy from './Pages/Utils/Privacy';
 
 const MainLayout = ({ children }) => (
   <div className="App">
@@ -73,6 +76,12 @@ const App = () => (
         <Route path="/signup" element={< Signup />} />
         <Route path="/apply" element={< ApplicationFrom />} />
         <Route path="/submit" element={< Submit /> } />
+
+        {/* Contact, Terms of Use & Privacy */}
+        <Route path="/contact" element={<MainLayout>< Contact /></MainLayout>}/>
+        <Route path="/terms" element={<MainLayout>< Terms /></MainLayout>}/>
+        <Route path="/privacy" element={<MainLayout>< Privacy /></MainLayout>}/>
+
       </Routes>
     </Suspense>
   </Router>

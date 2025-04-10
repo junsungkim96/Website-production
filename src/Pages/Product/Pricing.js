@@ -26,7 +26,7 @@ const Pricing = () => {
     },
     {
       name: 'Basic',
-      price: '$[299]/month',
+      price: '$299/month',
       features: [
         'Access to core simulator functionalities',
         'Limited hardware/software integration options',
@@ -37,7 +37,7 @@ const Pricing = () => {
     },
     {
       name: 'Pro',
-      price: '$[1999]/month',
+      price: '$999/month',
       features: [
         'All Basic Tier features',
         'Advanced simulation tools and analytics',
@@ -61,10 +61,10 @@ const Pricing = () => {
     },
     {
       name: 'Educational',
-      price: '$[9]/month',
+      price: '$9/month',
       features: [
         'Designed for students and educators',
-        'Access to core simulator functionalities',
+        'All Basic Tier features',
         'Educational resources and case studies',
         'Limited support via email',
         'Group access for classrooms or labs',

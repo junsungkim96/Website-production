@@ -94,7 +94,7 @@ const Homepage = () => {
                 <p className="strength-title">Save Time</p>
               </div>
               <div className="product-text">
-                Achieve system validation ~100x faster with virtual hardware simulations.
+                Achieve system validation ~100x faster with virtual hardware simulations
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ const Homepage = () => {
                 <p className="strength-title">Save Money</p>
               </div>
               <div className="product-text">
-                Reduce system validation costs to ~1/100 with virtual hardware simulations.
+                Reduce system validation costs to ~1/100 with virtual hardware simulations
               </div>
             </div>
           </div>
@@ -142,7 +142,7 @@ const Homepage = () => {
                 <p className="strength-title">Optimize</p>
               </div>
               <div className="product-text">
-                Find the right balance between size, cost, and performance.
+                Find the right balance between size, cost, and performance
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ const Homepage = () => {
             </div>
             <img className="use-case-image" src={img2} alt = ""/>
             <div className="use-case-text">
-              Test the performance of inspection algorithms in different light settings
+              Test the performance of inspection algorithms in different camera HW and light settings
             </div>  
           </div>
           <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
@@ -259,7 +259,7 @@ const Homepage = () => {
         <div className="left-text">Research</div>
         <div className="right-text">
           <div className="right-small-text">
-            We research deep learning based computer vision system optimization.
+            We research deep learning based computer vision system optimization
           </div>
           <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}} onClick = {()=>navigate('research')}>
             <p>Learn about our research</p>
@@ -296,6 +296,24 @@ const Homepage = () => {
           onClick = {()=> navigate('/careers')}>
             <div className = "career-button">View Careers</div> 
           </Button>
+        </div>
+      </div>
+
+      <hr class="separator"></hr>
+
+      {/* -----------------------------------------------------------Contact Us-------------------------------------------------------- */}
+      
+      <div class="update-container">
+        <div className="left-text">
+          Contact Us
+        </div>
+        <div className="right-text">
+          <div className="right-small-text">
+            Big ideas start with a simple hello. Let's connect!
+          </div>
+          <div className = "underline" onClick = {()=> navigate('/contact')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
+            <p>Contact us</p>
+          </div>
         </div>
       </div>
 

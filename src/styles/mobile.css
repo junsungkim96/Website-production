@@ -385,4 +385,9 @@
   .role-text{
     font-size: 23px;
   }
+
+  .contact{
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
 }
