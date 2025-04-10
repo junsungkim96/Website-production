@@ -131,16 +131,42 @@ const Footer = () => {
 
 
 
-      <div style = {{backgroundColor: 'black', paddingBottom: '1vh'}}>
-        <Container style = {{marginTop: '1vh'}}>
-          <Row> 
-            <Col>
-              <div className = "footer-left">
-                © Copyright {company_name}. All Rights Reserved
+      <div style={{ backgroundColor: 'black', paddingBottom: '1vh' }}>
+        <Container>
+          <Row className="d-flex align-items-end">
+            {/* Left column */}
+            <Col xs={12} md={6} className = "mb-3 mb-md-0">
+              <div
+                style={{
+                  color: '#aaa',
+                  fontSize: '0.7rem',
+                  lineHeight: '2',
+                  textAlign: 'left',
+                  marginBottom: '0.5vh',
+                }}
+              >
+                상호: 큐블랙에이아이 | 대표자명: 김준성 <br />
+                사업자등록번호: 484-50-00824 | 통신판매업 신고번호: <br />
+                주소: 서울특별시 마포구 마포대로 92, A동 3층 | 이메일: info@qblackai.com
               </div>
             </Col>
-            <Col>
-              <div  className = "footer-right" onClick ={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Back to top</div>
+
+            {/* Right column */}
+            <Col
+              xs={12}
+              md={6}
+              className="d-flex flex-column align-items-md-end align-items-start"
+            >
+              <div
+                className="footer-right"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                Back to top
+              </div>
+
+              <div className="footer-right" style={{ marginTop: '1vh' }}>
+                © Copyright {company_name}. All Rights Reserved
+              </div>
             </Col>
           </Row>
         </Container>
