@@ -191,8 +191,8 @@ const Menubar = () => {
                   <Nav.Link 
                     key={i} 
                     onClick={() => {
-                      if (item === 'Overview'){
-                        closeOffcanvasAndNavigate('/product_overview');
+                      if (item === 'Features'){
+                        closeOffcanvasAndNavigate('/product_features');
                       } else if (item === 'Pricing'){
                         closeOffcanvasAndNavigate('/product_pricing');
                       }
