@@ -48,7 +48,7 @@ const App = () => (
         <Route path="/" element={<MainLayout>< Homepage /></MainLayout>} />
         
         {/* Product */}
-        <Route path="/product_overview" element={<MainLayout>< Product /></MainLayout>}/>
+        <Route path="/product_features" element={<MainLayout>< Product /></MainLayout>}/>
         <Route path="/product_pricing" element={<MainLayout>< Pricing /></MainLayout>}/>
         
         {/* Research */}

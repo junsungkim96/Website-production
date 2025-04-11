@@ -52,7 +52,7 @@ const Homepage = () => {
           Product
         </div>
         <div className="right-text">
-          <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product_overview')}>View all product features</p>
+          <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product_features')}>View all product features</p>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ const Homepage = () => {
         Your browser does not support the video tag.
       </video>
 
-      <div className="product-center-text">End-to-End image pipeline for illuminant, scene, optics, actuator, sensor, ISP and algorithms</div>
+      <div className="product-center-text">End-to-End image pipeline for illuminant, scene, optics, sensor, ISP and algorithms</div>
       
 
       <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>

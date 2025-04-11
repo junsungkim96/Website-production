@@ -29,8 +29,8 @@ const Footer = () => {
               <div
                 key={i}
                 onClick={() => {
-                  if (item === 'Overview') {
-                    navigate('/product_overview');
+                  if (item === 'Features') {
+                    navigate('/product_features');
                   } 
                   else if (item === 'Pricing')
                   {

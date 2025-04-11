@@ -89,7 +89,7 @@ const Menubar = () => {
               title: 'Product',
               items: productItems,
               onClick: (item) => {
-                if (item === 'Overview') navigate('/product_overview');
+                if (item === 'Features') navigate('/product_features');
                 else if (item === 'Pricing') navigate('/product_pricing');
               },
             },
