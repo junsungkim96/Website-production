@@ -25,8 +25,10 @@ const Product = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
-      <div className = "career-left-text" style = {{fontSize: '50px'}}>
-        Main Features
+      <div className = "career-left-text">
+        <p style = {{fontSize: '50px'}}>
+          Main Features
+        </p>
       </div>
 
 
@@ -113,7 +115,10 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Assess detection, segmentation, and other CV tasks with simulated data
         </div>
-
+        <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {!isSmallScreen ? undefined : "/img/isp.jpg"}>
+          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/isp-FhVv0cepVhKRz0bXDDbeyyUYKR8syD.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
 
