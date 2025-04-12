@@ -19,6 +19,7 @@ import img4 from '../img/homepage/security-safe.svg';
 import img5 from '../img/homepage/settings-gear.svg';
 import img6 from '../img/homepage/specificity.svg';
 import {company_name} from '../data/Company_data';
+import product from '../img/homepage/product_overview.png';
 
 
 const Homepage = () => {
@@ -64,11 +65,13 @@ const Homepage = () => {
       </video> */}
 
       {/* Video streaming using Vercel Storage Blob Store */}
-      <video className = "video-container" controls autoPlay={!isSmallScreen} loop = {false} muted poster = {!isSmallScreen ? undefined : "/img/demo.jpg"}>
+      {/* <video className = "video-container" controls autoPlay={!isSmallScreen} loop = {false} muted poster = {!isSmallScreen ? undefined : "/img/demo.jpg"}>
         <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/Quasar_simulator-1gup72IZQQ4abyHJdDKh7HoDtHm0cR.mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
 
+
+      <img className = "full-width-image" style = {{marginBottom: '3vh'}} src={product} alt="" />
       <div className="product-center-text">End-to-End image pipeline for illuminant, scene, optics, sensor, ISP and algorithms</div>
       
 
