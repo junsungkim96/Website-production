@@ -114,8 +114,8 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Assess detection, segmentation, and other CV tasks with simulated data
         </div>
-        <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/isp.jpg"}>
-          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/isp-FhVv0cepVhKRz0bXDDbeyyUYKR8syD.mp4" />
+        <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/algorithm.jpg"}>
+          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/algorithm-XndlFRIeI7pVN3UM4skb26fZrqdmYh.mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
