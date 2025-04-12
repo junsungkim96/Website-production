@@ -71,25 +71,26 @@ const Homepage = () => {
       </video> */}
 
 
-      <img className = "full-width-image" style = {{marginBottom: '3vh'}} src={product} alt="" />
+      <img className = "pipeline-image" src={product} alt="" />
       <div className="product-center-text">End-to-End image pipeline for illuminant, scene, optics, sensor, ISP and algorithms</div>
       
 
       <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
-        <div className="row"> {/* Added gap between cards */}
-          
+        <div className="row g-4"> {/* Adds gutter (spacing) between cards */}
+
           {/* Card 1 */}
-          <div className="col-md-4" style={{ display: 'flex' }}>
+          <div className="col-lg-4 col-md-6 d-flex">
             <div
               className="product-card-content"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '5vh 1vw',  // Reduced padding top and bottom
+                padding: '5vh 1vw',
                 borderRadius: '15px',
                 backgroundColor: '#FFFFFF',
                 minHeight: '25vh',
                 flexGrow: 1,
+                width: '100%',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
@@ -103,17 +104,18 @@ const Homepage = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="col-md-4" style={{ display: 'flex' }}>
+          <div className="col-lg-4 col-md-6 d-flex">
             <div
               className="product-card-content"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '5vh 1vw',  // Reduced padding top and bottom
+                padding: '5vh 1vw',
                 borderRadius: '15px',
                 backgroundColor: '#FFFFFF',
                 minHeight: '25vh',
                 flexGrow: 1,
+                width: '100%',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
@@ -127,17 +129,18 @@ const Homepage = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="col-md-4" style={{ display: 'flex' }}>
+          <div className="col-lg-4 col-md-6 d-flex">
             <div
               className="product-card-content"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '5vh 1vw',  // Reduced padding top and bottom
+                padding: '5vh 1vw',
                 borderRadius: '15px',
                 backgroundColor: '#FFFFFF',
                 minHeight: '25vh',
                 flexGrow: 1,
+                width: '100%',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>

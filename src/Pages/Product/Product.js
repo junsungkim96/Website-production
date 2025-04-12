@@ -27,9 +27,9 @@ const Product = () => {
 
       {/* Illuminant */}
       <div style = {{paddingTop: '10vh'}}>
-        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%'}}>
+        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <img className="strength-image" src={illuminant} alt=""/>
-          Light Your Scene: Default or Customizable Illuminants
+          <div>Light Your Scene: Default or Customizable Illuminants</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Explore how lighting impacts image capture with flexible illumination options
@@ -43,9 +43,9 @@ const Product = () => {
 
       {/* Scene */}
       <div style = {{paddingTop: '10vh'}}>
-        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%'}}>
+        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <img className="strength-image" src={scene} alt=""/>
-          Set the Stage: Realistic Scenes & Image Import Support
+          <div>Set the Stage: Realistic Scenes & Image Import Support</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Use built-in scenes or load any iamge to simulate real-world scenarios
@@ -59,9 +59,9 @@ const Product = () => {
 
       {/* Optics */}
       <div style = {{paddingTop: '10vh'}}>
-        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%'}}>
+        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
          <img className="strength-image" src={optics} alt=""/>
-          See Through the Glass: Simulate Optical Performance
+          <div>See Through the Glass: Simulate Optical Performance</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Evaluate how your lens design affect image sharpness, distortion, and clarity
@@ -75,9 +75,9 @@ const Product = () => {
 
       {/* Sensor */}
       <div style = {{paddingTop: '10vh'}}>
-        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%'}}>
+        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <img className="strength-image" src={sensor} alt=""/>
-          Capture the Details: Model Sensor Response & Noise  
+          <div>Capture the Details: Model Sensor Response & Noise</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Test dynamic range, resolution and sensor noise under realistic conditions
@@ -91,9 +91,9 @@ const Product = () => {
 
       {/* ISP */}
       <div style = {{paddingTop: '10vh'}}>
-        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%'}}>
+        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <img className="strength-image" src={isp} alt=""/>
-          Polish Your Pixels: Simulate the Entire ISP Pipeline  
+          <div>Polish Your Pixels: Simulate the Entire ISP Pipeline</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Apply demosaicing, noise reduction, color correction and more
@@ -107,9 +107,9 @@ const Product = () => {
 
       {/* AI Algorithms */}
       <div style = {{paddingTop: '10vh'}}>
-        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%'}}>
+        <div className="left-text" style = {{fontSize: '3vh', marginBottom: '1vh', width: '90%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
           <img className="strength-image" src={algorithms} alt=""/>
-          Power the Vision: Benchmark AI Algorithm Performance
+          <div>Power the Vision: Benchmark AI Algorithm Performance</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Assess detection, segmentation, and other CV tasks with simulated data

@@ -390,4 +390,11 @@
     padding-left: 5vw;
     padding-right: 5vw;
   }
+
+  .pipeline-image{
+    width: 90vw;
+    background-position: center;
+    margin-top: 0.5vh;
+    margin-bottom: 3vh;
+  }
 }
