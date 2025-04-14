@@ -1,17 +1,24 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
+  // Handle CORS preflight requests (OPTIONS method)
+  if (req.method === "OPTIONS") {
+    return res.status(200).end(); // Preflight request, just send a success status
+  }
+
   // Enable CORS for your frontend domain
   res.setHeader('Access-Control-Allow-Origin', 'https://www.qblackai.com');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
+  // Only handle POST requests
   if (req.method !== "POST") {
-    return res.status(405).end(); // Method Not Allowed
+    return res.status(405).json({ message: "Method Not Allowed" }); // Method Not Allowed
   }
 
   const { productType, quantity, companyName, firstName, lastName, email, message } = req.body;
 
+  // Set up nodemailer transporter
   const transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
@@ -23,7 +30,7 @@ export default async function handler(req, res) {
   });
 
   try {
-    // 내부 팀에게 메일
+    // Send email to internal team
     await transporter.sendMail({
       from: process.env.MAIL_USER,
       to: process.env.MAIL_USER,
@@ -38,7 +45,7 @@ export default async function handler(req, res) {
       replyTo: email,
     });
 
-    // 사용자에게 확인 메일
+    // Send confirmation email to the user
     await transporter.sendMail({
       from: process.env.MAIL_USER,
       to: email,
@@ -48,7 +55,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ message: "Message sent successfully" });
   } catch (error) {
-    console.error("메일 전송 에러:", error);
+    console.error("Error sending email:", error);
     res.status(500).json({ message: "Failed to send message" });
   }
 }
