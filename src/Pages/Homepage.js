@@ -72,7 +72,7 @@ const Homepage = () => {
 
 
       <img className = "pipeline-image" src={product} alt="" />
-      <div className="product-center-text">End-to-End image pipeline for illuminant, scene, optics, sensor, ISP and algorithms</div>
+      <div className="product-center-text">End-to-End imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms</div>
       
 
       <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
@@ -98,7 +98,7 @@ const Homepage = () => {
                 <p className="strength-title">Save Time</p>
               </div>
               <div className="product-text">
-                Achieve system validation ~100x faster with virtual hardware simulations
+                Achieve system validation ~100x faster with integrated HW & SW virtual simulations
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ const Homepage = () => {
                 <p className="strength-title">Save Money</p>
               </div>
               <div className="product-text">
-                Reduce system validation costs to ~1/100 with virtual hardware simulations
+                Reduce system validation costs to ~1/100 with virtual simulation - no need for physical prototypes
               </div>
             </div>
           </div>

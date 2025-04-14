@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Videos 
 /public/video/*.mp4
+
+# Serverlss API
+server.js
