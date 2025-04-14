@@ -39,7 +39,7 @@ const ContactSales = () => {
     setSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact-sales', {
+      const response = await fetch('http://qblackai.com/api/contact-sales', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
