@@ -36,6 +36,7 @@ export default async function handler(req, res) {
       to: process.env.MAIL_USER,
       subject: `Product Inquiry from ${companyName}`,
       text: `
+        Company: ${companyName}
         Name: ${firstName}, ${lastName}
         Email: ${email}
         Product Type: ${productType}
