@@ -31,7 +31,7 @@ const ApplicationForm = () => {
           formData.append('resume', fields.resume);
 
           try {
-            const res = await fetch('https://www.qblackai.com/api/apply', {
+            const res = await fetch('https://qblackai.com/api/apply', {
               method: 'POST',
               body: formData
             });
