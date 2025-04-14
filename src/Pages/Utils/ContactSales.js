@@ -38,8 +38,11 @@ const ContactSales = () => {
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     setSubmitting(true);
 
+    const apiUrl = 'https://www.qblackai.com/api/contact-sales';
+    console.log("🔥 Sending fetch to:", apiUrl);
+
     try {
-      const response = await fetch('https://www.qblackai.com/api/contact-sales', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
