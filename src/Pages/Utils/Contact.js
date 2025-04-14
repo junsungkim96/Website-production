@@ -34,7 +34,7 @@ const Contact = () => {
 
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
-      const response = await fetch('http://qblackai.com/api/contact', {
+      const response = await fetch('http://qblackai-111s-projects-230c46fa.vercel.app/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
