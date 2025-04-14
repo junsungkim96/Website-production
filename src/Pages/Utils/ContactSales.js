@@ -83,7 +83,7 @@ const ContactSales = () => {
                   </p>
                 </div>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formProductType">
+                <Form.Group className="contact mb-4 text-start">
                   <Form.Label>
                     Product Type <span className="text-danger">*</span>
                   </Form.Label>
@@ -98,7 +98,7 @@ const ContactSales = () => {
                   <div className="text-danger"><ErrorMessage name="productType" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formQuantity">
+                <Form.Group className="contact mb-4 text-start">
                     <Form.Label>
                         Quantity <span className="text-danger">*</span>
                     </Form.Label>
@@ -111,37 +111,37 @@ const ContactSales = () => {
                     <div className="text-danger"><ErrorMessage name="quantity" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formCompanyName">
+                <Form.Group className="contact mb-4 text-start">
                   <Form.Label>Company Name <span className="text-danger">*</span></Form.Label>
                   <Field type="text" name="companyName" className="form-control" placeholder="" />
                   <div className="text-danger"><ErrorMessage name="companyName" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formFirstName">
+                <Form.Group className="contact mb-4 text-start">
                   <Form.Label>First Name <span className="text-danger">*</span></Form.Label>
                   <Field type="text" name="firstName" className="form-control" placeholder="" />
                   <div className="text-danger"><ErrorMessage name="firstName" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formLastName">
+                <Form.Group className="contact mb-4 text-start">
                   <Form.Label>Last Name <span className="text-danger">*</span></Form.Label>
                   <Field type="text" name="lastName" className="form-control" placeholder="" />
                   <div className="text-danger"><ErrorMessage name="lastName" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formEmail">
+                <Form.Group className="contact mb-4 text-start">
                   <Form.Label>Email Address <span className="text-danger">*</span></Form.Label>
                   <Field type="email" name="email" className="form-control" placeholder="" />
                   <div className="text-danger"><ErrorMessage name="email" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formMessage">
+                <Form.Group className="contact mb-4 text-start">
                   <Form.Label>Message </Form.Label>
                   <Field as="textarea" name="message" rows={5} className="form-control" placeholder="Write your message here..." />
                   <div className="text-danger"><ErrorMessage name="message" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formTerms">
+                <Form.Group className="contact mb-4 text-start">
                   <div className="form-check">
                     <Field
                       type="checkbox"
