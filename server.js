@@ -10,7 +10,16 @@ const PORT = 5000;
 require('dotenv').config();
 
 // Enable CORS for requests from localhost:3000 and other ports
-app.use(cors({origin: '*'}));
+// app.use(cors({origin: '*'}));
+
+// Enable CORS for requests from your frontend domain (modify with your actual domain)
+const corsOptions = {
+  origin: 'https://www.qblackai.com',  // Frontend domain
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
