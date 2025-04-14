@@ -150,14 +150,25 @@ const ContactSales = () => {
                       id="termsCheckbox"
                     />
                     <Form.Label className="form-check-label" htmlFor="termsCheckbox">
-                      I agree to the{' '}
-                      <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline' }}>
+                      I agree to the&nbsp;
+                      <a
+                        href="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#fff', textDecoration: 'underline' }}
+                      >
                         Terms of Use
-                      </a>{' '}
-                      and{' '}
-                      <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline' }}>
+                      </a>
+                      &nbsp;and&nbsp;
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#fff', textDecoration: 'underline' }}
+                      >
                         Privacy Policy
                       </a>
+                      &nbsp;of Qblack AI
                       <span className="text-danger"> *</span>
                     </Form.Label>
                   </div>

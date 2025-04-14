@@ -534,3 +534,8 @@ p2{
   margin-top: 0.5vh;
   margin-bottom: 3vh;
 }
+
+.term-container {
+  padding-left: 30%;
+  padding-right: 30%;
+}
