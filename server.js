@@ -66,6 +66,41 @@ app.post('/api/contact', async(req, res) => {
   }
 })
 
+// CONTACT SALES
+app.post('/api/contact-sales', async(req, res) => {
+  try{
+    const {productType, quantity, companyName, firstName, lastName, email, message} = req.body;
+
+    // Email to internal team
+    await transporter.sendMail({
+      from: process.env.MAIL_USER,
+      to: process.env.MAIL_USER,
+      subject: `Product Inquiry from ${companyName}`,
+      text: `
+        Name: ${firstName}, ${lastName}
+        Email: ${email}
+        Product Type: ${productType}
+        Quantity: ${quantity}
+        Message: ${message}
+      `,
+      replyTo: email
+    });
+
+    // Confirmation email to buyer
+    await transporter.sendMail({
+      from: process.env.MAIL_USER,
+      to: email,
+      subject: `Thanks for your interest in our product`,
+      text: `Hi ${firstName},\n\nThank you for reaching out to us!\nWe've received your inquiry and will get back to you shortly.\n\nBest regards,\nQblack AI Team`
+    });
+
+    res.status(200).json({message: 'Message sent successfully'});
+  } catch (error){
+    console.error('Mail send error:', error);
+    res.status(500).json({message: 'Failed to send message'});
+  }
+})
+
 // APPLY
 app.post('/api/apply', upload.single('resume'), async(req, res) => {
   try{

@@ -2,39 +2,44 @@ import React, { useLayoutEffect } from 'react';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Form, Button, Row } from 'react-bootstrap';
+import {useLocation} from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
-  questionType: Yup.string().required('Please select a question type'),
+  productType: Yup.string().required('Please select a product type'),
+  quantity: Yup.number().positive('Quantity must be a positive number').integer('Quantity must be an integer').required('Quantity is required'),
   companyName: Yup.string().required('Company Name is required'),
   firstName: Yup.string().required('First name is required'),
   lastName: Yup.string().required('Last name is required'),
   email: Yup.string().email('Email is invalid').required('Email is required'),
-  subject: Yup.string().required('Subject is required'),
-  message: Yup.string().required('Message is required'),
   acceptedTerms: Yup.boolean()
     .oneOf([true], 'You must accept the terms and privacy policy')
     .required('You must accept the terms and privacy policy'),
 });
 
 const initialValues = {
-  questionType: '',
+  productType: '',
+  quantity: 1,
   companyName: '',
   firstName: '',
   lastName: '',
   email: '',
-  subject: '',
   message: '',
   acceptedTerms: false,
 };
 
-const Contact = () => {
+const ContactSales = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const location = useLocation();
+  const planName = location.state?.planName || '';  //fallback to empty string
+
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
+    setSubmitting(true);
+
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch('http://localhost:5000/api/contact-sales', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
@@ -59,17 +64,17 @@ const Contact = () => {
     <div style={{ paddingTop: '10vh', paddingBottom: '10vh', color: 'white', overflowX: 'hidden', width: '100%', boxSizing: 'border-box' }}>
       <div style={{ marginBottom: '10vh' }}>
         <div className="left-text" style={{ fontSize: '50px' }}>
-          Contact Us
+          Let's Make It Happen
         </div>
         <br />
         <p className="company-text">
-          Big ideas start with a simple hello — whether it’s about our tech, teaming up, or something new.
+          Thank you for your interest in our product. We are here to help you take the next step and turn your vision into reality.
         </p>
       </div>
 
       <Row className="justify-content-center">
         <div>
-          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          <Formik initialValues={{...initialValues, productType: planName}} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ isSubmitting: isSending }) => (
               <FormikForm>
                 <div className="contact d-flex justify-content-end">
@@ -78,19 +83,32 @@ const Contact = () => {
                   </p>
                 </div>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formQuestionType">
+                <Form.Group className="contact mb-4 text-start" controlId="formProductType">
                   <Form.Label>
-                    Question Type <span className="text-danger">*</span>
+                    Product Type <span className="text-danger">*</span>
                   </Form.Label>
-                  <Field as="select" name="questionType" className="form-control">
-                    <option value="">Select a question type</option>
-                    <option value="General Inquiry">General Inquiry</option>
-                    <option value="Support">Support</option>
-                    <option value="Partnership">Partnership</option>
-                    <option value="Careers">Careers</option>
-                    <option value="Other">Other</option>
+                  <Field as="select" name="productType" className="form-control">
+                    <option value="">Select product type</option>
+                    <option value="Trial">Trial</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Pro">Pro</option>
+                    <option value="Enterprise">Enterprise</option>
+                    <option value="Education">Education</option>
                   </Field>
-                  <div className="text-danger"><ErrorMessage name="questionType" /></div>
+                  <div className="text-danger"><ErrorMessage name="productType" /></div>
+                </Form.Group>
+
+                <Form.Group className="contact mb-4 text-start" controlId="formQuantity">
+                    <Form.Label>
+                        Quantity <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Field 
+                        type="number" 
+                        name="quantity" 
+                        className="form-control" 
+                        min="1" // Quantity must be at least 1
+                    />
+                    <div className="text-danger"><ErrorMessage name="quantity" /></div>
                 </Form.Group>
 
                 <Form.Group className="contact mb-4 text-start" controlId="formCompanyName">
@@ -117,14 +135,8 @@ const Contact = () => {
                   <div className="text-danger"><ErrorMessage name="email" /></div>
                 </Form.Group>
 
-                <Form.Group className="contact mb-4 text-start" controlId="formSubject">
-                  <Form.Label>Subject <span className="text-danger">*</span></Form.Label>
-                  <Field type="text" name="subject" className="form-control" placeholder="Let us know what you're reaching out about" />
-                  <div className="text-danger"><ErrorMessage name="subject" /></div>
-                </Form.Group>
-
                 <Form.Group className="contact mb-4 text-start" controlId="formMessage">
-                  <Form.Label>Message <span className="text-danger">*</span></Form.Label>
+                  <Form.Label>Message </Form.Label>
                   <Field as="textarea" name="message" rows={5} className="form-control" placeholder="Write your message here..." />
                   <div className="text-danger"><ErrorMessage name="message" /></div>
                 </Form.Group>
@@ -165,7 +177,7 @@ const Contact = () => {
                   position: 'relative',
                   color: 'white'}} 
                   disabled={isSending}>
-                    {isSending ? 'Sending Message...' : 'Send Message'}
+                    {isSending ? 'Sending...' : 'Submit Inquiry'}
                   </Button>
                 </div>
               </FormikForm>
@@ -177,4 +189,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactSales;

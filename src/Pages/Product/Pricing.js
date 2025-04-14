@@ -4,12 +4,48 @@ import '../../styles/tablet.css';
 import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap';
-import handleTrialDownload from '../../component/Download';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const Pricing = () => {
+  const navigate = useNavigate();
+  
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const TrialDownload = () => {
+    // const apiEndpoint = "http://localhost:5000/api/download/trial";  // Your backend endpoint
+    const apiEndpoint = `http://${window.location.hostname}:5000/api/download/trial`;
+  
+    // Make a GET request to the backend to fetch the file
+    axios.get(apiEndpoint, { responseType: 'blob' })
+      .then(response => {
+        // The response data contains the file as a Blob
+        const blob = response.data;
+  
+        // Create a link element for the download
+        const downloadLink = document.createElement('a');
+        
+        // Create an object URL for the Blob and set it as the link's href
+        downloadLink.href = window.URL.createObjectURL(blob);
+        
+        // Set the filename for the downloaded file
+        downloadLink.setAttribute('download', 'test.txt');
+  
+        // Append the link to the body (necessary for the removeChild operation to work)
+        document.body.appendChild(downloadLink);
+        
+        // Programmatically click the link to trigger the download
+        downloadLink.click();
+  
+        // Clean up by removing the link from the DOM
+        document.body.removeChild(downloadLink);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  };
 
   const plans = [
     {
@@ -21,8 +57,8 @@ const Pricing = () => {
         'Access to onboarding materials and tutorials',
         'Option to upgrade to any paid tier at the end of the trial',
       ],
-      buttonText: 'Start Trial',
-      onClick: handleTrialDownload,
+      buttonText: 'Contact Sales',
+      onClick: () => navigate('/contact_sales', {state: {planName: 'Basic'}})
     },
     {
       name: 'Basic',
@@ -33,7 +69,8 @@ const Pricing = () => {
         'Basic support via email',
         'Monthly updates and access to community forums',
       ],
-      buttonText: 'Subscribe',
+      buttonText: 'Contact Sales',
+      onClick: () => navigate('/contact_sales', {state: {planName: 'Basic'}})
     },
     {
       name: 'Pro',
@@ -45,11 +82,12 @@ const Pricing = () => {
         'Access to webinars and tutorials',
         'One-on-one consultation (1 hour/month)',
       ],
-      buttonText: 'Subscribe',
+      buttonText: 'Contact Sales',
+      onClick: () => navigate('/contact_sales', {state: {planName: 'Pro'}})
     },
     {
       name: 'Enterprise',
-      price: 'Contact us',
+      price: 'Contact Us',
       features: [
         'All Pro Tier features',
         'Custom integration solutions for specific HW/SW',
@@ -58,9 +96,10 @@ const Pricing = () => {
         'Access to early/beta releases',
       ],
       buttonText: 'Contact Sales',
+      onClick: () => navigate('/contact_sales', {state: {planName: 'Enterprise'}})
     },
     {
-      name: 'Educational',
+      name: 'Education',
       price: '$9/month',
       features: [
         'Designed for students and educators',
@@ -69,7 +108,8 @@ const Pricing = () => {
         'Limited support via email',
         'Group access for classrooms or labs',
       ],
-      buttonText: 'Subscribe',
+      buttonText: 'Contact Sales',
+      onClick: () => navigate('/contact_sales', {state: {planName: 'Education'}})
     },
   ];
 

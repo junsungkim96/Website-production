@@ -48,7 +48,7 @@ const Product = () => {
           <div>Set the Stage: Realistic Scenes & Image Import Support</div>
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
-          Use built-in scenes or load any iamge to simulate real-world scenarios
+          Use built-in scenes or load any image to simulate real-world scenarios
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/scene.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/scene-WuF6wYkl989CXzaPc4orCt6Vx2SW3W.mp4" />

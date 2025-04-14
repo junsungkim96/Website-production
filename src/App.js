@@ -29,6 +29,7 @@ import Signup from './Pages/Utils/Signup';
 import ApplicationFrom from './Pages/Utils/Apply';
 import Submit from './Pages/Utils/Submit';
 import Contact from './Pages/Utils/Contact';
+import ContactSales from './Pages/Utils/ContactSales';
 import Terms from './Pages/Utils/Terms';
 import Privacy from './Pages/Utils/Privacy';
 
@@ -81,6 +82,7 @@ const App = () => (
         <Route path="/contact" element={<MainLayout>< Contact /></MainLayout>}/>
         <Route path="/terms" element={<MainLayout>< Terms /></MainLayout>}/>
         <Route path="/privacy" element={<MainLayout>< Privacy /></MainLayout>}/>
+        <Route path="/contact_sales" element = {<MainLayout>< ContactSales /></MainLayout>}/>
 
       </Routes>
     </Suspense>
