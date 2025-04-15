@@ -139,7 +139,7 @@ const Footer = () => {
               <div
                 style={{
                   color: '#aaa',
-                  fontSize: '0.7rem',
+                  fontSize: '0.6rem',
                   lineHeight: '2',
                   textAlign: 'left',
                   marginBottom: '0.5vh',
