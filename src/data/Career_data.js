@@ -64,9 +64,7 @@ let data = [
     role: 'Sensor Engineer',
     location: 'Seoul, South Korea',
     description: 
-    `We are seeking a Sensor Characterization Engineer to lead the evaluation and optimization of imaging sensors for our state-of-the-art computer vision systems. 
-    This role involves analyzing sensor performance, optimizing calibration, and ensuring seamless integration within our end-to-end imaging pipeline, including illuminants, 
-    optics, actuators, and algorithms.
+    `We are seeking a Sensor Characterization Engineer to lead the evaluation and optimization of imaging sensors for our state-of-the-art computer vision systems. This role involves analyzing sensor performance, optimizing calibration, and ensuring seamless integration within our end-to-end imaging pipeline, including illuminants, optics, actuators, and algorithms.
     
     Key Responsibilities:
     
