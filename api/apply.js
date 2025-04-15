@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       await transporter.sendMail({
         from: process.env.MAIL_USER,
         to: process.env.MAIL_USER,
-        subject: `Job Application from ${firstName} ${lastName}`,
+        subject: `[Job Application] ${firstName}, ${lastName}`,
         text: `Name: ${firstName} ${lastName} \nEmail: ${email} \nPhone: ${phone}`,
         replyTo: email,
         attachments: resume

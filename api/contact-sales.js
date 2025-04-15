@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: process.env.MAIL_USER,
       to: process.env.MAIL_USER,
-      subject: `Product Inquiry from ${companyName}`,
+      subject: `[Product Inquiry] ${companyName}`,
       text: `
         Company: ${companyName}
         Name: ${firstName}, ${lastName}
