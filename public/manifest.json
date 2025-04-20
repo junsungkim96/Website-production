@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Qblack AI",
+  "name": "Qblack AI Computer Vision Simulation",
   "icons": [
     {
       "src": "QblackAI_logo_black.png",
@@ -8,7 +8,7 @@
       "type": "image/png"
     },
     {
-      "src": "logo192.png",
+      "src": "QblackAI_logo_black.png",
       "type": "image/png",
       "sizes": "192x192"
     },
