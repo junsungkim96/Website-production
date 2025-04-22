@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   try {
     // 내부 팀에게 메일
     await transporter.sendMail({
-      from: process.env.MAIL_USER,
+      from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
       to: process.env.MAIL_USER,
       subject: `[Contact Us] ${companyName}`,
       text: `
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 
     // 사용자에게 확인 메일
     await transporter.sendMail({
-      from: process.env.MAIL_USER,
+      from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
       to: email,
       subject: `Thanks for contacting Qblack AI`,
       text: `Hi ${firstName},\n\nThank you for reaching out to us!\nWe've received your message and will get back to you shortly.\n\nBest regards,\nQblack AI Team`

@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   try {
     // Send email to internal team
     await transporter.sendMail({
-      from: process.env.MAIL_USER,
+      from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
       to: process.env.MAIL_USER,
       subject: `[Product Inquiry] ${companyName}`,
       text: `
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
     // Send confirmation email to the user
     await transporter.sendMail({
-      from: process.env.MAIL_USER,
+      from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
       to: email,
       subject: `Thanks for your interest in our product`,
       text: `Hi ${firstName},\n\nThank you for reaching out to us!\nWe've received your inquiry and will get back to you shortly.\n\nBest regards,\nQblack AI Team`

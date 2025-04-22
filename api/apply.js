@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     try {
       // 내부 팀에게 메일
       await transporter.sendMail({
-        from: process.env.MAIL_USER,
+        from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
         to: process.env.MAIL_USER,
         subject: `[Job Application] ${firstName}, ${lastName}`,
         text: `Name: ${firstName} ${lastName} \nEmail: ${email} \nPhone: ${phone}`,
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
 
       // 사용자에게 확인 메일
       await transporter.sendMail({
-        from: process.env.MAIL_USER,
+        from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
         to: email,
         subject: `Thanks for applying to Qblack AI`,
         text: `Dear ${firstName} ${lastName},\n\nThank you for applying to Qblack AI!\nWe have received your application and will review it carefully.\n\nWe appreciate your interest in joining us.\n\nBest regards,\nQblack AI Team`
