@@ -33,6 +33,8 @@ import ContactSales from './Pages/Utils/ContactSales.js';
 import Terms from './Pages/Utils/Terms.js';
 import Privacy from './Pages/Utils/Privacy.js';
 
+import {Analytics} from '@vercel/analytics/react';
+
 const MainLayout = ({ children }) => (
   <div className="App">
     <Menubar />
@@ -83,6 +85,9 @@ const App = () => (
         <Route path="/terms" element={<MainLayout>< Terms /></MainLayout>}/>
         <Route path="/privacy" element={<MainLayout>< Privacy /></MainLayout>}/>
         <Route path="/contact_sales" element = {<MainLayout>< ContactSales /></MainLayout>}/>
+
+        {/* Vercel Analytics for Website */}
+        <Analytics/>
 
       </Routes>
     </Suspense>
