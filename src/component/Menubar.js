@@ -35,6 +35,19 @@ const Menubar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 992) {
+        setShowOffcanvas(false);
+        setIsOpen(false);
+        resetMenus();
+      }
+    };
+  
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const resetMenus = () => setExpandedMenu(null);
 
   const handleToggleOffcanvas = () => {

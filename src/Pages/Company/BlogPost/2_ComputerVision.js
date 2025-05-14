@@ -11,9 +11,9 @@ export const metadata = {
             from autonomous vehicles and industrial robotics to smartphones and healthcare diagnostics. As the demand for smarter
             and faster visual intelligence grows, so does the need for a fundamental shift in how we design these systems.
             `
-    };
+};
 
-const BlogPost = () => {
+const CV = () => {
     useLayoutEffect(()=>{
         window.scrollTo(0, 0);
     }, []);
@@ -128,4 +128,4 @@ const BlogPost = () => {
     );
 }
 
-export default BlogPost;
+export default CV;
