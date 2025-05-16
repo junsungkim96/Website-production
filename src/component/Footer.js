@@ -9,7 +9,8 @@ import Col from 'react-bootstrap/Col';
 import {useNavigate} from 'react-router-dom';
 import {company_name} from '../data/Company_data';
 import linkedin from '../img/sns/linkedin_white.png';
-import youtube from '../img/sns/youtube_white.png'; 
+import youtube from '../img/sns/youtube_white.png';
+import medium from '../img/sns/medium_white.png';
 import {productItems, researchItems, companyItems} from '../data/Menu_data';
 
 const Footer = () => {
@@ -119,6 +120,9 @@ const Footer = () => {
             <div className = "footer-font">
               <a href="https://www.linkedin.com/company/qblackai/" target="_blank" rel="noreferrer noopener">
                 <img className="social-media" src={linkedin} alt="LinkedIn" />
+              </a>
+              <a href="https://medium.com/qblackai" target="_blank" rel="noreferrer noopener">
+                <img style = {{padding: '1%'}} className="social-media" src={medium} alt="YouTube" />
               </a>
               <a href="https://www.youtube.com/@qblackai" target="_blank" rel="noreferrer noopener">
                 <img className="social-media" src={youtube} alt="YouTube" />
