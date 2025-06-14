@@ -40,7 +40,7 @@ const DownloadPage = () => {
           setFieldError('licenseKey', 'License key does not match.');
         } else {
           // 오류 메시지가 모호할 때 두 필드 모두 강조
-          setFieldError('email', 'Invalid credentials.');
+          setFieldError('email', 'Invalid email.');
           setFieldError('licenseKey', 'Invalid credentials.');
         }
       }

@@ -1,5 +1,5 @@
 // Import the MongoDB client connection helper
-import clientPromise from '../lib/mongodb';
+import clientPromise from '../lib/mongodb.js';
 
 export default async function handler(req, res) {
   // Only allow POST requests to this API route
