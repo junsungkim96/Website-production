@@ -1,60 +1,65 @@
-import fs from 'fs';
-import path from 'path';
+// Import the MongoDB client connection helper
+import clientPromise from '../lib/mongodb';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+  // Only allow POST requests to this API route
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed
   }
 
-  // List of allowed email and license key combinations
+  // Extract email and licenseKey from the request body
+  const { email, licenseKey } = req.body;
+
+  // Hardcoded list of valid email and license key combinations
   const allowedCredentials = [
     { email: 'junsungkim@qblackai.com', licenseKey: 'quantum25!' },
     { email: 'shawnhong@google.com', licenseKey: 'okaygoogle' },
   ];
 
-  const { email, licenseKey } = req.body;
+  try {
+    // Get connected MongoDB client
+    const client = await clientPromise;
 
-  // Path to the JSON file that stores used licenses
-  const usedLicensesPath = path.join(process.cwd(), 'api', 'used-licenses.json');
+    // Select the database and collection
+    const db = client.db('licenseDB');
+    const collection = db.collection('usedLicenses');
 
-  // Initialize or create the file if it doesn't exist
-  if (!fs.existsSync(usedLicensesPath)) {
-    fs.writeFileSync(usedLicensesPath, JSON.stringify([]));
-  }
+    // Check if the license has already been used
+    const alreadyUsed = await collection.findOne({ email, licenseKey });
+    if (alreadyUsed) {
+      return res.status(403).json({
+        valid: false,
+        message: 'This license has already been used.',
+      });
+    }
 
-  // Load the list of already used licenses
-  let usedLicenses = JSON.parse(fs.readFileSync(usedLicensesPath, 'utf-8'));
+    // Check if provided credentials match any in the allowed list
+    const isValid = allowedCredentials.find(
+      (cred) => cred.email === email && cred.licenseKey === licenseKey
+    );
 
-  // Check if the license has already been used
-  const alreadyUsed = usedLicenses.some(
-    (cred) => cred.email === email && cred.licenseKey === licenseKey
-  );
+    if (isValid) {
+      // Save this license usage in the database with timestamp
+      await collection.insertOne({ email, licenseKey, usedAt: new Date() });
 
-  if (alreadyUsed) {
-    return res.status(403).json({
+      // Respond with a success message and download link
+      return res.status(200).json({
+        valid: true,
+        downloadUrl: '/program/QuasarVision.exe',
+      });
+    } else {
+      // If credentials are invalid, return unauthorized
+      return res.status(401).json({
+        valid: false,
+        message: 'Invalid email or license key',
+      });
+    }
+  } catch (error) {
+    // Catch and log any unexpected server/database errors
+    console.error('License validation failed:', error);
+    return res.status(500).json({
       valid: false,
-      message: 'This license has already been used.',
-    });
-  }
-
-  // Validate credentials
-  const match = allowedCredentials.find(
-    (cred) => cred.email === email && cred.licenseKey === licenseKey
-  );
-
-  if (match) {
-    // Mark license as used
-    usedLicenses.push({ email, licenseKey });
-    fs.writeFileSync(usedLicensesPath, JSON.stringify(usedLicenses, null, 2));
-
-    return res.status(200).json({
-      valid: true,
-      downloadUrl: '/program/QuasarVision.exe',
-    });
-  } else {
-    return res.status(401).json({
-      valid: false,
-      message: 'Invalid email or license key.',
+      message: 'Internal server error.',
     });
   }
 }
