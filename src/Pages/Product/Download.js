@@ -17,7 +17,7 @@ const DownloadPage = () => {
 
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
-      const response = await fetch('https://www.qblackai.com/api/validate-license', {
+      const response = await fetch('https://www.qblackai.com/api/license-check', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),

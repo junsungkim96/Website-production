@@ -1,5 +1,6 @@
 // Import the MongoDB client connection helper
 import clientPromise from '../lib/mongodb.js';
+import allowedCredentials  from '../src/data/allowedCredentials.js';
 
 export default async function handler(req, res) {
   // Only allow POST requests to this API route
@@ -9,12 +10,6 @@ export default async function handler(req, res) {
 
   // Extract email and licenseKey from the request body
   const { email, licenseKey } = req.body;
-
-  // Hardcoded list of valid email and license key combinations
-  const allowedCredentials = [
-    { email: 'junsungkim@qblackai.com', licenseKey: 'quantum25!' },
-    { email: 'shawnhong@google.com', licenseKey: 'okaygoogle' },
-  ];
 
   try {
     // Get connected MongoDB client
@@ -26,6 +21,7 @@ export default async function handler(req, res) {
 
     // Check if the license has already been used
     const alreadyUsed = await collection.findOne({ email, licenseKey });
+
     if (alreadyUsed) {
       return res.status(403).json({
         valid: false,
@@ -40,7 +36,14 @@ export default async function handler(req, res) {
 
     if (isValid) {
       // Save this license usage in the database with timestamp
-      await collection.insertOne({ email, licenseKey, usedAt: new Date() });
+      await collection.insertOne({ 
+        email, 
+        licenseKey, 
+        download_time: new Date(),
+        hwid: null,
+        is_activated: false,
+        activation_time: null, 
+      });
 
       // Respond with a success message and download link
       return res.status(200).json({
