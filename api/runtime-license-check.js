@@ -2,6 +2,7 @@ import clientPromise from '../lib/mongodb.js';
 import crypto from 'crypto';
 
 const LICENSE_VALIDITY_DAYS = 30;
+const LICENSE_VALIDITY_MINUTES = 3;
 
 function hashHwid(hwid) {
     return crypto.createHash('sha256').update(hwid).digest('hex');
@@ -34,20 +35,21 @@ export default async function handler(req, res) {
         }
 
         // First activation
-        if (!license.isActivated) {
+        if (!license.is_activated) {
             await collection.updateOne(
                 { licenseKey },
                 {
                     $set: {
                         hwid: hashedHwid,
-                        isActivated: true,
+                        is_activated: true,
                         activatedAt: now,
                     },
                 }
             );
 
-            const expireAt = new Date(now);
-            expireAt.setDate(expireAt.getDate() + LICENSE_VALIDITY_DAYS);
+            // const expireAt = new Date(now);
+            // expireAt.setDate(expireAt.getDate() + LICENSE_VALIDITY_DAYS);
+			const expireAt = new Date(now.getTime() + LICENSE_VALIDITY_MINUTES * 60 * 1000); // 3 minutes from now
 
             return res.status(200).json({
                 valid: true,
@@ -65,8 +67,9 @@ export default async function handler(req, res) {
         }
 
         // Check expiration
-        const expireAt = new Date(license.activatedAt);
-        expireAt.setDate(expireAt.getDate() + LICENSE_VALIDITY_DAYS);
+        // const expireAt = new Date(license.activatedAt);
+        // expireAt.setDate(expireAt.getDate() + LICENSE_VALIDITY_DAYS);
+		const expireAt = new Date(activatedAt.getTime() + LICENSE_VALIDITY_MINUTES * 60 * 1000);
 
         if (now > expireAt) {
             return res.status(403).json({
