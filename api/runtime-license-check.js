@@ -2,7 +2,7 @@ import clientPromise from '../lib/mongodb.js';
 import crypto from 'crypto';
 
 const LICENSE_VALIDITY_DAYS = 30;
-const LICENSE_VALIDITY_MINUTES = 3;
+const LICENSE_VALIDITY_MINUTES = 10;
 
 function hashHwid(hwid) {
     return crypto.createHash('sha256').update(hwid).digest('hex');

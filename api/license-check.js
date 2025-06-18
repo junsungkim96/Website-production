@@ -1,6 +1,5 @@
 // Import the MongoDB client connection helper
 import clientPromise from '../lib/mongodb.js';
-import allowedCredentials  from '../src/data/allowedCredentials.js';
 
 export default async function handler(req, res) {
   // Only allow POST requests to this API route
@@ -17,10 +16,11 @@ export default async function handler(req, res) {
 
     // Select the database and collection
     const db = client.db('licenseDB');
-    const collection = db.collection('usedLicenses');
+    const usedCollection = db.collection('usedLicenses');
+    const allowedCollection = db.collection('allowedLicenses');
 
     // Check if the license has already been used
-    const alreadyUsed = await collection.findOne({ email, licenseKey });
+    const alreadyUsed = await usedCollection.findOne({ email, licenseKey });
 
     if (alreadyUsed) {
       return res.status(403).json({
@@ -30,13 +30,11 @@ export default async function handler(req, res) {
     }
 
     // Check if provided credentials match any in the allowed list
-    const isValid = allowedCredentials.find(
-      (cred) => cred.email === email && cred.licenseKey === licenseKey
-    );
+    const isValid = await allowedCollection.findOne({email, licenseKey});
 
     if (isValid) {
       // Save this license usage in the database with timestamp
-      await collection.insertOne({ 
+      await usedCollection.insertOne({ 
         email, 
         licenseKey, 
         download_time: new Date(),
