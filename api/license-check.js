@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       // Respond with a success message and download link
       return res.status(200).json({
         valid: true,
-        downloadUrl: '/program/QuasarVision.exe',
+        downloadUrl: '/program/QuasarVisionInstaller.zip',
       });
     } else {
       // If credentials are invalid, return unauthorized
