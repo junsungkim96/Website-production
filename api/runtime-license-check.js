@@ -20,7 +20,6 @@ export default async function handler(req, res) {
         const client = await clientPromise;
         const db = client.db('licenseDB');
         const usedCollection = db.collection('usedLicenses');
-        const allowedCollection = db.collection('allowedLicenses');
 
         const hashedHwid = hashHwid(hwid);
         const now = new Date();
@@ -33,8 +32,8 @@ export default async function handler(req, res) {
         }
 
         // Get validity_days from allowedLicenses
-        const allowedLicense = await allowedCollection.findOne({licenseKey});
-        const validityDays = allowedLicense?.validity_days ?? 1;
+        const raw_validityDays = license.validity_days ?? 1;
+        const validityDays = parseInt(raw_validityDays, 10);
 
         // First activation
         if (!license.is_activated) {
