@@ -1,9 +1,6 @@
 import clientPromise from '../lib/mongodb.js';
 import crypto from 'crypto';
 
-const LICENSE_VALIDITY_DAYS = 1;
-// const LICENSE_VALIDITY_MINUTES = 10;
-
 function hashHwid(hwid) {
     return crypto.createHash('sha256').update(hwid).digest('hex');
 }
@@ -22,21 +19,26 @@ export default async function handler(req, res) {
     try {
         const client = await clientPromise;
         const db = client.db('licenseDB');
-        const collection = db.collection('usedLicenses');
+        const usedCollection = db.collection('usedLicenses');
+        const allowedCollection = db.collection('allowedLicenses');
 
         const hashedHwid = hashHwid(hwid);
         const now = new Date();
 
-        const license = await collection.findOne({ licenseKey });
+        const license = await usedCollection.findOne({ licenseKey });
 
         // License not found
         if (!license) {
             return res.status(401).json({ valid: false, message: 'License not found' });
         }
 
+        // Get validity_days from allowedLicenses
+        const allowedLicense = await allowedCollection.findOne({licenseKey});
+        const validityDays = allowedLicense?.validity_days ?? 1;
+
         // First activation
         if (!license.is_activated) {
-            await collection.updateOne(
+            await usedCollection.updateOne(
                 { licenseKey },
                 {
                     $set: {
@@ -48,9 +50,8 @@ export default async function handler(req, res) {
             );
 
             const expireAt = new Date(now);
-            expireAt.setDate(expireAt.getDate() + LICENSE_VALIDITY_DAYS);
-			// const expireAt = new Date(now.getTime() + LICENSE_VALIDITY_MINUTES * 60 * 1000); // 3 minutes from now
-
+            expireAt.setDate(expireAt.getDate() + validityDays);
+			
             return res.status(200).json({
                 valid: true,
                 message: 'License activated',
@@ -68,8 +69,7 @@ export default async function handler(req, res) {
 
         // Check expiration
         const expireAt = new Date(license.activatedAt);
-        expireAt.setDate(expireAt.getDate() + LICENSE_VALIDITY_DAYS);
-		// const expireAt = new Date(activatedAt.getTime() + LICENSE_VALIDITY_MINUTES * 60 * 1000);
+        expireAt.setDate(expireAt.getDate() + validityDays);
 
         if (now > expireAt) {
             return res.status(403).json({

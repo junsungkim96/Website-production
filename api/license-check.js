@@ -33,11 +33,14 @@ export default async function handler(req, res) {
     const isValid = await allowedCollection.findOne({email, licenseKey});
 
     if (isValid) {
+      const validityDays = isValid.validity_days ?? 1;  // fallback to 1 if undefined
+
       // Save this license usage in the database with timestamp
       await usedCollection.insertOne({ 
         email, 
         licenseKey, 
         download_time: new Date(),
+        validity_days: validityDays,
         hwid: null,
         is_activated: false,
         activation_time: null, 
