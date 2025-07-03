@@ -49,7 +49,7 @@ export default async function handler(req, res) {
       // Respond with a success message and download link
       return res.status(200).json({
         valid: true,
-        downloadUrl: 'https://8puowjmkndisb60h.public.blob.vercel-storage.com/QuasarVisionInstaller-AUrCUTxiQCXCD2PRzQ9wqXKkP9fwEk.zip',
+        downloadUrl: 'https://8puowjmkndisb60h.public.blob.vercel-storage.com/QuasarVisionInstaller-fXiVCavRfMv3VYRs0hWEoS2n4y6dgi.zip',
       });
     } else {
       // If credentials are invalid, return unauthorized
