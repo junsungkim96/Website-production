@@ -2,9 +2,13 @@ import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
 import eye from '../img/homepage/eye_diamond.png';
 import React, {useState, useEffect} from 'react';
+import Button from 'react-bootstrap/Button';
 import {useLayoutEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 const ParticleBackground = () => {
+  const navigate = useNavigate();
+
   const particlesInit = async (main) => {
     // Initialize the full version of particles.js
     await loadFull(main);
@@ -30,13 +34,20 @@ const ParticleBackground = () => {
       <div style={{height: '10vh'}}/>
 
       {/* Text Content */}
-      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white', pointerEvents: 'none'}}>
+      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
         <div style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
           <div className="catch-phrase">Your Vision Perfectly Simulated</div>
         </div>
 
         <div style={{ marginTop: '2vh', marginBottom: '2vh', height: 'auto' }}>
           <div className="catch-phrase2">The ultimate digital twin simulator {isSmallScreen ? <br/> : null} for Computer Vision</div>
+        </div>
+
+        <div style={{ marginTop: '3vh', marginBottom: '4vh'}}>
+          <Button variant = "light" size = "lg"
+          onClick = {()=> navigate('/demo')}>
+            <div className = "career-button">Book a Demo →</div> 
+          </Button>
         </div>
 
         <div>

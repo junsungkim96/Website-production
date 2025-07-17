@@ -33,6 +33,7 @@ import Contact from './Pages/Utils/Contact.js';
 import ContactSales from './Pages/Utils/ContactSales.js';
 import Terms from './Pages/Utils/Terms.js';
 import Privacy from './Pages/Utils/Privacy.js';
+import Demo from './Pages/Utils/Demo.js';
 
 import {Analytics} from '@vercel/analytics/react';
 
@@ -91,6 +92,7 @@ const App = () => (
           <Route path="/terms" element={<MainLayout>< Terms /></MainLayout>}/>
           <Route path="/privacy" element={<MainLayout>< Privacy /></MainLayout>}/>
           <Route path="/contact_sales" element = {<MainLayout>< ContactSales /></MainLayout>}/>
+          <Route path="/demo" element = {<MainLayout><Demo/></MainLayout>}/>
 
         </Routes>
       </Suspense>
