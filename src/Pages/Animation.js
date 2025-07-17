@@ -31,7 +31,7 @@ const ParticleBackground = () => {
   return (
     <div style={{ position: 'relative', height: '105vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
       
-      <div style={{height: '10vh'}}/>
+      <div style={{height: '6vh'}}/>
 
       {/* Text Content */}
       <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
