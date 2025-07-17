@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main -->
+  <url><loc>https://qblackai.com/</loc></url>
+
+  <!-- Product -->
+  <url><loc>https://qblackai.com/product_features</loc></url>
+  <url><loc>https://qblackai.com/product_pricing</loc></url>
+  <url><loc>https://qblackai.com/download</loc></url>
+
+  <!-- Research -->
+  <url><loc>https://qblackai.com/research</loc></url>
+  <url><loc>https://qblackai.com/illuminant</loc></url>
+  <url><loc>https://qblackai.com/optics</loc></url>
+  <url><loc>https://qblackai.com/sensor</loc></url>
+  <url><loc>https://qblackai.com/isp</loc></url>
+  <url><loc>https://qblackai.com/qpu</loc></url>
+
+  <!-- Company -->
+  <url><loc>https://qblackai.com/company</loc></url>
+  <url><loc>https://qblackai.com/blog</loc></url>
+  <url><loc>https://qblackai.com/careers</loc></url>
+  <url><loc>https://qblackai.com/stories</loc></url>
+  <url><loc>https://qblackai.com/ir</loc></url>
+  <url><loc>https://qblackai.com/news</loc></url>
+
+  <!-- Blog Subpages -->
+  <url><loc>https://qblackai.com/blog/founding_story</loc></url>
+  <url><loc>https://qblackai.com/blog/cv</loc></url>
+
+  <!-- Signup / Apply -->
+  <url><loc>https://qblackai.com/login</loc></url>
+  <url><loc>https://qblackai.com/signup</loc></url>
+  <url><loc>https://qblackai.com/apply</loc></url>
+  <url><loc>https://qblackai.com/submit</loc></url>
+
+  <!-- Contact / Terms / Privacy -->
+  <url><loc>https://qblackai.com/contact</loc></url>
+  <url><loc>https://qblackai.com/contact_sales</loc></url>
+  <url><loc>https://qblackai.com/demo</loc></url>
+  <url><loc>https://qblackai.com/terms</loc></url>
+  <url><loc>https://qblackai.com/privacy</loc></url>
+
+</urlset>
