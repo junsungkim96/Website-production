@@ -9,7 +9,7 @@ import optics from '../../img/product/optics.png';
 import sensor from '../../img/product/sensor.png';
 import isp from '../../img/product/isp.png';
 import algorithms from '../../img/product/algorithms.png';
-
+import {Helmet} from "react-helmet";
 
 const Product = () => {
   useLayoutEffect(()=>{
@@ -18,12 +18,21 @@ const Product = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
+
+      <Helmet>
+        <title>Product</title>
+        <meta
+          name="description"
+          content="Learn about our product features"
+        />
+        <link rel="canonical" href="https://qblackai.com/product_features" />
+      </Helmet>
+
       <div className = "career-left-text">
         <p style = {{fontSize: '50px'}}>
           Main Features
         </p>
       </div>
-
 
       {/* Illuminant */}
       <div style = {{paddingTop: '10vh'}}>

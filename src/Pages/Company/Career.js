@@ -8,6 +8,7 @@ import data from '../../data/Career_data.js';
 import {MdArrowDropDown, MdArrowDropUp} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 import {company_name} from '../../data/Company_data.js';
+import {Helmet} from 'react-helmet';
 
 const Careers = () => {
   const navigate = useNavigate();
@@ -30,6 +31,16 @@ const Careers = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
+      
+      <Helmet>
+        <title>Careers</title>
+        <meta
+          name="description"
+          content="Join QblackAI to shape the future of computer vision industry"
+        />
+        <link rel="canonical" href="https://qblackai.com/careers" />
+      </Helmet>
+      
       <div style = {{display: 'flex', flexDirection: 'column'}}>
         <div className="career-left-text">
           <div>

@@ -6,6 +6,7 @@ import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card} from 'react-bootstrap';
 import { metadata as founding_story } from './BlogPost/1_FoundingStory';
 import { metadata as cv } from './BlogPost/2_ComputerVision';
+import {Helemt} from 'react-helmet';
 
 const Blog = () => {
   useLayoutEffect(()=>{
@@ -16,6 +17,16 @@ const Blog = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
+
+      <Helmet>
+        <title>Blog</title>
+        <meta
+          name="description"
+          content="Explore QblackAI's latest insights and updates on computer vision "
+        />
+        <link rel="canonical" href="https://qblackai.com/blog" />
+      </Helmet>
+
       <Container>
         {/* Blog Title */}
         <p style = {{fontSize: '50px'}}>

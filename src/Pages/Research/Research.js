@@ -9,6 +9,7 @@ import imaging_pipeline from '../../img/research/research_overview.png';
 // import light from '../../img/research/lamp.svg';
 // import optics from '../../img/research/optics.png';
 // import microchip from '../../img/research/microchip.png';
+import {Helmet} from "react-helmet";
 
 
 const Research = () => {
@@ -31,6 +32,16 @@ const Research = () => {
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh', 
                   overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
+      
+      <Helmet>
+        <title>Research</title>
+        <meta
+          name="description"
+          content="Learn about our cutting-edge research topics"
+        />
+        <link rel="canonical" href="https://qblackai.com/research" />
+      </Helmet>
+      
       <div style = {{marginBottom: '15vh'}}>
         <div className="left-text" style = {{fontSize: '50px'}}>
           Cutting-edge Research

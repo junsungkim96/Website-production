@@ -9,6 +9,8 @@ import first_principle from '../../img/company/first_principle.png';
 import honesty from '../../img/company/honesty.png';
 import customer from '../../img/company/customer.png';
 import open from '../../img/company/open.png';
+import {Helmet} from "react-helmet";
+
 
 const Company = () => {
   useLayoutEffect(() => {
@@ -57,6 +59,16 @@ const Company = () => {
 
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
+      
+      <Helmet>
+        <title>About Us</title>
+        <meta
+          name="description"
+          content="Learn about our mission, vision, and values."
+        />
+        <link rel="canonical" href="https://qblackai.com/company" />
+      </Helmet>
+
       <div>
         <div className="left-text" style = {{fontSize: '40px'}}>
           Shaping the Future
