@@ -6,7 +6,7 @@ import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card} from 'react-bootstrap';
 import { metadata as founding_story } from './BlogPost/1_FoundingStory';
 import { metadata as cv } from './BlogPost/2_ComputerVision';
-import {Helemt} from 'react-helmet';
+import {Helmet} from 'react-helmet';
 
 const Blog = () => {
   useLayoutEffect(()=>{

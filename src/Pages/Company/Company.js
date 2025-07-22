@@ -64,7 +64,7 @@ const Company = () => {
         <title>About Us</title>
         <meta
           name="description"
-          content="Learn about our mission, vision, and values."
+          content="Learn about our mission, vision, and values"
         />
         <link rel="canonical" href="https://qblackai.com/company" />
       </Helmet>
