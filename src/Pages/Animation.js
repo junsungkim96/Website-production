@@ -1,7 +1,6 @@
 import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
 import eye from '../img/homepage/eye_diamond.png';
-import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import {useLayoutEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -13,16 +12,6 @@ const ParticleBackground = () => {
     // Initialize the full version of particles.js
     await loadFull(main);
   };
-
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useLayoutEffect(()=>{
     window.scrollTo(0, 0);
@@ -36,14 +25,17 @@ const ParticleBackground = () => {
       {/* Text Content */}
       <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
         <div style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
-          <div className="catch-phrase">Simulate {isSmallScreen ? <br/> : null} Your Vision</div>
+          <div className="catch-phrase">Simulate Your Vision</div>
         </div>
 
-        <div style={{ marginTop: '2vh', marginBottom: '2vh', height: 'auto' }}>
-          <div className="catch-phrase2">Bring your ideas to life {isSmallScreen ? <br/> : null} before a single prototype is built</div>
+        <div style={{ marginTop: '2vh', marginBottom: '5vh', height: 'auto' }}>
+          <div className="catch-phrase2">
+            QblackAI is redefining computer vision <br/>
+            with cutting-edge simulation technology
+          </div>
         </div>
 
-        <div style={{ marginTop: '3vh', marginBottom: '4vh'}}>
+        <div style={{ marginTop: '5vh', marginBottom: '5vh'}}>
           <Button variant = "light" size = "lg"
           onClick = {()=> navigate('/demo')}>
             <div className = "career-button">Book a Demo →</div> 

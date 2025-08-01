@@ -98,7 +98,7 @@ const Homepage = () => {
                 <p className="strength-title">Save Time</p>
               </div>
               <div className="product-text">
-                Achieve system validation ~100x faster with integrated HW & SW virtual simulations
+                Achieve system validation ~10x faster with integrated HW & SW virtual simulations
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ const Homepage = () => {
                 <p className="strength-title">Save Money</p>
               </div>
               <div className="product-text">
-                Reduce system validation costs to ~1/100 with virtual simulation - no need for physical prototypes
+                Reduce system validation costs to ~1/10 with virtual simulation - no need for physical prototypes
               </div>
             </div>
           </div>
