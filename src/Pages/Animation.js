@@ -36,11 +36,11 @@ const ParticleBackground = () => {
       {/* Text Content */}
       <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
         <div style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
-          <div className="catch-phrase">Your Vision Perfectly Simulated</div>
+          <div className="catch-phrase">Simulate {isSmallScreen ? <br/> : null} Your Vision</div>
         </div>
 
         <div style={{ marginTop: '2vh', marginBottom: '2vh', height: 'auto' }}>
-          <div className="catch-phrase2">The ultimate digital twin simulator {isSmallScreen ? <br/> : null} for Computer Vision</div>
+          <div className="catch-phrase2">Bring your ideas to life {isSmallScreen ? <br/> : null} before a single prototype is built</div>
         </div>
 
         <div style={{ marginTop: '3vh', marginBottom: '4vh'}}>
@@ -54,6 +54,8 @@ const ParticleBackground = () => {
           <img className = "eye" src={eye} alt = ""/>
         </div>
       </div>
+
+
       
       {/* Particles background */}
       <Particles
