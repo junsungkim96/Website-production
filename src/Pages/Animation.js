@@ -30,7 +30,7 @@ const ParticleBackground = () => {
 
         <div style={{ marginTop: '2vh', marginBottom: '5vh', height: 'auto' }}>
           <div className="catch-phrase2">
-            QblackAI is leading the Physical AI revolution  <br/>
+            QblackAI is powering the Physical AI revolution  <br/>
             with next-generation computer vision simulation
           </div>
         </div>
