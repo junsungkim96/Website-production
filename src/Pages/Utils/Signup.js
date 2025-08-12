@@ -39,7 +39,18 @@ class Signup extends React.Component {
           />
         </Link>
 
-        <Card style = {{padding: '10px', marginTop: '1vh', marginLeft: '43vw', marginRight: '43vw'}}>
+        <Card
+            style={{
+              padding: '20px',
+              marginTop: '1vh',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              maxWidth: '400px',
+              backgroundColor: 'white',
+              boxSizing: 'border-box',
+              width: '90%',          // 작은 화면에서 좌우 여백 확보
+            }}
+          >
           <form onSubmit={this.handleSubmit} style = {{display: 'flex', flexDirection: 'column'}}>
             <div style = {{fontSize: '3.3vh', fontWeight: 'bold', marginBottom: '2vh', display: 'flex', justifyContent: 'center'}}>
               Welcome

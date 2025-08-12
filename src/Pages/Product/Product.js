@@ -43,11 +43,13 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Explore how lighting impacts image capture with flexible illumination options
         </div>
-        <div>
-          <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}}
-            onClick={() => window.open('https://medium.com/qblackai/lighting-the-scene-the-critical-role-of-illuminants-in-computervision-ff916cc44c9c', '_blank', 'noopener,noreferrer')}>
-            <p>Read More</p>
-          </div>
+        <div className="left-text" style = {{cursor: 'pointer',  fontSize: '2vh', marginBottom: '2vh', width: '90%',
+            textDecoration: 'underline',
+            textUnderlineOffset: '7px',
+            textDecorationThickness: '1px'
+        }}
+          onClick={() => window.open('https://medium.com/qblackai/lighting-the-scene-the-critical-role-of-illuminants-in-computervision-ff916cc44c9c', '_blank', 'noopener,noreferrer')}>
+          Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/illuminant.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/illuminant-p347qo7yMw0x4XJPB6YzseDzanujCz.mp4" />
@@ -65,6 +67,14 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Use built-in scenes or load any image to simulate real-world scenarios
         </div>
+        <div className="left-text" style = {{cursor: 'pointer', fontSize: '2vh', marginBottom: '2vh', width: '90%',
+            textDecoration: 'underline',
+            textUnderlineOffset: '7px',
+            textDecorationThickness: '1px'
+        }}
+          onClick={() => window.open('https://medium.com/qblackai/the-scene-physical-environment-for-vision-testing-817dcb1a6237', '_blank', 'noopener,noreferrer')}>
+          Learn More
+        </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/scene.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/scene-WuF6wYkl989CXzaPc4orCt6Vx2SW3W.mp4" />
           Your browser does not support the video tag.
@@ -80,6 +90,14 @@ const Product = () => {
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Evaluate how your lens design affect image sharpness, distortion, and clarity
+        </div>
+        <div className="left-text" style = {{cursor: 'pointer', fontSize: '2vh', marginBottom: '2vh', width: '90%',
+            textDecoration: 'underline',
+            textUnderlineOffset: '7px',
+            textDecorationThickness: '1px'
+        }}
+          onClick={() => window.open('https://medium.com/qblackai/optics-from-rays-to-blur-how-lenses-shape-vision-2a7911f80b11', '_blank', 'noopener,noreferrer')}>
+          Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/optics.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/optics-GhD7QB5N2OyqsTLdYO6fAN5iOXTalY.mp4" />
@@ -97,6 +115,14 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Test dynamic range, resolution and sensor noise under realistic conditions
         </div>
+        <div className="left-text" style = {{cursor: 'pointer', fontSize: '2vh', marginBottom: '2vh', width: '90%',
+            textDecoration: 'underline',
+            textUnderlineOffset: '7px',
+            textDecorationThickness: '1px'
+        }}
+          onClick={() => window.open('https://medium.com/qblackai/sensor-turning-light-into-digital-data-26291898573a', '_blank', 'noopener,noreferrer')}>
+          Learn More
+        </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/sensor.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/sensor-wRmSwhW4Xs5iwzRbyv3u5RQAvNs2fE.mp4" />
           Your browser does not support the video tag.
@@ -113,6 +139,14 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Apply demosaicing, noise reduction, color correction and more
         </div>
+        <div className="left-text" style = {{cursor: 'pointer', fontSize: '2vh', marginBottom: '2vh', width: '90%',
+            textDecoration: 'underline',
+            textUnderlineOffset: '7px',
+            textDecorationThickness: '1px'
+        }}
+          onClick={() => window.open('https://medium.com/qblackai/isp-transforming-raw-sensor-data-into-images-f053082eaeda', '_blank', 'noopener,noreferrer')}>
+          Learn More
+        </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/isp.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/isp-FhVv0cepVhKRz0bXDDbeyyUYKR8syD.mp4" />
           Your browser does not support the video tag.
@@ -128,6 +162,14 @@ const Product = () => {
         </div>
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Assess detection, segmentation, and other CV tasks with simulated data
+        </div>
+        <div className="left-text" style = {{cursor: 'pointer', fontSize: '2vh', marginBottom: '2vh', width: '90%',
+            textDecoration: 'underline',
+            textUnderlineOffset: '7px',
+            textDecorationThickness: '1px'
+        }}
+          onClick={() => window.open('https://medium.com/qblackai/ai-algorithms-making-sense-of-the-simulated-world-f2aaa6cab5bd', '_blank', 'noopener,noreferrer')}>
+          Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/algorithm.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/algorithm-XndlFRIeI7pVN3UM4skb26fZrqdmYh.mp4" />
