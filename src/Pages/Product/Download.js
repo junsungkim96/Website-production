@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import logo from '../../img/qblackai_logo.png';
+import {Button} from 'react-bootstrap';
 
 const DownloadPage = () => {
   const validationSchema = Yup.object().shape({
@@ -139,9 +140,14 @@ const DownloadPage = () => {
                   className="form-group"
                   style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}
                 >
-                  <button type="submit" className="btn btn-primary">
+                  <Button
+                      variant="success"
+                      size="lg"
+                      type = "submit"
+                      style={{ backgroundColor: "#008B8B", borderColor: '#2F4F4F', borderWidth: "0.3px",  borderStyle: "solid"}}
+                    >
                     Validate & Download
-                  </button>
+                  </Button>
                 </div>
               </Form>
             </Card>

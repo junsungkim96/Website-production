@@ -43,6 +43,12 @@ const Product = () => {
         <div className="left-text" style = {{fontStyle: 'italic', fontSize: '1.8vh', marginBottom: '1vh', width: '90%'}}>
           Explore how lighting impacts image capture with flexible illumination options
         </div>
+        <div>
+          <div className = "underline" style = {{cursor: 'pointer', paddingTop: '2vh'}}
+            onClick={() => window.open('https://medium.com/qblackai/lighting-the-scene-the-critical-role-of-illuminants-in-computervision-ff916cc44c9c', '_blank', 'noopener,noreferrer')}>
+            <p>Read More</p>
+          </div>
+        </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/illuminant.jpg"}>
           <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/illuminant-p347qo7yMw0x4XJPB6YzseDzanujCz.mp4" />
           Your browser does not support the video tag.

@@ -163,6 +163,17 @@ const Menubar = () => {
               </div>
             </div>
           ))}
+          <div
+            className="navbar-item"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/login')}
+            onMouseEnter={() => setHoveredMenu('Login')}
+            onMouseLeave={() => setHoveredMenu(null)}
+          >
+            <span className="custom-dropdown-title">
+              Login
+            </span>
+          </div>
         </div>
 
           <div className="mobile-nav">
