@@ -4,7 +4,7 @@ const verificationStore = {}; // 실제는 Redis나 DB 추천
 
 export default async function handler(req, res) {
   // CORS 헤더
-  res.setHeader('Access-Control-Allow-Origin', '*'); // 개발용, 운영 시 도메인 제한
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.qblackai.com'); // 개발용, 운영 시 도메인 제한
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
