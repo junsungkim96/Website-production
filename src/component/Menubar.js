@@ -189,7 +189,7 @@ const Menubar = () => {
                 }
               }}
             >
-              <span className="user-dropdown-title"
+              <span className="custom-dropdown-title"
               >
                 {isLoggedIn ? userFirstName : 'Login'}
                 {isLoggedIn && (

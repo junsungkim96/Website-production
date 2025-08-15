@@ -37,19 +37,6 @@
   display: inline-block;
 }
 
-.user-dropdown-title {
-  display: flex;
-  align-items: center;
-  font-size: 1rem; /* Adjust font size */
-  color: '#008B8B';
-  transition: color 0.3s ease;
-  font-family: 'Helvetica', sans-serif;
-}
-
-.user-dropdown-title .custom-dropdown-icon {
-  color: inherit; /* 부모 색상 상속 */
-}
-
 .full-width-image{
   width: 60vw;
   background-position: center;
