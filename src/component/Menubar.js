@@ -185,7 +185,7 @@ const Menubar = () => {
               onMouseLeave={() => setHoveredMenu(null)}
               onClick={()=>{
                 if(!isLoggedIn){
-                  navigate('login');
+                  navigate('/login');
                 }
               }}
             >
