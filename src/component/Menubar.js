@@ -31,16 +31,16 @@ const Menubar = () => {
   const [userFirstName, setUserFirstName] = useState('');
 
   useEffect(()=>{
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const firstName = localStorage.getItem('userFirstName') || '';
-    
-    if (!firstName) {
-      setIsLoggedIn(false);
-      setUserFirstName('');
-    } else {
-      setIsLoggedIn(loggedIn);
-      setUserFirstName(firstName);
+    const updateLoginStatus = () =>{
+      setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+      setUserFirstName(localStorage.getItem('userFirstName') || '');
     }
+
+    window.addEventListener('login', updateLoginStatus);
+
+    updateLoginStatus();
+
+    return () => window.removeEventListener('login', updateLoginStatus);
   }, [])
 
   useEffect(() => {

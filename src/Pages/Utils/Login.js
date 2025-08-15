@@ -49,6 +49,7 @@ const Login = () => {
       if (res.ok) {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', values.email);
+        window.dispatchEvent(new Event('login'));
         navigate('/');
       } else {
         alert(data.message || '로그인에 실패했습니다.');
