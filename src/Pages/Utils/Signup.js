@@ -14,6 +14,7 @@ const Signup = () => {
   const [serverMessage, setServerMessage] = useState('');
   const [emailVerified, setEmailVerified] = useState(false);
   const [emailAddress, setEmailAddress] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
 
   // Validation schema for email (step 1)
   const emailSchema = Yup.object().shape({
@@ -104,7 +105,7 @@ const Signup = () => {
           firstName: values.firstName,
           lastName: values.lastName,
           email: emailAddress,
-          password: values.password,
+          password: signupPassword,
         }),
       });
       const data = await res.json();
@@ -159,6 +160,7 @@ const Signup = () => {
               setStep(2);
               }
               else if (step === 2){
+                setSignupPassword(values.password)
                 await sendCode();
                 setStep(3);
               }
@@ -380,7 +382,6 @@ const Signup = () => {
             </span>
           </span>
         )}
-
 
         {serverMessage && (
           <div style={{ color: 'red', marginTop: '10px', textAlign: 'center' }}>{serverMessage}</div>
