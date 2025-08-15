@@ -144,64 +144,106 @@ const Menubar = () => {
                   else if (item === 'News') navigate('/news');
                 },
               },
-              ...(isLoggedIn ? [{
-                title: userFirstName,
-                items: [
-                  { label: 'Simulate', onClick: () => navigate('/simulate') },
-                  { label: 'Logout', onClick: () => {
-                      setHoveredMenu(null);
-                      localStorage.removeItem('isLoggedIn');
-                      localStorage.removeItem('userFirstName');
-                      setIsLoggedIn(false);
-                      setUserFirstName('');
-                      navigate('/');
-                    }
-                  }
-                ],
-              }] : []),
             ].map((menu, idx) => (
               <div
                 className="navbar-item"
-                style={{ cursor: 'pointer', position: 'relative', paddingLeft: '1vw' }}
+                style = {{cursor: 'pointer'}}
                 key={idx}
                 onMouseEnter={() => setHoveredMenu(menu.title)}
                 onMouseLeave={() => setHoveredMenu(null)}
-                onClick={() => {
-                  if (!isLoggedIn && menu.title === userFirstName) {
-                    navigate('/login');
-                  }
-                }}
               >
                 <span className="custom-dropdown-title">
-                  {(!isLoggedIn && menu.title === userFirstName) ? 'Login' : menu.title}
-                  {menu.items && menu.items.length > 0 && (
-                    <span
-                      className={`custom-dropdown-icon ${hoveredMenu === menu.title ? 'open' : ''}`}
-                      style={{ marginLeft: '10px' }}
-                    >
-                      ›
-                    </span>
-                  )}
+                  {menu.title}
+                  <span
+                    className={`custom-dropdown-icon ${hoveredMenu === menu.title ? 'open' : ''}`}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    ›
+                  </span>
                 </span>
-
-                {menu.items && hoveredMenu === menu.title && (
-                  <div className="dropdown-menu">
-                    {menu.items.map((item, i) => (
-                      <div
-                        className="dropdown-item"
-                        key={i}
-                        onClick={() => {
-                          setHoveredMenu(null);
-                          item.onClick();
-                        }}
-                      >
-                        {item.label}
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <div className="dropdown-menu">
+                  {menu.items.map((item, i) => (
+                    <div
+                      className="dropdown-item"
+                      key={i}
+                      onClick={() => {
+                        setHoveredMenu(null);
+                        setTimeout(() => menu.onClick(item), 100);
+                      }}
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
+
+            <div
+              className="navbar-item"
+              style={{ cursor: 'pointer', paddingLeft: '1vw', position: 'relative' }}
+              onMouseEnter={() => setHoveredMenu(isLoggedIn ? 'userMenu' : 'Login')}
+              onMouseLeave={() => setHoveredMenu(null)}
+              onClick={()=>{
+                if(!isLoggedIn){
+                  navigate('login');
+                }
+              }}
+            >
+              <span className="custom-dropdown-title">
+                {isLoggedIn ? userFirstName : 'Login'}
+                {isLoggedIn && (
+                  <span
+                    className={`custom-dropdown-icon ${hoveredMenu === 'userMenu' ? 'open' : ''}`}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    ›
+                  </span>
+                )}
+              </span>
+
+              {/* 로그인 상태일 때 드롭다운 메뉴 */}
+              {isLoggedIn && (
+                <div
+                  className="dropdown-menu"
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    display: hoveredMenu === 'userMenu' ? 'block' : 'none',
+                  }}
+                >
+                  {[
+                    {
+                      label: 'Simulate',
+                      onClick: () => {
+                        setHoveredMenu(null);
+                        navigate('/simulate');
+                      },
+                    },
+                    {
+                      label: 'Logout',
+                      onClick: () => {
+                        setHoveredMenu(null);
+                        localStorage.removeItem('isLoggedIn');
+                        localStorage.removeItem('userFirstName');
+                        setIsLoggedIn(false);
+                        setUserFirstName('');
+                        navigate('/');
+                      },
+                    },
+                  ].map((item, i) => (
+                    <div
+                      className="dropdown-item"
+                      key={i}
+                      onClick={item.onClick}
+                    >
+                      {item.label}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
           </div>
 
           <div className="mobile-nav">
