@@ -183,6 +183,11 @@ const Menubar = () => {
             style={{ cursor: 'pointer', paddingLeft: '1vw', position: 'relative' }}
             onMouseEnter={() => setHoveredMenu(isLoggedIn ? 'userMenu' : 'Login')}
             onMouseLeave={() => setHoveredMenu(null)}
+            onClick={()=>{
+              if(!isLoggedIn){
+                navigate('login');
+              }
+            }}
           >
             <span className="custom-dropdown-title">
               {isLoggedIn ? userFirstName : 'Login'}
