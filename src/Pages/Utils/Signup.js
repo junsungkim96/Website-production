@@ -100,6 +100,12 @@ const Signup = () => {
       setServerMessage('Please verify your email first.');
       return;
     }
+    console.log('Submitting final signup with:', {
+    firstName: values.firstName,
+    lastName: values.lastName,
+    email: emailAddress,
+    password: signupPassword,
+    });
     try {
       const res = await fetch('https://www.qblackai.com/api/signup', {
         method: 'POST',
