@@ -1,6 +1,6 @@
 import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
-import eye from '../img/homepage/eye_diamond.png';
+import eye from '../../img/homepage/eye_diamond.png';
 import Button from 'react-bootstrap/Button';
 import {useLayoutEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
