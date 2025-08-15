@@ -6,8 +6,6 @@ import logo from '../../img/qblackai_logo.png';
 import '../../styles/desktop.css';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-const API_BASE = 'https://www.qblackai.com/api';
-
 const Login = () => {
   const [step, setStep] = useState(1); // Step 1: Email, Step 2: Password
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +33,7 @@ const Login = () => {
 
   const handleLogin = async (values, setSubmitting, setFieldError, navigate) => {
     try {
-      const res = await fetch(`${API_BASE}/login`, {
+      const res = await fetch('https://www.qblackai.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -5,7 +5,7 @@ const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 export default async function handler(req, res){
-  res.setHeader('Access-Control-Allow-Origin', 'https://qblackai.com'); // 개발 중에는 *로 허용
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.qblackai.com'); // 개발 중에는 *로 허용
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
