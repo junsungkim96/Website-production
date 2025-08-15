@@ -49,7 +49,7 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: `"QblackAI" <${process.env.MAIL_USER}>`,
       to: email,
-      subject: 'Your Verification Code',
+      subject: '[QblackAI] Your Verification Code',
       text: `Your verification code is: ${code}. It will expire in 5 minutes.`,
       html: `<p>Your verification code is: <b>${code}</b>. It will expire in 5 minutes.</p>`,
     });

@@ -24,6 +24,25 @@ const Menubar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState(null);
 
+  // const [isLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+  // const [userFirstName] = useState(localStorage.getItem('userFirstName') || '');
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userFirstName, setUserFirstName] = useState('');
+
+  useEffect(()=>{
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const firstName = localStorage.getItem('userFirstName') || '';
+    
+    if (!firstName) {
+      setIsLoggedIn(false);
+      setUserFirstName('');
+    } else {
+      setIsLoggedIn(loggedIn);
+      setUserFirstName(firstName);
+    }
+  }, [])
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
@@ -166,14 +185,21 @@ const Menubar = () => {
           <div
             className="navbar-item"
             style={{ cursor: 'pointer', paddingLeft: '1vw' }}
-            onClick={() => navigate('/login')}
-            onMouseEnter={() => setHoveredMenu('Login')}
+            onClick={() => {
+              if (isLoggedIn){
+                navigate('/simulation');
+              } else{
+                navigate('/login');
+              }
+            }}
+            onMouseEnter={() => setHoveredMenu(isLoggedIn ? userFirstName : 'Login')}
             onMouseLeave={() => setHoveredMenu(null)}
           >
             <span className="custom-dropdown-title">
-              Login
+              {isLoggedIn ? userFirstName : 'Login'}
             </span>
           </div>
+
         </div>
 
           <div className="mobile-nav">
