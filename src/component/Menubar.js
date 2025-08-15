@@ -165,7 +165,7 @@ const Menubar = () => {
           ))}
           <div
             className="navbar-item"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', paddingLeft: '2vw' }}
             onClick={() => navigate('/login')}
             onMouseEnter={() => setHoveredMenu('Login')}
             onMouseLeave={() => setHoveredMenu(null)}
