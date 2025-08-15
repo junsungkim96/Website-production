@@ -83,11 +83,14 @@ const Signup = () => {
       if (res.ok) {
         setEmailVerified(true);
         setServerMessage('Email verified!');
+        return true;
       } else {
         setServerMessage(data.message || 'Verification failed.');
+        return false;
       }
     } catch {
       setServerMessage('Server error verifying code.');
+      return false;
     }
   };
 
@@ -165,8 +168,8 @@ const Signup = () => {
                 setStep(3);
               }
               else if (step === 3){
-                await verifyCode(values);
-                setStep(4);
+                const ok = await verifyCode(values);
+                if(ok) setStep(4);
               }
               else if (step === 4){
                 await finalSignup(values);
@@ -351,7 +354,7 @@ const Signup = () => {
                   color: 'white',
                   border: '1px solid #008B8B',
                   minWidth: '180px',
-                  transition: 'all 0.2s ease',
+                  transition: 'all 0.5s ease',
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
                   padding: '12px 0',
                   marginTop: '8px',
