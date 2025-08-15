@@ -111,126 +111,98 @@ const Menubar = () => {
           {/* -----------------------------------------------------------Desktop-------------------------------------------------------- */}
 
           <div className="desktop-nav">
-          {[
-            {
-              title: 'Product',
-              items: productItems,
-              onClick: (item) => {
-                if (item === 'Features') navigate('/product_features');
-                else if (item === 'Pricing') navigate('/product_pricing');
+            {[
+              {
+                title: 'Product',
+                items: productItems,
+                onClick: (item) => {
+                  if (item === 'Features') navigate('/product_features');
+                  else if (item === 'Pricing') navigate('/product_pricing');
+                },
               },
-            },
-            {
-              title: 'Research',
-              items: researchItems,
-              onClick: (item) => {
-                if (item === 'Overview') navigate('/research');
-                else if (item === 'Illuminant') navigate('/illuminant');
-                else if (item === 'Optics') navigate('/optics');
-                else if (item === 'Sensor') navigate('/sensor');
-                else if (item === 'ISP') navigate('/isp');
-                else if (item === 'QPU') navigate('/qpu');
+              {
+                title: 'Research',
+                items: researchItems,
+                onClick: (item) => {
+                  if (item === 'Overview') navigate('/research');
+                  else if (item === 'Illuminant') navigate('/illuminant');
+                  else if (item === 'Optics') navigate('/optics');
+                  else if (item === 'Sensor') navigate('/sensor');
+                  else if (item === 'ISP') navigate('/isp');
+                  else if (item === 'QPU') navigate('/qpu');
+                },
               },
-            },
-            {
-              title: 'Company',
-              items: companyItems,
-              onClick: (item) => {
-                if (item === 'About') navigate('/company');
-                else if (item === 'Blog') navigate('/blog');
-                else if (item === 'Careers') navigate('/careers');
-                else if (item === 'Customer Stories') navigate('/stories');
-                else if (item === 'Investor Relations') navigate('/ir');
-                else if (item === 'News') navigate('/news');
+              {
+                title: 'Company',
+                items: companyItems,
+                onClick: (item) => {
+                  if (item === 'About') navigate('/company');
+                  else if (item === 'Blog') navigate('/blog');
+                  else if (item === 'Careers') navigate('/careers');
+                  else if (item === 'Customer Stories') navigate('/stories');
+                  else if (item === 'Investor Relations') navigate('/ir');
+                  else if (item === 'News') navigate('/news');
+                },
               },
-            },
-          ].map((menu, idx) => (
-            <div
-              className="navbar-item"
-              style = {{cursor: 'pointer'}}
-              key={idx}
-              onMouseEnter={() => setHoveredMenu(menu.title)}
-              onMouseLeave={() => setHoveredMenu(null)}
-            >
-              <span className="custom-dropdown-title">
-                {menu.title}
-                <span
-                  className={`custom-dropdown-icon ${hoveredMenu === menu.title ? 'open' : ''}`}
-                  style={{ marginLeft: '10px' }}
-                >
-                  ›
-                </span>
-              </span>
-              <div className="dropdown-menu">
-                {menu.items.map((item, i) => (
-                  <div
-                    className="dropdown-item"
-                    key={i}
-                    onClick={() => {
+              ...(isLoggedIn ? [{
+                title: userFirstName,
+                items: [
+                  { label: 'Simulate', onClick: () => navigate('/simulate') },
+                  { label: 'Logout', onClick: () => {
                       setHoveredMenu(null);
-                      setTimeout(() => menu.onClick(item), 100);
-                    }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <div
-            className="navbar-item"
-            style={{ cursor: 'pointer', paddingLeft: '1vw', position: 'relative' }}
-            onMouseEnter={() => setHoveredMenu(isLoggedIn ? 'userMenu' : 'Login')}
-            onMouseLeave={() => setHoveredMenu(null)}
-            onClick={()=>{
-              if(!isLoggedIn){
-                navigate('login');
-              }
-            }}
-          >
-            <span className="custom-dropdown-title">
-              {isLoggedIn ? userFirstName : 'Login'}
-              {isLoggedIn && (
-                <span
-                  className={`custom-dropdown-icon ${hoveredMenu === 'userMenu' ? 'open' : ''}`}
-                  style={{ marginLeft: '10px' }}
-                >
-                  ›
+                      localStorage.removeItem('isLoggedIn');
+                      localStorage.removeItem('userFirstName');
+                      setIsLoggedIn(false);
+                      setUserFirstName('');
+                      navigate('/');
+                    }
+                  }
+                ],
+              }] : []),
+            ].map((menu, idx) => (
+              <div
+                className="navbar-item"
+                style={{ cursor: 'pointer', position: 'relative', paddingLeft: '1vw' }}
+                key={idx}
+                onMouseEnter={() => setHoveredMenu(menu.title)}
+                onMouseLeave={() => setHoveredMenu(null)}
+                onClick={() => {
+                  if (!isLoggedIn && menu.title === userFirstName) {
+                    navigate('/login');
+                  }
+                }}
+              >
+                <span className="custom-dropdown-title">
+                  {(!isLoggedIn && menu.title === userFirstName) ? 'Login' : menu.title}
+                  {menu.items && menu.items.length > 0 && (
+                    <span
+                      className={`custom-dropdown-icon ${hoveredMenu === menu.title ? 'open' : ''}`}
+                      style={{ marginLeft: '10px' }}
+                    >
+                      ›
+                    </span>
+                  )}
                 </span>
-              )}
-            </span>
 
-            {/* 로그인 상태일 때 드롭다운 메뉴 */}
-            {isLoggedIn && hoveredMenu === 'userMenu' && (
-              <div className="dropdown-menu" style={{ position: 'absolute', top: '100%', right: 0 }}>
-                <div
-                  className="dropdown-item"
-                  onClick={() => {
-                    setHoveredMenu(null);
-                    navigate('/simulation'); // QuasarVision 페이지로 이동
-                  }}
-                >
-                  Simulation
-                </div>
-                <div
-                  className="dropdown-item"
-                  onClick={() => {
-                    setHoveredMenu(null);
-                    localStorage.removeItem('isLoggedIn');
-                    localStorage.removeItem('userFirstName');
-                    setIsLoggedIn(false);
-                    setUserFirstName('');
-                    navigate('/'); // 로그아웃 후 홈으로 이동
-                  }}
-                >
-                  Logout
-                </div>
+                {menu.items && hoveredMenu === menu.title && (
+                  <div className="dropdown-menu">
+                    {menu.items.map((item, i) => (
+                      <div
+                        className="dropdown-item"
+                        key={i}
+                        onClick={() => {
+                          setHoveredMenu(null);
+                          item.onClick();
+                        }}
+                      >
+                        {item.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
-
-        </div>
 
           <div className="mobile-nav">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ border: 'none', width: '25px', height: '18px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '0', marginLeft: 'auto' }}>
