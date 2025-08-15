@@ -277,7 +277,7 @@ const Signup = () => {
               {step === 3 && (
                 <div style={{ width: '100%' }}>
                   <div style={{ marginBottom: '10px', fontSize: '0.9rem', color: '#555', textAlign: 'center' }}>
-                    {emailAddress} <br/> 주소로 받은 인증 코드를 입력하세요.
+                    Enter the verification code sent to <br/> {emailAddress} <br/>
                   </div>
 
                   <Field

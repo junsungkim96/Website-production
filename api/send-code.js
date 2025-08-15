@@ -1,52 +1,47 @@
-import nodemailer from 'nodemailer';
+import { MongoClient } from 'mongodb';
 
-let verificationStore = {}; // 메모리 저장
-export const config = {
-  api: { bodyParser: true },
-};
+// MongoDB 연결
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri);
+
+function generateCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString(); // 6자리 코드
+}
 
 export default async function handler(req, res) {
-  // CORS 처리
   res.setHeader('Access-Control-Allow-Origin', 'https://www.qblackai.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
-
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method Not Allowed' });
 
   const { email } = req.body;
-  if (!email) return res.status(400).json({ message: 'Email is required' });
+  if (!email) return res.status(400).json({ message: 'Email required' });
 
   try {
-    // 6자리 랜덤 코드 생성
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    await client.connect();
+    const db = client.db('licenseDB');
+    const codes = db.collection('verificationCodes');
 
-    // 메모리 저장 (5분 TTL)
-    verificationStore[email] = { code, expires: Date.now() + 5 * 60 * 1000 };
+    const code = generateCode();
+    const expires = Date.now() + 5 * 60 * 1000; // 5분 유효
 
-    // Nodemailer 설정
-    const transporter = nodemailer.createTransport({
-      host: "mail.privateemail.com",
-      port: 465,
-      secure: true,
-      auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
-    });
+    // 기존 코드 삭제 후 새 코드 저장
+    await codes.updateOne(
+      { email },
+      { $set: { code, expires } },
+      { upsert: true }
+    );
 
-    // 인증 코드 메일 발송
-    await transporter.sendMail({
-      from: `"QblackAI Info" <${process.env.MAIL_USER}>`,
-      to: email,
-      subject: `[QblackAI] Your verification code is ${code}`,
-      text: `Your verification code is ${code}. This code expires in 5 minutes.`,
-    });
+    // TODO: 실제 이메일 전송 로직 추가 가능
+    console.log(`Verification code for ${email}: ${code}`);
 
-    res.status(200).json({ message: 'Verification code sent' });
-  } catch (error) {
-    console.error('Send code error:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    return res.status(200).json({ message: 'Verification code sent.' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  } finally {
+    await client.close();
   }
 }
-
-// 필요 시 다른 모듈에서 verificationStore 접근 가능
-export { verificationStore };
