@@ -48,7 +48,7 @@ const Login = () => {
 
       if (res.ok) {
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', values.email);
+        localStorage.setItem('userFirstName', data.firstName);
         window.dispatchEvent(new Event('login'));
         navigate('/');
       } else {
