@@ -291,8 +291,6 @@ const Signup = () => {
               )}
 
 
-
-
               {/* Verification code form  (Step 3)*/}
               {step === 3 && (
                 <div style={{ width: '100%' }}>
@@ -361,9 +359,9 @@ const Signup = () => {
         )}
 
 
-        {serverMessage && (
+        {/* {serverMessage && (
           <div style={{ color: 'red', marginTop: '10px', textAlign: 'center' }}>{serverMessage}</div>
-        )}
+        )} */}
       </div>
     </div>
   );
