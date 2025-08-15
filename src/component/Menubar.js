@@ -211,7 +211,7 @@ const Menubar = () => {
                     navigate('/simulation'); // QuasarVision 페이지로 이동
                   }}
                 >
-                  QuasarVision
+                  Simulation
                 </div>
                 <div
                   className="dropdown-item"
@@ -219,6 +219,8 @@ const Menubar = () => {
                     setHoveredMenu(null);
                     localStorage.removeItem('isLoggedIn');
                     localStorage.removeItem('userFirstName');
+                    setIsLoggedIn(false);
+                    setUserFirstName('');
                     navigate('/'); // 로그아웃 후 홈으로 이동
                   }}
                 >
@@ -227,25 +229,6 @@ const Menubar = () => {
               </div>
             )}
           </div>
-
-          
-          {/* <div
-            className="navbar-item"
-            style={{ cursor: 'pointer', paddingLeft: '1vw' }}
-            onClick={() => {
-              if (isLoggedIn){
-                navigate('/simulation');
-              } else{
-                navigate('/login');
-              }
-            }}
-            onMouseEnter={() => setHoveredMenu(isLoggedIn ? userFirstName : 'Login')}
-            onMouseLeave={() => setHoveredMenu(null)}
-          >
-            <span className="custom-dropdown-title">
-              {isLoggedIn ? userFirstName : 'Login'}
-            </span>
-          </div> */}
 
         </div>
 
