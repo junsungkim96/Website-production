@@ -1,12 +1,21 @@
 import { MongoClient } from 'mongodb';
+import nodemailer from 'nodemailer';
 
-// MongoDB 연결
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 function generateCode() {
   return Math.floor(100000 + Math.random() * 900000).toString(); // 6자리 코드
 }
+
+// 이메일 발송용 transporter 설정 (예: Gmail)
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // 사용하려는 메일 서비스
+  auth: {
+    user: process.env.EMAIL_USER, // 발신 이메일
+    pass: process.env.EMAIL_PASS, // 이메일 비밀번호 또는 앱 비밀번호
+  },
+});
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://www.qblackai.com');
@@ -25,17 +34,25 @@ export default async function handler(req, res) {
     const codes = db.collection('verificationCodes');
 
     const code = generateCode();
-    const expires = Date.now() + 5 * 60 * 1000; // 5분 유효
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5분 뒤 만료
 
     // 기존 코드 삭제 후 새 코드 저장
     await codes.updateOne(
       { email },
-      { $set: { code, expires } },
+      { $set: { code, expiresAt } },
       { upsert: true }
     );
 
-    // TODO: 실제 이메일 전송 로직 추가 가능
-    console.log(`Verification code for ${email}: ${code}`);
+    // 이메일 발송
+    await transporter.sendMail({
+      from: `"QblackAI" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: 'Your Verification Code',
+      text: `Your verification code is: ${code}. It will expire in 5 minutes.`,
+      html: `<p>Your verification code is: <b>${code}</b>. It will expire in 5 minutes.</p>`,
+    });
+
+    console.log(`Verification code for ${email}: ${code} (sent via email)`);
 
     return res.status(200).json({ message: 'Verification code sent.' });
   } catch (err) {
