@@ -150,25 +150,32 @@ const Signup = () => {
             step === 1 ? emailSchema : step === 2 ? passwordSchema : step === 3 ? codeSchema : nameSchema
           }
           enableReinitialize
-          onSubmit={async (values) => {
-            if (step === 1){
+          onSubmit={async (values, {setSubmitting}) => {
+            setServerMessage('');
+            setSubmitting(true);
+            try{
+              if (step === 1){
               setEmailAddress(values.email);
               setStep(2);
+              }
+              else if (step === 2){
+                await sendCode();
+                setStep(3);
+              }
+              else if (step === 3){
+                await verifyCode(values);
+                setStep(4);
+              }
+              else if (step === 4){
+                await finalSignup(values);
+              }
+            } finally{
+              setSubmitting(false);
             }
-            else if (step === 2){
-              await sendCode();
-              setStep(3);
-            }
-            else if (step === 3){
-              await verifyCode(values);
-              setStep(4);
-            }
-            else if (step === 4){
-              await finalSignup(values);
-            }
+            
           }}
         >
-          {({ errors, touched}) => (
+          {({ errors, touched, isSubmitting}) => (
             <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ fontSize: '4vh', fontWeight: 'bold', textAlign: 'center' }}>
                 Create Account
@@ -332,9 +339,25 @@ const Signup = () => {
                 </>
               )}
 
-              <button type="submit" className="next-button" disabled={!!errors.password || !!errors.confirmPassword}>
+              {/* Submit / Next Button */}
+              <button
+                type="submit"
+                className="next-button"
+                disabled={!!errors.password || !!errors.confirmPassword || isSubmitting}
+                style={{
+                  backgroundColor: isSubmitting ? '#006666' : '#008B8B',
+                  color: 'white',
+                  border: '1px solid #008B8B',
+                  minWidth: '180px',
+                  transition: 'all 0.2s ease',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                  padding: '12px 0',
+                  marginTop: '8px',
+                }}
+              >
                 {step === 4 ? 'Sign Up' : 'Next'}
               </button>
+
             </Form>
           )}
         </Formik>
@@ -359,9 +382,9 @@ const Signup = () => {
         )}
 
 
-        {/* {serverMessage && (
+        {serverMessage && (
           <div style={{ color: 'red', marginTop: '10px', textAlign: 'center' }}>{serverMessage}</div>
-        )} */}
+        )}
       </div>
     </div>
   );
