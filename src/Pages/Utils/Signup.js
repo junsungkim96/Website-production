@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage, FormikConsumer} from 'formik';
+import { Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import logo from '../../img/qblackai_logo.png';
@@ -54,7 +54,7 @@ const Signup = () => {
       return;
     }
     try {
-      const res = await fetch('/api/send-code', {
+      const res = await fetch('https://www.qblackai.com/api/send-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emailAddress }),
@@ -73,7 +73,7 @@ const Signup = () => {
   // Code verification (step 3)
   const verifyCode = async (values) => {
     try {
-      const res = await fetch('/api/verify-code', {
+      const res = await fetch('https://www.qblackai.com/api/verify-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emailAddress, code: values.verificationCode }),
@@ -97,7 +97,7 @@ const Signup = () => {
       return;
     }
     try {
-      const res = await fetch('/api/signup', {
+      const res = await fetch('https://www.qblackai.com/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

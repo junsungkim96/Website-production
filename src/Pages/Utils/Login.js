@@ -43,22 +43,53 @@ const Login = () => {
 
       <div style={{ maxWidth: '400px', margin: '20px auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Formik
+          enableReinitialize
           initialValues={{ email: '', password: '' }}
           validationSchema={step === 1 ? emailSchema : passwordSchema}
-          onSubmit={(values) => {
+          onSubmit={async (values, { setSubmitting, validateForm, setFieldError }) => {
             if (step === 1) {
+              // 이메일 검증
+              const errors = await validateForm();
+              if (errors.email) {
+                alert(errors.email);
+                setSubmitting(false);
+                return;
+              }
               setStep(2);
+              setSubmitting(false);
             } else if (step === 2) {
-              // TODO: Call login API with values.email & values.password
-              console.log('Logging in with', values);
-              localStorage.setItem('isLoggedIn', 'true');
-              localStorage.setItem('userEmail', values.email);
-              navigate('/'); // Redirect to user page
+              try {
+                const res = await fetch('http://qblackai.com/api/login', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    email: values.email,
+                    password: values.password
+                  })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                  localStorage.setItem('isLoggedIn', 'true');
+                  localStorage.setItem('userEmail', values.email);
+                  navigate('/');
+                } else {
+                  alert(data.message || '로그인에 실패했습니다.');
+                  setFieldError('password', data.message || 'Login failed');
+                }
+              } catch (err) {
+                alert('서버 오류로 로그인에 실패했습니다.');
+                console.error(err);
+              } finally {
+                setSubmitting(false);
+              }
             }
           }}
         >
           {({ errors, touched }) => (
             <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {/* Welcome 유지 */}
               <div
                 style={{
                   fontSize: '4vh',
@@ -70,7 +101,7 @@ const Login = () => {
                 Welcome
               </div>
 
-              
+              {/* 이메일 */}
               <div className="form-group" style={{ width: '100%' }}>
                 <Field
                   name="email"
@@ -81,6 +112,7 @@ const Login = () => {
                 <ErrorMessage name="email" component="div" className="invalid-feedback" />
               </div>
 
+              {/* 비밀번호 */}
               {step === 2 && (
                 <div className="form-group" style={{ width: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
@@ -114,10 +146,16 @@ const Login = () => {
                   <ErrorMessage name="password" component="div" className="invalid-feedback" />
                 </div>
               )}
-              <button type="submit" className="next-button">Next</button>
+
+              {/* 버튼 */}
+              <button type="submit" className="next-button">
+                {step === 1 ? 'Next' : 'Login'}
+              </button>
             </Form>
           )}
         </Formik>
+
+
 
         <span style={{ display: 'flex', justifyContent: 'center', fontSize: '16px', marginTop: '15px' }}>
           Need an account?&nbsp;
