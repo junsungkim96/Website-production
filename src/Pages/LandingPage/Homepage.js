@@ -57,20 +57,6 @@ const Homepage = () => {
         </div>
       </div>
 
-      {/* Video streaming using local source */}
-      {/* <video className="video-container" autoPlay loop muted
-        style = {{marginBottom: '3vh'}}>
-        <source src="/video/Quasar_simulator.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video> */}
-
-      {/* Video streaming using Vercel Storage Blob Store */}
-      {/* <video className = "video-container" controls autoPlay={!isSmallScreen} loop = {false} muted poster = {!isSmallScreen ? undefined : "/img/demo.jpg"}>
-        <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/Quasar_simulator-1gup72IZQQ4abyHJdDKh7HoDtHm0cR.mp4" />
-        Your browser does not support the video tag.
-      </video> */}
-
-
       <img className = "pipeline-image" src={product} alt="" />
       <div className="product-center-text">End-to-End imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms</div>
       

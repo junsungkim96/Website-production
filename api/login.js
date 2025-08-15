@@ -41,16 +41,6 @@ export default async function handler(req, res){
       return res.status(401).json({message: 'Invalid email or password'});
     }
 
-    // JWT 생성 (valid for 7 days)
-    const token = jwt.sign(
-      {email: user.email, firstName: user.firstName},
-      process.env.JWT_SECRET,
-      {expiresIn: '7d'}
-    );
-
-    // send to HttpOnly cookie
-    res.setHeader('Set-Cookie', `token=${toekn}; HttpOnly; Path=/; Max-Age=${7*24*60*60}; SameSite=Lax`);
-
     // login successful
     res.status(200).json({message: 'Login successful', firstName: user.firstName});
   } catch(error){
