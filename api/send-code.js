@@ -12,8 +12,8 @@ function generateCode() {
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // 사용하려는 메일 서비스
   auth: {
-    user: process.env.EMAIL_USER, // 발신 이메일
-    pass: process.env.EMAIL_PASS, // 이메일 비밀번호 또는 앱 비밀번호
+    user: process.env.MAIL_USER, // 발신 이메일
+    pass: process.env.MAIL_PASS, // 이메일 비밀번호 또는 앱 비밀번호
   },
 });
 
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
 
     // 이메일 발송
     await transporter.sendMail({
-      from: `"QblackAI" <${process.env.EMAIL_USER}>`,
+      from: `"QblackAI" <${process.env.MAIL_USER}>`,
       to: email,
       subject: 'Your Verification Code',
       text: `Your verification code is: ${code}. It will expire in 5 minutes.`,
