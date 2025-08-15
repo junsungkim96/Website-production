@@ -32,6 +32,35 @@ const Login = () => {
       .required('Password is required'),
   });
 
+  const handleLogin = async (values, setSubmitting, setFieldError, navigate) => {
+    try {
+      const res = await fetch('https://qblackai.com/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userEmail', values.email);
+        navigate('/');
+      } else {
+        alert(data.message || '로그인에 실패했습니다.');
+        setFieldError('password', data.message || 'Login failed');
+      }
+    } catch (err) {
+      alert('서버 오류로 로그인에 실패했습니다.');
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div style={{ marginTop: '5vh', textAlign: 'center' }}>
       <img
@@ -58,32 +87,7 @@ const Login = () => {
               setStep(2);
               setSubmitting(false);
             } else if (step === 2) {
-              try {
-                const res = await fetch('http://qblackai.com/api/login', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    email: values.email,
-                    password: values.password
-                  })
-                });
-
-                const data = await res.json();
-
-                if (res.ok) {
-                  localStorage.setItem('isLoggedIn', 'true');
-                  localStorage.setItem('userEmail', values.email);
-                  navigate('/');
-                } else {
-                  alert(data.message || '로그인에 실패했습니다.');
-                  setFieldError('password', data.message || 'Login failed');
-                }
-              } catch (err) {
-                alert('서버 오류로 로그인에 실패했습니다.');
-                console.error(err);
-              } finally {
-                setSubmitting(false);
-              }
+              await handleLogin(values, setSubmitting, setFieldError, navigate);
             }
           }}
         >
@@ -155,8 +159,6 @@ const Login = () => {
           )}
         </Formik>
 
-
-
         <span style={{ display: 'flex', justifyContent: 'center', fontSize: '16px', marginTop: '15px' }}>
           Need an account?&nbsp;
           <span
@@ -166,6 +168,7 @@ const Login = () => {
             Get Started!
           </span>
         </span>
+
       </div>
     </div>
   );
