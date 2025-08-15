@@ -208,8 +208,7 @@ const Menubar = () => {
                   style={{
                     position: 'absolute',
                     top: '100%',
-                    right: 0,
-                    display: hoveredMenu === 'userMenu' ? 'block' : 'none',
+                    right: 0
                   }}
                 >
                   {[
