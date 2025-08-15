@@ -189,12 +189,14 @@ const Menubar = () => {
                 }
               }}
             >
-              <span className="custom-dropdown-title">
+              <span className="custom-dropdown-title"
+                style={isLoggedIn ? { color: '#008B8B' } : {}}
+              >
                 {isLoggedIn ? userFirstName : 'Login'}
                 {isLoggedIn && (
                   <span
                     className={`custom-dropdown-icon ${hoveredMenu === 'userMenu' ? 'open' : ''}`}
-                    style={{ marginLeft: '10px' }}
+                    style={{ marginLeft: '10px', color: 'inherit'}}
                   >
                     ›
                   </span>
