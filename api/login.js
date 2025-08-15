@@ -33,7 +33,7 @@ export default async function handler(req, res){
     }
 
     // assume password is stored as hash
-    const isValid = await bcrypt.compare(password, user.passwordHash);
+    const isValid = await bcrypt.compare(password, user.password);
     if(!isValid){
       return res.status(401).json({message: 'Invalid email or password'});
     }
