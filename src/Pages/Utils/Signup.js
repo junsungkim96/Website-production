@@ -159,8 +159,13 @@ const Signup = () => {
               await sendCode();
               setStep(3);
             }
-            else if (step === 3) await verifyCode(values);
-            else if (step === 4) await finalSignup(values);
+            else if (step === 3){
+              await verifyCode(values);
+              setStep(4);
+            }
+            else if (step === 4){
+              await finalSignup(values);
+            }
           }}
         >
           {({ errors, touched}) => (
