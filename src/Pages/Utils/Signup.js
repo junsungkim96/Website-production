@@ -191,90 +191,105 @@ const Signup = () => {
               {step === 2 && (
                 <>
                   {/* Password Field */}
-                  <div className="form-group" style={{ position: 'relative', width: '100%' }}>
+                  <div className="form-group" style={{ width: '100%' }}>
                     <Field name="password">
                       {({ field, meta }) => (
                         <>
-                          <input
-                            {...field}
-                            type={showPassword ? 'text' : 'password'}
-                            placeholder="Password"
-                            style={{
-                              height: '50px',
-                              lineHeight: '50px',       // 버튼과 중앙 정렬
-                              fontSize: '16px',
-                              width: '100%',
-                              paddingRight: '40px',     // 버튼 공간 확보
-                              boxSizing: 'border-box',
-                            }}
-                            className={`input-field${meta.touched && meta.error ? ' is-invalid' : ''}`}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            style={{
-                              position: 'absolute',
-                              right: '10px',
-                              top: '50%',
-                              transform: 'translateY(-50%)',
-                              background: 'none',
-                              border: 'none',
-                              cursor: 'pointer',
-                              color: '#008B8B',
-                              padding: 0,
-                            }}
-                          >
-                            {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-                          </button>
-                          {meta.touched && meta.error && <div className="invalid-feedback">{meta.error}</div>}
+                          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                            <input
+                              {...field}
+                              type={showPassword ? 'text' : 'password'}
+                              placeholder="Password"
+                              style={{
+                                height: '50px',
+                                fontSize: '16px',
+                                flex: 1,
+                                paddingRight: '40px',
+                                boxSizing: 'border-box',
+                              }}
+                              className={`input-field${meta.touched && meta.error ? ' is-invalid' : ''}`}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              style={{
+                                position: 'absolute',
+                                right: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                height: '100%',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: '#008B8B',
+                                padding: 0,
+                              }}
+                            >
+                              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                            </button>
+                          </div>
+                          {meta.touched && meta.error && (
+                            <div style={{ color: 'red', fontSize: '0.85rem', marginTop: '4px' }}>
+                              {meta.error}
+                            </div>
+                          )}
                         </>
                       )}
                     </Field>
                   </div>
 
                   {/* Confirm Password Field */}
-                  <div className="form-group" style={{ position: 'relative', width: '100%' }}>
+                  <div className="form-group" style={{ width: '100%'}}>
                     <Field name="confirmPassword">
                       {({ field, meta }) => (
                         <>
-                          <input
-                            {...field}
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            placeholder="Confirm Password"
-                            style={{
-                              height: '50px',
-                              lineHeight: '50px',       // 버튼과 중앙 정렬
-                              fontSize: '16px',
-                              width: '100%',
-                              paddingRight: '40px',     // 버튼 공간 확보
-                              boxSizing: 'border-box',
-                            }}
-                            className={`input-field${meta.touched && meta.error ? ' is-invalid' : ''}`}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            style={{
-                              position: 'absolute',
-                              right: '10px',
-                              top: '50%',
-                              transform: 'translateY(-50%)',
-                              background: 'none',
-                              border: 'none',
-                              cursor: 'pointer',
-                              color: '#008B8B',
-                              padding: 0,
-                            }}
-                          >
-                            {showConfirmPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-                          </button>
-                          {meta.touched && meta.error && <div className="invalid-feedback">{meta.error}</div>}
+                          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                            <input
+                              {...field}
+                              type={showConfirmPassword ? 'text' : 'password'}
+                              placeholder="Confirm Password"
+                              style={{
+                                height: '50px',
+                                fontSize: '16px',
+                                flex: 1,
+                                paddingRight: '40px',
+                                boxSizing: 'border-box',
+                              }}
+                              className={`input-field${meta.touched && meta.error ? ' is-invalid' : ''}`}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              style={{
+                                position: 'absolute',
+                                right: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                height: '100%',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: '#008B8B',
+                                padding: 0,
+                              }}
+                            >
+                              {showConfirmPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                            </button>
+                          </div>
+                          {meta.touched && meta.error && (
+                            <div style={{ color: 'red', fontSize: '0.85rem', marginTop: '4px' }}>
+                              {meta.error}
+                            </div>
+                          )}
                         </>
                       )}
                     </Field>
                   </div>
                 </>
               )}
+
 
 
 

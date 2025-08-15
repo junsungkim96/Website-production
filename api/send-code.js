@@ -10,7 +10,9 @@ function generateCode() {
 
 // 이메일 발송용 transporter 설정 (예: Gmail)
 const transporter = nodemailer.createTransport({
-  service: 'Gmail', // 사용하려는 메일 서비스
+  host: "mail.privateemail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.MAIL_USER, // 발신 이메일
     pass: process.env.MAIL_PASS, // 이메일 비밀번호 또는 앱 비밀번호
