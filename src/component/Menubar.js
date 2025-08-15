@@ -177,7 +177,54 @@ const Menubar = () => {
               </div>
             </div>
           ))}
+
           <div
+            className="navbar-item"
+            style={{ cursor: 'pointer', paddingLeft: '1vw', position: 'relative' }}
+            onMouseEnter={() => setHoveredMenu(isLoggedIn ? 'userMenu' : 'Login')}
+            onMouseLeave={() => setHoveredMenu(null)}
+          >
+            <span className="custom-dropdown-title">
+              {isLoggedIn ? userFirstName : 'Login'}
+              {isLoggedIn && (
+                <span
+                  className={`custom-dropdown-icon ${hoveredMenu === 'userMenu' ? 'open' : ''}`}
+                  style={{ marginLeft: '10px' }}
+                >
+                  ›
+                </span>
+              )}
+            </span>
+
+            {/* 로그인 상태일 때 드롭다운 메뉴 */}
+            {isLoggedIn && hoveredMenu === 'userMenu' && (
+              <div className="dropdown-menu" style={{ position: 'absolute', top: '100%', right: 0 }}>
+                <div
+                  className="dropdown-item"
+                  onClick={() => {
+                    setHoveredMenu(null);
+                    navigate('/simulation'); // QuasarVision 페이지로 이동
+                  }}
+                >
+                  QuasarVision
+                </div>
+                <div
+                  className="dropdown-item"
+                  onClick={() => {
+                    setHoveredMenu(null);
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('userFirstName');
+                    navigate('/'); // 로그아웃 후 홈으로 이동
+                  }}
+                >
+                  Logout
+                </div>
+              </div>
+            )}
+          </div>
+
+          
+          {/* <div
             className="navbar-item"
             style={{ cursor: 'pointer', paddingLeft: '1vw' }}
             onClick={() => {
@@ -193,7 +240,7 @@ const Menubar = () => {
             <span className="custom-dropdown-title">
               {isLoggedIn ? userFirstName : 'Login'}
             </span>
-          </div>
+          </div> */}
 
         </div>
 
