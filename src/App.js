@@ -34,6 +34,7 @@ import ContactSales from './Pages/Utils/ContactSales.js';
 import Terms from './Pages/Utils/Terms.js';
 import Privacy from './Pages/Utils/Privacy.js';
 import Demo from './Pages/Utils/Demo.js';
+import Simulate from './Pages/Simulation/Simulate.js';
 
 import {Analytics} from '@vercel/analytics/react';
 
@@ -81,6 +82,9 @@ const App = () => (
           <Route path="/blog/founding_story" element={<MainLayout>< FoundingStory /></MainLayout>}/>
           <Route path="/blog/cv" element={<MainLayout>< CV /></MainLayout>}/>
           
+          {/* Signup & Apply */}
+          <Route path="/simulate" element = {<Simulate/>} />
+
           {/* Signup & Apply */}
           <Route path="/login" element={< Login />} />
           <Route path="/signup" element={< Signup />} />
