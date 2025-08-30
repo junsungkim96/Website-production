@@ -31,10 +31,6 @@ import SceneFileDialog from './UI/scene_file_input';
 import SensorDialog from './UI/sensor_input';
 import ISPDialog from './UI/isp_input';
 
-import bird from './image/bird.jpg';
-import city from './image/city.jpg';
-
-import axios from 'axios';
 
 const Simulate = () => {
   const navigate = useNavigate();
