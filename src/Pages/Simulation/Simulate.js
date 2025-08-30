@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import createRoot from 'react-dom/client';
+import {Line} from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../img/QblackAI_logo_black.png';
 import sidebarIcon from '../../img/simulate/sidebar-left.svg';
@@ -16,6 +18,24 @@ import spectrum from '../../img/simulate/spectrum.svg';
 import upload from '../../img/simulate/upload.svg';
 import brightness from '../../img/simulate/brightness.svg';
 
+import IlluminantDialogCustom from './UI/illuminant_luminance_custom';
+import IlluminantLuminanceDialog from './UI/illuminant_luminance';
+import SpectrumPlot from './UI/spectrum';
+import SceneLuminanceDialog from './UI/scene_luminance';
+import MacbethDialog from './UI/scene_macbeth_input';
+import PointArrayDialog from './UI/scene_pointarray_input';
+import GridlinesDialog from './UI/scene_gridline_input';
+import RingsRaysDialog from './UI/scene_ringsrays_input';
+import SlantedEdgeDialog from './UI/scene_slantededge_input';
+import SceneFileDialog from './UI/scene_file_input';
+import SensorDialog from './UI/sensor_input';
+import ISPDialog from './UI/isp_input';
+
+import bird from './image/bird.jpg';
+import city from './image/city.jpg';
+
+import axios from 'axios';
+
 const Simulate = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState('System Optimization');
@@ -23,16 +43,18 @@ const Simulate = () => {
   const [logoHovered, setLogoHovered] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(240);
 
+  const [resultImage, setResultImage] = useState(null);
   const [outputText, setOutputText] = useState([]);
 
   const menuItems = [
     { name: 'System Optimization', icon: camera },
-    { name: 'Lens Design', icon: lens },
+    { name: 'Optics Design', icon: lens },
     { name: 'Sensor Design', icon: sensor },
   ];
 
   const menuRefs = useRef([]);
-  const logoSize = 40;
+  const abortControllerRef = useRef(null);
+  const logoSize = 35;
   const toggleSize = 25;
 
   useEffect(() => {
@@ -40,25 +62,592 @@ const Simulate = () => {
   }, [sidebarExpanded]);
 
   const illuminants = ["", "Custom", "D50", "D55", "D65", "D75", "Illuminant A", "Illuminant B", "Illuminant C", "Fluorescent", "Tungsten"];
-  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays"];
+  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "bird.jpg", "city.jpg"];
   const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye", "WideAngle"];
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "Fast-openISP"];
   const algorithms = ["", "DETR", "SAM1", "MiDaS"];
 
+  // Main UI logic
+
+  // Illuminant
+  const [isIlluminantLuminanceDialogOpen, setIsIlluminantLuminanceDialogOpen] = useState(false);
+  const [selectedIlluminant, setSelectedIlluminant] = useState('');
+  const [illuminantLuminanceValue, setIlluminantLuminanceValue] = useState('');
+
+  const [customIlluminantData, setCustomIlluminantData] = useState(
+    Array.from({length: 31}, () => ["",""])
+  )
+
+  const IlluminantLuminanceSubmit = (value) => {
+    setIlluminantLuminanceValue(value);
+  }
+
+  const IlluminantCustomSubmit = (value) =>{
+    setCustomIlluminantData(value);
+  }
+
+  const openSpectrumPopup = async (selectedIlluminant, illuminantLuminanceValue, customIlluminantData) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/get_illuminant", {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          illuminant: selectedIlluminant,
+          illuminantLuminance: illuminantLuminanceValue,
+          photonValues: customIlluminantData.map(row => Number(row[0]))
+        }),
+      });
+
+      const illuminant = await response.json();
+
+      // 데이터 확인
+      const { wave, energy } = illuminant;
+      if (!wave || !energy) {
+        console.warn("wave or energy is missing");
+        return;
+      }
+      SpectrumPlot(wave, energy);
+
+    } catch (err) {
+      console.error("Failed to fetch illuminant data:", err);
+    }
+  };
+
+
+  // Scene
+  const [isSceneLuminanceDialogOpen, setIsSceneLuminanceDialogOpen] = useState(false);
+  const fileInputRef = useRef(null);
+  const [selectedScene, setSelectedScene] = useState('');
   const [sceneFile, setSceneFile] = useState('');
+  const [sceneLuminanceValue, setSceneLuminanceValue] = useState('');
+
+  const [isMacbethDialogOpen, setIsMacbethDialogOpen] = useState(false);
+  const [isPointArrayDialogOpen, setIsPointArrayDialogOpen] = useState(false);
+  const [isGridlineDialogOpen, setIsGridlineDialogOpen] = useState(false);
+  const [isSlantedEdgeDialogOpen, setIsSlantedEdgeDialogOpen] = useState(false);
+  const [isRingsRaysDialogOpen, setIsRingsRaysDialogOpen] = useState(false);
+  const [isSceneFileDialogOpen, setIsSceneFileDialogOpen] = useState(false);
+
+  const [macbethParams, setMacbethValues] = useState({'hfov': 10, 'patchSize': 16});
+  const [pointarrayParams, setPointArrayValues] = useState({'hfov': 10, 'arraySize': 128, 'pointSpacing': 16});
+  const [gridlinesParams, setGridlinesValues] = useState({'hfov': 10, 'gridlineSize': 128, 'lineSpacing': 16, 'lineThickness': 1});
+  const [slantededgeParams, setSlantededgeValues] = useState({'hfov': 10, 'imageSize': 128, 'edgeAngle': 2.6, 'darkLevel': 0});
+  const [ringsraysParams, setRingsraysValues] = useState({'hfov': 10, 'radialFreq': 8, 'size': 128});
+  const [scenefileParams, setSceneFileValues] = useState({'hfov': 10});
+
+  const sceneButtonClick = () => {
+    if (selectedScene == '') return;
+    else if (selectedScene === 'Macbeth') setIsMacbethDialogOpen(true);
+    else if (selectedScene === 'Point Array') setIsPointArrayDialogOpen(true);
+    else if (selectedScene === 'Gridlines') setIsGridlineDialogOpen(true);
+    else if (selectedScene === 'Slanted Edge') setIsSlantedEdgeDialogOpen(true);
+    else if (selectedScene === 'Rings Rays') setIsRingsRaysDialogOpen(true);
+    else setIsSceneFileDialogOpen(true);
+  };
+
+  const SceneLuminanceSubmit = (value) => {
+    setSceneLuminanceValue(value);
+  }
+
+  const handleMacbethSubmit = (values) => {
+    setMacbethValues(values);
+  }
+
+  const handlePointArraySubmit = (values) => {
+    setPointArrayValues(values);
+  }
+
+  const handleGridlinesSubmit = (values) =>{
+    setGridlinesValues(values);
+  }
+
+  const handleSlantededgeSubmit = (values) => {
+    setSlantededgeValues(values);
+  }
+
+  const handleRingsraysSubmit = (values) => {
+    setRingsraysValues(values);
+  }
+
+  const handleSceneFileSubmit = (values) => {
+    setSceneFileValues(values);
+  }
+
+  // Optics 
+  const [selectedOptics, setSelectedOptics] = useState('');
   const [opticsFile, setOpticsFile] = useState('');
+
+  // Sensor
+  const [isSensorDialogOpen, setIsSensorDialogOpen] = useState(false);
+  const [selectedSensor, setSelectedSensor] = useState('');
+  const [sensorValues, setSensorValues] = useState({
+      voltage_swing: "1.15",          // Voltage Swing (V)
+      well_capacity: "9000",          // Well Capacity (e)
+      fill_factor: "0.45",            // Fill Factor
+      pixel_size: "2.2",              // Pixel Size (µm)
+      dark_voltage: "10",             // Dark Voltage (µV/s)
+      read_noise: "0.96",             // Read Noise (mV)
+      prnu: "0.2218",                 // PRNU (%)
+      dsnu: "1",                      // DSNU (mV)
+      analog_gain: "1",               // Analog Gain
+      analog_offset: "0",             // Analog Offset
+      rows: "400",                    // Rows
+      cols: "600",                    // Cols
+  });
+
+  const handleSensorSubmit = (values) => {
+    setSensorValues(values);
+  }
+
+  // ISP
+  const [isIspDialogOpen, setIsIspDialogOpen] = useState(false);
+  const [selectedISP, setSelectedISP] = useState('');
+  const [ispValues, setIspValues] = useState({
+    // DPC
+    dpcEnabled: true,
+    dpcValue: '30',
+
+    // BLC
+    blcEnabled: true,
+    blcR: '0',
+    blcGr: '0',
+    blcGb: '0',
+    blcB: '0',
+    blcalpha: '0',
+    blcbeta: '0',
+
+    // AAF
+    aafEnabled: true,
+
+    // AWB
+    awbEnabled: true,
+    awbR: '1400',
+    awbGr: '1200',
+    awbGb: '1200',
+    awbB: '5000',
+
+    // CNF
+    cnfEnabled: true,
+    cnfValue: '0',
+
+    // CFA
+    cfaEnabled: true,
+    cfaType: 'malvar',
+
+    // CCM
+    ccmEnabled: true,
+    ccmValues: [
+      ['0', '0', '2000', '0'],
+      ['0', '2000', '0', '0'],
+      ['2000', '0', '0', '0'],
+    ],
+
+    // GAC
+    gacEnabled: true,
+    gacGain: '256',
+    gacOffset: '0.8',
+
+    // CSC
+    cscEnabled: true,
+
+    // NLM
+    nlmEnabled: true,
+    nlmRadius: '9',
+    nlmSigma: '3',
+    nlmHeight: '10',
+
+    // BNF
+    bnfEnabled: true,
+    bnfDistTh: '1.0',
+    bnfNormGain: '1.0',
+
+    // CEH
+    cehEnabled: true,
+    cehGain: '4,6',
+    cehOffset: '0.01',
+
+    // EEH
+    eehEnabled: true,
+    eehGain: '384',
+    eehOffset: '100',
+    eehEdgeThreshold: '4',
+    eehDeltaThreshold: '1000',
+
+    // FCS
+    fcsEnabled: true,
+    fcsGain: '8',
+    fcsOffset: '32',
+
+    // HSC
+    hscEnabled: true,
+    hscSaturationGain: '0',
+    hscHueOffset: '256',
+
+    // BCC
+    bccEnabled: true,
+    bccContrastGain: '0',
+    bccBrightnessOffset: '256',
+
+    // SCL
+    sclEnabled: false,
+    sclWidth: '1920',
+    sclHeight: '1080',      
+    });
+
+  const handleISPSubmit = (values) => {
+    setIspValues(values);
+  }
+
+  // Algorithms
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState('');
   const [algorithmFile, setAlgorithmFile] = useState('');
+
+  
+  // UI buttons
+
+  const handleNewPage = () => {
+    // Illuminant
+    setSelectedIlluminant('');
+    setIlluminantLuminanceValue('');
+    setCustomIlluminantData([...Array(31)].map(()=> ["", ""]));
+    
+    // Scene
+    setSelectedScene('');
+    setSceneLuminanceValue('');
+    setMacbethValues({
+      hfov: 10,
+      patchSize: 16
+    });
+    setPointArrayValues({
+      hfov: 10,
+      arraySize: 128,
+      pointSpacing: 16
+    });
+    setGridlinesValues({
+      hfov: 10,
+      gridlineSize: 128,
+      lineSpacing: 16,
+      lineThickness: 1
+    });
+    setSlantededgeValues({
+      hfov: 10,
+      imageSize: 128,
+      edgeAngle: 2.6,
+      darkLevel: 0
+    });
+    setRingsraysValues({
+      hfov: 10,
+      radialFreq: 8,
+      size: 128
+    });
+    setSceneLuminanceValue('');
+
+    // Optics
+    setSelectedOptics('');
+    setOpticsFile('');
+
+    // Sensor
+    setSelectedSensor('');
+    setSensorValues({
+      voltage_swing: "1.15",          // Voltage Swing (V)
+      well_capacity: "9000",          // Well Capacity (e)
+      fill_factor: "0.45",            // Fill Factor
+      pixel_size: "2.2",              // Pixel Size (µm)
+      dark_voltage: "10",             // Dark Voltage (µV/s)
+      read_noise: "0.96",             // Read Noise (mV)
+      prnu: "0.2218",                 // PRNU (%)
+      dsnu: "1",                      // DSNU (mV)
+      analog_gain: "1",               // Analog Gain
+      analog_offset: "0",             // Analog Offset
+      rows: "400",                    // Rows
+      cols: "600",                    // Cols
+    })
+
+    // ISP
+    setSelectedISP('');
+    setIspValues({
+    // DPC
+    dpcEnabled: true,
+    dpcValue: '30',
+
+    // BLC
+    blcEnabled: true,
+    blcR: '0',
+    blcGr: '0',
+    blcGb: '0',
+    blcB: '0',
+    blcalpha: '0',
+    blcbeta: '0',
+
+    // AAF
+    aafEnabled: true,
+
+    // AWB
+    awbEnabled: true,
+    awbR: '1400',
+    awbGr: '1200',
+    awbGb: '1200',
+    awbB: '5000',
+
+    // CNF
+    cnfEnabled: true,
+    cnfValue: '0',
+
+    // CFA
+    cfaEnabled: true,
+    cfaType: 'malvar',
+
+    // CCM
+    ccmEnabled: true,
+    ccmValues: [
+      ['0', '0', '2000', '0'],
+      ['0', '2000', '0', '0'],
+      ['2000', '0', '0', '0'],
+    ],
+
+    // GAC
+    gacEnabled: true,
+    gacGain: '256',
+    gacOffset: '0.8',
+
+    // CSC
+    cscEnabled: true,
+
+    // NLM
+    nlmEnabled: true,
+    nlmRadius: '9',
+    nlmSigma: '3',
+    nlmHeight: '10',
+
+    // BNF
+    bnfEnabled: true,
+    bnfDistTh: '1.0',
+    bnfNormGain: '1.0',
+
+    // CEH
+    cehEnabled: true,
+    cehGain: '4,6',
+    cehOffset: '0.01',
+
+    // EEH
+    eehEnabled: true,
+    eehGain: '384',
+    eehOffset: '100',
+    eehEdgeThreshold: '4',
+    eehDeltaThreshold: '1000',
+
+    // FCS
+    fcsEnabled: true,
+    fcsGain: '8',
+    fcsOffset: '32',
+
+    // HSC
+    hscEnabled: true,
+    hscSaturationGain: '0',
+    hscHueOffset: '256',
+
+    // BCC
+    bccEnabled: true,
+    bccContrastGain: '0',
+    bccBrightnessOffset: '256',
+
+    // SCL
+    sclEnabled: false,
+    sclWidth: '1920',
+    sclHeight: '1080',      
+    })
+
+    // Algorithms
+    setSelectedAlgorithm('');
+    setAlgorithmFile('');
+
+    // Image
+    setResultImage(null);
+
+    // Text
+    setOutputText([]);
+  }
+
+  const outputTextRef = useRef(null);
+
+  useEffect(()=>{
+    if (outputTextRef.current){
+      outputTextRef.current.scrollTop = outputTextRef.current.scrollHeight;
+    }
+  }, [outputText])
+
+  const fovCheck = () => {
+    if (!(selectedScene && selectedOptics)) return;
+
+    const payload = {
+      selectedScene,
+      sceneFile: "",
+      selectedOptics,
+      macbethParams,
+      pointarrayParams,
+      gridlinesParams,
+      slantededgeParams,
+      ringsraysParams,
+      scenefileParams,
+    };
+
+    fetch("http://127.0.0.1:8000/fov_check", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((line) => {
+          const jsonData = JSON.parse(line);
+          if (jsonData.type === "log") {
+            setOutputText((prev) => [...prev, jsonData.content]);
+          }
+        });
+        setOutputText((prev) => [...prev, "\n"]);
+      })
+      .catch((err) => console.error("FOV check error:", err));
+  };
+
+  useEffect(()=>{
+    fovCheck();
+  }, [selectedScene, selectedOptics]);
+
+  const handleSave = async() => {
+    
+  }
+
+  const handleRunSimulation = async () => {
+    setResultImage(null);
+
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    // Extract only the photon values
+    const photonValues = customIlluminantData.map(row => Number(row[0]));
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/simulate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          illuminant: selectedIlluminant,
+          illuminantLuminance: illuminantLuminanceValue,
+          illuminantCustomPhotons: photonValues,
+          scene: selectedScene,
+          sceneFile: sceneFile,
+          sceneLuminance: sceneLuminanceValue,
+          macbethParams: macbethParams,
+          pointarrayParams: pointarrayParams,
+          gridlinesParams: gridlinesParams,
+          slantededgeParams: slantededgeParams,
+          ringsraysParams: ringsraysParams,
+          scenefileParams: scenefileParams,
+          optics: selectedOptics,
+          sensor: selectedSensor,
+          sensorParams: sensorValues,
+          isp: selectedISP,
+          ispParams: ispValues,
+          algorithm: selectedAlgorithm
+        }),
+        signal: controller.signal
+      });
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = '';
+
+      let done = false;
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        buffer += decoder.decode(value || new Uint8Array(), { stream: true });
+
+        let lines = buffer.split('\n');
+        buffer = lines.pop(); // 마지막 라인은 아직 완전하지 않을 수 있으므로 버퍼에 남김
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const jsonData = JSON.parse(line);
+            if (jsonData.type === "log") {
+              setOutputText(prev => [...prev, jsonData.content]);
+            } else if (jsonData.type === "result") {
+              setResultImage(jsonData.content);
+            }
+          } catch (err) {
+            console.warn("Invalid JSON chunk skipped:", line);
+          }
+        }
+      }
+
+      // 마지막 남은 버퍼 처리
+      if (buffer.trim()) {
+        try {
+          const jsonData = JSON.parse(buffer);
+          if (jsonData.type === "log") setOutputText(prev => [...prev, jsonData.content]);
+          else if (jsonData.type === "result") setResultImage(jsonData.content);
+        } catch (err) {
+          console.warn("Invalid JSON chunk at end skipped:", buffer);
+        }
+      }
+      setOutputText(prev => [...prev, "\n"]);
+
+    } catch (error) {
+      console.error(error);
+      setOutputText(prev => [...prev, "Simulation failed:" + error.message]);
+    }
+  };
+
+
+  const handleStopSimulation = async() => {
+    if (abortControllerRef.current){
+      abortControllerRef.current.abort();
+      setOutputText(prev => [...prev, "Stop simulation at " + new Date().toLocaleTimeString()]);
+    }
+
+    try{
+      const response = await fetch("http://127.0.0.1:8000/stop");
+      const data = response.data;
+
+      if (data.message){
+        setOutputText(prev => [...prev, data.message]);
+      }
+    } catch (error){
+      console.error(error);
+      setOutputText(prev => [
+        ...prev,
+        "Stop failed: " + error.message
+      ])
+    }
+  }
+
+
+  // Sidebar buttons
+
+  const handleLogoClick = () => {
+    if (!sidebarExpanded) setSidebarExpanded(true);
+    else navigate('/');
+  };
+
+
+  // UI Style
 
   const sidebarStyle = {
     width: `${sidebarWidth}px`,
-    backgroundColor: '#eee',
+    backgroundColor: '#f7f7f7',
+    // backgroundColor: 'rgb(170, 171, 184)',
     color: 'black',
     display: 'flex',
     flexDirection: 'column',
     padding: '20px 10px',
     transition: 'width 0.3s',
     borderRight: '1px solid #ccc',
+    height: '100%',
   };
 
   const sidebarHeaderStyle = {
@@ -98,7 +687,7 @@ const Simulate = () => {
     marginBottom: '5px',
     cursor: 'pointer',
     borderRadius: '10px',
-    backgroundColor: active ? '#ddd' : 'transparent',
+    backgroundColor: active ? '#e6e6e6' : 'transparent',
     display: 'flex',
     alignItems: 'center',
     justifyContent: sidebarExpanded ? 'flex-start' : 'center',
@@ -117,6 +706,7 @@ const Simulate = () => {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
+    height: '100vh',
   };
 
   const topSectionStyle = {
@@ -124,13 +714,14 @@ const Simulate = () => {
     alignItems: 'flex-start',
     padding: '10px 20px',
     borderBottom: '1px solid #ccc',
+    // backgroundColor: 'rgb(120, 130, 145)',
   };
 
   const buttonGroupStyle = {
     display: 'flex',
     flexDirection: 'column',
     gap: '5px',
-    flex: '0 0 165px',
+    flex: '0 0 150px',
     height: '100%',
     justifyContent: 'flex-end',
   };
@@ -138,12 +729,6 @@ const Simulate = () => {
   const buttonRowStyle = {
     display: 'flex',
     gap: '8px',
-  };
-
-  const simulationAreaStyle = {
-    display: 'flex',
-    gap: '10px',
-    width: 'calc(150px * 6 + 20px * 5)',
   };
 
   const sectionStyle = {
@@ -155,6 +740,13 @@ const Simulate = () => {
     maxWidth: '200px',
     padding: '0 5px',
     boxSizing: 'border-box',
+  };
+
+  const dividerStyle = {
+    width: '1px',
+    backgroundColor: '#ccc',
+    alignSelf: 'stretch',
+    margin: '0 5px',
   };
 
   const iconButtonStyle = {
@@ -176,7 +768,9 @@ const Simulate = () => {
 
   const bottomSectionStyle = {
     flex: 1,
+    height: '100%',
     display: 'flex',
+    overflow: 'hidden',
   };
 
   const imageAreaStyle = {
@@ -186,26 +780,27 @@ const Simulate = () => {
     justifyContent: 'center',
     borderRight: '1px solid #ccc',
     backgroundColor: '#fff',
+    overflow: "hidden",
+    height: '100%',
   };
 
   const textAreaStyle = {
     flex: 2,
     padding: '20px',
     backgroundColor: '#f9f9f9',
-  };
-
-  const handleLogoClick = () => {
-    if (!sidebarExpanded) setSidebarExpanded(true);
-    else navigate('/');
+    overflowX: "hidden",
+    overflowY: "auto",
+    maxHeight: "100%",
   };
 
   const selectStyle = {
     width: '100%',
     height: '28px',
     boxSizing: 'border-box',
-    padding: '0 8px',
+    padding: '10 0px',
     minWidth: '80px',
-    fontSize: '13px',
+    fontSize: '14px',
+    borderRadius: '3px',
   };
 
   const fileInputRowStyle = {
@@ -220,10 +815,11 @@ const Simulate = () => {
     boxSizing: 'border-box',
     padding: '0 8px',
     minWidth: '50px',
+    fontSize: '12px',
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden'}}>
       <div style={sidebarStyle}>
         <div style={sidebarHeaderStyle}>
           <div
@@ -264,154 +860,291 @@ const Simulate = () => {
           <div style={buttonGroupStyle}>
             <div style={buttonRowStyle}>
               <button title="New" style={iconButtonStyle}>
-                <img src={newpage} alt="New" style={{ width: 20, height: 20 }} />
+                <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
               </button>
               <button title="Save" style={iconButtonStyle}>
                 <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="Back" style={iconButtonStyle}>
+              <button title="Back" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
                 <img src={back} alt="Back" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="Forward" style={iconButtonStyle}>
+              <button title="Forward" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
                 <img src={forward} alt="Forward" style={{ width: 20, height: 20 }} />
               </button>
             </div>
 
             <div style={buttonRowStyle}>
-              <button title="Run" style={iconButtonStyle} onClick={() => setOutputText(prev => [...prev, "Start Simulation at " + new Date().toLocaleTimeString()])}>
+              <button title="Run" style={iconButtonStyle} onClick={handleRunSimulation}>
                 <img src={run} alt="Run" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="Stop" style={iconButtonStyle}>
+              <button title="Stop" style={iconButtonStyle} onClick={handleStopSimulation}>
                 <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="SFR" style={iconButtonStyle}>
+              <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
                 <span style={{ fontSize: "14px", fontWeight: "bold" }}>SFR</span>
               </button>
             </div>
           </div>
 
-          <div style={simulationAreaStyle}>
-            <div style={sectionStyle}>
-              <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold'}}>Illuminant</label>
-              <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-                <select style={selectStyle}>{illuminants.map((ill, idx) => <option key={idx}>{ill}</option>)}</select>
-                <button style={iconButtonStyle}>
-                  <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
-                </button>
-                <button style={iconButtonStyle}>
-                  <img src={spectrum} alt="Spectrum" style={{ width: '20px', height: '20px' }} />
-                </button>
-              </div>
-            </div>
+          <div style={dividerStyle}></div>
 
-            <div style={sectionStyle}>
-              <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Scene</label>
-              <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-                <select style={selectStyle}>{scenes.map((s, idx) => <option key={idx}>{s}</option>)}</select>
-                <button style={iconButtonStyle}>
-                  <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
-                </button>
-                <button style={iconButtonStyle}>
-                  <img src={brightness} alt="Brightness" style={{ width: '20px', height: '20px' }} />
-                </button>
-              </div>
-              <div style={fileInputRowStyle}>
-                <input
-                  type="text"
-                  value={sceneFile}
-                  readOnly
-                  placeholder=""
-                  style={fileInputStyle}
+          {/* Illuminant */}
+          <div style={sectionStyle}>
+            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold'}}>Illuminant</label>
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <select
+                style={selectStyle} 
+                value={selectedIlluminant} 
+                onChange={(e)=> setSelectedIlluminant(e.target.value)}
+              >
+                {illuminants.map((ill, idx) => <option key={idx}>{ill}</option>)}
+              </select>
+              
+              <button style={iconButtonStyle} onClick={() => setIsIlluminantLuminanceDialogOpen(true)}>
+                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+              </button>
+
+              {isIlluminantLuminanceDialogOpen && (
+                selectedIlluminant === 'Custom' ? (
+                  <IlluminantDialogCustom
+                  initialData={customIlluminantData}
+                  onSubmit={(values)=>{
+                    IlluminantCustomSubmit(values);
+                    setSceneLuminanceValue(''); 
+                  }}
+                  onClose={() => {
+                    setIsIlluminantLuminanceDialogOpen(false)
+                  }}
                 />
-                <button style={iconButtonStyle} title="Upload">
-                  <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
-                  <input
-                    type="file"
-                    style={{ display: 'none' }}
-                    onChange={(e) =>
-                      e.target.files.length > 0 && setSceneFile(e.target.files[0].name)
-                    }
-                  />
-                </button>
-              </div>
-            </div>
-
-            <div style={sectionStyle}>
-              <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
-              <select style={selectStyle}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
-              <div style={fileInputRowStyle}>
-                <input
-                  type="text"
-                  value={opticsFile}
-                  readOnly
-                  placeholder=""
-                  style={fileInputStyle}
+                )
+                : (
+                  <IlluminantLuminanceDialog
+                  initialValue={illuminantLuminanceValue}
+                  onSubmit={(values)=>{
+                    IlluminantLuminanceSubmit(values);
+                    setSceneLuminanceValue('');
+                  }}
+                  onClose={()=> {
+                    setIsIlluminantLuminanceDialogOpen(false)
+                  }}
                 />
-                <button style={iconButtonStyle} title="Upload">
-                  <img src={upload} alt="Upload" style={{ width: 20, height: 20 }}/>
-                  <input
-                    type="file"
-                    style={{ display: 'none' }}
-                    onChange={(e) =>
-                      e.target.files.length > 0 && setOpticsFile(e.target.files[0].name)
-                    }
-                  />
-                </button>
-              </div>
-            </div>
+                )
+              )}
 
-            <div style={sectionStyle}>
-              <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Sensor</label>
-              <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-                <select style={selectStyle}>{sensors.map((s, idx) => <option key={idx}>{s}</option>)}</select>
-                <button style={iconButtonStyle}>
-                  <img src={parameter} alt="Params" style={{ width: '20px', height: '20px'}} />
-                </button>
-              </div>
+              <button style={iconButtonStyle} onClick={() => openSpectrumPopup(selectedIlluminant, illuminantLuminanceValue, customIlluminantData)}>
+                <img src={spectrum} alt="Spectrum" style={{ width: '20px', height: '20px' }} />
+              </button>
             </div>
-
-            <div style={sectionStyle}>
-              <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>ISP</label>
-              <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-                <select style={selectStyle}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
-                <button style={iconButtonStyle}>
-                  <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
-                </button>
-              </div>
-            </div>
-
-            <div style={sectionStyle}>
-              <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
-              <select style={selectStyle}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
-              <div style={fileInputRowStyle}>
-                <input
-                  type="text"
-                  value={algorithmFile}
-                  readOnly
-                  placeholder=""
-                  style={fileInputStyle}
-                />
-                <button style={iconButtonStyle}>
-                  <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
-                  <input
-                    type="file"
-                    style={{ display: 'none' }}
-                    onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
-                  />
-                </button>
-              </div>
-            </div>
-
           </div>
+
+          <div style={dividerStyle}></div>
+
+          {/* Scene */}
+          <div style={sectionStyle}>
+            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Scene</label>
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <select 
+                style={selectStyle}
+                value={selectedScene}
+                onChange = {(e) => setSelectedScene(e.target.value)}
+              >
+                {scenes.map((s, idx) => <option key={idx} value = {s}>{s}</option>)}
+              </select>
+              
+              <button style={iconButtonStyle} onClick = {sceneButtonClick}>
+                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+              </button>
+              {isMacbethDialogOpen && <MacbethDialog initialValues={macbethParams} onSubmit={handleMacbethSubmit} onClose={() => {setIsMacbethDialogOpen(false); fovCheck();}} />}
+              {isPointArrayDialogOpen && <PointArrayDialog initialValues={pointarrayParams} onSubmit={handlePointArraySubmit} onClose={() => {setIsPointArrayDialogOpen(false); fovCheck();}} />}
+              {isGridlineDialogOpen && <GridlinesDialog initialValues={gridlinesParams} onSubmit={handleGridlinesSubmit} onClose={() => {setIsGridlineDialogOpen(false); fovCheck();}} />}
+              {isSlantedEdgeDialogOpen && <SlantedEdgeDialog initialValues={slantededgeParams} onSubmit={handleSlantededgeSubmit} onClose={() => {setIsSlantedEdgeDialogOpen(false); fovCheck();}} />}
+              {isRingsRaysDialogOpen && <RingsRaysDialog initialValues={ringsraysParams} onSubmit={handleRingsraysSubmit} onClose={() => {setIsRingsRaysDialogOpen(false); fovCheck();}} />}
+              {isSceneFileDialogOpen && <SceneFileDialog initialValues={scenefileParams} onSubmit={handleSceneFileSubmit} onClose={() => {setIsSceneFileDialogOpen(false); fovCheck();}} />}
+              
+
+              <button style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>
+                <img src={brightness} alt="Brightness" style={{ width: '20px', height: '20px' }} />
+              </button>
+              {isSceneLuminanceDialogOpen && (
+                <SceneLuminanceDialog
+                  initialValues = {sceneLuminanceValue}
+                  onSubmit = {(values)=>{
+                    SceneLuminanceSubmit(values);
+                    setIlluminantLuminanceValue('');
+                  }}
+                  onClose={() => {
+                    setIsSceneLuminanceDialogOpen(false)
+                  }}
+                />
+              )}
+
+            </div>
+
+            <div style={fileInputRowStyle}>
+              <input
+                type="text"
+                value={sceneFile}
+                readOnly
+                placeholder=""
+                disabled
+                style={fileInputStyle}
+              />
+              <button
+                style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}
+                title="Upload"
+                disabled
+                onClick={() => fileInputRef.current.click()}
+              >
+                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={(e) => e.target.files.length > 0 && setSceneFile(e.target.files[0].name)}
+              />
+            </div>
+          </div>
+
+          <div style={dividerStyle}></div>
+
+          {/* Optics */}
+          <div style={sectionStyle}>
+            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
+            <select style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
+            <div style={fileInputRowStyle}>
+              <input
+                type="text"
+                disabled
+                value={opticsFile}
+                readOnly
+                placeholder=""
+                style={fileInputStyle}
+              />
+              <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} title="Upload">
+                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }}/>
+                <input
+                  type="file"
+                  disabled
+                  style={{ display: 'none' }}
+                  onChange={(e) =>
+                    e.target.files.length > 0 && setOpticsFile(e.target.files[0].name)
+                  }
+                />
+              </button>
+            </div>
+          </div>
+
+          <div style={dividerStyle}></div>
+
+          {/* Sensor */}
+          <div style={sectionStyle}>
+            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Sensor</label>
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <select style={selectStyle} value={selectedSensor} onChange={(e) => setSelectedSensor(e.target.value)}>{sensors.map((s, idx) => <option key={idx}>{s}</option>)}</select>
+
+              <button style={iconButtonStyle} onClick={() => setIsSensorDialogOpen(true)}>
+                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px'}} />
+              </button>
+
+              {isSensorDialogOpen && (
+                <SensorDialog
+                  initialValues={sensorValues}
+                  onSubmit={handleSensorSubmit}
+                  onClose={() => setIsSensorDialogOpen(false)}
+                />
+              )}
+
+            </div>
+          </div>
+
+          <div style={dividerStyle}></div>
+
+          {/* ISP */}
+          <div style={sectionStyle}>
+            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>ISP</label>
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <select style={selectStyle} value={selectedISP} onChange={(e) => setSelectedISP(e.target.value)}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
+              
+              <button style={iconButtonStyle} onClick={() => {if(selectedISP === 'Fast-openISP'){
+                  setIsIspDialogOpen(true);
+                }}
+              }>
+                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+              </button>
+
+              {isIspDialogOpen && (
+                <ISPDialog
+                  initialValues = {ispValues}
+                  onSubmit={handleISPSubmit}
+                  onClose={() => setIsIspDialogOpen(false)}
+                />
+              )}
+            </div>
+            <div style={fileInputRowStyle}>
+              <input
+                type="text"
+                disabled
+                value={algorithmFile}
+                readOnly
+                placeholder=""
+                style={fileInputStyle}
+              />
+              <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+                <input
+                  type="file"
+                  disabled
+                  style={{ display: 'none' }}
+                  onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
+                />
+              </button>
+            </div>
+          </div>
+
+          <div style={dividerStyle}></div>
+
+          {/* Algorithms */}
+          <div style={sectionStyle}>
+            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
+            <select style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
+            <div style={fileInputRowStyle}>
+              <input
+                type="text"
+                disabled
+                value={algorithmFile}
+                readOnly
+                placeholder=""
+                style={fileInputStyle}
+              />
+              <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+                <input
+                  type="file"
+                  disabled
+                  style={{ display: 'none' }}
+                  onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
+                />
+              </button>
+            </div>
+          </div>
+
+          <div style={dividerStyle}></div>
+
         </div>
 
         <div style={bottomSectionStyle}>
           <div style={imageAreaStyle}>
-            <span>Image Preview Area</span>
+            {resultImage ? (
+              <img src={resultImage} alt="Simulation Result" style={{width: "100%", height: "100%", objectFit: "contain", imageRendering: 'pixelated'}}/>
+            ):(
+              <span></span>
+            )}
+            
           </div>
-          <div style={textAreaStyle}>
+          <div ref={outputTextRef} style={textAreaStyle}>
             {outputText.map((line, idx) => (
-              <pre key={idx} style={{margin: 0}}>{line}</pre>
+              <pre key={idx} style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{line}</pre>
             ))}
           </div>
         </div>
