@@ -1,5 +1,57 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+const h = 6.62607015e-34; // Planck's constant [J sec]
+const c = 299792458;      // Speed of light [m/s]
+
+// 1D 또는 2D 배열 대응
+const quantaToEnergy = ({ wavelength, photons }) => {
+  if (!photons || photons.length === 0) return [];
+
+  const numWaves = wavelength.length;
+  const energy = [];
+
+  if (Array.isArray(photons[0])) {
+    // 2D XW format
+    for (let i = 0; i < photons.length; i++) {
+      energy[i] = [];
+      for (let j = 0; j < numWaves; j++) {
+        energy[i][j] = (h * c / (wavelength[j] * 1e-9)) * photons[i][j];
+      }
+    }
+  } else {
+    // 1D array
+    for (let j = 0; j < numWaves; j++) {
+      energy[j] = (h * c / (wavelength[j] * 1e-9)) * photons[j];
+    }
+  }
+
+  return energy;
+};
+
+const energyToQuanta = ({ wavelength, energy }) => {
+  if (!energy || energy.length === 0) return [];
+
+  const numWaves = wavelength.length;
+  const photons = [];
+
+  if (Array.isArray(energy[0])) {
+    // 2D XW format
+    for (let i = 0; i < energy.length; i++) {
+      photons[i] = [];
+      for (let j = 0; j < numWaves; j++) {
+        photons[i][j] = energy[i][j] * (wavelength[j] * 1e-9) / (h * c);
+      }
+    }
+  } else {
+    // 1D array
+    for (let j = 0; j < numWaves; j++) {
+      photons[j] = energy[j] * (wavelength[j] * 1e-9) / (h * c);
+    }
+  }
+
+  return photons;
+};
+
 const IlluminantDialogCustom = ({ initialData, onClose }) => {
   const [tableData, setTableData] = useState(
     initialData || Array.from({ length: 31 }, () => ["", ""])
@@ -17,13 +69,37 @@ const IlluminantDialogCustom = ({ initialData, onClose }) => {
   const handleChange = (rowIndex, colIndex, value) => {
     const newData = [...tableData];
     newData[rowIndex][colIndex] = value;
+
+    const wave = [400 + rowIndex * 10]; // 배열로 감싸기
+
+    try {
+      if (colIndex === 0) { // photon 입력
+        if (value === "" || isNaN(parseFloat(value))) {
+          newData[rowIndex][1] = ""; // energy 빈칸 유지
+        } else {
+          const photonVal = [parseFloat(value) * 1e20];
+          const energy = quantaToEnergy({ wavelength: wave, photons: photonVal });
+          newData[rowIndex][1] = energy[0].toFixed(6);
+        }
+      } else if (colIndex === 1) { // energy 입력
+        if (value === "" || isNaN(parseFloat(value))) {
+          newData[rowIndex][0] = ""; // photon 빈칸 유지
+        } else {
+          const energyVal = [[parseFloat(value)]];
+          const photon = energyToQuanta({ wavelength: wave, energy: energyVal });
+          newData[rowIndex][0] = (photon[0][0] / 1e20).toFixed(6);
+        }
+      }
+    } catch (err) {
+      if (colIndex === 0) newData[rowIndex][1] = "";
+      else newData[rowIndex][0] = "";
+    }
+
     setTableData(newData);
   };
 
   const handleModify = () => {
-    if (onClose){
-      onClose(tableData);
-    }
+    if (onClose) onClose(tableData);
   };
 
   const handleKeyDown = (e, rowIndex, colIndex) => {
@@ -53,15 +129,14 @@ const IlluminantDialogCustom = ({ initialData, onClose }) => {
         break;
       case 'Escape':
         e.preventDefault();
-        if (onClose) onClose(null); // esc 눌렀을 때 다이얼로그 닫기
+        if (onClose) onClose(null);
         break;
       default:
         break;
     }
   };
 
-
-  const verticalHeaders = Array.from({ length: 31 }, (_, i) => `${400 + i*10} nm`);
+  const verticalHeaders = Array.from({ length: 31 }, (_, i) => `${400 + i * 10} nm`);
   const horizontalHeaders = ["Photons (10^20)", "Energy (J)"];
 
   return (
@@ -108,7 +183,6 @@ const IlluminantDialogCustom = ({ initialData, onClose }) => {
     </div>
   );
 };
-
 
 const styles = {
   overlay: {
