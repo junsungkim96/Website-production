@@ -4,6 +4,7 @@ import './styles/tablet.css';
 import './styles/mobile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {Suspense} from 'react';
 import Menubar from './component/Menubar';
 import Footer from './component/Footer';
@@ -46,6 +47,17 @@ const MainLayout = ({ children }) => (
   </div>
 );
 
+const ProtectedRoute = ({children}) => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === true;
+
+  if(!isLoggedIn){
+    alert('You must be logged in to access this page')
+    return <Navigate to="/login" replace />
+  }
+
+  return children
+}
+
 const App = () => (
   <>
     {/* Vercel Analytics for Website */}
@@ -83,7 +95,7 @@ const App = () => (
           <Route path="/blog/cv" element={<MainLayout>< CV /></MainLayout>}/>
           
           {/* Signup & Apply */}
-          <Route path="/simulate" element = {<Simulate/>} />
+          <Route path="/simulate" element = {<ProtectedRoute> <Simulate/> </ProtectedRoute>} />
 
           {/* Signup & Apply */}
           <Route path="/login" element={< Login />} />
