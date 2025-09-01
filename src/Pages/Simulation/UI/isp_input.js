@@ -179,7 +179,7 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
     setSclEnabled(initialValues.sclEnabled ?? sclEnabled);
     setSclWidth(initialValues.sclWidth ?? sclWidth);
     setSclHeight(initialValues.sclHeight ?? sclHeight);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues]);
 
 
@@ -194,7 +194,7 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
       ccmEnabled, ccmValues,
       gacEnabled, gacGain, gacOffset,
       cscEnabled,
-      nlmEnabled, nlmRadius, nlmSigma,
+      nlmEnabled, nlmRadius, nlmSigma, nlmHeight,
       bnfEnabled, bnfDistTh, bnfNormGain,
       cehEnabled, cehGain, cehOffset,
       eehEnabled, eehGain, eehOffset, eehEdgeThreshold, eehDeltaThreshold,
@@ -715,7 +715,7 @@ const styles = {
   },
   dialog: {
     width: 850,
-    height: 1000,
+    height: 900,
     backgroundColor: 'rgb(255, 255, 255)', // Changed dialog background to match PySide2 screenshot
     borderRadius: '8px',
     boxShadow: '0px 4px 12px rgba(0,0,0,0.2)',

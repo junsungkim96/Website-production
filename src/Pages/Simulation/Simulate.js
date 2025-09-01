@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import createRoot from 'react-dom/client';
-import {Line} from 'react-chartjs-2';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../img/QblackAI_logo_black.png';
 import sidebarIcon from '../../img/simulate/sidebar-left.svg';
@@ -133,7 +131,7 @@ const Simulate = () => {
   const [scenefileParams, setSceneFileValues] = useState({'hfov': 10});
 
   const sceneButtonClick = () => {
-    if (selectedScene == '') return;
+    if (selectedScene === '') return;
     else if (selectedScene === 'Macbeth') setIsMacbethDialogOpen(true);
     else if (selectedScene === 'Point Array') setIsPointArrayDialogOpen(true);
     else if (selectedScene === 'Gridlines') setIsGridlineDialogOpen(true);
@@ -510,9 +508,27 @@ const Simulate = () => {
     fovCheck();
   }, [selectedScene, selectedOptics]);
 
-  const handleSave = async() => {
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/get_device", { method: "POST" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.device === 'cuda') {
+          setOutputText(['Using GPU for calculation']);
+          setOutputText((prev) => [...prev, "\n"]);
+        } else if (data.device === 'cpu') {
+          setOutputText(['Using CPU for calculation\n']);
+          setOutputText((prev) => [...prev, "\n"]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setOutputText('Unable to detect device');
+      });
+  }, []);
+
+  // const handleSave = async() => {
     
-  }
+  // }
 
   const handleRunSimulation = async () => {
     setResultImage(null);
