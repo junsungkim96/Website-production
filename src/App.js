@@ -48,7 +48,7 @@ const MainLayout = ({ children }) => (
 );
 
 const ProtectedRoute = ({children}) => {
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === true;
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
   if(!isLoggedIn){
     alert('You must be logged in to access this page')
