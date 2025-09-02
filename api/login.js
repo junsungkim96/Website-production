@@ -41,6 +41,15 @@ export default async function handler(req, res){
       return res.status(401).json({message: 'Invalid email or password'});
     }
 
+    // Update login info
+    await users.updateOne(
+      {_id: user._id},
+      {
+        $set: {lastLoginAt: new Date()},
+        $inc: {loginCount: 1}
+      }
+    )
+
     // login successful
     res.status(200).json({message: 'Login successful', firstName: user.firstName});
   } catch(error){

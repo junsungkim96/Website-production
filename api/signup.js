@@ -36,6 +36,11 @@ export default async function handler(req, res){
       email,
       password: hashedPassword,
       createdAt: new Date(),
+      lastLoginAt: null,
+      loginCount: 0,
+      plan: "free",
+      isActive: true,
+      roles: ["user"]
     });
 
     res.status(201).json({message: 'User created'});

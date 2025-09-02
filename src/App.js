@@ -37,6 +37,7 @@ import Privacy from './Pages/Utils/Privacy.js';
 import Demo from './Pages/Utils/Demo.js';
 import Simulate from './Pages/Simulation/Simulate.js';
 import DesktopInfo from './Pages/Utils/DesktopLogin.js';
+import Dashboard from './Pages/Utils/Dashboard.js';
 
 import {Analytics} from '@vercel/analytics/react';
 
@@ -111,6 +112,9 @@ const App = () => (
           <Route path="/privacy" element={<MainLayout>< Privacy /></MainLayout>}/>
           <Route path="/contact_sales" element = {<MainLayout>< ContactSales /></MainLayout>}/>
           <Route path="/demo" element = {<MainLayout><Demo/></MainLayout>}/>
+
+          {/* Admin Page */}
+          <Route path="/dashboard" element={< Dashboard />} />
 
         </Routes>
       </Suspense>
