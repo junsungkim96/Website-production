@@ -36,6 +36,7 @@ import Terms from './Pages/Utils/Terms.js';
 import Privacy from './Pages/Utils/Privacy.js';
 import Demo from './Pages/Utils/Demo.js';
 import Simulate from './Pages/Simulation/Simulate.js';
+import DesktopInfo from './Pages/Utils/DesktopLogin.js';
 
 import {Analytics} from '@vercel/analytics/react';
 
@@ -102,6 +103,7 @@ const App = () => (
           <Route path="/signup" element={< Signup />} />
           <Route path="/apply" element={< ApplicationFrom />} />
           <Route path="/submit" element={< Submit /> } />
+          <Route path="/desktop-info" element={< DesktopInfo/>} />
 
           {/* Contact, Terms of Use & Privacy */}
           <Route path="/contact" element={<MainLayout>< Contact /></MainLayout>}/>

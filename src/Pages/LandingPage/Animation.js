@@ -17,6 +17,21 @@ const ParticleBackground = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const freeTrial = () => {
+    const isMobile = window.innerWidth <= 768;
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (isMobile){
+      navigate('/desktop-info');
+    } else{
+      if (isLoggedIn){
+        navigate('/simulate');
+      } else{
+        navigate('/login');
+      }
+    }
+  }
+
   return (
     <div style={{ position: 'relative', height: '105vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
       
@@ -35,10 +50,15 @@ const ParticleBackground = () => {
           </div>
         </div>
 
-        <div style={{ marginTop: '5vh', marginBottom: '5vh'}}>
-          <Button variant = "light" size = "lg"
-          onClick = {()=> navigate('/demo')}>
-            <div className = "career-button">Book a Demo →</div> 
+        <div style ={{display: 'flex', justifyContent: 'center', gap: '30px', marginTop: '5vh', marginBottom: '5vh'}}>
+          <Button variant = "light" size = "md"
+          onClick = {freeTrial} style = {{borderRadius: '12px'}}>
+            <div className = "career-button">Start free trial →</div> 
+          </Button>
+          
+          <Button variant = "light" size = "md"
+          onClick = {()=> navigate('/demo')} style = {{borderRadius: '12px'}}>
+            <div className = "career-button">Enterprise Demo →</div> 
           </Button>
         </div>
 
