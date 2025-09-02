@@ -19,34 +19,36 @@ const Pricing = () => {
       price: 'Free',
       features: [
         '7-day trial',
-        'Full access to core simulator functionalities for a limited time',
-        'Access to onboarding materials and tutorials',
-        'Option to upgrade to any paid tier at the end of the trial',
+        'Access to core simulator functions',
+        'Limited scene data & simulated image downloads',
+        'Option to upgrade to any paid tier after trial',
       ],
       buttonText: 'Contact Sales',
-      onClick: () => navigate('/contact_sales', {state: {planName: 'Basic'}})
+      onClick: () => navigate('/contact_sales', {state: {planName: 'Trial'}})
     },
     {
       name: 'Basic',
-      price: '$299/month',
+      price: '$499/month',
       features: [
         'Access to core simulator functionalities',
-        'Limited hardware/software integration options',
-        'Basic support via email',
-        'Monthly updates and access to community forums',
+        'CPU-based simulations',
+        'Complete scene data & unlimited simulated image downloads',
+        'Email support',
+        'Monthly updates and community forum access',
       ],
       buttonText: 'Contact Sales',
       onClick: () => navigate('/contact_sales', {state: {planName: 'Basic'}})
     },
     {
       name: 'Pro',
-      price: '$999/month',
+      price: '$2499/month',
       features: [
         'All Basic Tier features',
-        'Advanced simulation tools and analytics',
-        'Priority email support',
+        'GPU-based simulations',
+        'Access to extensive lens, sensor and ISP database',
+        'Advanced automation and analytics tools',
+        'Support via email',
         'Access to webinars and tutorials',
-        'One-on-one consultation (1 hour/month)',
       ],
       buttonText: 'Contact Sales',
       onClick: () => navigate('/contact_sales', {state: {planName: 'Pro'}})
@@ -56,10 +58,10 @@ const Pricing = () => {
       price: 'Contact Us',
       features: [
         'All Pro Tier features',
-        'Custom integration solutions for specific HW/SW',
+        'On-premise deployment',
+        'Tailored hardware/software integrations',
         'Dedicated account manager',
         'Onboarding assistance and training for teams',
-        'Access to early/beta releases',
       ],
       buttonText: 'Contact Sales',
       onClick: () => navigate('/contact_sales', {state: {planName: 'Enterprise'}})
@@ -70,9 +72,8 @@ const Pricing = () => {
       features: [
         'Designed for students and educators',
         'All Basic Tier features',
-        'Educational resources and case studies',
-        'Limited support via email',
-        'Group access for classrooms or labs',
+        'Support via email',
+        'Group access for classrooms',
       ],
       buttonText: 'Contact Sales',
       onClick: () => navigate('/contact_sales', {state: {planName: 'Education'}})
@@ -93,7 +94,24 @@ const Pricing = () => {
       <Container style={{ marginTop: '5vh', marginBottom: '10vh' }}>
         <Row>
           {plans.map((plan, index) => (
-            <Col key={index} md={6} lg={4} className="mb-4">
+            <Col key={index} md={6} lg={4} className="mb-4" style={{ position: 'relative' }}>
+              {plan.name === 'Pro' && (
+                <div style={{
+                  position: 'absolute',
+                  top: '10px',
+                  right: '20px',
+                  backgroundColor: '#FFA500', // 주황색
+                  color: '#fff',
+                  padding: '5px 10px',
+                  borderRadius: '20px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  zIndex: 10,
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.3)'
+                }}>
+                  Top Choice
+                </div>
+              )}
               <Card className="h-100 shadow">
                 <Card.Body style={{ display: 'flex', flexDirection: 'column' }}>
                   <Card.Title style={{ textAlign: 'center', fontSize: '30px', fontWeight: '500'}}>{plan.name}</Card.Title>
@@ -111,7 +129,7 @@ const Pricing = () => {
                       variant="success"
                       size="lg"
                       onClick={plan.onClick}
-                      style={{ backgroundColor: "#008B8B", borderColor: '#2F4F4F', borderWidth: "1px",  borderStyle: "solid"}}
+                      style={{ backgroundColor: "#008B8B", borderColor: '#2F4F4F', borderWidth: "1px", borderStyle: "solid"}}
                     >
                       {plan.buttonText}
                     </Button>

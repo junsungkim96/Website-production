@@ -53,7 +53,7 @@ const ParticleBackground = () => {
         <div style ={{display: 'flex', justifyContent: 'center', gap: '30px', marginTop: '5vh', marginBottom: '5vh'}}>
           <Button variant = "light" size = "md"
           onClick = {freeTrial} style = {{borderRadius: '12px'}}>
-            <div className = "career-button">Start free trial →</div> 
+            <div className = "career-button">Start Free Trial →</div> 
           </Button>
           
           <Button variant = "light" size = "md"
