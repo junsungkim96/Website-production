@@ -24,7 +24,6 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const [loading, setLoading] = useState(true);
   const [metrics, setMetrics] = useState({
     totalUsers: 0,
     dau: 0,
@@ -53,7 +52,6 @@ const Dashboard = () => {
       } catch (err) {
         console.error('Error fetching dashboard metrics:', err);
       } finally {
-        setLoading(false);
       }
     };
 

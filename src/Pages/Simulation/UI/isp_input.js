@@ -88,13 +88,13 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
 
   // HSC
   const [hscEnabled, setHscEnabled] = useState(initialValues.hscEnabled ?? true);
-  const [hscSaturationGain, setHscSaturationGain] = useState(initialValues.hscSaturationGain ?? '0');
-  const [hscHueOffset, setHscHueOffset] = useState(initialValues.hscHueOffset ?? '256');
+  const [hscHueOffset, setHscHueOffset] = useState(initialValues.hscHueOffset ?? '0');
+  const [hscSaturationGain, setHscSaturationGain] = useState(initialValues.hscSaturationGain ?? '256');
 
   // BCC
   const [bccEnabled, setBccEnabled] = useState(initialValues.bccEnabled ?? true);
-  const [bccContrastGain, setBccContrastGain] = useState(initialValues.bccContrastGain ?? '0');
-  const [bccBrightnessOffset, setBccBrightnessOffset] = useState(initialValues.bccBrightnessOffset ?? '256');
+  const [bccBrightnessOffset, setBccBrightnessOffset] = useState(initialValues.bccBrightnessOffset ?? '0');
+  const [bccContrastGain, setBccContrastGain] = useState(initialValues.bccContrastGain ?? '256');
 
   // SCL
   const [sclEnabled, setSclEnabled] = useState(initialValues.sclEnabled ?? false);
@@ -169,12 +169,12 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
     setFcsOffset(initialValues.fcsOffset ?? fcsOffset);
 
     setHscEnabled(initialValues.hscEnabled ?? hscEnabled);
-    setHscSaturationGain(initialValues.hscSaturationGain ?? hscSaturationGain);
     setHscHueOffset(initialValues.hscHueOffset ?? hscHueOffset);
+    setHscSaturationGain(initialValues.hscSaturationGain ?? hscSaturationGain);
 
     setBccEnabled(initialValues.bccEnabled ?? bccEnabled);
-    setBccContrastGain(initialValues.bccContrastGain ?? bccContrastGain);
     setBccBrightnessOffset(initialValues.bccBrightnessOffset ?? bccBrightnessOffset);
+    setBccContrastGain(initialValues.bccContrastGain ?? bccContrastGain);
 
     setSclEnabled(initialValues.sclEnabled ?? sclEnabled);
     setSclWidth(initialValues.sclWidth ?? sclWidth);
@@ -199,8 +199,8 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
       cehEnabled, cehGain, cehOffset,
       eehEnabled, eehGain, eehOffset, eehEdgeThreshold, eehDeltaThreshold,
       fcsEnabled, fcsGain, fcsOffset,
-      hscEnabled, hscSaturationGain, hscHueOffset,
-      bccEnabled, bccContrastGain, bccBrightnessOffset,
+      hscEnabled, hscHueOffset, hscSaturationGain,
+      bccEnabled, bccBrightnessOffset, bccContrastGain,
       sclEnabled, sclWidth, sclHeight,
     };
     if (onSubmit) onSubmit(inputs);
@@ -619,11 +619,11 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
                     <div style={{ ...styles.gridLayout, flexGrow: 1 }}>
                       <div style={styles.gridItem}>
                         <label>hue offset</label>
-                        <input type="text" value={hscSaturationGain} onChange={(e) => setHscSaturationGain(e.target.value)} style={styles.textInput} />
+                        <input type="text" value={hscHueOffset} onChange={(e) => setHscHueOffset(e.target.value)} style={styles.textInput} />
                       </div>
                       <div style={styles.gridItem}>
                         <label>saturation gain</label>
-                        <input type="text" value={hscHueOffset} onChange={(e) => setHscHueOffset(e.target.value)} style={styles.textInput} />
+                        <input type="text" value={hscSaturationGain} onChange={(e) => setHscSaturationGain(e.target.value)} style={styles.textInput} />
                       </div>
                     </div>
                   </div>
@@ -645,11 +645,11 @@ const ISPDialog = ({onSubmit, onClose, initialValues }) => {
                     <div style={{ ...styles.gridLayout, flexGrow: 1 }}>
                       <div style={styles.gridItem}>
                         <label>brightness offset</label>
-                        <input type="text" value={bccContrastGain} onChange={(e) => setBccContrastGain(e.target.value)} style={styles.textInput} />
+                        <input type="text" value={bccBrightnessOffset} onChange={(e) => setBccBrightnessOffset(e.target.value)} style={styles.textInput} />
                       </div>
                       <div style={styles.gridItem}>
                         <label>contrast gain</label>
-                        <input type="text" value={bccBrightnessOffset} onChange={(e) => setBccBrightnessOffset(e.target.value)} style={styles.textInput} />
+                        <input type="text" value={bccContrastGain} onChange={(e) => setBccContrastGain(e.target.value)} style={styles.textInput} />
                       </div>
                     </div>
                   </div>

@@ -5,6 +5,8 @@ import sidebarIcon from '../../img/simulate/sidebar-left.svg';
 import camera from '../../img/simulate/dslr-camera.png';
 import lens from '../../img/simulate/optics.png';
 import sensor from '../../img/simulate/microchip.png';
+import PlanModal from './UI/PlanModal';
+
 import newpage from '../../img/simulate/new-file.svg';
 import run from '../../img/simulate/run.svg';
 import save from '../../img/simulate/save.svg';
@@ -45,6 +47,10 @@ const Simulate = () => {
     { name: 'Optics Design', icon: lens },
     { name: 'Sensor Design', icon: sensor },
   ];
+
+  const [currentUser, setCurrentUser] = useState('Junsung');
+  const [currentPlan, setCurrentPlan] = useState('Trial')
+  const [showPlanModal, setShowPlanModal] = useState(false);
 
   const menuRefs = useRef([]);
   const abortControllerRef = useRef(null);
@@ -186,8 +192,8 @@ const Simulate = () => {
       dsnu: "1",                      // DSNU (mV)
       analog_gain: "1",               // Analog Gain
       analog_offset: "0",             // Analog Offset
-      rows: "400",                    // Rows
-      cols: "600",                    // Cols
+      rows: "450",                    // Rows
+      cols: "650",                    // Cols
   });
 
   const handleSensorSubmit = (values) => {
@@ -275,13 +281,13 @@ const Simulate = () => {
 
     // HSC
     hscEnabled: true,
-    hscSaturationGain: '0',
-    hscHueOffset: '256',
+    hscHueOffset: '0',
+    hscSaturationGain: '256',
 
     // BCC
     bccEnabled: true,
-    bccContrastGain: '0',
-    bccBrightnessOffset: '256',
+    bccBrightnessOffset: '0',
+    bccContrastGain: '256',
 
     // SCL
     sclEnabled: false,
@@ -354,8 +360,8 @@ const Simulate = () => {
       dsnu: "1",                      // DSNU (mV)
       analog_gain: "1",               // Analog Gain
       analog_offset: "0",             // Analog Offset
-      rows: "400",                    // Rows
-      cols: "600",                    // Cols
+      rows: "450",                    // Rows
+      cols: "650",                    // Cols
     })
 
     // ISP
@@ -438,13 +444,13 @@ const Simulate = () => {
 
     // HSC
     hscEnabled: true,
-    hscSaturationGain: '0',
-    hscHueOffset: '256',
+    hscHueOffset: '0',
+    hscSaturationGain: '256',
 
     // BCC
     bccEnabled: true,
-    bccContrastGain: '0',
-    bccBrightnessOffset: '256',
+    bccBrightnessOffset: '0',
+    bccContrastGain: '256',
 
     // SCL
     sclEnabled: false,
@@ -638,6 +644,36 @@ const Simulate = () => {
     }
   }
 
+  const shareSimulationResult = (resultImage, simulationInputs) => {
+    if (!resultImage) {
+      alert('No simulation result available.');
+      return;
+    }
+
+    try {
+      // Combine the image and input parameters into a single object
+      const payload = {
+        image: resultImage,       // base64 string or URL of the simulation result
+        inputs: simulationInputs, // JSON object containing simulation parameters
+        timestamp: new Date().toISOString() // current timestamp
+      };
+
+      // Create a Blob from the payload and generate a temporary URL
+      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      // Copy the URL to the clipboard
+      navigator.clipboard.writeText(url);
+      alert(`Sharable link is copied to the clipboard!\n${url}`);
+
+      // Revoke the URL after a certain time to free memory
+      setTimeout(() => URL.revokeObjectURL(url), 60000); // revoke after 1 minute
+    } catch (err) {
+      console.error(err);
+      alert('Failed to create share link');
+    }
+  };
+
 
   // Sidebar buttons
 
@@ -650,16 +686,15 @@ const Simulate = () => {
   // UI Style
 
   const sidebarStyle = {
+    height: '100vh',
     width: `${sidebarWidth}px`,
-    backgroundColor: '#f7f7f7',
-    // backgroundColor: 'rgb(170, 171, 184)',
+    backgroundColor: '#f7f7f7', // backgroundColor: 'rgb(170, 171, 184)',
     color: 'black',
     display: 'flex',
     flexDirection: 'column',
     padding: '20px 10px',
     transition: 'width 0.3s',
     borderRight: '1px solid #ccc',
-    height: '100%',
   };
 
   const sidebarHeaderStyle = {
@@ -865,6 +900,39 @@ const Simulate = () => {
             {sidebarExpanded && <span>{item.name}</span>}
           </div>
         ))}
+
+        <div
+          style={{
+            marginTop: 'auto', // push to bottom
+            padding: '10px',
+            cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: sidebarExpanded ? '#fafafa' : 'transparent',
+            borderTop: sidebarExpanded ? '1px solid #ccc' : 'none',
+          }}
+          onClick={() => setShowPlanModal(true)} // 모달 상태
+        >
+          {sidebarExpanded && (
+            <>
+              <span style={{fontWeight: '400', fontSize: '16px', color: '#111'}}>{currentUser}</span>
+              <span style={{fontSize: '14px', color: '#777', marginTop: '2px'}}>{currentPlan}</span>
+            </>
+        )}
+        </div>
+
+        {/* 요금제 변경 모달 */}
+        {showPlanModal && (
+          <PlanModal
+            currentPlan={currentPlan}
+            onClose={() => setShowPlanModal(false)}
+            onChangePlan={(newPlan) => {
+              setCurrentPlan(newPlan);
+              setShowPlanModal(false);
+            }}
+          />
+        )}
       </div>
 
       <div style={mainContentStyle}>
@@ -894,6 +962,33 @@ const Simulate = () => {
               </button>
               <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
                 <span style={{ fontSize: "14px", fontWeight: "bold" }}>SFR</span>
+              </button>
+              <button
+                style={{...iconButtonStyle,  opacity: 0.5, cursor: 'not-allowed'}}
+                title="Share"
+                disabled
+                onClick={()=>shareSimulationResult(resultImage, {
+                  illuminant: selectedIlluminant,
+                  illuminantLuminance: illuminantLuminanceValue,
+                  illuminantCustomPhotons: customIlluminantData.map(row => Number(row[0])),
+                  scene: selectedScene,
+                  sceneFile: sceneFile,
+                  sceneLuminance: sceneLuminanceValue,
+                  macbethParams: macbethParams,
+                  pointarrayParams: pointarrayParams,
+                  gridlinesParams: gridlinesParams,
+                  slantededgeParams: slantededgeParams,
+                  ringsraysParams: ringsraysParams,
+                  scenefileParams: scenefileParams,
+                  optics: selectedOptics,
+                  sensor: selectedSensor,
+                  sensorParams: sensorValues,
+                  isp: selectedISP,
+                  ispParams: ispValues,
+                  algorithm: selectedAlgorithm
+                })}
+              >
+                <img src={upload} alt="Share" style={{ width: 20, height: 20 }} />
               </button>
             </div>
           </div>
