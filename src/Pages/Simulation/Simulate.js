@@ -80,7 +80,11 @@ const Simulate = () => {
   )
 
   const IlluminantLuminanceSubmit = (value) => {
-    setIlluminantLuminanceValue(value);
+    // if (typeof value === 'number'){    
+      setIlluminantLuminanceValue(value);
+    // }else{
+    //   setOutputText((prev) => [...prev, "Illuminant luminance must be a decimal number"]);
+    // }
   }
 
   const IlluminantCustomSubmit = (value) =>{
@@ -134,7 +138,7 @@ const Simulate = () => {
   const [gridlinesParams, setGridlinesValues] = useState({'hfov': 10, 'gridlineSize': 128, 'lineSpacing': 16, 'lineThickness': 1});
   const [slantededgeParams, setSlantededgeValues] = useState({'hfov': 10, 'imageSize': 128, 'edgeAngle': 2.6, 'darkLevel': 0});
   const [ringsraysParams, setRingsraysValues] = useState({'hfov': 10, 'radialFreq': 8, 'size': 128});
-  const [scenefileParams, setSceneFileValues] = useState({'hfov': 10});
+  const [sceneFileParams, setSceneFileValues] = useState({'hfov': 10});
 
   const sceneButtonClick = () => {
     if (selectedScene === '') return;
@@ -152,26 +156,32 @@ const Simulate = () => {
 
   const handleMacbethSubmit = (values) => {
     setMacbethValues(values);
+    fovCheck({macbeth: values});
   }
 
   const handlePointArraySubmit = (values) => {
     setPointArrayValues(values);
+    fovCheck({pointarray: values});
   }
 
   const handleGridlinesSubmit = (values) =>{
     setGridlinesValues(values);
+    fovCheck({gridlines: values});
   }
 
   const handleSlantededgeSubmit = (values) => {
     setSlantededgeValues(values);
+    fovCheck({slantededge: values});
   }
 
   const handleRingsraysSubmit = (values) => {
     setRingsraysValues(values);
+    fovCheck({ringsrays: values});
   }
 
   const handleSceneFileSubmit = (values) => {
     setSceneFileValues(values);
+    fovCheck({sceneFile: values});
   }
 
   // Optics 
@@ -477,19 +487,26 @@ const Simulate = () => {
     }
   }, [outputText])
 
-  const fovCheck = () => {
+  const fovCheck = ({
+    macbeth = macbethParams,
+    pointarray = pointarrayParams,
+    gridlines = gridlinesParams,
+    slantededge = slantededgeParams,
+    ringsrays = ringsraysParams,
+    sceneFile = sceneFileParams,
+  } = {}) => {
     if (!(selectedScene && selectedOptics)) return;
 
     const payload = {
       selectedScene,
       sceneFile: "",
       selectedOptics,
-      macbethParams,
-      pointarrayParams,
-      gridlinesParams,
-      slantededgeParams,
-      ringsraysParams,
-      scenefileParams,
+      macbethParams: macbeth,
+      pointarrayParams: pointarray,
+      gridlinesParams: gridlines,
+      slantededgeParams: slantededge,
+      ringsraysParams: ringsrays,
+      sceneFileParams: sceneFile,
     };
 
     fetch("http://127.0.0.1:8000/fov_check", {
@@ -564,7 +581,7 @@ const Simulate = () => {
           gridlinesParams: gridlinesParams,
           slantededgeParams: slantededgeParams,
           ringsraysParams: ringsraysParams,
-          scenefileParams: scenefileParams,
+          sceneFileParams: sceneFileParams,
           optics: selectedOptics,
           sensor: selectedSensor,
           sensorParams: sensorValues,
@@ -625,7 +642,7 @@ const Simulate = () => {
   const handleStopSimulation = async() => {
     if (abortControllerRef.current){
       abortControllerRef.current.abort();
-      setOutputText(prev => [...prev, "Stop simulation at " + new Date().toLocaleTimeString()]);
+      setOutputText(prev => [...prev, "Simulation stopped. Wait a moment to run simulation"]);
     }
 
     try{
@@ -979,7 +996,7 @@ const Simulate = () => {
                   gridlinesParams: gridlinesParams,
                   slantededgeParams: slantededgeParams,
                   ringsraysParams: ringsraysParams,
-                  scenefileParams: scenefileParams,
+                  sceneFileParams: sceneFileParams,
                   optics: selectedOptics,
                   sensor: selectedSensor,
                   sensorParams: sensorValues,
@@ -1061,12 +1078,12 @@ const Simulate = () => {
               <button style={iconButtonStyle} onClick = {sceneButtonClick}>
                 <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
               </button>
-              {isMacbethDialogOpen && <MacbethDialog initialValues={macbethParams} onSubmit={handleMacbethSubmit} onClose={() => {setIsMacbethDialogOpen(false); fovCheck();}} />}
-              {isPointArrayDialogOpen && <PointArrayDialog initialValues={pointarrayParams} onSubmit={handlePointArraySubmit} onClose={() => {setIsPointArrayDialogOpen(false); fovCheck();}} />}
-              {isGridlineDialogOpen && <GridlinesDialog initialValues={gridlinesParams} onSubmit={handleGridlinesSubmit} onClose={() => {setIsGridlineDialogOpen(false); fovCheck();}} />}
-              {isSlantedEdgeDialogOpen && <SlantedEdgeDialog initialValues={slantededgeParams} onSubmit={handleSlantededgeSubmit} onClose={() => {setIsSlantedEdgeDialogOpen(false); fovCheck();}} />}
-              {isRingsRaysDialogOpen && <RingsRaysDialog initialValues={ringsraysParams} onSubmit={handleRingsraysSubmit} onClose={() => {setIsRingsRaysDialogOpen(false); fovCheck();}} />}
-              {isSceneFileDialogOpen && <SceneFileDialog initialValues={scenefileParams} onSubmit={handleSceneFileSubmit} onClose={() => {setIsSceneFileDialogOpen(false); fovCheck();}} />}
+              {isMacbethDialogOpen && <MacbethDialog initialValues={macbethParams} onSubmit={handleMacbethSubmit} onClose={() => {setIsMacbethDialogOpen(false);}} />}
+              {isPointArrayDialogOpen && <PointArrayDialog initialValues={pointarrayParams} onSubmit={handlePointArraySubmit} onClose={() => {setIsPointArrayDialogOpen(false);}} />}
+              {isGridlineDialogOpen && <GridlinesDialog initialValues={gridlinesParams} onSubmit={handleGridlinesSubmit} onClose={() => {setIsGridlineDialogOpen(false);}} />}
+              {isSlantedEdgeDialogOpen && <SlantedEdgeDialog initialValues={slantededgeParams} onSubmit={handleSlantededgeSubmit} onClose={() => {setIsSlantedEdgeDialogOpen(false);}} />}
+              {isRingsRaysDialogOpen && <RingsRaysDialog initialValues={ringsraysParams} onSubmit={handleRingsraysSubmit} onClose={() => {setIsRingsRaysDialogOpen(false);}} />}
+              {isSceneFileDialogOpen && <SceneFileDialog initialValues={sceneFileParams} onSubmit={handleSceneFileSubmit} onClose={() => {setIsSceneFileDialogOpen(false);}} />}
               
 
               <button style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>

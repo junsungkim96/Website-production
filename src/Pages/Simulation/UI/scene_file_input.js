@@ -26,7 +26,7 @@ const SceneFileDialog = ({ onSubmit, onClose, initialValues ={} }) => {
   }, [onClose]);
 
   const handleSubmit = () => {
-    if (onSubmit) onSubmit({ hfov});
+    if (onSubmit) onSubmit({hfov: Number(hfov)});
     if (onClose) onClose(); // 창 닫기 트리거
   };
 
