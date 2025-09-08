@@ -4,7 +4,7 @@ import logo from '../../img/QblackAI_logo_black.png';
 import sidebarIcon from '../../img/simulate/sidebar-left.svg';
 import camera from '../../img/simulate/dslr-camera.png';
 import lens from '../../img/simulate/optics.png';
-import sensor from '../../img/simulate/microchip.png';
+// import sensor from '../../img/simulate/microchip.png';
 import PlanModal from './UI/PlanModal';
 
 import newpage from '../../img/simulate/new-file.svg';
@@ -30,6 +30,8 @@ import SlantedEdgeDialog from './UI/scene_slantededge_input';
 import SceneFileDialog from './UI/scene_file_input';
 import SensorDialog from './UI/sensor_input';
 import ISPDialog from './UI/isp_input';
+
+import { API_BASE_URL } from '../../config';
 
 
 const Simulate = () => {
@@ -90,7 +92,7 @@ const Simulate = () => {
 
   const openSpectrumPopup = async (selectedIlluminant, illuminantLuminanceValue, customIlluminantData) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/get_illuminant", {
+      const response = await fetch(`${API_BASE_URL}/get_illuminant`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -515,7 +517,7 @@ const Simulate = () => {
       sceneFileParams: sceneFile,
     };
 
-    fetch("http://127.0.0.1:8000/fov_check", {
+    fetch(`${API_BASE_URL}/fov_check`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -538,7 +540,7 @@ const Simulate = () => {
   }, [selectedScene, selectedOptics]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_device", { method: "POST" })
+    fetch(`${API_BASE_URL}/get_device`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
         if (data.device === 'cuda') {
@@ -572,7 +574,7 @@ const Simulate = () => {
     const photonValues = customIlluminantData.map(row => Number(row[0]));
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/simulate', {
+      const response = await fetch(`${API_BASE_URL}/simulate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -653,7 +655,7 @@ const Simulate = () => {
     }
 
     try{
-      const response = await fetch("http://127.0.0.1:8000/stop");
+      const response = await fetch(`${API_BASE_URL}/stop`);
       const data = response.data;
 
       if (data.message){
