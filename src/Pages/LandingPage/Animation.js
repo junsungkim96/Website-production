@@ -7,6 +7,8 @@ import {useNavigate} from 'react-router-dom';
 
 const ParticleBackground = () => {
   const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
   const particlesInit = async (main) => {
     // Initialize the full version of particles.js
@@ -18,9 +20,6 @@ const ParticleBackground = () => {
   }, []);
 
   const freeTrial = () => {
-    const isMobile = window.innerWidth <= 768;
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
     if (isMobile){
       navigate('/desktop-info');
     } else{
@@ -50,7 +49,7 @@ const ParticleBackground = () => {
           </div>
         </div>
 
-        <div style ={{display: 'flex', justifyContent: 'center', gap: '30px', marginTop: '5vh', marginBottom: '5vh'}}>
+        <div style ={{display: 'flex', justifyContent: 'center', gap: isMobile ? '15px' : '30px', marginTop: '5vh', marginBottom: '5vh'}}>
           <Button variant = "light" size = "md"
           onClick = {freeTrial} style = {{borderRadius: '12px'}}>
             <div className = "career-button">Start Free Trial →</div> 

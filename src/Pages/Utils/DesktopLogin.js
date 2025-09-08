@@ -11,15 +11,18 @@ const DesktopInfo = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         height: '100vh',        // 화면 전체 높이
         textAlign: 'center',
+        paddingTop: '30vh',
         padding: '20px',
         backgroundColor: '#000', // 페이지 배경 검정
         color: '#fff',           // 글자 흰색
+        boxSizing: 'border-box',
+        overflow: 'hidden',
       }}
     >
-      <h4 style = {{width: '80%', margin: '0 auto'}}>
+      <h4 style = {{width: '80%', margin: '0 auto', fontWeight: 300}}>
         The free trial is only available on desktop. Please use a desktop computer to start your trial.
       </h4>
       <Button

@@ -38,7 +38,7 @@ export default async function handler(req, res){
       createdAt: new Date(),
       lastLoginAt: null,
       loginCount: 0,
-      plan: "free",
+      plan: "Free Trial",
       isActive: true,
       roles: ["user"]
     });
