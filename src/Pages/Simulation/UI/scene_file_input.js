@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import parameter from '../../../img/simulate/parameter.svg';
-import SceneDialogCustom from './scene_luminance_custom';
+// import SceneDialogCustom from './scene_luminance_custom';
 
 const SceneFileDialog = ({ onSubmit, onClose, initialValues ={}, illuminantData, onIlluminantChange}) => {
   const [hfov, setHfov] = useState(initialValues?.hfov || 10);
@@ -66,7 +66,7 @@ const SceneFileDialog = ({ onSubmit, onClose, initialValues ={}, illuminantData,
           />
         </div>
 
-        <div style={styles.inputRow}>
+        {/* <div style={styles.inputRow}>
           <label style={styles.label}>Scene Illuminant</label>
           <select
             value={selectedIlluminant}
@@ -84,9 +84,9 @@ const SceneFileDialog = ({ onSubmit, onClose, initialValues ={}, illuminantData,
             }>
             <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
           </button>
-        </div>
+        </div> */}
 
-        {isSceneLuminanceDialogOpen && (
+        {/* {isSceneLuminanceDialogOpen && (
           <SceneDialogCustom 
             initialData = {illuminantData}
             onSubmit={(data) => {
@@ -96,7 +96,7 @@ const SceneFileDialog = ({ onSubmit, onClose, initialValues ={}, illuminantData,
             }}
             onClose={() => setIsSceneLuminanceDialogOpen(false)}
           />
-        )}
+        )} */}
 
         <button onClick={handleSubmit} style={styles.button}>
           Modify
