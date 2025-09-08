@@ -45,12 +45,13 @@ const Simulate = () => {
   const menuItems = [
     { name: 'System Optimization', icon: camera },
     { name: 'Optics Design', icon: lens },
-    { name: 'Sensor Design', icon: sensor },
+    // { name: 'Sensor Design', icon: sensor },
   ];
 
   const [currentUser, setCurrentUser] = useState('Junsung');
-  const [currentPlan, setCurrentPlan] = useState('Trial')
+  const [currentPlan, setCurrentPlan] = useState('Free Trial')
   const [showPlanModal, setShowPlanModal] = useState(false);
+  const userRef = useRef(null);
 
   const menuRefs = useRef([]);
   const abortControllerRef = useRef(null);
@@ -62,7 +63,7 @@ const Simulate = () => {
   }, [sidebarExpanded]);
 
   const illuminants = ["", "Custom", "D50", "D55", "D65", "D75", "Illuminant A", "Illuminant B", "Illuminant C", "Fluorescent", "Tungsten"];
-  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "bird.jpg", "city.jpg"];
+  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "bird.jpg"/*, "city.jpg"*/];
   const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye", "WideAngle"];
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "Fast-openISP"];
@@ -79,12 +80,8 @@ const Simulate = () => {
     Array.from({length: 31}, () => ["",""])
   )
 
-  const IlluminantLuminanceSubmit = (value) => {
-    // if (typeof value === 'number'){    
-      setIlluminantLuminanceValue(value);
-    // }else{
-    //   setOutputText((prev) => [...prev, "Illuminant luminance must be a decimal number"]);
-    // }
+  const IlluminantLuminanceSubmit = (value) => { 
+    setIlluminantLuminanceValue(value);
   }
 
   const IlluminantCustomSubmit = (value) =>{
@@ -138,7 +135,14 @@ const Simulate = () => {
   const [gridlinesParams, setGridlinesValues] = useState({'hfov': 10, 'gridlineSize': 128, 'lineSpacing': 16, 'lineThickness': 1});
   const [slantededgeParams, setSlantededgeValues] = useState({'hfov': 10, 'imageSize': 128, 'edgeAngle': 2.6, 'darkLevel': 0});
   const [ringsraysParams, setRingsraysValues] = useState({'hfov': 10, 'radialFreq': 8, 'size': 128});
-  const [sceneFileParams, setSceneFileValues] = useState({'hfov': 10});
+  const [sceneFileParams, setSceneFileValues] = useState({'hfov': 10, 'illuminant': ''});
+  const [sceneFileIlluminantData, setSceneFileIlluminantData] = useState(
+    Array.from({length: 31}, () => ["",""])
+  )
+
+  const sceneIlluminantSubmit = (value) => {
+    setSceneFileIlluminantData(value);
+  }
 
   const sceneButtonClick = () => {
     if (selectedScene === '') return;
@@ -352,6 +356,8 @@ const Simulate = () => {
       size: 128
     });
     setSceneLuminanceValue('');
+    setSceneFileValues({'hfov': 10, 'illuminant': ''});
+    setSceneFileIlluminantData(Array.from({length: 31}, () => ["",""]));
 
     // Optics
     setSelectedOptics('');
@@ -582,6 +588,7 @@ const Simulate = () => {
           slantededgeParams: slantededgeParams,
           ringsraysParams: ringsraysParams,
           sceneFileParams: sceneFileParams,
+          sceneFileIlluminantData: sceneFileIlluminantData,
           optics: selectedOptics,
           sensor: selectedSensor,
           sensorParams: sensorValues,
@@ -709,7 +716,7 @@ const Simulate = () => {
     color: 'black',
     display: 'flex',
     flexDirection: 'column',
-    padding: '20px 10px',
+    padding: '20px 3px 0px 3px',
     transition: 'width 0.3s',
     borderRight: '1px solid #ccc',
   };
@@ -718,6 +725,7 @@ const Simulate = () => {
     display: 'flex',
     alignItems: 'center',
     marginBottom: '20px',
+    padding: '0px 10px 0px 10px',
     justifyContent: sidebarExpanded ? 'space-between' : 'center',
   };
 
@@ -910,8 +918,16 @@ const Simulate = () => {
           <div
             key={item.name}
             ref={(el) => (menuRefs.current[index] = el)}
-            style={sidebarItemStyle(activeMenu === item.name)}
-            onClick={() => setActiveMenu(item.name)}
+            style={{
+              ...sidebarItemStyle(activeMenu === item.name),
+              cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
+              opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
+            }}
+            onClick={() => {
+              if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
+                setActiveMenu(item.name);
+              }
+            }}
           >
             <img src={item.icon} alt={item.name} style={iconStyle} />
             {sidebarExpanded && <span>{item.name}</span>}
@@ -919,29 +935,58 @@ const Simulate = () => {
         ))}
 
         <div
+          ref={userRef}
           style={{
-            marginTop: 'auto', // push to bottom
-            padding: '10px',
+            marginTop: 'auto', // 맨 아래로 밀기
+            padding: '12px',
             cursor: 'pointer',
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
+            borderTop: sidebarExpanded ? '1px solid #ccc' : 'transparent', // 위에 가느다란 선
             backgroundColor: sidebarExpanded ? '#fafafa' : 'transparent',
-            borderTop: sidebarExpanded ? '1px solid #ccc' : 'none',
+            height: '60px',
+            boxSizing: 'border-box',
+            pointerEvents: 'none',
           }}
-          onClick={() => setShowPlanModal(true)} // 모달 상태
+          // onClick={() => setShowPlanModal(true)} // 클릭하면 모달 열기
         >
+          {/* 사용자 이니셜 동그라미 */}
+          <div
+            style={{
+              width: '28px',
+              height: '28px',
+              borderRadius: '50%',
+              backgroundColor: '#009ACD',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '16px',
+              fontWeight: '600',
+              marginRight: '15px',
+              flexShrink: 0,
+            }}
+          >
+            {currentUser.charAt(0).toUpperCase()}
+          </div>
+
+          {/* 사용자 이름 & 플랜 */}
           {sidebarExpanded && (
-            <>
-              <span style={{fontWeight: '400', fontSize: '16px', color: '#111'}}>{currentUser}</span>
-              <span style={{fontSize: '14px', color: '#777', marginTop: '2px'}}>{currentPlan}</span>
-            </>
-        )}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontWeight: '600', fontSize: '16px', color: '#111' }}>
+                {currentUser}
+              </span>
+              <span style={{ fontSize: '14px', color: '#666'}}>
+                {currentPlan}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* 요금제 변경 모달 */}
         {showPlanModal && (
           <PlanModal
+            anchorRef = {userRef}
             currentPlan={currentPlan}
             onClose={() => setShowPlanModal(false)}
             onChangePlan={(newPlan) => {
@@ -959,7 +1004,7 @@ const Simulate = () => {
               <button title="New" style={iconButtonStyle}>
                 <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
               </button>
-              <button title="Save" style={iconButtonStyle}>
+              <button title="Save" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
                 <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
               </button>
               <button title="Back" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
@@ -974,7 +1019,7 @@ const Simulate = () => {
               <button title="Run" style={iconButtonStyle} onClick={handleRunSimulation}>
                 <img src={run} alt="Run" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="Stop" style={iconButtonStyle} onClick={handleStopSimulation}>
+              <button title="Stop" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} disabled onClick={handleStopSimulation}>
                 <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
               </button>
               <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
@@ -1083,8 +1128,15 @@ const Simulate = () => {
               {isGridlineDialogOpen && <GridlinesDialog initialValues={gridlinesParams} onSubmit={handleGridlinesSubmit} onClose={() => {setIsGridlineDialogOpen(false);}} />}
               {isSlantedEdgeDialogOpen && <SlantedEdgeDialog initialValues={slantededgeParams} onSubmit={handleSlantededgeSubmit} onClose={() => {setIsSlantedEdgeDialogOpen(false);}} />}
               {isRingsRaysDialogOpen && <RingsRaysDialog initialValues={ringsraysParams} onSubmit={handleRingsraysSubmit} onClose={() => {setIsRingsRaysDialogOpen(false);}} />}
-              {isSceneFileDialogOpen && <SceneFileDialog initialValues={sceneFileParams} onSubmit={handleSceneFileSubmit} onClose={() => {setIsSceneFileDialogOpen(false);}} />}
-              
+              {isSceneFileDialogOpen && 
+                <SceneFileDialog 
+                  initialValues={sceneFileParams} 
+                  illuminantData = {sceneFileIlluminantData}
+                  onIlluminantChange = {sceneIlluminantSubmit} 
+                  onSubmit={handleSceneFileSubmit} 
+                  onClose={() => {setIsSceneFileDialogOpen(false);}} 
+                />
+              }
 
               <button style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>
                 <img src={brightness} alt="Brightness" style={{ width: '20px', height: '20px' }} />
@@ -1267,9 +1319,12 @@ const Simulate = () => {
             
           </div>
           <div ref={outputTextRef} style={textAreaStyle}>
-            {outputText.map((line, idx) => (
-              <pre key={idx} style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{line}</pre>
-            ))}
+            {Array.isArray(outputText) 
+              ? outputText.map((line, idx) => (
+                  <pre key={idx} style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{line}</pre>
+                ))
+              : <pre style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{outputText}</pre>
+            }
           </div>
         </div>
       </div>

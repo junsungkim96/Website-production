@@ -82,7 +82,7 @@ const Pricing = () => {
 
 
   return (
-    <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh' }}>
+    <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="career-left-text">
           <div>
@@ -95,6 +95,20 @@ const Pricing = () => {
         <Row>
           {plans.map((plan, index) => (
             <Col key={index} md={6} lg={4} className="mb-4" style={{ position: 'relative' }}>
+              {plan.name === 'Trial' && (
+                <div style={{
+                  position: 'absolute',
+                  top: '-40px',    // 카드 위쪽 바깥
+                  left: '20px',     // 카드 왼쪽 정렬
+                  fontSize: '16px',
+                  color: '#fff',
+                  fontWeight: 400,
+                  textDecoration: 'underline'
+                }}>
+                  *Price does not include taxes
+                </div>
+              )}
+
               {plan.name === 'Pro' && (
                 <div style={{
                   position: 'absolute',
