@@ -142,6 +142,7 @@ const Menubar = () => {
                   else if (item === 'Customer Stories') navigate('/stories');
                   else if (item === 'Investor Relations') navigate('/ir');
                   else if (item === 'News') navigate('/news');
+                  else if (item === 'Contact') navigate('/contact')
                 },
               },
             ].map((menu, idx) => (
@@ -356,6 +357,8 @@ const Menubar = () => {
                         closeOffcanvasAndNavigate('/ir');
                       } else if (item === 'News') {
                         closeOffcanvasAndNavigate('/news');
+                      } else if (item === 'Contact'){
+                        closeOffcanvasAndNavigate('/contact');
                       }
                     }}
                     style={{ color: 'white', fontSize: '4vw' }}
