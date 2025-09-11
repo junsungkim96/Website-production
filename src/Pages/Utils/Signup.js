@@ -18,8 +18,35 @@ const Signup = () => {
 
   // Validation schema for email (step 1)
   const emailSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
+    email: Yup.string().email('Invalid email').required('Email is required').test(
+      'duplicate-check', // test 이름
+      'Already registered. Try another email', // 에러 메시지
+      async (value) => {
+        if (!value) return false; // 빈 값일 때는 에러
+        const isDuplicate = await checkEmailDuplicate(value);
+        return isDuplicate; // 중복이면 false 반환
+      }
+    ),
   });
+
+  const checkEmailDuplicate = async (email) => {
+    if (!email) return false;
+
+    try {
+      const response = await fetch('/api/check-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      return !data.duplicate; // 중복이면 false, 중복 아니면 true
+    } catch (error) {
+      console.error('Email check failed:', error);
+      return false;
+    }
+  };
 
   // Validation scehma for password (step 2)
   const passwordSchema = Yup.object().shape({
@@ -47,42 +74,6 @@ const Signup = () => {
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
   });
-
-  // Check duplicate email (step 1)
-  const checkEmailDuplicate = async (email) => {
-    if (!email) {
-      setServerMessage('Email not set.');
-      return false;
-    }
-
-    try {
-      const res = await fetch('https://www.qblackai.com/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName: 'Temp',
-          lastName: 'Temp',
-          email,
-          password: 'Temp1234!' // 더미 비밀번호
-        }),
-      });
-
-      if (res.status === 409) {
-        setServerMessage('This email is already registered.');
-        return true; // 이메일 중복
-      } else if (!res.ok) {
-        const data = await res.json();
-        setServerMessage(data.message || 'Server error.');
-        return false;
-      }
-
-      return false; // 사용 가능
-    } catch (error) {
-      console.error(error);
-      setServerMessage('Error checking email.');
-      return false;
-    }
-  };
 
   // Send code (step 2)
   const sendCode = async () => {
@@ -230,25 +221,13 @@ const Signup = () => {
               {/* Email form (Step 1)*/}
               {step === 1 && (
                 <div className="form-group" style={{ width: '100%' }}>
-                  <Field name="email">
-                    {({ field, form }) => (
-                      <input
-                        {...field}
-                        type="email"
-                        placeholder="Email"
-                        className={`input-field${form.errors.email && form.touched.email ? ' is-invalid' : ''}`}
-                        onBlur={async (e) => {
-                          field.onBlur(e); // Formik 기본 onBlur 호출
-                          const isDuplicate = await checkEmailDuplicate(e.target.value);
-                          if (!isDuplicate) {
-                            setServerMessage(''); // 중복 아니면 메시지 초기화
-                          }
-                        }}
-                      />
-                    )}
-                  </Field>
+                  <Field
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    className={`input-field${errors.email && touched.email ? ' is-invalid' : ''}`}
+                  />
                   <ErrorMessage name="email" component="div" className="invalid-feedback" />
-                  {serverMessage && <div className="text-danger mt-1">{serverMessage}</div>}
                 </div>
               )}
 
