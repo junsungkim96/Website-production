@@ -51,7 +51,7 @@ export default async function handler(req, res){
     )
 
     // login successful
-    res.status(200).json({message: 'Login successful', firstName: user.firstName});
+    res.status(200).json({message: 'Login successful', firstName: user.firstName, plan: user.plan});
   } catch(error){
     console.error(error);
     res.status(500).json({message: error.message || 'Internal server error'});
