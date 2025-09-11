@@ -93,7 +93,7 @@ const Login = () => {
             }
           }}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, isSubmitting }) => (
             <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {/* Welcome 유지 */}
               <div
@@ -154,7 +154,7 @@ const Login = () => {
               )}
 
               {/* 버튼 */}
-              <button type="submit" className="next-button">
+              <button type="submit" className="next-button" disabled={isSubmitting}>
                 {step === 1 ? 'Next' : 'Login'}
               </button>
             </Form>
