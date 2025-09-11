@@ -64,7 +64,7 @@ const Login = () => {
   };
 
   return (
-    <div style={{ marginTop: '5vh', textAlign: 'center' }}>
+    <div style={{ marginTop: '5vh', textAlign: 'center'}}>
       <img
         src={logo}
         alt="QblackAI Logo"
@@ -79,7 +79,6 @@ const Login = () => {
           validationSchema={step === 1 ? emailSchema : passwordSchema}
           onSubmit={async (values, { setSubmitting, validateForm, setFieldError }) => {
             if (step === 1) {
-              // 이메일 검증
               const errors = await validateForm();
               if (errors.email) {
                 alert(errors.email);
@@ -95,32 +94,39 @@ const Login = () => {
         >
           {({ errors, touched, isSubmitting }) => (
             <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {/* Welcome 유지 */}
-              <div
-                style={{
-                  fontSize: '4vh',
-                  fontWeight: 'bold',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-              >
+              {/* Welcome */}
+              <div style={{ fontSize: '4vh', fontWeight: 'bold', display: 'flex', justifyContent: 'center' }}>
                 Welcome
               </div>
 
               {/* 이메일 */}
-              <div className="form-group" style={{ width: '100%' }}>
+              <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
                 <Field
                   name="email"
                   type="email"
                   placeholder="Email"
                   className={`input-field${errors.email && touched.email ? ' is-invalid' : ''}`}
+                  disabled={isSubmitting} // 입력 막기
                 />
+                {isSubmitting && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'rgba(200,200,200,0.5)',
+                      zIndex: 10,
+                    }}
+                  />
+                )}
                 <ErrorMessage name="email" component="div" className="invalid-feedback" />
               </div>
 
               {/* 비밀번호 */}
               {step === 2 && (
-                <div className="form-group" style={{ width: '100%' }}>
+                <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
                   <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
                     <Field
                       name="password"
@@ -128,10 +134,12 @@ const Login = () => {
                       placeholder="Password"
                       className={`input-field${errors.password && touched.password ? ' is-invalid' : ''}`}
                       style={{ flex: 1, height: '50px', fontSize: '16px' }}
+                      disabled={isSubmitting} // 입력 막기
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
+                      disabled={isSubmitting} // 클릭 막기
                       style={{
                         position: 'absolute',
                         right: '10px',
@@ -141,7 +149,7 @@ const Login = () => {
                         justifyContent: 'center',
                         background: 'none',
                         border: 'none',
-                        cursor: 'pointer',
+                        cursor: isSubmitting ? 'default' : 'pointer',
                         color: '#008B8B',
                         padding: 0,
                       }}
@@ -149,17 +157,48 @@ const Login = () => {
                       {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
                     </button>
                   </div>
+
+                  {isSubmitting && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(200,200,200,0.5)',
+                        zIndex: 10,
+                      }}
+                    />
+                  )}
+
                   <ErrorMessage name="password" component="div" className="invalid-feedback" />
                 </div>
               )}
 
               {/* 버튼 */}
-              <button type="submit" className="next-button" disabled={isSubmitting}>
-                {step === 1 ? 'Next' : 'Login'}
-              </button>
+              <div style={{ position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
+                <button type="submit" className="next-button" disabled={isSubmitting}>
+                  {step === 1 ? 'Next' : 'Login'}
+                </button>
+                {isSubmitting && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'rgba(200,200,200,0.5)',
+                      zIndex: 10,
+                    }}
+                  />
+                )}
+              </div>
             </Form>
           )}
         </Formik>
+
 
         <span style={{ display: 'flex', justifyContent: 'center', fontSize: '16px', marginTop: '15px' }}>
           Need an account?&nbsp;
