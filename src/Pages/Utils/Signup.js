@@ -18,15 +18,7 @@ const Signup = () => {
 
   // Validation schema for email (step 1)
   const emailSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required').test(
-      'duplicate-check', // test 이름
-      'Already registered. Try another email', // 에러 메시지
-      async (value) => {
-        if (!value) return false; // 빈 값일 때는 에러
-        const isDuplicate = await checkEmailDuplicate(value);
-        return isDuplicate; // 중복이면 false 반환
-      }
-    ),
+    email: Yup.string().email('Invalid email').required('Email is required'),
   });
 
   const checkEmailDuplicate = async (email) => {
@@ -187,13 +179,19 @@ const Signup = () => {
             step === 1 ? emailSchema : step === 2 ? passwordSchema : step === 3 ? codeSchema : nameSchema
           }
           enableReinitialize
-          onSubmit={async (values, {setSubmitting}) => {
+          onSubmit={async (values, {setSubmitting, setErrors}) => {
             setServerMessage('');
             setSubmitting(true);
             try{
               if (step === 1){
-              setEmailAddress(values.email);
-              setStep(2);
+                const isAvailable = await checkEmailDuplicate(values.email);
+                if (!isAvailable){
+                  setErrors({email: 'Already registered. Try another email'});
+                  setServerMessage('Email already registered');
+                  return;
+                }
+                setEmailAddress(values.email);
+                setStep(2);
               }
               else if (step === 2){
                 setSignupPassword(values.password)
