@@ -218,15 +218,14 @@ const Menubar = () => {
                       label: 'Simulate',
                       onClick: () => {
                         setHoveredMenu(null);
-                        navigate('/simulate');
+                        navigate('/simulate');  
                       },
                     },
                     {
                       label: 'Logout',
                       onClick: () => {
                         setHoveredMenu(null);
-                        localStorage.removeItem('isLoggedIn');
-                        localStorage.removeItem('userFirstName');
+                        localStorage.clear();
                         setIsLoggedIn(false);
                         setUserFirstName('');
                         navigate('/');

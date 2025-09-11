@@ -49,6 +49,7 @@ const Login = () => {
       if (res.ok) {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userFirstName', data.firstName);
+        localStorage.setItem('userPlan', data.plan);
         window.dispatchEvent(new Event('login'));
         navigate('/');
       } else {
