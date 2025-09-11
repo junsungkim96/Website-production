@@ -48,6 +48,42 @@ const Signup = () => {
     lastName: Yup.string().required('Last name required'),
   });
 
+  // Check duplicate email (step 1)
+  const checkEmailDuplicate = async (email) => {
+    if (!email) {
+      setServerMessage('Email not set.');
+      return false;
+    }
+
+    try {
+      const res = await fetch('https://www.qblackai.com/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: 'Temp',
+          lastName: 'Temp',
+          email,
+          password: 'Temp1234!' // 더미 비밀번호
+        }),
+      });
+
+      if (res.status === 409) {
+        setServerMessage('This email is already registered.');
+        return true; // 이메일 중복
+      } else if (!res.ok) {
+        const data = await res.json();
+        setServerMessage(data.message || 'Server error.');
+        return false;
+      }
+
+      return false; // 사용 가능
+    } catch (error) {
+      console.error(error);
+      setServerMessage('Error checking email.');
+      return false;
+    }
+  };
+
   // Send code (step 2)
   const sendCode = async () => {
     if (!emailAddress){
@@ -194,13 +230,25 @@ const Signup = () => {
               {/* Email form (Step 1)*/}
               {step === 1 && (
                 <div className="form-group" style={{ width: '100%' }}>
-                  <Field
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                    className={`input-field${errors.email && touched.email ? ' is-invalid' : ''}`}
-                  />
+                  <Field name="email">
+                    {({ field, form }) => (
+                      <input
+                        {...field}
+                        type="email"
+                        placeholder="Email"
+                        className={`input-field${form.errors.email && form.touched.email ? ' is-invalid' : ''}`}
+                        onBlur={async (e) => {
+                          field.onBlur(e); // Formik 기본 onBlur 호출
+                          const isDuplicate = await checkEmailDuplicate(e.target.value);
+                          if (!isDuplicate) {
+                            setServerMessage(''); // 중복 아니면 메시지 초기화
+                          }
+                        }}
+                      />
+                    )}
+                  </Field>
                   <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                  {serverMessage && <div className="text-danger mt-1">{serverMessage}</div>}
                 </div>
               )}
 
