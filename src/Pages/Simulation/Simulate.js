@@ -50,10 +50,8 @@ const Simulate = () => {
     // { name: 'Sensor Design', icon: sensor },
   ];
 
-  const [currentUser, setCurrentUser] = useState('');
-  const [currentPlan, setCurrentPlan] = useState('');
-  setCurrentUser(localStorage.getItem('userFirstName'));
-  setCurrentPlan(localStorage.getItem('userPlan'));
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('userFirstName') || '');
+  const [currentPlan, setCurrentPlan] = useState(localStorage.getItem('userPlan') || '');
 
   const [showPlanModal, setShowPlanModal] = useState(false);
   const userRef = useRef(null);
