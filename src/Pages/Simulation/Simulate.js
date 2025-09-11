@@ -65,6 +65,10 @@ const Simulate = () => {
     setSidebarWidth(sidebarExpanded ? 240 : 60);
   }, [sidebarExpanded]);
 
+  const handleToggle = () => {
+    setSidebarExpanded(prev => !prev);
+  };
+
   const illuminants = ["", "Custom", "D50", "D55", "D65", "D75", "Illuminant A", "Illuminant B", "Illuminant C", "Fluorescent", "Tungsten"];
   const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "bird.jpg"/*, "city.jpg"*/];
   const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye", "WideAngle"];
@@ -729,7 +733,7 @@ const Simulate = () => {
     alignItems: 'center',
     marginBottom: '20px',
     padding: '0px 10px 0px 10px',
-    justifyContent: sidebarExpanded ? 'space-between' : 'center',
+    justifyContent: 'space-between',
   };
 
   const logoContainerStyle = {
@@ -911,7 +915,7 @@ const Simulate = () => {
           </div>
 
           {sidebarExpanded && (
-            <div style={toggleStyle} onClick={() => setSidebarExpanded(false)}>
+            <div style={toggleStyle} onClick={handleToggle}>
               <img src={sidebarIcon} alt="Collapse" style={{ width: `${toggleSize}px`, height: `${toggleSize}px` }} />
             </div>
           )}
