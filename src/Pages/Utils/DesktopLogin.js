@@ -22,8 +22,9 @@ const DesktopInfo = () => {
         overflow: 'hidden',
       }}
     >
-      <h4 style = {{width: '80%', margin: '0 auto', fontWeight: 300}}>
-        The free trial is only available on desktop. Please use a desktop computer to start your trial.
+      <h4 style = {{width: '80%', margin: '0 auto', fontSize: '16px', fontWeight: 300}}>
+        Free trial is only available on desktop. <br/>
+        Please use a desktop computer to start your trial.
       </h4>
       <Button
         variant="success"

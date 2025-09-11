@@ -7,6 +7,16 @@ import {Container, Row, Col, Card, Button} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 
 const Pricing = () => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+  const freeTrial = () => {
+    if (isLoggedIn){
+      navigate('/simulate');
+    } else{
+      navigate('/login');
+    }
+  }
+  
   const navigate = useNavigate();
   
   useLayoutEffect(() => {
@@ -23,8 +33,8 @@ const Pricing = () => {
         'Limited scene data & simulated image downloads',
         'Option to upgrade to any paid tier after trial',
       ],
-      buttonText: 'Contact Sales',
-      onClick: () => navigate('/contact_sales', {state: {planName: 'Trial'}})
+      buttonText: 'Start Free Trial',
+      onClick: freeTrial,
     },
     {
       name: 'Basic',

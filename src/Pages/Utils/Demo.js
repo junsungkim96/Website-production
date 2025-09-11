@@ -74,7 +74,7 @@ const Demo = () => {
 
       <Row className="justify-content-center">
         <div>
-          <Formik initialValues={{...initialValues, productType: planName || 'Trial'}} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          <Formik initialValues={{...initialValues, productType: planName || 'Enterprise'}} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ isSubmitting: isSending }) => (
               <FormikForm>
                 <div className="contact d-flex justify-content-end">
@@ -89,10 +89,10 @@ const Demo = () => {
                   </Form.Label>
                   <Field as="select" name="productType" className="form-control">
                     <option value="">Select product type</option>
-                    <option value="Trial">Trial</option>
+                    <option value="Trial" disabled>Trial</option>
                     <option value="Basic" disabled>Basic</option>
                     <option value="Pro" disabled>Pro</option>
-                    <option value="Enterprise" disabled>Enterprise</option>
+                    <option value="Enterprise">Enterprise</option>
                     <option value="Education" disabled>Education</option>
                   </Field>
                   <div className="text-danger"><ErrorMessage name="productType" /></div>
