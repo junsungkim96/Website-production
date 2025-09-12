@@ -19,15 +19,6 @@ export default async function handler(req, res) {
     await client.connect();
     const db = client.db('licenseDB');
     const users = db.collection('users');
-    const codes = db.collection('verificationCodes');
-
-    // Check if a valid verification code exists for this email
-    const record = await codes.findOne({ email });
-    if (!record) return res.status(400).json({ message: 'No verification record found. Please verify your email first.' });
-    if (Date.now() > record.expires) {
-      await codes.deleteOne({ email });
-      return res.status(410).json({ message: 'Verification code expired. Please request a new one.' });
-    }
 
     // Hash the new password
     const hashedPassword = await bcrypt.hash(password, 10);
