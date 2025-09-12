@@ -50,98 +50,99 @@ const Login = () => {
       .required('Confirm password is required'),
   });
 
-  // --- API handlers ---
-  const handleLogin = async (values, setSubmitting, setFieldError) => {
-    try {
-      const res = await fetch(`${API_BASE}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: values.email, password: values.password }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userFirstName', data.firstName);
-        localStorage.setItem('userPlan', data.plan);
-        window.dispatchEvent(new Event('login'));
-        navigate('/');
-      } else {
-        alert(data.message || '로그인에 실패했습니다.');
-        setFieldError('password', data.message || 'Login failed');
-      }
-    } catch (err) {
-      alert('서버 오류로 로그인에 실패했습니다.');
-      console.error(err);
-    } finally {
-      setSubmitting(false);
+// --- API handlers ---
+const handleLogin = async (values, setSubmitting, setFieldError) => {
+  try {
+    const res = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: values.email, password: values.password }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userFirstName', data.firstName);
+      localStorage.setItem('userPlan', data.plan);
+      window.dispatchEvent(new Event('login'));
+      navigate('/');
+    } else {
+      alert(data.message || 'Login failed.');
+      setFieldError('password', data.message || 'Login failed');
     }
-  };
+  } catch (err) {
+    alert('Server error. Failed to login.');
+    console.error(err);
+  } finally {
+    setSubmitting(false);
+  }
+};
 
-  const handleSendResetEmail = async (values, setSubmitting) => {
-    try {
-      const res = await fetch(`${API_BASE}/forgot-password`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: values.email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUserEmail(values.email);
-        setResetMessage('Verification code sent. Please check your email.');
-        setStep(4);
-      } else {
-        setResetMessage(data.message || 'Failed to send reset email.');
-      }
-    } catch (err) {
-      setResetMessage('서버 오류로 요청 실패');
-      console.error(err);
-    } finally {
-      setSubmitting(false);
+const handleSendResetEmail = async (values, setSubmitting) => {
+  try {
+    const res = await fetch(`${API_BASE}/send-code`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: values.email }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setUserEmail(values.email);
+      setResetMessage('Verification code sent. Please check your email.');
+      setStep(4);
+    } else {
+      setResetMessage(data.message || 'Failed to send reset email.');
     }
-  };
+  } catch (err) {
+    setResetMessage('Server error. Request failed.');
+    console.error(err);
+  } finally {
+    setSubmitting(false);
+  }
+};
 
-  const handleVerifyCode = async (values, setSubmitting) => {
-    try {
-      const res = await fetch(`${API_BASE}/verify-code`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail, code: values.code }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStep(5);
-      } else {
-        alert(data.message || 'Invalid verification code.');
-      }
-    } catch (err) {
-      alert('서버 오류');
-      console.error(err);
-    } finally {
-      setSubmitting(false);
+const handleVerifyCode = async (values, setSubmitting) => {
+  try {
+    const res = await fetch(`${API_BASE}/verify-code`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail, code: values.code }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setStep(5);
+    } else {
+      alert(data.message || 'Invalid verification code.');
     }
-  };
+  } catch (err) {
+    alert('Server error.');
+    console.error(err);
+  } finally {
+    setSubmitting(false);
+  }
+};
 
-  const handleResetPassword = async (values, setSubmitting) => {
-    try {
-      const res = await fetch(`${API_BASE}/reset-password`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail, password: values.password }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        alert('Password reset successful. Please login.');
-        setStep(1);
-      } else {
-        alert(data.message || 'Password reset failed.');
-      }
-    } catch (err) {
-      alert('서버 오류');
-      console.error(err);
-    } finally {
-      setSubmitting(false);
+const handleResetPassword = async (values, setSubmitting) => {
+  try {
+    const res = await fetch(`${API_BASE}/reset-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail, password: values.password }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      alert('Password reset successful. Please login.');
+      setStep(1);
+    } else {
+      alert(data.message || 'Password reset failed.');
     }
-  };
+  } catch (err) {
+    alert('Server error.');
+    console.error(err);
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div style={{ marginTop: '5vh', textAlign: 'center'}}>
