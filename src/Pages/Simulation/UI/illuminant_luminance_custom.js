@@ -53,8 +53,13 @@ const energyToQuanta = ({ wavelength, energy }) => {
 };
 
 const IlluminantDialogCustom = ({ initialData, onClose }) => {
+  // deep copy로 초기값 저장
   const [tableData, setTableData] = useState(
-    initialData || Array.from({ length: 31 }, () => ["", ""])
+    initialData ? initialData.map(row => [...row]) : Array.from({ length: 31 }, () => ["", ""])
+  );
+
+  const originalDataRef = useRef(
+    initialData ? initialData.map(row => [...row]) : Array.from({ length: 31 }, () => ["", ""])
   );
 
   // 2D 배열로 ref 생성
@@ -129,6 +134,7 @@ const IlluminantDialogCustom = ({ initialData, onClose }) => {
         break;
       case 'Escape':
         e.preventDefault();
+        setTableData(originalDataRef.current.map(row=> [...row]));
         if (onClose) onClose(null);
         break;
       default:

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -9,21 +9,35 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 const API_BASE = 'https://www.qblackai.com/api';
 
 const Login = () => {
-  const [step, setStep] = useState(1); // Step 1: Email, Step 2: Password
+  // step: 1=이메일 입력, 2=비밀번호 입력, 3=reset 이메일 전송, 4=코드 인증, 5=비밀번호 재설정
+  const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
+  const [resetMessage, setResetMessage] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const passwordRef = useRef(null);
   const navigate = useNavigate();
 
-  // Validation schemas for each step
+  useEffect(() => {
+    if (step === 2 && passwordRef.current) {
+      passwordRef.current.focus();
+    }
+  }, [step]);
+
+  // Validation schemas
   const emailSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
+    email: Yup.string().email('Email is invalid').required('Email is required'),
   });
 
   const passwordSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
+    email: Yup.string().email('Email is invalid').required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
+
+  const codeSchema = Yup.object().shape({
+    code: Yup.string().required('Verification code is required'),
+  });
+
+  const resetPasswordSchema = Yup.object().shape({
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
@@ -31,21 +45,20 @@ const Login = () => {
       .matches(/\d/, 'Password must contain at least one number')
       .matches(/[@$!%*?&#]/, 'Password must contain at least one special character')
       .required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Confirm password is required'),
   });
 
-  const handleLogin = async (values, setSubmitting, setFieldError, navigate) => {
+  // --- API handlers ---
+  const handleLogin = async (values, setSubmitting, setFieldError) => {
     try {
       const res = await fetch(`${API_BASE}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
+        body: JSON.stringify({ email: values.email, password: values.password }),
       });
-
       const data = await res.json();
-
       if (res.ok) {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userFirstName', data.firstName);
@@ -64,6 +77,72 @@ const Login = () => {
     }
   };
 
+  const handleSendResetEmail = async (values, setSubmitting) => {
+    try {
+      const res = await fetch(`${API_BASE}/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: values.email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setUserEmail(values.email);
+        setResetMessage('Verification code sent. Please check your email.');
+        setStep(4);
+      } else {
+        setResetMessage(data.message || 'Failed to send reset email.');
+      }
+    } catch (err) {
+      setResetMessage('서버 오류로 요청 실패');
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleVerifyCode = async (values, setSubmitting) => {
+    try {
+      const res = await fetch(`${API_BASE}/verify-code`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail, code: values.code }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStep(5);
+      } else {
+        alert(data.message || 'Invalid verification code.');
+      }
+    } catch (err) {
+      alert('서버 오류');
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleResetPassword = async (values, setSubmitting) => {
+    try {
+      const res = await fetch(`${API_BASE}/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail, password: values.password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert('Password reset successful. Please login.');
+        setStep(1);
+      } else {
+        alert(data.message || 'Password reset failed.');
+      }
+    } catch (err) {
+      alert('서버 오류');
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div style={{ marginTop: '5vh', textAlign: 'center'}}>
       <img
@@ -76,20 +155,31 @@ const Login = () => {
       <div style={{ maxWidth: '400px', margin: '20px auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Formik
           enableReinitialize
-          initialValues={{ email: '', password: '' }}
-          validationSchema={step === 1 ? emailSchema : passwordSchema}
-          onSubmit={async (values, { setSubmitting, validateForm, setFieldError }) => {
+          initialValues={{ email: userEmail || '', password: '', code: '', confirmPassword: '' }}
+          validationSchema={
+            step === 1
+              ? emailSchema
+              : step === 2
+              ? passwordSchema
+              : step === 3
+              ? emailSchema
+              : step === 4
+              ? codeSchema
+              : resetPasswordSchema
+          }
+          onSubmit={async (values, { setSubmitting, setFieldError }) => {
             if (step === 1) {
-              const errors = await validateForm();
-              if (errors.email) {
-                alert(errors.email);
-                setSubmitting(false);
-                return;
-              }
+              setUserEmail(values.email);
               setStep(2);
               setSubmitting(false);
             } else if (step === 2) {
-              await handleLogin(values, setSubmitting, setFieldError, navigate);
+              await handleLogin(values, setSubmitting, setFieldError);
+            } else if (step === 3) {
+              await handleSendResetEmail(values, setSubmitting);
+            } else if (step === 4) {
+              await handleVerifyCode(values, setSubmitting);
+            } else if (step === 5) {
+              await handleResetPassword(values, setSubmitting);
             }
           }}
         >
@@ -97,33 +187,39 @@ const Login = () => {
             <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {/* Welcome */}
               <div style={{ fontSize: '4vh', fontWeight: 'bold', display: 'flex', justifyContent: 'center' }}>
-                Welcome
+                {step === 1 && 'Welcome'}
+                {step === 2 && 'Welcome'}
+                {step === 3 && 'Reset Password'}
+                {step === 4 && 'Verify Code'}
+                {step === 5 && 'New Password'}
               </div>
 
               {/* 이메일 */}
-              <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
-                <Field
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  className={`input-field${errors.email && touched.email ? ' is-invalid' : ''}`}
-                  disabled={isSubmitting} // 입력 막기
-                />
-                {isSubmitting && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      backgroundColor: 'rgba(200,200,200,0.5)',
-                      zIndex: 10,
-                    }}
+              {(step === 1 || step === 2 || step === 3) && (
+                <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
+                  <Field
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    className={`input-field${errors.email && touched.email ? ' is-invalid' : ''}`}
+                    disabled={isSubmitting || step === 2}
                   />
-                )}
-                <ErrorMessage name="email" component="div" className="invalid-feedback" />
-              </div>
+                  {isSubmitting && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(200,200,200,0.5)',
+                        zIndex: 10,
+                      }}
+                    />
+                  )}
+                  <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                </div>
+              )}
 
               {/* 비밀번호 */}
               {step === 2 && (
@@ -135,12 +231,13 @@ const Login = () => {
                       placeholder="Password"
                       className={`input-field${errors.password && touched.password ? ' is-invalid' : ''}`}
                       style={{ flex: 1, height: '50px', fontSize: '16px' }}
-                      disabled={isSubmitting} // 입력 막기
+                      disabled={isSubmitting}
+                      innerRef={passwordRef}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      disabled={isSubmitting} // 클릭 막기
+                      disabled={isSubmitting}
                       style={{
                         position: 'absolute',
                         right: '10px',
@@ -177,10 +274,59 @@ const Login = () => {
                 </div>
               )}
 
+              {/* 인증 코드 */}
+              {step === 4 && (
+                <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
+                  <Field
+                    name="code"
+                    type="text"
+                    placeholder="Enter verification code"
+                    className={`input-field${errors.code && touched.code ? ' is-invalid' : ''}`}
+                    disabled={isSubmitting}
+                  />
+                  <ErrorMessage name="code" component="div" className="invalid-feedback" />
+                </div>
+              )}
+
+              {/* 새 비밀번호 */}
+              {step === 5 && (
+                <>
+                  <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
+                    <Field
+                      name="password"
+                      type="password"
+                      placeholder="New Password"
+                      className={`input-field${errors.password && touched.password ? ' is-invalid' : ''}`}
+                      disabled={isSubmitting}
+                    />
+                    <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                  </div>
+
+                  <div className="form-group" style={{ width: '100%', position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
+                    <Field
+                      name="confirmPassword"
+                      type="password"
+                      placeholder="Confirm Password"
+                      className={`input-field${errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : ''}`}
+                      disabled={isSubmitting}
+                    />
+                    <ErrorMessage name="confirmPassword" component="div" className="invalid-feedback" />
+                  </div>
+                </>
+              )}
+
               {/* 버튼 */}
               <div style={{ position: 'relative', borderRadius: '10px', overflow: 'hidden' }}>
                 <button type="submit" className="next-button" disabled={isSubmitting}>
-                  {step === 1 ? 'Next' : 'Login'}
+                  {step === 1
+                    ? 'Next'
+                    : step === 2
+                    ? 'Login'
+                    : step === 3
+                    ? 'Send Reset Link'
+                    : step === 4
+                    ? 'Verify Code'
+                    : 'Reset Password'}
                 </button>
                 {isSubmitting && (
                   <div
@@ -200,6 +346,17 @@ const Login = () => {
           )}
         </Formik>
 
+        {/* Forgot Password */}
+        {step === 2 && (
+          <span
+            style={{ marginTop: '10px', display: 'block', cursor: 'pointer', color: '#0066cc' }}
+            onClick={() => setStep(3)}
+          >
+            Forgot Password?
+          </span>
+        )}
+
+        {resetMessage && <div style={{ marginTop: '10px', color: 'green' }}>{resetMessage}</div>}
 
         <span style={{ display: 'flex', justifyContent: 'center', fontSize: '16px', marginTop: '15px' }}>
           Need an account?&nbsp;
@@ -210,7 +367,6 @@ const Login = () => {
             Get Started!
           </span>
         </span>
-
       </div>
     </div>
   );

@@ -381,13 +381,13 @@ const Signup = () => {
                 disabled={!!errors.password || !!errors.confirmPassword || isSubmitting}
                 style={{
                   backgroundColor: isSubmitting ? '#006666' : '#008B8B',
-                  color: 'white',
-                  border: '1px solid #008B8B',
-                  minWidth: '180px',
+                //   color: 'white',
+                //   border: '1px solid #008B8B',
+                //   minWidth: '180px',
                   transition: 'all 0.5s ease',
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  padding: '12px 0',
-                  marginTop: '8px',
+                //   padding: '12px 0',
+                //   marginTop: '8px',
                 }}
               >
                 {step === 4 ? 'Sign Up' : 'Next'}

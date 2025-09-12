@@ -105,6 +105,9 @@ const Footer = () => {
                   else if (item === 'News') {
                     navigate('/news');
                   }
+                  else if (item === 'Contact'){
+                    navigate('/contact')
+                  }
                 }}
                 className = "footer-font"
               >
