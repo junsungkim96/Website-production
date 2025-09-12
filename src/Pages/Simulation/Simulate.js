@@ -74,7 +74,7 @@ const Simulate = () => {
   const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye", "WideAngle"];
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "Fast-openISP"];
-  const algorithms = ["", "DETR", "SAM1", "MiDaS"];
+  const algorithms = ["", "DETR", "SAM_ViT_B", "MiDaS_DPT_Small"];
 
   // Main UI logic
 
