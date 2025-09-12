@@ -161,11 +161,12 @@ const handleResetPassword = async (values, setSubmitting) => {
       <div style={{ maxWidth: '400px', margin: '20px auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Formik
           enableReinitialize
-           initialValues={
-            step === 5
-              ? { password: '', confirmPassword: '' } // Step 5일 때는 새 비밀번호 필드 초기화
-              : { email: userEmail || '', password: '', code: '', confirmPassword: '' }
-          }
+          initialValues={{
+            email: step === 1 ? '' : userEmail || '',
+            password: '',
+            code: '',
+            confirmPassword: '',
+          }}
           validationSchema={
             step === 1
               ? emailSchema

@@ -138,10 +138,10 @@ const Signup = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        setServerMessage('Signup successful! You can now log in.');
+        alert('Signup successful! You can now log in.');
         navigate('/login');
       } else {
-        setServerMessage(data.message || 'Signup failed.');
+        alert(data.message || 'Signup failed.');
       }
     } catch {
       setServerMessage('Server error during signup.');
