@@ -82,7 +82,7 @@ const handleSendResetEmail = async (values, setSubmitting) => {
     const res = await fetch(`${API_BASE}/send-code`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: values.email }),
+      body: JSON.stringify({ email: userEmail }),
     });
     const data = await res.json();
     if (res.ok) {
@@ -176,6 +176,7 @@ const handleResetPassword = async (values, setSubmitting) => {
             } else if (step === 2) {
               await handleLogin(values, setSubmitting, setFieldError);
             } else if (step === 3) {
+              setUserEmail(values.email);
               await handleSendResetEmail(values, setSubmitting);
             } else if (step === 4) {
               await handleVerifyCode(values, setSubmitting);
@@ -359,15 +360,17 @@ const handleResetPassword = async (values, setSubmitting) => {
 
         {resetMessage && <div style={{ marginTop: '10px', color: 'green' }}>{resetMessage}</div>}
 
-        <span style={{ display: 'flex', justifyContent: 'center', fontSize: '16px', marginTop: '15px' }}>
-          Need an account?&nbsp;
-          <span
-            style={{ color: 'rgb(0, 100, 250)', cursor: 'pointer' }}
-            onClick={() => navigate('/signup')}
-          >
-            Get Started!
+        {(step === 1 || step === 2) && (
+          <span style={{ display: 'flex', justifyContent: 'center', fontSize: '16px', marginTop: '15px' }}>
+            Need an account?&nbsp;
+            <span
+              style={{ color: 'rgb(0, 100, 250)', cursor: 'pointer' }}
+              onClick={() => navigate('/signup')}
+            >
+              Get Started!
+            </span>
           </span>
-        </span>
+        )}
       </div>
     </div>
   );
