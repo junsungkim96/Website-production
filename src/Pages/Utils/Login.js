@@ -22,6 +22,11 @@ const Login = () => {
       passwordRef.current.focus();
     }
   }, [step]);
+  
+  // Initialize resetMessage after every step
+  useEffect(() => {
+    setResetMessage('');
+  }, [step]);
 
   // Validation schemas
   const emailSchema = Yup.object().shape({

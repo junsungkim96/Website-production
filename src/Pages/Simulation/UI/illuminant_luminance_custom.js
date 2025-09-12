@@ -52,7 +52,7 @@ const energyToQuanta = ({ wavelength, energy }) => {
   return photons;
 };
 
-const IlluminantDialogCustom = ({ initialData, onClose }) => {
+const IlluminantDialogCustom = ({ initialData, onClose, onSubmit }) => {
   // deep copy로 초기값 저장
   const [tableData, setTableData] = useState(
     initialData ? initialData.map(row => [...row]) : Array.from({ length: 31 }, () => ["", ""])
@@ -104,6 +104,7 @@ const IlluminantDialogCustom = ({ initialData, onClose }) => {
   };
 
   const handleModify = () => {
+    if (onSubmit) onSubmit(tableData);
     if (onClose) onClose(tableData);
   };
 
