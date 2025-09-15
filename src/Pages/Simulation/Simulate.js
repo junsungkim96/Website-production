@@ -566,7 +566,10 @@ const Simulate = () => {
     
   // }
 
+  const [isSimulationRunning, setIsSimulationRunning] = useState(false);
+
   const handleRunSimulation = async () => {
+    setIsSimulationRunning(true);
     setResultImage(null);
 
     if (abortControllerRef.current) {
@@ -647,33 +650,38 @@ const Simulate = () => {
       setOutputText(prev => [...prev, "\n"]);
 
     } catch (error) {
+      if (error.name === "AbortError") return;
       console.error(error);
       setOutputText(prev => [...prev, "Simulation failed:" + error.message]);
+    } finally {
+      if (!abortControllerRef.current.aborted){
+        setIsSimulationRunning(false);
+      }
     }
   };
 
 
-  const handleStopSimulation = async() => {
-    if (abortControllerRef.current){
+  const handleStopSimulation = async () => {
+    if (abortControllerRef.current) {
       abortControllerRef.current.abort();
-      setOutputText(prev => [...prev, "Simulation stopped. Wait a moment to run simulation"]);
+      setOutputText(prev => [...prev, "\n", "🚩 Terminating simulation...", "Wait until start message appears"]);
+      setIsSimulationRunning(true);
     }
 
-    try{
-      const response = await fetch(`${API_BASE_URL}/stop`);
-      const data = response.data;
+    try {
+      const response = await fetch(`${API_BASE_URL}/stop`, { method: "POST" });
+      const data = await response.json();
 
-      if (data.message){
-        setOutputText(prev => [...prev, data.message]);
+      if (data.status === "stopped") {
+        setOutputText(prev => [...prev, "✅ Simulation terminated. Ready to run again", "\n"]);
+        setIsSimulationRunning(false);
       }
-    } catch (error){
+    } catch (error) {
       console.error(error);
-      setOutputText(prev => [
-        ...prev,
-        "Stop failed: " + error.message
-      ])
+      setOutputText(prev => [...prev, "Stop failed: " + error.message]);
+      setIsSimulationRunning(false);
     }
-  }
+  };
 
   const shareSimulationResult = (resultImage, simulationInputs) => {
     if (!resultImage) {
@@ -1008,7 +1016,12 @@ const Simulate = () => {
         <div style={topSectionStyle}>
           <div style={buttonGroupStyle}>
             <div style={buttonRowStyle}>
-              <button title="New" style={iconButtonStyle}>
+              <button title="New" 
+                style={{...iconButtonStyle,
+                        opacity: isSimulationRunning ? 0.5 : 1,
+                        cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
+                disabled={isSimulationRunning}
+              >
                 <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
               </button>
               <button title="Save" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
@@ -1023,10 +1036,15 @@ const Simulate = () => {
             </div>
 
             <div style={buttonRowStyle}>
-              <button title="Run" style={iconButtonStyle} onClick={handleRunSimulation}>
+              <button title="Run" 
+                style={{...iconButtonStyle, 
+                        opacity: isSimulationRunning ? 0.5 : 1,
+                        cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
+                onClick={handleRunSimulation} 
+                disabled={isSimulationRunning}>
                 <img src={run} alt="Run" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="Stop" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} disabled onClick={handleStopSimulation}>
+              <button title="Stop" style={{...iconButtonStyle}} onClick={handleStopSimulation}>
                 <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
               </button>
               <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
