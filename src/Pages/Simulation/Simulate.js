@@ -328,6 +328,8 @@ const Simulate = () => {
   // UI buttons
 
   const handleNewPage = () => {
+    detectDevice();
+  
     // Illuminant
     setSelectedIlluminant('');
     setIlluminantLuminanceValue('');
@@ -544,7 +546,7 @@ const Simulate = () => {
     fovCheck();
   }, [selectedScene, selectedOptics]);
 
-  useEffect(() => {
+  const detectDevice = () => {
     fetch(`${API_BASE_URL}/get_device`, { method: "POST" })
       .then((res) => res.json())
       .then((data) => {
@@ -560,6 +562,10 @@ const Simulate = () => {
         console.error(err);
         setOutputText('Unable to detect device');
       });
+  }
+
+  useEffect(()=>{
+    detectDevice();
   }, []);
 
   // const handleSave = async() => {
