@@ -1050,7 +1050,7 @@ const Simulate = () => {
                 disabled={isSimulationRunning}>
                 <img src={run} alt="Run" style={{ width: 20, height: 20 }} />
               </button>
-              <button title="Stop" style={{...iconButtonStyle}} onClick={handleStopSimulation}>
+              <button title="Stop" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} disabled onClick={handleStopSimulation}>
                 <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
               </button>
               <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
