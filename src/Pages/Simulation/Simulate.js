@@ -70,7 +70,7 @@ const Simulate = () => {
   };
 
   const illuminants = ["", "Custom", "D50", "D55", "D65", "D75", "Illuminant A", "Illuminant B", "Illuminant C", "Fluorescent", "Tungsten"];
-  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "bird.jpg"/*, "city.jpg"*/];
+  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "apple.jpg"/*, "city.jpg"*/];
   const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye", "WideAngle"];
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "Fast-openISP"];
@@ -560,7 +560,7 @@ const Simulate = () => {
       })
       .catch((err) => {
         console.error(err);
-        setOutputText('Unable to detect device');
+        setOutputText('Compute resource not available');
       });
   }
 
