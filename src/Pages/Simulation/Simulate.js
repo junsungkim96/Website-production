@@ -70,11 +70,11 @@ const Simulate = () => {
   };
 
   const illuminants = ["", "Custom", "D50", "D55", "D65", "D75", "Illuminant A", "Illuminant B", "Illuminant C", "Fluorescent", "Tungsten"];
-  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "apple.jpg"/*, "city.jpg"*/];
-  const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye", "WideAngle"];
+  const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "apple.jpg"];
+  const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye"];
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "Fast-openISP"];
-  const algorithms = ["", "DETR", "SAM_ViT_B", "MiDaS_DPT_Small"];
+  const algorithms = ["", "DETR", "MiDaS_DPT_Small"];
 
   // Main UI logic
 
