@@ -224,7 +224,7 @@ const Menubar = () => {
                     },
                     {
                       label: 'Logout',
-                      onClick: () => {
+                      onClick: async() => {
                         setHoveredMenu(null);
                         await fetch(`${API_BASE}/logout`, {method: 'POST', credentials: 'include'});
                         localStorage.clear();
