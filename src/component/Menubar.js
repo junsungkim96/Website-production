@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import { company_name } from '../data/Company_data';
 import {productItems, researchItems, companyItems} from '../data/Menu_data';
 
+const API_BASE = 'https://www.qblackai.com/api';
 
 const Menubar = () => {
   // Inside your Menubar component
@@ -225,6 +226,7 @@ const Menubar = () => {
                       label: 'Logout',
                       onClick: () => {
                         setHoveredMenu(null);
+                        await fetch(`${API_BASE}/logout`, {method: 'POST', credentials: 'include'});
                         localStorage.clear();
                         setIsLoggedIn(false);
                         setUserFirstName('');

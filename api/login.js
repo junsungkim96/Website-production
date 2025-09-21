@@ -35,6 +35,10 @@ export default async function handler(req, res){
       return res.status(401).json({message: 'Invalid email or password'});
     }
 
+    if(user.isLoggedIn){
+      return res.status(403).json({message: 'This account is already logged in'});
+    }
+
     // assume password is stored as hash
     const isValid = await bcrypt.compare(password, user.password);
     if(!isValid){
@@ -45,7 +49,10 @@ export default async function handler(req, res){
     await users.updateOne(
       {_id: user._id},
       {
-        $set: {lastLoginAt: new Date()},
+        $set: {
+          lastLoginAt: new Date(),
+          isLoggedIn: true
+        },
         $inc: {loginCount: 1}
       }
     )
