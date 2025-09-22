@@ -66,6 +66,7 @@ const handleLogin = async (values, setSubmitting, setFieldError) => {
     const data = await res.json();
     if (res.ok) {
       localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', values.email);
       localStorage.setItem('userFirstName', data.firstName);
       localStorage.setItem('userPlan', data.plan);
       window.dispatchEvent(new Event('login'));
