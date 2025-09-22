@@ -226,7 +226,12 @@ const Menubar = () => {
                       label: 'Logout',
                       onClick: async() => {
                         setHoveredMenu(null);
-                        await fetch(`${API_BASE}/logout`, {method: 'POST', credentials: 'include'});
+                        await fetch(`${API_BASE}/logout`, {
+                          method: 'POST', 
+                          headers: {'Content-Type': 'application/json'},
+                          body: JSON.stringify({email: localStorage.getItem('userEmail')}),
+                          credentials: 'include'
+                        });
                         localStorage.clear();
                         setIsLoggedIn(false);
                         setUserFirstName('');
