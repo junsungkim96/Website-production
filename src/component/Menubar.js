@@ -216,7 +216,7 @@ const Menubar = () => {
                 >
                   {[
                     {
-                      label: 'Simulate',
+                      label: 'QuasarVision →',
                       onClick: () => {
                         setHoveredMenu(null);
                         navigate('/simulate');  
