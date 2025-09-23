@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import logo from '../../img/qblackai_logo.png';
 
+const API_BASE = 'https://www.qblackai.com/api';
+
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const Signup = () => {
     if (!email) return false;
 
     try {
-      const response = await fetch('/api/check-email', {
+      const response = await fetch(`${API_BASE}/check-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -74,7 +76,7 @@ const Signup = () => {
       return;
     }
     try {
-      const res = await fetch('https://www.qblackai.com/api/send-code', {
+      const res = await fetch(`${API_BASE}/send-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emailAddress }),
@@ -93,7 +95,7 @@ const Signup = () => {
   // Code verification (step 3)
   const verifyCode = async (values) => {
     try {
-      const res = await fetch('https://www.qblackai.com/api/verify-code', {
+      const res = await fetch(`${API_BASE}/verify-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emailAddress, code: values.verificationCode }),
@@ -119,14 +121,21 @@ const Signup = () => {
       setServerMessage('Please verify your email first.');
       return;
     }
+
+    if (!values.agreeTerms) {
+      setServerMessage('You must agree to the Terms of Use and Privacy Policy.');
+      return;
+    }
+
     console.log('Submitting final signup with:', {
     firstName: values.firstName,
     lastName: values.lastName,
     email: emailAddress,
     password: signupPassword,
     });
+    
     try {
-      const res = await fetch('https://www.qblackai.com/api/signup', {
+      const res = await fetch(`${API_BASE}/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -371,6 +380,18 @@ const Signup = () => {
                     />
                     <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
                   </div>
+                  
+                  {/* Terms checkbox */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '10px' }}>
+                    <Field type="checkbox" name="agreeTerms" />
+                    <label style={{ fontSize: '0.9rem', lineHeight: '1.2', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
+                      I agree to the{' '}
+                      <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => window.open('/terms', '_blank')}>Terms of Use</span>{' '}
+                      and{' '}
+                      <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => window.open('/privacy', '_blank')}>Privacy Policy</span>
+                    </label>
+                  </div>
+
                 </>
               )}
 
