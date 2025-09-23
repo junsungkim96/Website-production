@@ -188,14 +188,13 @@ const Signup = () => {
             step === 1 ? emailSchema : step === 2 ? passwordSchema : step === 3 ? codeSchema : nameSchema
           }
           enableReinitialize
-          onSubmit={async (values, {setSubmitting, setErrors}) => {
+          onSubmit={async (values, {setSubmitting}) => {
             setServerMessage('');
             setSubmitting(true);
             try{
               if (step === 1){
                 const isAvailable = await checkEmailDuplicate(values.email);
                 if (!isAvailable){
-                  setErrors({email: 'Already registered. Try another email'});
                   setServerMessage('Email already registered');
                   return;
                 }
@@ -395,6 +394,10 @@ const Signup = () => {
                 </>
               )}
 
+              {serverMessage && (
+                <div style={{ color: 'red', marginTop: '10px', textAlign: 'center', fontSize: '0.9rem', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{serverMessage}</div>
+              )}
+
               {/* Submit / Next Button */}
               <button
                 type="submit"
@@ -437,9 +440,6 @@ const Signup = () => {
           </span>
         )}
 
-        {serverMessage && (
-          <div style={{ color: 'red', marginTop: '10px', textAlign: 'center' }}>{serverMessage}</div>
-        )}
       </div>
     </div>
   );
