@@ -394,10 +394,6 @@ const Signup = () => {
                 </>
               )}
 
-              {serverMessage && (
-                <div style={{ color: 'red', marginTop: '10px', textAlign: 'center', fontSize: '0.9rem', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{serverMessage}</div>
-              )}
-
               {/* Submit / Next Button */}
               <button
                 type="submit"
@@ -416,6 +412,10 @@ const Signup = () => {
               >
                 {step === 4 ? 'Sign Up' : 'Next'}
               </button>
+
+              {serverMessage && (
+                <div style={{ color: 'red', marginTop: '10px', textAlign: 'center', fontSize: '0.9rem'}}>{serverMessage}</div>
+              )}
 
             </Form>
           )}
