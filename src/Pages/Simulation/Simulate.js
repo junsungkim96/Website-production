@@ -31,10 +31,88 @@ import SceneFileDialog from './UI/scene_file_input';
 import SensorDialog from './UI/sensor_input';
 import ISPDialog from './UI/isp_input';
 
+import Joyride, {STATUS} from "react-joyride";
+
 import { API_BASE_URL } from '../../config';
 
 
 const Simulate = () => {
+  const [tutorialSteps, setTutorialSteps] = useState([]);
+  const [runTour, setRunTour] = useState(false);
+  const [showStageMenu, setShowStageMenu] = useState(false);
+
+  const stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
+
+  const stageStepsMap = {
+    Scene: [
+      { target: "#illuminant-select", content: "Choose an illuminant.", placement: "bottom" },
+      { target: "#illuminant-param-select", content: (<div>Enter either photons (or energy) <br />or luminance (try a value of 100).</div>), placement: "bottom" },
+      { target: "#illuminant-spectrum-select", content: (<div>Preview the spectrum profile.<br />You can skip this one.</div>), placement: "bottom" },
+      { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
+      { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
+      { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
+      { target: "#run-button", content: "Run the simulation.", placement: "bottom" }
+    ],
+    Optics: [
+      { target: "#illuminant-select", content: "Choose an illuminant.", placement: "bottom" },
+      { target: "#illuminant-param-select", content: (<div>Enter either photons (or energy) <br />or luminance (try a value of 100).</div>), placement: "bottom" },
+      { target: "#illuminant-spectrum-select", content: (<div>Preview the spectrum profile.<br />You can skip this one.</div>), placement: "bottom" },
+      { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
+      { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
+      { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#run-button", content: "Run the simulation.", placement: "bottom" }
+    ],
+    Sensor: [
+      { target: "#illuminant-select", content: "Choose an illuminant.", placement: "bottom" },
+      { target: "#illuminant-param-select", content: (<div>Enter either photons (or energy) <br />or luminance (try a value of 100).</div>), placement: "bottom" },
+      { target: "#illuminant-spectrum-select", content: (<div>Preview the spectrum profile.<br />You can skip this one.</div>), placement: "bottom" },
+      { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
+      { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
+      { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#sensor-select", content: "Select a sensor type.", placement: "bottom" },
+      { target: "#sensor-param-select", content: "Configure the sensor parameters.", placement: "bottom" },
+      { target: "#run-button", content: "Run the simulation.", placement: "bottom" }
+    ],
+    ISP: [
+      { target: "#illuminant-select", content: "Choose an illuminant.", placement: "bottom" },
+      { target: "#illuminant-param-select", content: (<div>Enter either photons (or energy) <br />or luminance (try a value of 100).</div>), placement: "bottom" },
+      { target: "#illuminant-spectrum-select", content: (<div>Preview the spectrum profile.<br />You can skip this one.</div>), placement: "bottom" },
+      { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
+      { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
+      { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#sensor-select", content: "Select a sensor type.", placement: "bottom" },
+      { target: "#sensor-param-select", content: "Configure the sensor parameters.", placement: "bottom" },
+      { target: "#isp-select", content: "Select an ISP algorithm.", placement: "bottom" },
+      { target: "#isp-param-select", content: "Fine-tune ISP parameters.", placement: "bottom" },
+      { target: "#run-button", content: "Run the simulation.", placement: "bottom" }
+    ],
+    Algorithms: [
+      { target: "#illuminant-select", content: "Choose an illuminant.", placement: "bottom" },
+      { target: "#illuminant-param-select", content: (<div>Enter either photons (or energy) <br />or luminance (try a value of 100).</div>), placement: "bottom" },
+      { target: "#illuminant-spectrum-select", content: (<div>Preview the spectrum profile.<br />You can skip this one.</div>), placement: "bottom" },
+      { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
+      { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
+      { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#sensor-select", content: "Select a sensor type.", placement: "bottom" },
+      { target: "#sensor-param-select", content: "Configure the sensor parameters.", placement: "bottom" },
+      { target: "#isp-select", content: "Select an ISP algorithm.", placement: "bottom" },
+      { target: "#isp-param-select", content: "Fine-tune ISP parameters.", placement: "bottom" },
+      { target: "#algorithm-select", content: "Choose an AI algorithm.", placement: "bottom" },
+      { target: "#run-button", content: "Run the full simulation.", placement: "bottom" }
+    ]
+  };
+
+  const startTutorial = (stage) => {
+    setTutorialSteps(stageStepsMap[stage]);
+    setRunTour(true);
+    setShowStageMenu(false);
+  };
+
+
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState('System Optimization');
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
@@ -913,6 +991,78 @@ const Simulate = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden'}}>
+      {/* Joyride */}
+      {/* <Joyride
+        steps={tutorialSteps}
+        run={runTour}
+        continuous
+        scrollToFirstStep
+        disableOverlay={true} // 배경 깜빡임 제거
+        spotlightPadding={0}  // spotlight 영역 여백 제거
+        styles={{ options: { primaryColor: '#1976d2', zIndex: 10000, spotlightShadow: "0 0 0 transparent"},
+          tooltip: {
+            fontSize: '16px',   // 글자 크기 줄이기
+            padding: '8px 12px', // 안쪽 여백 줄이기
+            maxWidth: '500px',   // 박스 최대 너비
+            textAlign: 'left',
+          },      
+        }}
+        locale={{
+          back: "Back",
+          last: "Finish",
+          next: "Next",
+          skip: "Skip"
+        }}
+        callback={(data) => {
+          if ([STATUS.FINISHED, STATUS.SKIPPED].includes(data.status)) {
+            setRunTour(false);
+          }
+        }}
+      /> */}
+      <Joyride
+        steps={tutorialSteps}
+        run={runTour}
+        continuous={true}
+        showSkipButton={false}
+        showCloseButton={false}      // X 버튼 제거
+        disableOverlay={true}        // overlay 제거
+        spotlightClicks={false}
+        spotlightPadding={0}
+        floaterProps={{ 
+          disableAnimation: true,    // 툴팁 애니메이션 제거
+          hideArrow: false            // 화살표는 필요시
+        }}
+        styles={{
+          options: {
+            zIndex: 10000,
+            primaryColor: '#1976d2',
+            spotlightShadow: '0 0 0 transparent',
+            showProgress: false,
+          },
+          tooltip: {
+            fontSize: '16px',
+            padding: '8px 12px',
+            maxWidth: '600px',
+            borderRadius: '6px',
+            textAlign: 'left',
+          },
+          overlay: { display: 'none' },
+        }}
+        locale={{
+          back: "Back",
+          next: "Next",
+          last: "Finish",
+          skip: "Skip",
+          close: "",  // X 버튼 제거
+        }}
+        callback={(data) => {
+          if ([STATUS.FINISHED, STATUS.SKIPPED].includes(data.status)) {
+            setRunTour(false);
+            setTimeout(() => setTutorialSteps([]), 200);
+          }
+        }}
+      />
+
       <div style={sidebarStyle}>
         <div style={sidebarHeaderStyle}>
           <div
@@ -955,59 +1105,128 @@ const Simulate = () => {
           </div>
         ))}
 
-        <div
-          ref={userRef}
-          style={{
-            marginTop: 'auto', // 맨 아래로 밀기
-            padding: '12px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            borderTop: sidebarExpanded ? '1px solid #ccc' : 'transparent', // 위에 가느다란 선
-            backgroundColor: sidebarExpanded ? '#fafafa' : 'transparent',
-            height: '60px',
-            boxSizing: 'border-box',
-            pointerEvents: 'none',
-          }}
-          // onClick={() => setShowPlanModal(true)} // 클릭하면 모달 열기
-        >
-          {/* 사용자 이니셜 동그라미 */}
-          <div
+        {/* 🔹 사용자 영역 + Tutorial 버튼 묶기 */}
+        <div style={{ marginTop: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {/* Tutorial 버튼 */}
+          <button
+            onClick={() => setShowStageMenu(prev => !prev)}
             style={{
-              width: '28px',
-              height: '28px',
-              borderRadius: '50%',
-              backgroundColor: '#009ACD',
+              width: '100%',
+              padding: '8px 12px',
+              backgroundColor: '#008B8B',
               color: '#fff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '16px',
-              fontWeight: '600',
-              marginRight: '15px',
-              flexShrink: 0,
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: 500,
             }}
           >
-            {currentUser.charAt(0).toUpperCase()}
-          </div>
+            Tutorial
+          </button>
 
-          {/* 사용자 이름 & 플랜 */}
-          {sidebarExpanded && (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontWeight: '600', fontSize: '16px', color: '#111' }}>
-                {currentUser}
-              </span>
-              <span style={{ fontSize: '14px', color: '#666'}}>
-                {currentPlan}
-              </span>
+          {/* 중앙 모달 팝업 */}
+          {showStageMenu && (
+            <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                backgroundColor: 'rgba(0,0,0,0.4)', // 반투명 배경
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 10000,
+              }}
+              onClick={() => setShowStageMenu(false)} // 배경 클릭 시 닫기
+            >
+              <div
+                style={{
+                  backgroundColor: '#fff',
+                  padding: '20px 24px',
+                  borderRadius: '8px',
+                  minWidth: '300px',
+                  maxWidth: '400px',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                }}
+                onClick={(e) => e.stopPropagation()} // 모달 내부 클릭은 닫기 방지
+              >
+                {stages.map(stage => (
+                  <button
+                    key={stage}
+                    onClick={() => startTutorial(stage)}
+                    style={{
+                      display: 'block',
+                      margin: '6px 0',
+                      width: '100%',
+                      padding: '8px 12px',
+                      border: '1px solid #ddd',
+                      borderRadius: 4,
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      textAlign: 'center',
+                      backgroundColor: '#fafafa'
+                    }}
+                  >
+                    {stage}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
+
+          {/* 사용자 이니셜 */}
+          <div
+            ref={userRef}
+            style={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              borderTop: sidebarExpanded ? '1px solid #ccc' : 'transparent',
+              backgroundColor: sidebarExpanded ? '#fafafa' : 'transparent',
+              height: '60px',
+              boxSizing: 'border-box',
+              pointerEvents: 'none',
+              paddingTop: '8px'
+            }}
+          >
+            <div
+              style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                backgroundColor: '#009ACD',
+                color: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '16px',
+                fontWeight: '600',
+                marginRight: '15px',
+                flexShrink: 0,
+              }}
+            >
+              {currentUser.charAt(0).toUpperCase()}
+            </div>
+
+            {sidebarExpanded && (
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontWeight: '600', fontSize: '16px', color: '#111' }}>
+                  {currentUser}
+                </span>
+                <span style={{ fontSize: '14px', color: '#666'}}>
+                  {currentPlan}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* 요금제 변경 모달 */}
         {showPlanModal && (
           <PlanModal
-            anchorRef = {userRef}
+            anchorRef={userRef}
             currentPlan={currentPlan}
             onClose={() => setShowPlanModal(false)}
             onChangePlan={(newPlan) => {
@@ -1042,7 +1261,8 @@ const Simulate = () => {
             </div>
 
             <div style={buttonRowStyle}>
-              <button title="Run" 
+              <button title="Run"
+                id="run-button" 
                 style={{...iconButtonStyle, 
                         opacity: isSimulationRunning ? 0.5 : 1,
                         cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
@@ -1096,11 +1316,12 @@ const Simulate = () => {
                 style={selectStyle} 
                 value={selectedIlluminant} 
                 onChange={(e)=> setSelectedIlluminant(e.target.value)}
+                id="illuminant-select"
               >
                 {illuminants.map((ill, idx) => <option key={idx}>{ill}</option>)}
               </select>
               
-              <button style={iconButtonStyle} onClick={() => setIsIlluminantLuminanceDialogOpen(true)}>
+              <button style={iconButtonStyle} onClick={() => setIsIlluminantLuminanceDialogOpen(true)} id="illuminant-param-select">
                 <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
               </button>
 
@@ -1131,7 +1352,7 @@ const Simulate = () => {
                 )
               )}
 
-              <button style={iconButtonStyle} onClick={() => openSpectrumPopup(selectedIlluminant, illuminantLuminanceValue, customIlluminantData)}>
+              <button style={iconButtonStyle} onClick={() => openSpectrumPopup(selectedIlluminant, illuminantLuminanceValue, customIlluminantData)} id="illuminant-spectrum-select">
                 <img src={spectrum} alt="Spectrum" style={{ width: '20px', height: '20px' }} />
               </button>
             </div>
@@ -1144,6 +1365,7 @@ const Simulate = () => {
             <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Scene</label>
             <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
               <select 
+                id="scene-select"
                 style={selectStyle}
                 value={selectedScene}
                 onChange = {(e) => setSelectedScene(e.target.value)}
@@ -1151,7 +1373,7 @@ const Simulate = () => {
                 {scenes.map((s, idx) => <option key={idx} value = {s}>{s}</option>)}
               </select>
               
-              <button style={iconButtonStyle} onClick = {sceneButtonClick}>
+              <button id="scene-param-select" style={iconButtonStyle} onClick = {sceneButtonClick}>
                 <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
               </button>
               {isMacbethDialogOpen && <MacbethDialog initialValues={macbethParams} onSubmit={handleMacbethSubmit} onClose={() => {setIsMacbethDialogOpen(false);}} />}
@@ -1169,7 +1391,7 @@ const Simulate = () => {
                 />
               }
 
-              <button style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>
+              <button id="scene-luminance-select" style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>
                 <img src={brightness} alt="Brightness" style={{ width: '20px', height: '20px' }} />
               </button>
               {isSceneLuminanceDialogOpen && (
@@ -1218,7 +1440,7 @@ const Simulate = () => {
           {/* Optics */}
           <div style={sectionStyle}>
             <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
-            <select style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
+            <select id="optics-select" style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
             <div style={fileInputRowStyle}>
               <input
                 type="text"
@@ -1248,9 +1470,9 @@ const Simulate = () => {
           <div style={sectionStyle}>
             <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Sensor</label>
             <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <select style={selectStyle} value={selectedSensor} onChange={(e) => setSelectedSensor(e.target.value)}>{sensors.map((s, idx) => <option key={idx}>{s}</option>)}</select>
+              <select id="sensor-select" style={selectStyle} value={selectedSensor} onChange={(e) => setSelectedSensor(e.target.value)}>{sensors.map((s, idx) => <option key={idx}>{s}</option>)}</select>
 
-              <button style={iconButtonStyle} onClick={() => setIsSensorDialogOpen(true)}>
+              <button id="sensor-param-select" style={iconButtonStyle} onClick={() => setIsSensorDialogOpen(true)}>
                 <img src={parameter} alt="Params" style={{ width: '20px', height: '20px'}} />
               </button>
 
@@ -1271,12 +1493,9 @@ const Simulate = () => {
           <div style={sectionStyle}>
             <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>ISP</label>
             <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <select style={selectStyle} value={selectedISP} onChange={(e) => setSelectedISP(e.target.value)}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
+              <select id="isp-select" style={selectStyle} value={selectedISP} onChange={(e) => setSelectedISP(e.target.value)}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
               
-              <button style={iconButtonStyle} onClick={() => {if(selectedISP === 'Fast-openISP'){
-                  setIsIspDialogOpen(true);
-                }}
-              }>
+              <button id="isp-param-select" style={iconButtonStyle} onClick={() => {if(selectedISP === 'Fast-openISP'){setIsIspDialogOpen(true);}}}>
                 <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
               </button>
 
@@ -1314,7 +1533,7 @@ const Simulate = () => {
           {/* Algorithms */}
           <div style={sectionStyle}>
             <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
-            <select style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
+            <select id="algorithm-select" style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
             <div style={fileInputRowStyle}>
               <input
                 type="text"
