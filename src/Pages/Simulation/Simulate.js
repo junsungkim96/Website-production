@@ -31,6 +31,8 @@ import SceneFileDialog from './UI/scene_file_input';
 import SensorDialog from './UI/sensor_input';
 import ISPDialog from './UI/isp_input';
 
+import OpticsDesign from './Optics';
+
 import Joyride, {STATUS} from "react-joyride";
 
 import { API_BASE_URL } from '../../config';
@@ -117,7 +119,7 @@ const Simulate = () => {
   const [activeMenu, setActiveMenu] = useState('System Optimization');
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [logoHovered, setLogoHovered] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(240);
+  const [sidebarWidth, setSidebarWidth] = useState(220);
 
   const [resultImage, setResultImage] = useState(null);
   const [outputText, setOutputText] = useState([]);
@@ -140,7 +142,7 @@ const Simulate = () => {
   const toggleSize = 25;
 
   useEffect(() => {
-    setSidebarWidth(sidebarExpanded ? 240 : 60);
+    setSidebarWidth(sidebarExpanded ? 220 : 60);
   }, [sidebarExpanded]);
 
   const handleToggle = () => {
@@ -1091,11 +1093,12 @@ const Simulate = () => {
             ref={(el) => (menuRefs.current[index] = el)}
             style={{
               ...sidebarItemStyle(activeMenu === item.name),
-              cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
-              opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
+              // cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
+              // opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
             }}
             onClick={() => {
-              if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
+              // if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
+              if (item.name !== 'Sensor Design'){
                 setActiveMenu(item.name);
               }
             }}
@@ -1237,347 +1240,360 @@ const Simulate = () => {
         )}
       </div>
 
-      <div style={mainContentStyle}>
-        <div style={topSectionStyle}>
-          <div style={buttonGroupStyle}>
-            <div style={buttonRowStyle}>
-              <button title="New" 
-                style={{...iconButtonStyle,
-                        opacity: isSimulationRunning ? 0.5 : 1,
-                        cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
-                disabled={isSimulationRunning}
-              >
-                <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
-              </button>
-              <button title="Save" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
-                <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
-              </button>
-              <button title="Back" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
-                <img src={back} alt="Back" style={{ width: 20, height: 20 }} />
-              </button>
-              <button title="Forward" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
-                <img src={forward} alt="Forward" style={{ width: 20, height: 20 }} />
-              </button>
-            </div>
+      <div style={{width: `calc(100% - ${sidebarWidth}px)` }}>
+        {activeMenu === 'System Optimization' && (
+          <div style={mainContentStyle}>
+            <div style={topSectionStyle}>
+              <div style={buttonGroupStyle}>
+                <div style={buttonRowStyle}>
+                  <button title="New" 
+                    style={{...iconButtonStyle,
+                            opacity: isSimulationRunning ? 0.5 : 1,
+                            cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
+                    disabled={isSimulationRunning}
+                  >
+                    <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
+                  </button>
+                  <button title="Save" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                    <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
+                  </button>
+                  <button title="Back" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                    <img src={back} alt="Back" style={{ width: 20, height: 20 }} />
+                  </button>
+                  <button title="Forward" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                    <img src={forward} alt="Forward" style={{ width: 20, height: 20 }} />
+                  </button>
+                </div>
 
-            <div style={buttonRowStyle}>
-              <button title="Run"
-                id="run-button" 
-                style={{...iconButtonStyle, 
-                        opacity: isSimulationRunning ? 0.5 : 1,
-                        cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
-                onClick={handleRunSimulation} 
-                disabled={isSimulationRunning}>
-                <img src={run} alt="Run" style={{ width: 20, height: 20 }} />
-              </button>
-              <button title="Stop" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} disabled onClick={handleStopSimulation}>
-                <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
-              </button>
-              <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
-                <span style={{ fontSize: "14px", fontWeight: "bold" }}>SFR</span>
-              </button>
-              <button
-                style={{...iconButtonStyle,  opacity: 0.5, cursor: 'not-allowed'}}
-                title="Share"
-                disabled
-                onClick={()=>shareSimulationResult(resultImage, {
-                  illuminant: selectedIlluminant,
-                  illuminantLuminance: illuminantLuminanceValue,
-                  illuminantCustomPhotons: customIlluminantData.map(row => Number(row[0])),
-                  scene: selectedScene,
-                  sceneFile: sceneFile,
-                  sceneLuminance: sceneLuminanceValue,
-                  macbethParams: macbethParams,
-                  pointarrayParams: pointarrayParams,
-                  gridlinesParams: gridlinesParams,
-                  slantededgeParams: slantededgeParams,
-                  ringsraysParams: ringsraysParams,
-                  sceneFileParams: sceneFileParams,
-                  optics: selectedOptics,
-                  sensor: selectedSensor,
-                  sensorParams: sensorValues,
-                  isp: selectedISP,
-                  ispParams: ispValues,
-                  algorithm: selectedAlgorithm
-                })}
-              >
-                <img src={upload} alt="Share" style={{ width: 20, height: 20 }} />
-              </button>
-            </div>
-          </div>
+                <div style={buttonRowStyle}>
+                  <button title="Run"
+                    id="run-button" 
+                    style={{...iconButtonStyle, 
+                            opacity: isSimulationRunning ? 0.5 : 1,
+                            cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
+                    onClick={handleRunSimulation} 
+                    disabled={isSimulationRunning}>
+                    <img src={run} alt="Run" style={{ width: 20, height: 20 }} />
+                  </button>
+                  <button title="Stop" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} disabled onClick={handleStopSimulation}>
+                    <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
+                  </button>
+                  <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                    <span style={{ fontSize: "14px", fontWeight: "bold" }}>SFR</span>
+                  </button>
+                  <button
+                    style={{...iconButtonStyle,  opacity: 0.5, cursor: 'not-allowed'}}
+                    title="Share"
+                    disabled
+                    onClick={()=>shareSimulationResult(resultImage, {
+                      illuminant: selectedIlluminant,
+                      illuminantLuminance: illuminantLuminanceValue,
+                      illuminantCustomPhotons: customIlluminantData.map(row => Number(row[0])),
+                      scene: selectedScene,
+                      sceneFile: sceneFile,
+                      sceneLuminance: sceneLuminanceValue,
+                      macbethParams: macbethParams,
+                      pointarrayParams: pointarrayParams,
+                      gridlinesParams: gridlinesParams,
+                      slantededgeParams: slantededgeParams,
+                      ringsraysParams: ringsraysParams,
+                      sceneFileParams: sceneFileParams,
+                      optics: selectedOptics,
+                      sensor: selectedSensor,
+                      sensorParams: sensorValues,
+                      isp: selectedISP,
+                      ispParams: ispValues,
+                      algorithm: selectedAlgorithm
+                    })}
+                  >
+                    <img src={upload} alt="Share" style={{ width: 20, height: 20 }} />
+                  </button>
+                </div>
+              </div>
 
-          <div style={dividerStyle}></div>
+              <div style={dividerStyle}></div>
 
-          {/* Illuminant */}
-          <div style={sectionStyle}>
-            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold'}}>Illuminant</label>
-            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <select
-                style={selectStyle} 
-                value={selectedIlluminant} 
-                onChange={(e)=> setSelectedIlluminant(e.target.value)}
-                id="illuminant-select"
-              >
-                {illuminants.map((ill, idx) => <option key={idx}>{ill}</option>)}
-              </select>
-              
-              <button style={iconButtonStyle} onClick={() => setIsIlluminantLuminanceDialogOpen(true)} id="illuminant-param-select">
-                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
-              </button>
+              {/* Illuminant */}
+              <div style={sectionStyle}>
+                <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold'}}>Illuminant</label>
+                <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+                  <select
+                    style={selectStyle} 
+                    value={selectedIlluminant} 
+                    onChange={(e)=> setSelectedIlluminant(e.target.value)}
+                    id="illuminant-select"
+                  >
+                    {illuminants.map((ill, idx) => <option key={idx}>{ill}</option>)}
+                  </select>
+                  
+                  <button style={iconButtonStyle} onClick={() => setIsIlluminantLuminanceDialogOpen(true)} id="illuminant-param-select">
+                    <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+                  </button>
 
-              {isIlluminantLuminanceDialogOpen && (
-                selectedIlluminant === 'Custom' ? (
-                  <IlluminantDialogCustom
-                  initialData={customIlluminantData}
-                  onSubmit={(values)=>{
-                    IlluminantCustomSubmit(values);
-                    setSceneLuminanceValue(''); 
-                  }}
-                  onClose={() => {
-                    setIsIlluminantLuminanceDialogOpen(false)
-                  }}
-                />
-                )
-                : (
-                  <IlluminantLuminanceDialog
-                  initialValue={illuminantLuminanceValue}
-                  onSubmit={(values)=>{
-                    IlluminantLuminanceSubmit(values);
-                    setSceneLuminanceValue('');
-                  }}
-                  onClose={()=> {
-                    setIsIlluminantLuminanceDialogOpen(false)
-                  }}
-                />
-                )
-              )}
+                  {isIlluminantLuminanceDialogOpen && (
+                    selectedIlluminant === 'Custom' ? (
+                      <IlluminantDialogCustom
+                      initialData={customIlluminantData}
+                      onSubmit={(values)=>{
+                        IlluminantCustomSubmit(values);
+                        setSceneLuminanceValue(''); 
+                      }}
+                      onClose={() => {
+                        setIsIlluminantLuminanceDialogOpen(false)
+                      }}
+                    />
+                    )
+                    : (
+                      <IlluminantLuminanceDialog
+                      initialValue={illuminantLuminanceValue}
+                      onSubmit={(values)=>{
+                        IlluminantLuminanceSubmit(values);
+                        setSceneLuminanceValue('');
+                      }}
+                      onClose={()=> {
+                        setIsIlluminantLuminanceDialogOpen(false)
+                      }}
+                    />
+                    )
+                  )}
 
-              <button style={iconButtonStyle} onClick={() => openSpectrumPopup(selectedIlluminant, illuminantLuminanceValue, customIlluminantData)} id="illuminant-spectrum-select">
-                <img src={spectrum} alt="Spectrum" style={{ width: '20px', height: '20px' }} />
-              </button>
-            </div>
-          </div>
+                  <button style={iconButtonStyle} onClick={() => openSpectrumPopup(selectedIlluminant, illuminantLuminanceValue, customIlluminantData)} id="illuminant-spectrum-select">
+                    <img src={spectrum} alt="Spectrum" style={{ width: '20px', height: '20px' }} />
+                  </button>
+                </div>
+              </div>
 
-          <div style={dividerStyle}></div>
+              <div style={dividerStyle}></div>
 
-          {/* Scene */}
-          <div style={sectionStyle}>
-            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Scene</label>
-            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <select 
-                id="scene-select"
-                style={selectStyle}
-                value={selectedScene}
-                onChange = {(e) => setSelectedScene(e.target.value)}
-              >
-                {scenes.map((s, idx) => <option key={idx} value = {s}>{s}</option>)}
-              </select>
-              
-              <button id="scene-param-select" style={iconButtonStyle} onClick = {sceneButtonClick}>
-                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
-              </button>
-              {isMacbethDialogOpen && <MacbethDialog initialValues={macbethParams} onSubmit={handleMacbethSubmit} onClose={() => {setIsMacbethDialogOpen(false);}} />}
-              {isPointArrayDialogOpen && <PointArrayDialog initialValues={pointarrayParams} onSubmit={handlePointArraySubmit} onClose={() => {setIsPointArrayDialogOpen(false);}} />}
-              {isGridlineDialogOpen && <GridlinesDialog initialValues={gridlinesParams} onSubmit={handleGridlinesSubmit} onClose={() => {setIsGridlineDialogOpen(false);}} />}
-              {isSlantedEdgeDialogOpen && <SlantedEdgeDialog initialValues={slantededgeParams} onSubmit={handleSlantededgeSubmit} onClose={() => {setIsSlantedEdgeDialogOpen(false);}} />}
-              {isRingsRaysDialogOpen && <RingsRaysDialog initialValues={ringsraysParams} onSubmit={handleRingsraysSubmit} onClose={() => {setIsRingsRaysDialogOpen(false);}} />}
-              {isSceneFileDialogOpen && 
-                <SceneFileDialog 
-                  initialValues={sceneFileParams} 
-                  illuminantData = {sceneFileIlluminantData}
-                  onIlluminantChange = {sceneIlluminantSubmit} 
-                  onSubmit={handleSceneFileSubmit} 
-                  onClose={() => {setIsSceneFileDialogOpen(false);}} 
-                />
-              }
-
-              <button id="scene-luminance-select" style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>
-                <img src={brightness} alt="Brightness" style={{ width: '20px', height: '20px' }} />
-              </button>
-              {isSceneLuminanceDialogOpen && (
-                <SceneLuminanceDialog
-                  initialValues = {sceneLuminanceValue}
-                  onSubmit = {(values)=>{
-                    SceneLuminanceSubmit(values);
-                    setIlluminantLuminanceValue('');
-                  }}
-                  onClose={() => {
-                    setIsSceneLuminanceDialogOpen(false)
-                  }}
-                />
-              )}
-
-            </div>
-
-            <div style={fileInputRowStyle}>
-              <input
-                type="text"
-                value={sceneFile}
-                readOnly
-                placeholder=""
-                disabled
-                style={fileInputStyle}
-              />
-              <button
-                style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}
-                title="Upload"
-                disabled
-                onClick={() => fileInputRef.current.click()}
-              >
-                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
-              </button>
-              <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                onChange={(e) => e.target.files.length > 0 && setSceneFile(e.target.files[0].name)}
-              />
-            </div>
-          </div>
-
-          <div style={dividerStyle}></div>
-
-          {/* Optics */}
-          <div style={sectionStyle}>
-            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
-            <select id="optics-select" style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
-            <div style={fileInputRowStyle}>
-              <input
-                type="text"
-                disabled
-                value={opticsFile}
-                readOnly
-                placeholder=""
-                style={fileInputStyle}
-              />
-              <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} title="Upload">
-                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }}/>
-                <input
-                  type="file"
-                  disabled
-                  style={{ display: 'none' }}
-                  onChange={(e) =>
-                    e.target.files.length > 0 && setOpticsFile(e.target.files[0].name)
+              {/* Scene */}
+              <div style={sectionStyle}>
+                <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Scene</label>
+                <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+                  <select 
+                    id="scene-select"
+                    style={selectStyle}
+                    value={selectedScene}
+                    onChange = {(e) => setSelectedScene(e.target.value)}
+                  >
+                    {scenes.map((s, idx) => <option key={idx} value = {s}>{s}</option>)}
+                  </select>
+                  
+                  <button id="scene-param-select" style={iconButtonStyle} onClick = {sceneButtonClick}>
+                    <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+                  </button>
+                  {isMacbethDialogOpen && <MacbethDialog initialValues={macbethParams} onSubmit={handleMacbethSubmit} onClose={() => {setIsMacbethDialogOpen(false);}} />}
+                  {isPointArrayDialogOpen && <PointArrayDialog initialValues={pointarrayParams} onSubmit={handlePointArraySubmit} onClose={() => {setIsPointArrayDialogOpen(false);}} />}
+                  {isGridlineDialogOpen && <GridlinesDialog initialValues={gridlinesParams} onSubmit={handleGridlinesSubmit} onClose={() => {setIsGridlineDialogOpen(false);}} />}
+                  {isSlantedEdgeDialogOpen && <SlantedEdgeDialog initialValues={slantededgeParams} onSubmit={handleSlantededgeSubmit} onClose={() => {setIsSlantedEdgeDialogOpen(false);}} />}
+                  {isRingsRaysDialogOpen && <RingsRaysDialog initialValues={ringsraysParams} onSubmit={handleRingsraysSubmit} onClose={() => {setIsRingsRaysDialogOpen(false);}} />}
+                  {isSceneFileDialogOpen && 
+                    <SceneFileDialog 
+                      initialValues={sceneFileParams} 
+                      illuminantData = {sceneFileIlluminantData}
+                      onIlluminantChange = {sceneIlluminantSubmit} 
+                      onSubmit={handleSceneFileSubmit} 
+                      onClose={() => {setIsSceneFileDialogOpen(false);}} 
+                    />
                   }
-                />
-              </button>
+
+                  <button id="scene-luminance-select" style={iconButtonStyle} onClick={() => setIsSceneLuminanceDialogOpen(true)}>
+                    <img src={brightness} alt="Brightness" style={{ width: '20px', height: '20px' }} />
+                  </button>
+                  {isSceneLuminanceDialogOpen && (
+                    <SceneLuminanceDialog
+                      initialValues = {sceneLuminanceValue}
+                      onSubmit = {(values)=>{
+                        SceneLuminanceSubmit(values);
+                        setIlluminantLuminanceValue('');
+                      }}
+                      onClose={() => {
+                        setIsSceneLuminanceDialogOpen(false)
+                      }}
+                    />
+                  )}
+
+                </div>
+
+                <div style={fileInputRowStyle}>
+                  <input
+                    type="text"
+                    value={sceneFile}
+                    readOnly
+                    placeholder=""
+                    disabled
+                    style={fileInputStyle}
+                  />
+                  <button
+                    style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}
+                    title="Upload"
+                    disabled
+                    onClick={() => fileInputRef.current.click()}
+                  >
+                    <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+                  </button>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                    onChange={(e) => e.target.files.length > 0 && setSceneFile(e.target.files[0].name)}
+                  />
+                </div>
+              </div>
+
+              <div style={dividerStyle}></div>
+
+              {/* Optics */}
+              <div style={sectionStyle}>
+                <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
+                <select id="optics-select" style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
+                <div style={fileInputRowStyle}>
+                  <input
+                    type="text"
+                    disabled
+                    value={opticsFile}
+                    readOnly
+                    placeholder=""
+                    style={fileInputStyle}
+                  />
+                  <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} title="Upload">
+                    <img src={upload} alt="Upload" style={{ width: 20, height: 20 }}/>
+                    <input
+                      type="file"
+                      disabled
+                      style={{ display: 'none' }}
+                      onChange={(e) =>
+                        e.target.files.length > 0 && setOpticsFile(e.target.files[0].name)
+                      }
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <div style={dividerStyle}></div>
+
+              {/* Sensor */}
+              <div style={sectionStyle}>
+                <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Sensor</label>
+                <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+                  <select id="sensor-select" style={selectStyle} value={selectedSensor} onChange={(e) => setSelectedSensor(e.target.value)}>{sensors.map((s, idx) => <option key={idx}>{s}</option>)}</select>
+
+                  <button id="sensor-param-select" style={iconButtonStyle} onClick={() => setIsSensorDialogOpen(true)}>
+                    <img src={parameter} alt="Params" style={{ width: '20px', height: '20px'}} />
+                  </button>
+
+                  {isSensorDialogOpen && (
+                    <SensorDialog
+                      initialValues={sensorValues}
+                      onSubmit={handleSensorSubmit}
+                      onClose={() => setIsSensorDialogOpen(false)}
+                    />
+                  )}
+
+                </div>
+              </div>
+
+              <div style={dividerStyle}></div>
+
+              {/* ISP */}
+              <div style={sectionStyle}>
+                <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>ISP</label>
+                <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+                  <select id="isp-select" style={selectStyle} value={selectedISP} onChange={(e) => setSelectedISP(e.target.value)}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
+                  
+                  <button id="isp-param-select" style={iconButtonStyle} onClick={() => {if(selectedISP === 'Fast-openISP'){setIsIspDialogOpen(true);}}}>
+                    <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+                  </button>
+
+                  {isIspDialogOpen && (
+                    <ISPDialog
+                      initialValues = {ispValues}
+                      onSubmit={handleISPSubmit}
+                      onClose={() => setIsIspDialogOpen(false)}
+                    />
+                  )}
+                </div>
+                <div style={fileInputRowStyle}>
+                  <input
+                    type="text"
+                    disabled
+                    value={algorithmFile}
+                    readOnly
+                    placeholder=""
+                    style={fileInputStyle}
+                  />
+                  <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                    <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+                    <input
+                      type="file"
+                      disabled
+                      style={{ display: 'none' }}
+                      onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <div style={dividerStyle}></div>
+
+              {/* Algorithms */}
+              <div style={sectionStyle}>
+                <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
+                <select id="algorithm-select" style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
+                <div style={fileInputRowStyle}>
+                  <input
+                    type="text"
+                    disabled
+                    value={algorithmFile}
+                    readOnly
+                    placeholder=""
+                    style={fileInputStyle}
+                  />
+                  <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                    <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+                    <input
+                      type="file"
+                      disabled
+                      style={{ display: 'none' }}
+                      onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <div style={dividerStyle}></div>
+
+            </div>
+
+            <div style={bottomSectionStyle}>
+              <div style={imageAreaStyle}>
+                {resultImage ? (
+                  <img src={resultImage} alt="Simulation Result" style={{width: "100%", height: "100%", objectFit: "contain", imageRendering: 'pixelated'}}/>
+                ):(
+                  <span></span>
+                )}
+                
+              </div>
+              <div ref={outputTextRef} style={textAreaStyle}>
+                {Array.isArray(outputText) 
+                  ? outputText.map((line, idx) => (
+                      <pre key={idx} style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{line}</pre>
+                    ))
+                  : <pre style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{outputText}</pre>
+                }
+              </div>
             </div>
           </div>
+        )}
 
-          <div style={dividerStyle}></div>
 
-          {/* Sensor */}
-          <div style={sectionStyle}>
-            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Sensor</label>
-            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <select id="sensor-select" style={selectStyle} value={selectedSensor} onChange={(e) => setSelectedSensor(e.target.value)}>{sensors.map((s, idx) => <option key={idx}>{s}</option>)}</select>
-
-              <button id="sensor-param-select" style={iconButtonStyle} onClick={() => setIsSensorDialogOpen(true)}>
-                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px'}} />
-              </button>
-
-              {isSensorDialogOpen && (
-                <SensorDialog
-                  initialValues={sensorValues}
-                  onSubmit={handleSensorSubmit}
-                  onClose={() => setIsSensorDialogOpen(false)}
-                />
-              )}
-
-            </div>
-          </div>
-
-          <div style={dividerStyle}></div>
-
-          {/* ISP */}
-          <div style={sectionStyle}>
-            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>ISP</label>
-            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              <select id="isp-select" style={selectStyle} value={selectedISP} onChange={(e) => setSelectedISP(e.target.value)}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
-              
-              <button id="isp-param-select" style={iconButtonStyle} onClick={() => {if(selectedISP === 'Fast-openISP'){setIsIspDialogOpen(true);}}}>
-                <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
-              </button>
-
-              {isIspDialogOpen && (
-                <ISPDialog
-                  initialValues = {ispValues}
-                  onSubmit={handleISPSubmit}
-                  onClose={() => setIsIspDialogOpen(false)}
-                />
-              )}
-            </div>
-            <div style={fileInputRowStyle}>
-              <input
-                type="text"
-                disabled
-                value={algorithmFile}
-                readOnly
-                placeholder=""
-                style={fileInputStyle}
-              />
-              <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
-                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
-                <input
-                  type="file"
-                  disabled
-                  style={{ display: 'none' }}
-                  onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
-                />
-              </button>
-            </div>
-          </div>
-
-          <div style={dividerStyle}></div>
-
-          {/* Algorithms */}
-          <div style={sectionStyle}>
-            <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
-            <select id="algorithm-select" style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
-            <div style={fileInputRowStyle}>
-              <input
-                type="text"
-                disabled
-                value={algorithmFile}
-                readOnly
-                placeholder=""
-                style={fileInputStyle}
-              />
-              <button style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
-                <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
-                <input
-                  type="file"
-                  disabled
-                  style={{ display: 'none' }}
-                  onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
-                />
-              </button>
-            </div>
-          </div>
-
-          <div style={dividerStyle}></div>
-
-        </div>
-
-        <div style={bottomSectionStyle}>
-          <div style={imageAreaStyle}>
-            {resultImage ? (
-              <img src={resultImage} alt="Simulation Result" style={{width: "100%", height: "100%", objectFit: "contain", imageRendering: 'pixelated'}}/>
-            ):(
-              <span></span>
-            )}
-            
-          </div>
-          <div ref={outputTextRef} style={textAreaStyle}>
-            {Array.isArray(outputText) 
-              ? outputText.map((line, idx) => (
-                  <pre key={idx} style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{line}</pre>
-                ))
-              : <pre style={{margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word"}}>{outputText}</pre>
-            }
-          </div>
-        </div>
+        {activeMenu === 'Optics Design' && (
+          <OpticsDesign/>
+        )}
       </div>
+
+
+
+
     </div>
   );
 };
