@@ -1107,23 +1107,24 @@ const Simulate = () => {
 
         {/* 🔹 사용자 영역 + Tutorial 버튼 묶기 */}
         <div style={{ marginTop: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {/* Tutorial 버튼 */}
-          <button
-            onClick={() => setShowStageMenu(prev => !prev)}
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              backgroundColor: '#008B8B',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: 500,
-            }}
-          >
-            Tutorial
-          </button>
+          {sidebarExpanded && (
+            <button
+              onClick={() => setShowStageMenu(prev => !prev)}
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                backgroundColor: '#008B8B',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 500,
+              }}
+            >
+              Tutorial
+            </button>
+          )}
 
           {/* 중앙 모달 팝업 */}
           {showStageMenu && (
