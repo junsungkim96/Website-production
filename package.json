@@ -28,6 +28,7 @@
     "react-joyride": "^2.9.3",
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.10.2",
     "react-tsparticles": "^2.12.2",
     "semantic-ui-react": "^2.1.5",
     "tsparticles": "^2.12.0",

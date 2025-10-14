@@ -119,7 +119,7 @@ const Simulate = () => {
   const [activeMenu, setActiveMenu] = useState('System Optimization');
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [logoHovered, setLogoHovered] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(220);
+  const [sidebarWidth, setSidebarWidth] = useState(240);
 
   const [resultImage, setResultImage] = useState(null);
   const [outputText, setOutputText] = useState([]);
@@ -142,7 +142,7 @@ const Simulate = () => {
   const toggleSize = 25;
 
   useEffect(() => {
-    setSidebarWidth(sidebarExpanded ? 220 : 60);
+    setSidebarWidth(sidebarExpanded ? 240 : 60);
   }, [sidebarExpanded]);
 
   const handleToggle = () => {
@@ -1111,22 +1111,24 @@ const Simulate = () => {
         {/* 🔹 사용자 영역 + Tutorial 버튼 묶기 */}
         <div style={{ marginTop: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {sidebarExpanded && (
-            <button
-              onClick={() => setShowStageMenu(prev => !prev)}
-              style={{
-                width: '100%',
-                padding: '8px 12px',
-                backgroundColor: '#008B8B',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 500,
-              }}
-            >
-              Tutorial
-            </button>
+              activeMenu === 'System Optimization' && (
+              <button
+                onClick={() => setShowStageMenu(prev => !prev)}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  backgroundColor: '#008B8B',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                }}
+              >
+                Tutorial
+              </button>
+            )
           )}
 
           {/* 중앙 모달 팝업 */}
@@ -1241,7 +1243,7 @@ const Simulate = () => {
         )}
       </div>
 
-      <div style={{width: `calc(100% - ${sidebarWidth}px)` }}>
+      <div style={{width: `calc(100% - ${sidebarWidth}px)`, transition: 'width 0.3s' }}>
         {activeMenu === 'System Optimization' && (
           <div style={mainContentStyle}>
             <div style={topSectionStyle}>
@@ -1588,7 +1590,9 @@ const Simulate = () => {
 
 
         {activeMenu === 'Optics Design' && (
-          <OpticsDesign/>
+          <div style={mainContentStyle}>
+            <OpticsDesign />
+          </div>
         )}
       </div>
 
