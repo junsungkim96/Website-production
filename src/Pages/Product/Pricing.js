@@ -63,31 +63,31 @@ const Pricing = () => {
       buttonText: 'Contact Sales',
       onClick: () => navigate('/contact_sales', {state: {planName: 'Pro'}})
     },
-    {
-      name: 'Enterprise',
-      price: 'Contact Us',
-      features: [
-        'All Pro Tier features',
-        'On-premise deployment',
-        'Tailored hardware/software integrations',
-        'Dedicated account manager',
-        'Onboarding assistance and training for teams',
-      ],
-      buttonText: 'Contact Sales',
-      onClick: () => navigate('/contact_sales', {state: {planName: 'Enterprise'}})
-    },
-    {
-      name: 'Education',
-      price: '$9/month',
-      features: [
-        'Designed for students and educators',
-        'All Basic Tier features',
-        'Support via email',
-        'Group access for classrooms',
-      ],
-      buttonText: 'Contact Sales',
-      onClick: () => navigate('/contact_sales', {state: {planName: 'Education'}})
-    },
+    // {
+    //   name: 'Enterprise',
+    //   price: 'Contact Us',
+    //   features: [
+    //     'All Pro Tier features',
+    //     'On-premise deployment',
+    //     'Tailored hardware/software integrations',
+    //     'Dedicated account manager',
+    //     'Onboarding assistance and training for teams',
+    //   ],
+    //   buttonText: 'Contact Sales',
+    //   onClick: () => navigate('/contact_sales', {state: {planName: 'Enterprise'}})
+    // },
+    // {
+    //   name: 'Education',
+    //   price: '$9/month',
+    //   features: [
+    //     'Designed for students and educators',
+    //     'All Basic Tier features',
+    //     'Support via email',
+    //     'Group access for classrooms',
+    //   ],
+    //   buttonText: 'Contact Sales',
+    //   onClick: () => navigate('/contact_sales', {state: {planName: 'Education'}})
+    // },
   ];
 
 
