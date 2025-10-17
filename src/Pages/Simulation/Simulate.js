@@ -134,9 +134,49 @@ const Simulate = () => {
   const [currentPlan, setCurrentPlan] = useState(localStorage.getItem('userPlan') || '');
 
   const [showMenu, setShowMenu] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true); // 스피너 켜기
+
+      // 로그아웃 API 호출
+      await fetch('https://www.qblackai.com/api/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: localStorage.getItem('userEmail') }),
+        credentials: 'include',
+      });
+
+      // 상태 초기화
+      localStorage.clear();
+      setIsLoggedIn(false);
+      setCurrentUser('');
+      setCurrentPlan('');
+
+      navigate('/');
+    } catch (err) {
+      console.error('Logout failed', err);
+      alert('Failed to logout. Please try again.');
+    } finally {
+      setIsLoggingOut(false); // 스피너 끄기
+    }
+  };
 
   const userRef = useRef(null);
+
+    // 바깥 영역 클릭 시 dropdown 닫기
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (userRef.current && !userRef.current.contains(event.target)) {
+        setShowMenu(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const menuRefs = useRef([]);
   const abortControllerRef = useRef(null);
@@ -1286,29 +1326,7 @@ const Simulate = () => {
 
                 {/* Logout */}
                 <div
-                  onClick={async () => {
-                    try {
-                      setShowMenu(false);
-
-                      await fetch('https://www.qblackai.com/api/logout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: localStorage.getItem('userEmail') }),
-                        credentials: 'include',
-                      });
-
-                      localStorage.clear();
-                      setIsLoggedIn(false);
-                      setCurrentUser('');
-                      setCurrentPlan('');
-
-                      navigate('/');
-                    } catch (err) {
-                      setShowMenu(false);
-                      console.error('Logout failed', err);
-                      alert('Failed to logout. Please try again.');
-                    }
-                  }}
+                  onClick={handleLogout}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f0f0')}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#fff')}
                   style={{
@@ -1322,10 +1340,45 @@ const Simulate = () => {
                   Logout
                 </div>
               </div>
-            )}
-
-            
+            )}            
           </div>
+
+          {/* Logout spinner overlay */}
+          {isLoggingOut && (
+            <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)', // 조금 더 어둡게
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 9999,
+              }}
+            >
+              <div
+                style={{
+                  width: '60px',
+                  height: '60px',
+                  border: '6px solid rgba(255,255,255,0.3)', // 연한 테두리
+                  borderTop: '6px solid #fff', // 흰색 회전
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite',
+                  boxShadow: '0 0 10px rgba(0,0,0,0.3)', // 살짝 그림자
+                }}
+              />
+            </div>
+          )}
+
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
 
         </div>
 
