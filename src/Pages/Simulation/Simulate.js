@@ -166,6 +166,18 @@ const Simulate = () => {
 
   const userRef = useRef(null);
 
+    // 바깥 영역 클릭 시 dropdown 닫기
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (userRef.current && !userRef.current.contains(event.target)) {
+        setShowMenu(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const menuRefs = useRef([]);
   const abortControllerRef = useRef(null);
   const logoSize = 35;
