@@ -12,6 +12,7 @@ import Homepage from './Pages/LandingPage/Homepage.js';
 import Product from './Pages/Product/Product.js';
 import Pricing from './Pages/Product/Pricing.js';
 import DownloadPage from './Pages/Product/Download.js';
+import Payment from './Pages/Product/Payment.js';
 import Research from './Pages/Research/Research.js';
 import Optics from './Pages/Research/Optics.js';
 import Sensor from './Pages/Research/Sensor.js';
@@ -75,6 +76,7 @@ const App = () => (
           <Route path="/product_features" element={<MainLayout>< Product /></MainLayout>}/>
           <Route path="/product_pricing" element={<MainLayout>< Pricing /></MainLayout>}/>
           <Route path="/download" element = {<DownloadPage />}/>
+          <Route path="/payment" element = {<Payment />}/>
           
           {/* Research */}
           <Route path="/research" element={<MainLayout>< Research /></MainLayout>}/>

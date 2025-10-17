@@ -46,8 +46,8 @@ const Pricing = () => {
         'Email support',
         'Monthly updates and community forum access',
       ],
-      buttonText: 'Contact Sales',
-      onClick: () => navigate('/contact_sales', {state: {planName: 'Basic'}})
+      buttonText: 'Subscribe Now',
+      onClick: () => navigate('/payment', {state: {planName: 'Basic'}})
     },
     {
       name: 'Pro',
@@ -60,8 +60,8 @@ const Pricing = () => {
         'Support via email',
         'Access to webinars and tutorials',
       ],
-      buttonText: 'Contact Sales',
-      onClick: () => navigate('/contact_sales', {state: {planName: 'Pro'}})
+      buttonText: 'Subscribe Now',
+      onClick: () => navigate('/payment', {state: {planName: 'Pro'}})
     },
     // {
     //   name: 'Enterprise',
