@@ -5,7 +5,7 @@ import sidebarIcon from '../../img/simulate/sidebar-left.svg';
 import camera from '../../img/simulate/dslr-camera.png';
 import lens from '../../img/simulate/optics.png';
 // import sensor from '../../img/simulate/microchip.png';
-import PlanModal from './UI/PlanModal';
+import {ChevronUp, ChevronDown} from 'lucide-react';
 
 import newpage from '../../img/simulate/new-file.svg';
 import run from '../../img/simulate/run.svg';
@@ -133,7 +133,9 @@ const Simulate = () => {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('userFirstName') || '');
   const [currentPlan, setCurrentPlan] = useState(localStorage.getItem('userPlan') || '');
 
-  const [showPlanModal, setShowPlanModal] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const userRef = useRef(null);
 
   const menuRefs = useRef([]);
@@ -1108,30 +1110,31 @@ const Simulate = () => {
           </div>
         ))}
 
-        {/* 🔹 사용자 영역 + Tutorial 버튼 묶기 */}
+        {/* Tutorial button + User info */}
         <div style={{ marginTop: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {sidebarExpanded && (
-              activeMenu === 'System Optimization' && (
-              <button
-                onClick={() => setShowStageMenu(prev => !prev)}
-                style={{
-                  width: '100%',
-                  padding: '8px 12px',
-                  backgroundColor: '#008B8B',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                }}
-              >
-                Tutorial
-              </button>
-            )
+          
+          {/* Tutorial button */}
+          {sidebarExpanded && activeMenu === 'System Optimization' && (
+            <button
+              onClick={() => setShowStageMenu(prev => !prev)}
+              style={{
+                width: '94%',
+                margin: '0 auto',
+                padding: '8px 12px',
+                backgroundColor: '#008B8B',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 500,
+              }}
+            >
+              Tutorial
+            </button>
           )}
 
-          {/* 중앙 모달 팝업 */}
+          {/* Center modal popup */}
           {showStageMenu && (
             <div
               style={{
@@ -1140,7 +1143,7 @@ const Simulate = () => {
                 left: 0,
                 width: '100vw',
                 height: '100vh',
-                backgroundColor: 'rgba(0,0,0,0.4)', // 반투명 배경
+                backgroundColor: 'rgba(0,0,0,0.4)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -1183,21 +1186,25 @@ const Simulate = () => {
             </div>
           )}
 
-          {/* 사용자 이니셜 */}
+          {/* User info */}
           <div
             ref={userRef}
+            onClick={() => setShowMenu(prev => !prev)}
             style={{
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               borderTop: sidebarExpanded ? '1px solid #ccc' : 'transparent',
-              backgroundColor: sidebarExpanded ? '#fafafa' : 'transparent',
+              backgroundColor: sidebarExpanded ? '#f7f7f7' : 'transparent',
               height: '60px',
               boxSizing: 'border-box',
-              pointerEvents: 'none',
-              paddingTop: '8px'
+              paddingTop: '8px',
+              pointerEvents: 'auto',
+              position: 'relative',
+              width: '210px',
             }}
           >
+            {/* User initial */}
             <div
               style={{
                 width: '28px',
@@ -1227,20 +1234,101 @@ const Simulate = () => {
                 </span>
               </div>
             )}
+
+            {/* Chevron icon */}
+            {sidebarExpanded && (
+              <div style={{ marginLeft: 'auto' }}>
+                {showMenu ? (
+                  <ChevronDown size={16} color="#000" strokeWidth={2} />
+                ) : (
+                  <ChevronUp size={16} color="#000" strokeWidth={2} />
+                )}
+              </div>
+            )}
+
+            {/* User menu dropdown */}
+            {showMenu && sidebarExpanded && (
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '100%',
+                  left: 0,
+                  width: '100%',
+                  backgroundColor: '#fff',
+                  border: '1px solid #ccc',
+                  borderRadius: '16px',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  zIndex: 100,
+                  overflow: 'hidden',
+                  marginBottom: '8px',
+                }}
+              >
+                {/* Upgrade Plan */}
+                <div
+                  onClick={() => {
+                    navigate('/product_pricing');
+                    setShowMenu(false);
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f0f0')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#fff')}
+                  style={{
+                    padding: '10px 16px',
+                    cursor: 'pointer',
+                    fontWeight: 500,
+                    color: '#222',
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  Upgrade Plan
+                </div>
+
+                {/* Logout */}
+                <div
+                  onClick={async () => {
+                    try {
+                      setShowMenu(false);
+
+                      await fetch('https://www.qblackai.com/api/logout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: localStorage.getItem('userEmail') }),
+                        credentials: 'include',
+                      });
+
+                      localStorage.clear();
+                      setIsLoggedIn(false);
+                      setCurrentUser('');
+                      setCurrentPlan('');
+
+                      navigate('/');
+                    } catch (err) {
+                      setShowMenu(false);
+                      console.error('Logout failed', err);
+                      alert('Failed to logout. Please try again.');
+                    }
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f0f0')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#fff')}
+                  style={{
+                    padding: '10px 16px',
+                    cursor: 'pointer',
+                    fontWeight: 500,
+                    color: '#e53935',
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  Logout
+                </div>
+              </div>
+            )}
+
+            
           </div>
+
         </div>
 
-        {showPlanModal && (
-          <PlanModal
-            anchorRef={userRef}
-            currentPlan={currentPlan}
-            onClose={() => setShowPlanModal(false)}
-            onChangePlan={(newPlan) => {
-              setCurrentPlan(newPlan);
-              setShowPlanModal(false);
-            }}
-          />
-        )}
       </div>
 
       <div style={{width: `calc(100% - ${sidebarWidth}px)`, transition: 'width 0.3s' }}>

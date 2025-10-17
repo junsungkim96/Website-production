@@ -51,13 +51,13 @@ const ParticleBackground = () => {
 
         <div style ={{display: 'flex', justifyContent: 'center', gap: isMobile ? '15px' : '30px', marginTop: '5vh', marginBottom: '5vh'}}>
           <Button variant = "light" size = "md"
-          onClick = {freeTrial} style = {{borderRadius: '12px'}}>
+          onClick = {freeTrial} style = {{borderRadius: '12px', minWidth: '230px'}}>
             <div className = "career-button">Start Free Trial →</div> 
           </Button>
           
           <Button variant = "light" size = "md"
-          onClick = {()=> navigate('/demo')} style = {{borderRadius: '12px'}}>
-            <div className = "career-button">Enterprise Demo →</div> 
+          onClick = {()=> navigate('/contact')} style = {{borderRadius: '12px', minWidth: '230px'}}>
+            <div className = "career-button">Contact Us →</div> 
           </Button>
         </div>
 
