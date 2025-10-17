@@ -303,14 +303,13 @@ const OpticsDesign = () => {
               <thead style={{ background: '#f8f8f8' }}>
                 <tr>
                   <th style={{ width: '50px', padding: '6px 8px' }}>Surf</th>
-                  <th style={{ width: '110px', padding: '6px 8px 6px 8px' }}>Type</th>
+                  <th style={{ width: '110px', padding: '6px 8px' }}>Type</th>
                   <th style={{ width: '120px', padding: '6px 8px 6px 20px' }}>Glass</th>
-                  <th style={{ width: '100px', padding: '6px 8px' }}>Radius (mm)</th>
-                  <th style={{ width: '100px', padding: '6px 8px' }}>Thickness (mm)</th>
-                  <th style={{ width: '100px', padding: '6px 8px' }}>Semi-Dia (mm)</th>
+                  <th style={{ width: '100px', padding: '6px 8px' }}>Radius Front</th>
+                  <th style={{ width: '100px', padding: '6px 8px' }}>Radius Back</th>
+                  <th style={{ width: '100px', padding: '6px 8px' }}>Thickness</th>
+                  <th style={{ width: '100px', padding: '6px 8px' }}>Semi-Dia</th>
                   <th style={{ width: '80px', padding: '6px 8px' }}>Conic</th>
-                  <th style={{ padding: '6px 8px' }}>Comment</th>
-                  <th style={{ padding: '6px 8px' }}>Extra</th>
                 </tr>
               </thead>
               <tbody>
