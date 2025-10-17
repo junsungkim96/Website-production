@@ -1093,12 +1093,12 @@ const Simulate = () => {
             ref={(el) => (menuRefs.current[index] = el)}
             style={{
               ...sidebarItemStyle(activeMenu === item.name),
-              // cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
-              // opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
+              cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
+              opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
             }}
             onClick={() => {
-              // if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
-              if (item.name !== 'Sensor Design'){
+              if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
+              // if (item.name !== 'Sensor Design'){
                 setActiveMenu(item.name);
               }
             }}
