@@ -20,6 +20,7 @@ import img5 from '../../img/homepage/settings-gear.svg';
 import img6 from '../../img/homepage/specificity.svg';
 import {company_name} from '../../data/Company_data';
 import product from '../../img/homepage/product_overview.png';
+import {Helmet} from "react-helmet";
 
 
 const Homepage = () => {
@@ -41,6 +42,14 @@ const Homepage = () => {
 
   return(
     <div>
+      <Helmet>
+        <title>QblackAI | Integrated HW-SW Computer Vision Simulation Platform</title>
+        <meta
+          name="description"
+          content=""
+        />
+        <link rel="canonical" href="https://qblackai.com/" />
+      </Helmet>
       
       <AnimatedBackground/>
 

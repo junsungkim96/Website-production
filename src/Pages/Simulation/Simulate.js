@@ -34,6 +34,7 @@ import ISPDialog from './UI/isp_input';
 import OpticsDesign from './Optics';
 
 import Joyride, {STATUS} from "react-joyride";
+import {Helmet} from "react-helmet";
 
 import { API_BASE_URL } from '../../config';
 
@@ -1035,6 +1036,15 @@ const Simulate = () => {
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden'}}>
+      <Helmet>
+        <title>QuasarVision</title>
+        <meta
+          name="description"
+          content="Premium simulator for computer vision"
+        />
+        <link rel="canonical" href="https://qblackai.com/simulate" />
+      </Helmet>
+
       {/* Joyride */}
       {/* <Joyride
         steps={tutorialSteps}

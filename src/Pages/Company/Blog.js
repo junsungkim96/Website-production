@@ -19,7 +19,7 @@ const Blog = () => {
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
 
       <Helmet>
-        <title>Blog</title>
+        <title>Company</title>
         <meta
           name="description"
           content="Explore QblackAI's latest insights and updates on computer vision "

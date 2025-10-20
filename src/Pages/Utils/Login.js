@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import logo from '../../img/qblackai_logo.png';
 import '../../styles/desktop.css';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import {Helmet} from "react-helmet";
 
 const API_BASE = 'https://www.qblackai.com/api';
 
@@ -152,6 +153,15 @@ const handleResetPassword = async (values, setSubmitting) => {
 
   return (
     <div style={{ marginTop: '5vh', textAlign: 'center'}}>
+      <Helmet>
+        <title>Login</title>
+        <meta
+          name="description"
+          content="Login page"
+        />
+        <link rel="canonical" href="https://qblackai.com/login" />
+      </Helmet>
+
       <img
         src={logo}
         alt="QblackAI Logo"

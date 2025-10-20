@@ -5,6 +5,7 @@ import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
+import {Helmet} from "react-helmet";
 
 const Pricing = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -93,6 +94,15 @@ const Pricing = () => {
 
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
+      <Helmet>
+        <title>Product</title>
+        <meta
+          name="description"
+          content="Learn about our product pricings"
+        />
+        <link rel="canonical" href="https://qblackai.com/product_pricing" />
+      </Helmet>
+
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="career-left-text">
           <div>
@@ -101,6 +111,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
+      
       <Container style={{ marginTop: '5vh', marginBottom: '10vh' }}>
         <Row>
           {plans.map((plan, index) => (

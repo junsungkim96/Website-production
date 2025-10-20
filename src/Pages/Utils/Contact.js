@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Form, Button, Row } from 'react-bootstrap';
+import {Helmet} from "react-helmet";
 
 const validationSchema = Yup.object().shape({
   questionType: Yup.string().required('Please select a question type'),
@@ -57,6 +58,15 @@ const Contact = () => {
 
   return (
     <div style={{ paddingTop: '10vh', paddingBottom: '10vh', color: 'white', overflowX: 'hidden', width: '100%', boxSizing: 'border-box' }}>
+      <Helmet>
+        <title>Company</title>
+        <meta
+          name="description"
+          content="Let's get in touch"
+        />
+        <link rel="canonical" href="https://qblackai.com/contact" />
+      </Helmet>
+
       <div style={{ marginBottom: '10vh' }}>
         <div className="left-text" style={{ fontSize: '50px' }}>
           Contact Us

@@ -3,6 +3,7 @@ import '../../styles/laptop.css';
 import '../../styles/tablet.css';
 import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
+import {Helmet} from "react-helmet";
 
 const Sensor = () => {
   useLayoutEffect(()=>{
@@ -13,6 +14,14 @@ const Sensor = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
+      <Helmet>
+        <title>Research</title>
+        <meta
+          name="description"
+          content="Learn about our cutting-edge research in sensor"
+        />
+        <link rel="canonical" href="https://qblackai.com/sensor" />
+      </Helmet>
       <div style = {{marginBottom: '15vh'}}>
         <div className="left-text" style = {{fontSize: '40px'}}>
           Physical Sensor Simulation

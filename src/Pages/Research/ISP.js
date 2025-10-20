@@ -3,6 +3,7 @@ import '../../styles/laptop.css';
 import '../../styles/tablet.css';
 import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
+import {Helmet} from "react-helmet";
 
 const ISP = () => {
   useLayoutEffect(()=>{
@@ -13,6 +14,14 @@ const ISP = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
+      <Helmet>
+        <title>Research</title>
+        <meta
+          name="description"
+          content="Learn about our cutting-edge research in image signal processing"
+        />
+        <link rel="canonical" href="https://qblackai.com/isp" />
+      </Helmet>
       <div style = {{marginBottom: '15vh'}}>
         <div className="left-text" style = {{width: '100vw', fontSize: '40px'}}>
           AI-Based ISP Automation
