@@ -5,6 +5,7 @@ import '../../styles/mobile.css';
 import React, {useLayoutEffect} from 'react';
 import {Container, Row, Col, Card} from 'react-bootstrap';
 import {metadata as quantum_computing} from './NewsPost/1_QuantumComputing.js';
+import {Helmet} from "react-helmet";
 
 const News = () => {
   useLayoutEffect(()=>{
@@ -15,6 +16,15 @@ const News = () => {
 
   return(
     <div style = {{marginBottom: '200px', paddingTop: '10vh', paddingBottom: '10vh', minHeight: '80vh'}}>
+      <Helmet>
+        <title>Company</title>
+        <meta
+          name="description"
+          content="Learn about our latest news"
+        />
+        <link rel="canonical" href="https://qblackai.com/news" />
+      </Helmet>
+
       <Container>
         {/* Blog Title */}
         <p style = {{fontSize: '50px'}}>

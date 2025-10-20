@@ -33,7 +33,7 @@ const Careers = () => {
     <div style = {{marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh', overflowX: 'hidden', width: '100%', boxSizing: 'border-box'}}>
       
       <Helmet>
-        <title>Careers</title>
+        <title>Company</title>
         <meta
           name="description"
           content="Join QblackAI to shape the future of computer vision industry"
