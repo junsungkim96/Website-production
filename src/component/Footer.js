@@ -146,13 +146,13 @@ const Footer = () => {
               <div
                 style={{
                   color: '#aaa',
-                  fontSize: '0.6rem',
+                  fontSize: '0.65rem',
                   lineHeight: '2',
                   textAlign: 'left',
                   marginBottom: '0.5vh',
                 }}
               >
-                상호: 큐블랙에이아이 | 대표: 김준성 <br />
+                상호: 큐블랙에이아이 | 대표: 김준성 | 전화: 0507-1460-0620 <br />
                 사업자등록번호: 484-50-00824 | 통신판매업 신고번호: 2025-서울마포-1151<br />
                 주소: 서울특별시 마포구 마포대로 92, A동 3층 | 이메일: info@qblackai.com
               </div>
