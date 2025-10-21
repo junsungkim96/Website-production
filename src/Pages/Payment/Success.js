@@ -12,7 +12,7 @@ export function SuccessPage() {
 
   async function confirmPayment() {
     try {
-      const response = await fetch("http://localhost:8000/api/payment-confirm", {
+      const response = await fetch("/api/payment-confirm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentKey, orderId, amount }),
