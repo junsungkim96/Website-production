@@ -402,4 +402,17 @@
     padding-left: 5vw;
     padding-right: 5vw;
   }
+
+  .pricing-alert {
+    text-align: center;
+    background-color: #fff8e1;
+    color: #333;
+    padding: 15px 10px;
+    border: 1px solid #f0d98a;
+    border-radius: 6px;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }
