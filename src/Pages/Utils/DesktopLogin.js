@@ -23,7 +23,7 @@ const DesktopInfo = () => {
       }}
     >
       <h4 style = {{width: '80%', margin: '0 auto', fontSize: '16px', fontWeight: 300}}>
-        Free trial is only available on desktop. <br/>
+        Simulation is only available on desktop. <br/>
         Please use a desktop computer to start your trial.
       </h4>
       <Button
@@ -40,7 +40,7 @@ const DesktopInfo = () => {
           color: '#fff', // 버튼 글자도 흰색
         }}
       >
-        Back to Mainpage
+        Go to previous page
       </Button>
     </div>
   );

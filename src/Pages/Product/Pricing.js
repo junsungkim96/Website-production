@@ -9,8 +9,12 @@ import {Helmet} from "react-helmet";
 
 const Pricing = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const isMobile = window.innerWidth <= 768;
 
   const freeTrial = () => {
+    if(isMobile){
+      navigate('/desktop-info');
+    }
     if (isLoggedIn){
       navigate('/simulate');
     } else{
@@ -19,10 +23,14 @@ const Pricing = () => {
   }
 
   const paidPlan = (planName) => {
-    if(isLoggedIn){
-      navigate('/checkout', {state: {planName}});
+    if(isMobile){
+      navigate('/desktop-info');
     } else{
-      navigate('/login');
+      if(isLoggedIn){
+        navigate('/checkout', {state: {planName}});
+      } else{
+        navigate('/login');
+      }
     }
   }
   
