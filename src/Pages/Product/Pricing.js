@@ -14,11 +14,12 @@ const Pricing = () => {
   const freeTrial = () => {
     if(isMobile){
       navigate('/desktop-info');
-    }
-    if (isLoggedIn){
-      navigate('/simulate');
-    } else{
-      navigate('/login');
+    }else{
+      if (isLoggedIn){
+        navigate('/simulate');
+      } else{
+        navigate('/login');
+      }
     }
   }
 
