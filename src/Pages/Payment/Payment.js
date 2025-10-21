@@ -93,8 +93,8 @@ const Payment = () => {
             orderName: `${selectedPlan.name} Plan Subscription`,
             successUrl: window.location.origin + '/success',
             failUrl: window.location.origin + '/fail',
-            customerEmail: 'info@qblackai.com',
-            customerName: 'QblackAI User',
+            customerEmail: 'info@qblackai.com', // 실제 사용자로 수정 필요
+            customerName: 'QblackAI User', // 실제 사용자 이름으로 수정 필요
           });
         } catch (err) {
           console.error('Toss SDK Error:', err);

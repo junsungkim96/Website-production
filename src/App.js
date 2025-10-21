@@ -13,8 +13,8 @@ import Product from './Pages/Product/Product.js';
 import Pricing from './Pages/Product/Pricing.js';
 import DownloadPage from './Pages/Product/Download.js';
 import Payment from './Pages/Payment/Payment.js';
-import Success from './Pages/Payment/Success.js';
-import Fail from './Pages/Payment/Fail.js';
+import {SuccessPage} from './Pages/Payment/Success.js';
+import {FailPage} from './Pages/Payment/Fail.js';
 import Research from './Pages/Research/Research.js';
 import Optics from './Pages/Research/Optics.js';
 import Sensor from './Pages/Research/Sensor.js';
@@ -78,9 +78,9 @@ const App = () => (
           <Route path="/product_features" element={<MainLayout>< Product /></MainLayout>}/>
           <Route path="/product_pricing" element={<MainLayout>< Pricing /></MainLayout>}/>
           <Route path="/download" element = {<DownloadPage />}/>
-          <Route path="/payment" element = {<Payment />}/>
-          <Route path="/success" element = {<Success />}/>
-          <Route path="/fail" element = {<Fail />}/>
+          <Route path="/checkout" element = {<Payment />}/>
+          <Route path="/success" element = {<SuccessPage />}/>
+          <Route path="/fail" element = {<FailPage />}/>
           
           {/* Research */}
           <Route path="/research" element={<MainLayout>< Research /></MainLayout>}/>

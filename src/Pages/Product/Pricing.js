@@ -48,7 +48,7 @@ const Pricing = () => {
         'Monthly updates and community forum access',
       ],
       buttonText: 'Subscribe Now',
-      onClick: () => navigate('/payment', {state: {planName: 'Basic'}})
+      onClick: () => navigate('/checkout', {state: {planName: 'Basic'}})
     },
     {
       name: 'Pro',
@@ -62,7 +62,7 @@ const Pricing = () => {
         'Access to webinars and tutorials',
       ],
       buttonText: 'Subscribe Now',
-      onClick: () => navigate('/payment', {state: {planName: 'Pro'}})
+      onClick: () => navigate('/checkout', {state: {planName: 'Pro'}})
     },
     // {
     //   name: 'Enterprise',
