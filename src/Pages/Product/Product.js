@@ -48,7 +48,7 @@ const Product = () => {
             textUnderlineOffset: '7px',
             textDecorationThickness: '1px'
         }}
-          onClick={() => window.open('https://medium.com/qblackai/lighting-the-scene-the-critical-role-of-illuminants-in-computervision-ff916cc44c9c', '_blank', 'noopener,noreferrer')}>
+          onClick={() => window.open('https://medium.com/qblackai/illuminant-how-light-sets-the-stage-for-imaging-d1f1d6442268', '_blank', 'noopener,noreferrer')}>
           Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/illuminant.jpg"}>
@@ -72,7 +72,7 @@ const Product = () => {
             textUnderlineOffset: '7px',
             textDecorationThickness: '1px'
         }}
-          onClick={() => window.open('https://medium.com/qblackai/the-scene-physical-environment-for-vision-testing-817dcb1a6237', '_blank', 'noopener,noreferrer')}>
+          onClick={() => window.open('https://medium.com/qblackai/scene-physical-environment-for-vision-testing-55d8d9d7e356', '_blank', 'noopener,noreferrer')}>
           Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/scene.jpg"}>
@@ -96,7 +96,7 @@ const Product = () => {
             textUnderlineOffset: '7px',
             textDecorationThickness: '1px'
         }}
-          onClick={() => window.open('https://medium.com/qblackai/optics-from-rays-to-blur-how-lenses-shape-vision-2a7911f80b11', '_blank', 'noopener,noreferrer')}>
+          onClick={() => window.open('https://medium.com/qblackai/optics-from-rays-to-blur-e410988c23ad', '_blank', 'noopener,noreferrer')}>
           Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/optics.jpg"}>
@@ -120,7 +120,7 @@ const Product = () => {
             textUnderlineOffset: '7px',
             textDecorationThickness: '1px'
         }}
-          onClick={() => window.open('https://medium.com/qblackai/sensor-turning-light-into-digital-data-26291898573a', '_blank', 'noopener,noreferrer')}>
+          onClick={() => window.open('https://medium.com/qblackai/sensor-turning-light-into-digital-data-ee5c8dfda2c6', '_blank', 'noopener,noreferrer')}>
           Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/sensor.jpg"}>
@@ -144,7 +144,7 @@ const Product = () => {
             textUnderlineOffset: '7px',
             textDecorationThickness: '1px'
         }}
-          onClick={() => window.open('https://medium.com/qblackai/isp-transforming-raw-sensor-data-into-images-f053082eaeda', '_blank', 'noopener,noreferrer')}>
+          onClick={() => window.open('https://medium.com/qblackai/isp-transforming-raw-sensor-data-into-images-bd1e4ddfda6e', '_blank', 'noopener,noreferrer')}>
           Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/isp.jpg"}>
@@ -168,7 +168,7 @@ const Product = () => {
             textUnderlineOffset: '7px',
             textDecorationThickness: '1px'
         }}
-          onClick={() => window.open('https://medium.com/qblackai/ai-algorithms-making-sense-of-the-simulated-world-f2aaa6cab5bd', '_blank', 'noopener,noreferrer')}>
+          onClick={() => window.open('https://medium.com/qblackai/ai-algorithms-making-sense-of-the-simulated-world-9c12da7d7d1d', '_blank', 'noopener,noreferrer')}>
           Learn More
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/algorithm.jpg"}>
