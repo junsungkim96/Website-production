@@ -5,6 +5,7 @@ import { ArrowLeft } from 'react-bootstrap-icons';
 import { ANONYMOUS } from "@tosspayments/tosspayments-sdk";
 
 const Payment = () => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   const navigate = useNavigate();
   const location = useLocation();
   const planName = location.state?.planName || 'Basic';
@@ -58,7 +59,8 @@ const Payment = () => {
 
       const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
       const tossPayments = window.TossPayments(clientKey);
-      const widgets = tossPayments.widgets({ customerKey: 'CUSTOMER_001' });
+      const customerKey = ANONYMOUS;
+      const widgets = tossPayments.widgets({ customerKey });
 
       const usdPrice = selectedPlan.priceUSD;
       const response = await fetch(
@@ -113,7 +115,7 @@ const Payment = () => {
     }
 
     return () => { mounted = false; };
-  }, []);
+  }, [selectedPlan]);
 
 
 
@@ -242,6 +244,28 @@ const Payment = () => {
 
                 <div id="payment-method" style={{ marginTop: '20px' }}></div>
                 <div id="agreement" style={{ marginTop: '20px' }}></div>
+
+                {/* 환불 규정 안내문 추가 */}
+                <div
+                  style={{
+                    marginTop: '20px',
+                    fontSize: '14px',
+                    color: '#555',
+                    textAlign: 'center',
+                    lineHeight: '1.6',
+                  }}
+                >
+                  결제 진행 시{' '}
+                  <a
+                    href="/refund"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#0066cc', textDecoration: 'underline' }}
+                  >
+                    환불 및 취소 정책
+                  </a>
+                  에 동의한 것으로 간주됩니다.
+                </div>
 
                 <div className="d-grid" style={{ marginTop: '30px' }}>
                   <Button

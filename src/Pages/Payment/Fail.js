@@ -28,7 +28,6 @@ export function FailPage() {
         textAlign: 'center',
         padding: '20px',
         fontFamily: 'Arial, sans-serif',
-        backgroundColor: '#f9f9f9',
       }}
     >
       <img
@@ -40,21 +39,7 @@ export function FailPage() {
       <p style={{ marginBottom: '20px', color: '#555', fontSize: '16px' }}>
         {errorInfo.message}
       </p>
-      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <button
-          onClick={() => navigate('/checkout', { state: { planName } })}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#3282f6',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '8px',
-            fontWeight: '500',
-            cursor: 'pointer',
-          }}
-        >
-          결제 다시 시도
-        </button>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <button
           onClick={() => navigate('/product_pricing')}
           style={{

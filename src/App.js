@@ -13,6 +13,7 @@ import Product from './Pages/Product/Product.js';
 import Pricing from './Pages/Product/Pricing.js';
 import DownloadPage from './Pages/Product/Download.js';
 import Payment from './Pages/Payment/Payment.js';
+import Refund from './Pages/Payment/Refund.js';
 import {SuccessPage} from './Pages/Payment/Success.js';
 import {FailPage} from './Pages/Payment/Fail.js';
 import Research from './Pages/Research/Research.js';
@@ -79,6 +80,7 @@ const App = () => (
           <Route path="/product_pricing" element={<MainLayout>< Pricing /></MainLayout>}/>
           <Route path="/download" element = {<DownloadPage />}/>
           <Route path="/checkout" element = {<Payment />}/>
+          <Route path="/refund" element = {<MainLayout>< Refund /></MainLayout>}/>
           <Route path="/success" element = {<SuccessPage />}/>
           <Route path="/fail" element = {<FailPage />}/>
           

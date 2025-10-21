@@ -17,6 +17,14 @@ const Pricing = () => {
       navigate('/login');
     }
   }
+
+  const paidPlan = (planName) => {
+    if(isLoggedIn){
+      navigate('/checkout', {state: {planName}});
+    } else{
+      navigate('/login');
+    }
+  }
   
   const navigate = useNavigate();
   
@@ -48,7 +56,7 @@ const Pricing = () => {
         'Monthly updates and community forum access',
       ],
       buttonText: 'Subscribe Now',
-      onClick: () => navigate('/checkout', {state: {planName: 'Basic'}})
+      onClick: () => paidPlan('Basic'),
     },
     {
       name: 'Pro',
@@ -62,7 +70,7 @@ const Pricing = () => {
         'Access to webinars and tutorials',
       ],
       buttonText: 'Subscribe Now',
-      onClick: () => navigate('/checkout', {state: {planName: 'Pro'}})
+      onClick: () => paidPlan('Pro'),
     },
     // {
     //   name: 'Enterprise',
@@ -110,6 +118,25 @@ const Pricing = () => {
             <br />
           </div>
         </div>
+      </div>
+
+      {/* ✅ 안내 문구 추가 */}
+      <div
+        style={{
+          textAlign: 'center',
+          backgroundColor: '#fff8e1',
+          color: '#333',
+          padding: '15px 10px',
+          border: '1px solid #f0d98a',
+          borderRadius: '6px',
+          width: '50%',
+          margin: '0 auto',
+          fontSize: '16px',
+          lineHeight: '1.6',
+        }}
+      >
+        ⚠️ Paid plan purchases are temporarily unavailable due to ongoing PG integration and review.  
+        The payment feature is expected to be reactivated in November.
       </div>
       
       <Container style={{ marginTop: '5vh', marginBottom: '10vh' }}>
