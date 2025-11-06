@@ -1,18 +1,25 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {useLocation} from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
 export function SuccessPage() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [responseData, setResponseData] = useState(null);
+  const location = useLocation();
 
   const searchParams = new URLSearchParams(window.location.search);
   const paymentKey = searchParams.get("paymentKey");
   const orderId = searchParams.get("orderId");
   const amount = searchParams.get("amount");
 
+  // Automatic development env detection
+  const hostname = window.location.hostname;
+  const isLocal = hostname.includes('localhost') || hostname.includes('127.0.0.1');
+  const API_BASE_URL = isLocal ? 'http://127.0.0.1:8000' : '';
+
   async function confirmPayment() {
     try {
-      const response = await fetch("/api/payment-confirm", {
+      const response = await fetch(`${API_BASE_URL}/api/payment-confirm`, {  //로컬: http://localhost:8000/api/payment-confirm, 배포: /api/payment-confirm
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentKey, orderId, amount }),
@@ -23,6 +30,34 @@ export function SuccessPage() {
 
       if (response.ok) {
         setIsConfirmed(true);
+
+        // Update plan info in DB
+        const planName = location.state?.planName;
+        const userEmail = localStorage.getItem("userEmail");
+
+        if(planName && userEmail){
+          try{
+            const updateRes = await fetch(`${API_BASE_URL}/api/update-plan`, {
+              method: "POST",
+              headers: { "Contect-Type": "application/json"},
+              body: JSON.stinrgify({
+                email: userEmail,
+                plan: planName,
+              }),
+            });
+          
+            const updateData = await updateRes.json();
+
+            if(updateRes.ok){
+              console.log("Plan updated successfully", updateData);
+            } else{
+              console.error("Plan udpate failed", updateData);
+            }
+          } catch(updateErr){
+            console.error("Error updating plan info:", updateErr);
+          }
+        }
+
       } else {
         console.error("결제 승인 실패:", data);
         alert("결제 승인 실패. 콘솔 확인");
