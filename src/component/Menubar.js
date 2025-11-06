@@ -18,6 +18,7 @@ const API_BASE = 'https://www.qblackai.com/api';
 const Menubar = () => {
   // Inside your Menubar component
   const [hoveredMenu, setHoveredMenu] = useState(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -226,16 +227,23 @@ const Menubar = () => {
                       label: 'Logout',
                       onClick: async() => {
                         setHoveredMenu(null);
-                        await fetch(`${API_BASE}/logout`, {
-                          method: 'POST', 
-                          headers: {'Content-Type': 'application/json'},
-                          body: JSON.stringify({email: localStorage.getItem('userEmail')}),
-                          credentials: 'include'
-                        });
-                        localStorage.clear();
-                        setIsLoggedIn(false);
-                        setUserFirstName('');
-                        navigate('/');
+                        setIsLoggingOut(true);
+                        try {
+                          await fetch(`${API_BASE}/logout`, {
+                            method: 'POST', 
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({email: localStorage.getItem('userEmail')}),
+                            credentials: 'include'
+                          });
+                          localStorage.clear();
+                          setIsLoggedIn(false);
+                          setUserFirstName('');
+                          navigate('/');
+                        } catch (err){
+                          console.error('Logout failed:', err);
+                        } finally{
+                          setIsLoggingOut(false);
+                        }
                       },
                     },
                   ].map((item, i) => (
@@ -250,6 +258,43 @@ const Menubar = () => {
                 </div>
               )}
             </div>
+
+            {/* Logout spinner overlay */}
+            {isLoggingOut && (
+              <div
+                style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '100vw',
+                  height: '100vh',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)', // 조금 더 어둡게
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  zIndex: 9999,
+                }}
+              >
+                <div
+                  style={{
+                    width: '60px',
+                    height: '60px',
+                    border: '6px solid rgba(255,255,255,0.3)', // 연한 테두리
+                    borderTop: '6px solid #fff', // 흰색 회전
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    boxShadow: '0 0 10px rgba(0,0,0,0.3)', // 살짝 그림자
+                  }}
+                />
+              </div>
+            )}
+
+            <style>{`
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+            `}</style>
 
           </div>
 
