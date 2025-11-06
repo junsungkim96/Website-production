@@ -16,6 +16,8 @@ import {productItems, researchItems, companyItems} from '../data/Menu_data';
 const API_BASE = 'https://www.qblackai.com/api';
 
 const Menubar = () => {
+  const isMobile = window.innerWidth <= 768;
+
   // Inside your Menubar component
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -218,9 +220,51 @@ const Menubar = () => {
                   {[
                     {
                       label: 'QuasarVision →',
-                      onClick: () => {
+                      onClick: async() => {
                         setHoveredMenu(null);
-                        navigate('/simulate');  
+                        
+                        if (isMobile) {
+                          navigate("/desktop-info");
+                          return;
+                        }
+
+                        const userEmail = localStorage.getItem("userEmail");
+                        if (!userEmail) {
+                          navigate("/login");
+                          return;
+                        }
+
+                        try {
+                          const res = await fetch(`/api/get-plan?email=${encodeURIComponent(userEmail)}`);
+                          const data = await res.json();
+
+                          if (!res.ok) {
+                            console.error("Failed to fetch plan:", data.message);
+                            navigate("/simulate"); // fallback
+                            return;
+                          }
+
+                          const { plan, expirationDate } = data;
+                          localStorage.setItem("userPlan", plan);
+                          localStorage.setItem("planExpiresAt", expirationDate);
+
+                          const isExpired = expirationDate && new Date(expirationDate) < new Date();
+
+                          // 플랜 상태에 따라 라우팅
+                          if (isExpired || plan === "Free Trial") {
+                            navigate("/simulate");
+                          } else if (plan === "Basic") {
+                            navigate("/simulate-basic");
+                          } else if (plan === "Pro") {
+                            navigate("/simulate-pro");
+                          } else {
+                            navigate("/simulate"); // fallback
+                          }
+
+                        } catch (err) {
+                          console.error("Error fetching plan info:", err);
+                          navigate("/simulate");
+                        }  
                       },
                     },
                     {

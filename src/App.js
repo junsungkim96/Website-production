@@ -40,6 +40,8 @@ import Terms from './Pages/Utils/Terms.js';
 import Privacy from './Pages/Utils/Privacy.js';
 import Demo from './Pages/Utils/Demo.js';
 import Simulate from './Pages/Simulation/Simulate.js';
+import SimulateBasic from './Pages/Simulation/SimulateBasic.js';
+import SimulatePro from './Pages/Simulation/SimulatePro.js';
 import DesktopInfo from './Pages/Utils/DesktopLogin.js';
 import Dashboard from './Pages/Utils/Dashboard.js';
 
@@ -104,8 +106,10 @@ const App = () => (
           <Route path="/blog/founding_story" element={<MainLayout>< FoundingStory /></MainLayout>}/>
           <Route path="/blog/cv" element={<MainLayout>< CV /></MainLayout>}/>
           
-          {/* Signup & Apply */}
+          {/* Simulation */}
           <Route path="/simulate" element = {<ProtectedRoute> <Simulate/> </ProtectedRoute>} />
+          <Route path="/simulate-basic" element = {<ProtectedRoute> <SimulateBasic/> </ProtectedRoute>} />
+          <Route path="/simulate-pro" element = {<ProtectedRoute> <SimulatePro/> </ProtectedRoute>} />
 
           {/* Signup & Apply */}
           <Route path="/login" element={< Login />} />

@@ -39,8 +39,8 @@ export function SuccessPage() {
           try{
             const updateRes = await fetch(`${API_BASE_URL}/api/update-plan`, {
               method: "POST",
-              headers: { "Contect-Type": "application/json"},
-              body: JSON.stinrgify({
+              headers: { "Content-Type": "application/json"},
+              body: JSON.stringify({
                 email: userEmail,
                 plan: planName,
               }),

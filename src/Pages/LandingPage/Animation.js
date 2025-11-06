@@ -19,17 +19,59 @@ const ParticleBackground = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const freeTrial = () => {
-    if (isMobile){
-      navigate('/desktop-info');
-    } else{
-      if (isLoggedIn){
-        navigate('/simulate');
-      } else{
-        navigate('/login');
-      }
+  const freeTrial = async () => {
+    if (isMobile) {
+      navigate("/desktop-info");
+      return;
     }
-  }
+
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+
+    const userEmail = localStorage.getItem("userEmail");
+    if (!userEmail) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      // const res = await fetch(`/api/get-plan?email=${encodeURIComponent(userEmail)}`);
+      // const data = await res.json();
+
+      // if (!res.ok) {
+      //   console.error("Failed to fetch plan:", data.message);
+      //   navigate("/simulate"); // fallback
+      //   return;
+      // }
+
+      // const { plan, expirationDate } = data;
+      // localStorage.setItem("userPlan", plan);
+      // localStorage.setItem("planExpiresAt", expirationDate);
+
+      // const isExpired = expirationDate && new Date(expirationDate) < new Date();
+      
+      let plan = "Basic"
+      let isExpired = false
+
+      // 플랜 상태에 따라 라우팅
+      if (isExpired || plan === "Free Trial") {
+        navigate("/simulate");
+      } else if (plan === "Basic") {
+        navigate("/simulate-basic");
+      } else if (plan === "Pro") {
+        navigate("/simulate-pro");
+      } else {
+        navigate("/simulate"); // fallback
+      }
+
+    } catch (err) {
+      console.error("Error fetching plan info:", err);
+      navigate("/simulate");
+    }
+  };
+
 
   return (
     <div style={{ position: 'relative', height: '105vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
