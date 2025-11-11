@@ -40,14 +40,14 @@ const OpticsDesign = () => {
   const handleNewPage = () => {
     setLensTable([
       {
-        surf: 0,
+        surf: 1,
         type: 'Spherical',
-        radius: '',
-        thickness: '',
         glass: 'AIR',
+        radius_front: '',
+        radius_back: '',
+        thickness: '',
         semiDiameter: '',
         conic: '',
-        comment: '',
       },
     ]);
     setAperture(25);
@@ -62,14 +62,14 @@ const OpticsDesign = () => {
 
   const [lensTable, setLensTable] = useState([
     {
-      surf: 0,
+      surf: 1,
       type: 'Spherical',
-      radius: 'Infinity',
-      thickness: 10,
       glass: 'AIR',
-      semiDiameter: 25,
-      conic: 0,
-      comment: 'Object',
+      radius_front: '',
+      radius_back: '',
+      thickness: '',
+      semiDiameter: '',
+      conic: '',
     },
   ]);
 
@@ -90,14 +90,14 @@ const OpticsDesign = () => {
       setLensTable([
         ...lensTable,
         {
-          surf: lensTable.length,
+          surf: lensTable.length + 1,
           type: 'Spherical',
-          radius: '',
-          thickness: '',
           glass: 'BK7',
+          radius_front: '',
+          radius_back: '',
+          thickness: '',
           semiDiameter: '',
           conic: '',
-          comment: '',
         },
       ]);
     }
@@ -111,6 +111,7 @@ const OpticsDesign = () => {
 
   const runRayTrace = async () => {
     setIsSimulationRunning(true);
+    console.log(lensTable);
 
     try {
       const payload = {lensTable};
@@ -127,16 +128,48 @@ const OpticsDesign = () => {
 
       // base64 이미지 바로 표시
       setRayTracePreview(
-        <img
-          src={data.raytrace_img}
-          alt="Ray Trace Preview"
-          style={{ maxWidth: '100%', maxHeight: '100%' }}
-        />
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+          }}
+        >
+          <img
+            src={data.raytrace_img}
+            alt="Ray Trace Preview"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+            }}
+          />
+        </div>
       );
 
       setPsfPlot(
-        <div>
-          <strong>PSF Hits (1D):</strong> {data.psf_1d.join(", ")}
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+          }}
+        >
+          <img
+            src={data.psf_2d} // 백엔드에서 psf_2d를 base64로 전송함
+            alt="PSF 2D Plot"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain', // 비율 유지하며 꽉 차게
+            }}
+          />
         </div>
       );
 
@@ -233,7 +266,7 @@ const OpticsDesign = () => {
         </button>
         <button
           title="Stop"
-          style={{ ...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed' }}
+          style={{ ...iconButtonStyle}}
         >
           <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
         </button>
@@ -244,7 +277,7 @@ const OpticsDesign = () => {
           <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
         </button> */}
         <button
-          style={{ ...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed' }}
+          style={{ ...iconButtonStyle}}
           title="Share"
         >
           <img src={upload} alt="Share" style={{ width: 20, height: 20 }} />
@@ -293,8 +326,8 @@ const OpticsDesign = () => {
               border="1"
               cellPadding="6"
               style={{
-                borderCollapse: 'separate', // collapse -> separate로 변경
-                borderSpacing: '0 0',        // 세로 간격 0, 가로는 각 th/td padding으로 조절
+                borderCollapse: 'separate',
+                borderSpacing: '0 0',
                 width: '100%',
                 fontSize: '14px',
                 tableLayout: 'fixed',
@@ -308,15 +341,18 @@ const OpticsDesign = () => {
                   <th style={{ width: '100px', padding: '6px 8px' }}>Radius Front</th>
                   <th style={{ width: '100px', padding: '6px 8px' }}>Radius Back</th>
                   <th style={{ width: '100px', padding: '6px 8px' }}>Thickness</th>
-                  <th style={{ width: '100px', padding: '6px 8px' }}>Semi-Dia</th>
+                  <th style={{ width: '100px', padding: '6px 8px' }}>Semi-Diameter</th>
                   <th style={{ width: '80px', padding: '6px 8px' }}>Conic</th>
                 </tr>
               </thead>
               <tbody>
                 {lensTable.map((row, idx) => (
                   <tr key={idx}>
+                    {/* Surf */}
                     <td style={{ padding: '4px 8px' }}>{row.surf}</td>
-                    <td style={{ padding: '4px 8px 4px 8px' }}>
+
+                    {/* Type */}
+                    <td style={{ padding: '4px 8px' }}>
                       <select
                         value={row.type}
                         onChange={(e) => updateValue(idx, 'type', e.target.value)}
@@ -328,6 +364,8 @@ const OpticsDesign = () => {
                         <option value="Aspheric">Aspheric</option>
                       </select>
                     </td>
+
+                    {/* Glass */}
                     <td style={{ padding: '4px 8px 4px 20px' }}>
                       <select
                         value={row.glass}
@@ -341,30 +379,35 @@ const OpticsDesign = () => {
                         <option value="CaF2">CaF2</option>
                         <option value="SF5">SF5</option>
                         <option value="SF6">SF6</option>
-                        <option value="SF10">SF10</option>
                         <option value="SF11">SF11</option>
-                        <option value="SF57">SF57</option>
-                        <option value="SF59">SF59</option>
-                        <option value="LAH55">LAH55</option>
                         <option value="S-LAH79">S-LAH79</option>
                         <option value="S-FPL53">S-FPL53</option>
-                        <option value="S-LAH58">S-LAH58</option>
-                        <option value="N-SF11">N-SF11</option>
-                        <option value="N-SF57">N-SF57</option>
                         <option value="ZnSe">ZnSe</option>
-                        <option value="BaF2">BaF2</option>
-                        <option value="KBr">KBr</option>
                         <option value="MgF2">MgF2</option>
-                        <option value="LiF">LiF</option>
                       </select>
                     </td>
+
+                    {/* Radius Front */}
                     <td style={{ padding: '4px 8px' }}>
                       <input
-                        value={row.radius}
-                        onChange={(e) => updateValue(idx, 'radius', e.target.value)}
+                        value={row.radius_front}
+                        onChange={(e) => updateValue(idx, 'radius_front', e.target.value)}
                         style={{ width: '80px', height: '28px' }}
+                        // placeholder="Front"
                       />
                     </td>
+
+                    {/* Radius Back */}
+                    <td style={{ padding: '4px 8px' }}>
+                      <input
+                        value={row.radius_back}
+                        onChange={(e) => updateValue(idx, 'radius_back', e.target.value)}
+                        style={{ width: '80px', height: '28px' }}
+                        // placeholder="Back"
+                      />
+                    </td>
+
+                    {/* Thickness */}
                     <td style={{ padding: '4px 8px' }}>
                       <input
                         value={row.thickness}
@@ -372,6 +415,8 @@ const OpticsDesign = () => {
                         style={{ width: '80px', height: '28px' }}
                       />
                     </td>
+
+                    {/* Semi-Dia */}
                     <td style={{ padding: '4px 8px' }}>
                       <input
                         value={row.semiDiameter}
@@ -379,39 +424,14 @@ const OpticsDesign = () => {
                         style={{ width: '80px', height: '28px' }}
                       />
                     </td>
+
+                    {/* Conic */}
                     <td style={{ padding: '4px 8px' }}>
                       <input
                         value={row.conic}
                         onChange={(e) => updateValue(idx, 'conic', e.target.value)}
                         style={{ width: '60px', height: '28px' }}
                       />
-                    </td>
-                    <td style={{ padding: '4px 8px' }}>
-                      <input
-                        value={row.comment}
-                        onChange={(e) => updateValue(idx, 'comment', e.target.value)}
-                        style={{ width: '100%', height: '28px' }}
-                      />
-                    </td>
-                    <td style={{ padding: '4px 8px' }}>
-                      {row.type === 'Cylindrical' && (
-                        <input
-                          type="number"
-                          value={row.axisAngle || ''}
-                          onChange={(e) => updateValue(idx, 'axisAngle', e.target.value)}
-                          placeholder="Axis Angle"
-                          style={{ width: '100px', height: '28px' }}
-                        />
-                      )}
-                      {row.type === 'Aspheric' && (
-                        <input
-                          type="text"
-                          value={row.asphericCoeffs || ''}
-                          onChange={(e) => updateValue(idx, 'asphericCoeffs', e.target.value)}
-                          placeholder="Coeff"
-                          style={{ width: '100px', height: '28px' }}
-                        />
-                      )}
                     </td>
                   </tr>
                 ))}
@@ -476,6 +496,8 @@ const OpticsDesign = () => {
             padding: '8px',
             display: 'flex',
             flexDirection: 'column',
+            overflow: 'hidden',
+            position: 'relative',
           }}
         >
           <h5 style={{ margin: '4px 0 6px 4px' }}>Lens Layout</h5>
@@ -485,6 +507,7 @@ const OpticsDesign = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              overflow: 'hidden',
             }}
           >
             {rayTracePreview}

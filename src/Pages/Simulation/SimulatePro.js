@@ -39,7 +39,7 @@ import {Helmet} from "react-helmet";
 import { API_BASE_URL } from '../../config';
 
 
-const Simulate = () => {
+const SimulatePro = () => {
   const [tutorialSteps, setTutorialSteps] = useState([]);
   const [runTour, setRunTour] = useState(false);
   const [showStageMenu, setShowStageMenu] = useState(false);
@@ -115,6 +115,8 @@ const Simulate = () => {
     setShowStageMenu(false);
   };
 
+  const [simulationHistory, setSimulationHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState('System Optimization');
@@ -124,6 +126,184 @@ const Simulate = () => {
 
   const [resultImage, setResultImage] = useState(null);
   const [outputText, setOutputText] = useState([]);
+
+
+
+  const canvasRef = useRef(null);
+  const [imgObj, setImgObj] = useState(null);
+  const [imgPosition, setImgPosition] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [start, setStart] = useState({ x: 0, y: 0 });
+  const [end, setEnd] = useState({ x: 0, y: 0 });
+  const [enableROI, setEnableROI] = useState(false);
+
+  // 이미지 로드 + canvas에 맞춤
+  useEffect(() => {
+    if (!resultImage) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.src = resultImage;
+    img.onload = () => {
+      // Canvas 픽셀 해상도를 이미지 해상도로 설정
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // 화면에 CSS로 맞추는 경우
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+
+      // 이미지 화면 위치 계산 (object-fit: contain)
+      const canvasDisplayWidth = canvas.clientWidth;
+      const canvasDisplayHeight = canvas.clientHeight;
+      const imgAspect = img.width / img.height;
+      const canvasAspect = canvasDisplayWidth / canvasDisplayHeight;
+      let dispW, dispH, dispX, dispY;
+      if (imgAspect > canvasAspect) {
+        dispW = canvasDisplayWidth;
+        dispH = canvasDisplayWidth / imgAspect;
+        dispX = 0;
+        dispY = (canvasDisplayHeight - dispH) / 2;
+      } else {
+        dispH = canvasDisplayHeight;
+        dispW = canvasDisplayHeight * imgAspect;
+        dispY = 0;
+        dispX = (canvasDisplayWidth - dispW) / 2;
+      }
+
+      setImgObj(img);
+      setImgPosition({ x: dispX, y: dispY, width: dispW, height: dispH });
+    };
+  }, [resultImage]);
+
+  // Crosshair 커서: 이미지 영역 안에서만
+  const handleMouseMoveCursor = (e) => {
+    if (!canvasRef.current || !imgObj) return;
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const { x, y, width, height } = imgPosition;
+
+    canvasRef.current.style.cursor =
+      enableROI && mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height
+        ? "crosshair"
+        : "default";
+  };
+
+  // 마우스 다운: 이미지 좌표 계산
+  const handleMouseDown = (e) => {
+    if (!enableROI || !imgObj) return;
+
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const { x, y, width, height } = imgPosition;
+
+    if (mouseX < x || mouseX > x + width || mouseY < y || mouseY > y + height) return;
+
+    // 이미지 좌표로 변환
+    const scaleX = imgObj.width / width;
+    const scaleY = imgObj.height / height;
+    const imgX = (mouseX - x) * scaleX;
+    const imgY = (mouseY - y) * scaleY;
+
+    setStart({ x: imgX, y: imgY });
+    setEnd({ x: imgX, y: imgY });
+    setIsDragging(true);
+  };
+
+  // 마우스 이동: ROI 업데이트
+  const handleMouseMove = (e) => {
+    if (!enableROI || !isDragging || !imgObj) return;
+
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const { x, y, width, height } = imgPosition;
+
+    const clampedX = Math.max(x, Math.min(mouseX, x + width));
+    const clampedY = Math.max(y, Math.min(mouseY, y + height));
+
+    const scaleX = imgObj.width / width;
+    const scaleY = imgObj.height / height;
+
+    setEnd({ x: (clampedX - x) * scaleX, y: (clampedY - y) * scaleY });
+  };
+
+  const handleMouseUp = async () => {
+    if (!enableROI || !isDragging || !imgObj) return;
+    setIsDragging(false);
+
+    const x = Math.min(start.x, end.x);
+    const y = Math.min(start.y, end.y);
+    const w = Math.abs(end.x - start.x);
+    const h = Math.abs(end.y - start.y);
+
+    const roiRect = { x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) };
+    setOutputText((prev) => [...prev, `ROI selected:  (x, y, w, h) = (${roiRect.x}, ${roiRect.y}, ${roiRect.w}, ${roiRect.h})`]);
+
+    try {
+      // 원본 이미지 그대로 base64
+      const tempCanvas = document.createElement("canvas");
+      tempCanvas.width = imgObj.width;
+      tempCanvas.height = imgObj.height;
+      const tempCtx = tempCanvas.getContext("2d");
+      tempCtx.drawImage(imgObj, 0, 0);
+      const dataUrl = tempCanvas.toDataURL("image/png");
+
+      const controller = new AbortController();
+      const response = await fetch(`${API_BASE_URL}/calculate_sfr`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...roiRect, image: dataUrl }),
+        signal: controller.signal,
+      });
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      let done = false;
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        buffer += decoder.decode(value || new Uint8Array(), { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop();
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const jsonData = JSON.parse(line);
+            if (jsonData.type === "log") {
+              setOutputText((prev) => [...prev, jsonData.content]);
+            }
+          } catch (err) {
+            console.warn("Invalid JSON chunk skipped:", line);
+          }
+        }
+      }
+
+      // 마지막 버퍼 처리
+      if (buffer.trim()) {
+        try {
+          const jsonData = JSON.parse(buffer);
+          if (jsonData.type === "log") setOutputText((prev) => [...prev, jsonData.content]);
+        } catch (err) {
+          console.warn("Invalid JSON chunk at end skipped:", buffer);
+        }
+      }
+      setOutputText((prev) => [...prev, "\n"]);
+    } catch (err) {
+      console.error("SFR calculation failed:", err);
+      setOutputText((prev) => [...prev, "Error calculating SFR"]);
+    }
+  };
+
+
+
 
   const menuItems = [
     { name: 'System Optimization', icon: camera },
@@ -251,6 +431,7 @@ const Simulate = () => {
   const fileInputRef = useRef(null);
   const [selectedScene, setSelectedScene] = useState('');
   const [sceneFile, setSceneFile] = useState('');
+  const [sceneFileObj, setSceneFileObj] = useState(null);
   const [sceneLuminanceValue, setSceneLuminanceValue] = useState('');
 
   const [isMacbethDialogOpen, setIsMacbethDialogOpen] = useState(false);
@@ -490,6 +671,7 @@ const Simulate = () => {
     setSceneLuminanceValue('');
     setSceneFileValues({'hfov': 10, 'illuminant': ''});
     setSceneFileIlluminantData(Array.from({length: 31}, () => ["",""]));
+    setSceneFile('');
 
     // Optics
     setSelectedOptics('');
@@ -691,6 +873,50 @@ const Simulate = () => {
     detectDevice();
   }, []);
 
+  const handleSave = () => {
+    if (!resultImage) {
+      alert("No image to save!");
+      return;
+    }
+
+    let fileName = prompt("Enter a file name:", "");
+    if (!fileName) return;
+
+    const formatInput = prompt("Enter file format (png, jpg, gif):", "png");
+    if (!formatInput) return; // 취소 시 종료
+
+    const format = formatInput.toLowerCase();
+    if (!["png", "jpg", "gif"].includes(format)) {
+      alert("Invalid format. Defaulting to PNG.");
+    }
+
+    const downloadLink = (href, name) => {
+      const link = document.createElement("a");
+      link.href = href;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    if (format === "png" || !format) {
+      downloadLink(resultImage, fileName + ".png");
+    } else if (format === "jpg" || format === "gif") {
+      const img = new Image();
+      img.crossOrigin = "anonymous"; // CORS 이슈 방지
+      img.src = resultImage;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        const dataUrl = canvas.toDataURL(`image/${format}`);
+        downloadLink(dataUrl, `${fileName}.${format}`);
+      };
+      img.onerror = () => alert("Failed to load image for conversion.");
+    }
+  };
 
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
 
@@ -707,32 +933,54 @@ const Simulate = () => {
     // Extract only the photon values
     const photonValues = customIlluminantData.map(row => Number(row[0]));
 
+    let sceneFileContent = "";
+    if (sceneFileObj instanceof File){
+      sceneFileContent = await new Promise((resolve, reject)=> {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result.split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(sceneFileObj);
+      })
+    } else if (typeof sceneFileObj === "string"){
+      sceneFileContent = sceneFileObj;
+    }
+
+    const snapshot = {
+      illuminant: selectedIlluminant,
+      illuminantLuminance: illuminantLuminanceValue,
+      illuminantCustomPhotons: photonValues,
+      scene: selectedScene, 
+      sceneFileName: sceneFile, // 파일 이름
+      sceneFile: sceneFileContent, // 파일 데이터
+      sceneLuminance: sceneLuminanceValue, 
+      macbethParams: macbethParams, 
+      pointarrayParams: pointarrayParams, 
+      gridlinesParams: gridlinesParams, 
+      slantededgeParams: slantededgeParams, 
+      ringsraysParams: ringsraysParams, 
+      sceneFileParams: sceneFileParams, 
+      sceneFileIlluminantData: sceneFileIlluminantData, 
+      optics: selectedOptics, 
+      sensor: selectedSensor, 
+      sensorParams: sensorValues, 
+      isp: selectedISP, 
+      ispParams: ispValues, 
+      algorithm: selectedAlgorithm
+    }
+
+    setSimulationHistory(prev => {
+      const trimmed = prev.slice(0, historyIndex + 1);
+      const updated = [...trimmed, snapshot];
+      setHistoryIndex(updated.length - 1);
+      return updated;
+    })
+
     try {
       const response = await fetch(`${API_BASE_URL}/simulate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          illuminant: selectedIlluminant,
-          illuminantLuminance: illuminantLuminanceValue,
-          illuminantCustomPhotons: photonValues,
-          scene: selectedScene,
-          sceneFile: sceneFile,
-          sceneLuminance: sceneLuminanceValue,
-          macbethParams: macbethParams,
-          pointarrayParams: pointarrayParams,
-          gridlinesParams: gridlinesParams,
-          slantededgeParams: slantededgeParams,
-          ringsraysParams: ringsraysParams,
-          sceneFileParams: sceneFileParams,
-          sceneFileIlluminantData: sceneFileIlluminantData,
-          optics: selectedOptics,
-          sensor: selectedSensor,
-          sensorParams: sensorValues,
-          isp: selectedISP,
-          ispParams: ispValues,
-          algorithm: selectedAlgorithm
-        }),
-        signal: controller.signal
+        body: JSON.stringify(snapshot),
+        signal: controller.signal,
       });
 
       const reader = response.body.getReader();
@@ -785,6 +1033,46 @@ const Simulate = () => {
       }
     }
   };
+
+  const handleGoBack = () => {
+    if (historyIndex > 0){
+      const newIndex = historyIndex - 1;
+      setHistoryIndex(newIndex);
+      restoreSimulationState(simulationHistory[newIndex]);
+    }
+  }
+
+  const handleGoForward = () => {
+    if (historyIndex < simulationHistory.length - 1){
+      const newIndex = historyIndex + 1;
+      setHistoryIndex(newIndex);
+      restoreSimulationState(simulationHistory[newIndex]);
+    }
+  }
+
+  const restoreSimulationState = (config) => {
+    setSelectedIlluminant(config.illuminant);
+    setIlluminantLuminanceValue(config.illuminantLuminance);
+    setCustomIlluminantData(config.illuminantCustomPhotons.map(v => [v.toString()])); 
+    setSelectedScene(config.scene);
+    setSceneFile(config.sceneFileName);
+    setSceneFileObj(config.sceneFile);
+    setSceneLuminanceValue(config.sceneLuminance);
+    setMacbethValues(config.macbethParams);
+    setPointArrayValues(config.pointarrayParams);
+    setGridlinesValues(config.gridlinesParams);
+    setSlantededgeValues(config.slantededgeParams);
+    setRingsraysValues(config.ringsraysParams);
+    setSceneFileValues(config.sceneFileParams);
+    setSceneFileIlluminantData(config.sceneFileIlluminantData);
+    setSelectedOptics(config.optics);
+    setSelectedSensor(config.sensor);
+    setSensorValues(config.sensorParams);
+    setSelectedISP(config.isp);
+    setIspValues(config.ispParams);
+    setSelectedAlgorithm(config.algorithm);
+  }
+
 
 
   const handleStopSimulation = async () => {
@@ -1142,11 +1430,11 @@ const Simulate = () => {
             ref={(el) => (menuRefs.current[index] = el)}
             style={{
               ...sidebarItemStyle(activeMenu === item.name),
-              cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
-              opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
+              cursor: ['Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
+              opacity: ['Sensor Design'].includes(item.name) ? 0.5 : 1
             }}
             onClick={() => {
-              if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
+              if (!['Sensor Design'].includes(item.name)) {
               // if (item.name !== 'Sensor Design'){
                 setActiveMenu(item.name);
               }
@@ -1405,13 +1693,19 @@ const Simulate = () => {
                   >
                     <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
                   </button>
-                  <button title="Save" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                  <button title="Save" onClick = {handleSave} style={{...iconButtonStyle}}>
                     <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
                   </button>
-                  <button title="Back" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                  <button title="Back" onClick = {handleGoBack} disabled = {historyIndex <= 0} style={{...iconButtonStyle, opacity: historyIndex <= 0 ? 0.5 : 1, cursor: historyIndex <= 0 ? 'not-allowed' : 'pointer'}}>
                     <img src={back} alt="Back" style={{ width: 20, height: 20 }} />
                   </button>
-                  <button title="Forward" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                  <button title="Forward" onClick = {handleGoForward} disabled = {historyIndex >= simulationHistory.length - 1} 
+                    style={{
+                      ...iconButtonStyle, 
+                      opacity: historyIndex >= simulationHistory.length - 1 ? 0.5 : 1, 
+                      cursor: historyIndex >= simulationHistory.length - 1 ? 'not-allowed' : 'pointer'
+                    }}
+                  >
                     <img src={forward} alt="Forward" style={{ width: 20, height: 20 }} />
                   </button>
                 </div>
@@ -1429,7 +1723,15 @@ const Simulate = () => {
                   <button title="Stop" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}} disabled onClick={handleStopSimulation}>
                     <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
                   </button>
-                  <button title="SFR" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                  <button 
+                    title="SFR" 
+                    style={{...iconButtonStyle, 
+                            boxShadow: enableROI
+                            ? "inset 2px 2px 4px rgba(0,0,0,0.2), inset -2px -2px 4px rgba(255,255,255,0.4)"
+                            : "none",
+                            transform: enableROI ? "translateY(1px)" : "none",
+                  }}
+                  onClick={()=>setEnableROI((prev) => !prev)}>
                     <span style={{ fontSize: "14px", fontWeight: "bold" }}>SFR</span>
                   </button>
                   <button
@@ -1524,7 +1826,11 @@ const Simulate = () => {
                     id="scene-select"
                     style={selectStyle}
                     value={selectedScene}
-                    onChange = {(e) => setSelectedScene(e.target.value)}
+                    onChange = {(e) => {
+                      setSelectedScene(e.target.value);
+                      setSceneFile('');
+                      setSceneFileObj(null);
+                    }}
                   >
                     {scenes.map((s, idx) => <option key={idx} value = {s}>{s}</option>)}
                   </select>
@@ -1571,13 +1877,13 @@ const Simulate = () => {
                     value={sceneFile}
                     readOnly
                     placeholder=""
-                    disabled
+                    // disabled
                     style={fileInputStyle}
                   />
                   <button
-                    style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}
+                    style={{...iconButtonStyle}}
                     title="Upload"
-                    disabled
+                    // disabled
                     onClick={() => fileInputRef.current.click()}
                   >
                     <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
@@ -1586,7 +1892,13 @@ const Simulate = () => {
                     type="file"
                     ref={fileInputRef}
                     style={{ display: 'none' }}
-                    onChange={(e) => e.target.files.length > 0 && setSceneFile(e.target.files[0].name)}
+                    onChange={(e) => {
+                      if(e.target.files.length > 0){
+                        setSceneFile(e.target.files[0].name);
+                        setSceneFileObj(e.target.files[0]);
+                        setSelectedScene('');    
+                      }
+                    }}
                   />
                 </div>
               </div>
@@ -1597,7 +1909,7 @@ const Simulate = () => {
               <div style={sectionStyle}>
                 <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
                 <select id="optics-select" style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1617,7 +1929,7 @@ const Simulate = () => {
                       }
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1663,7 +1975,7 @@ const Simulate = () => {
                     />
                   )}
                 </div>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1681,7 +1993,7 @@ const Simulate = () => {
                       onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1690,7 +2002,7 @@ const Simulate = () => {
               <div style={sectionStyle}>
                 <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
                 <select id="algorithm-select" style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1708,7 +2020,7 @@ const Simulate = () => {
                       onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1716,14 +2028,49 @@ const Simulate = () => {
             </div>
 
             <div style={bottomSectionStyle}>
-              <div style={imageAreaStyle}>
+              {/* <div style={imageAreaStyle}>
                 {resultImage ? (
-                  <img src={resultImage} alt="Simulation Result" style={{width: "100%", height: "100%", objectFit: "contain", imageRendering: 'pixelated'}}/>
-                ):(
+                  <canvas
+                    ref={canvasRef}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      cursor: enableROI ? "crosshair" : 'default',
+                      imageRendering: "pixelated"
+                    }}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                  />
+                ) : (
                   <span></span>
                 )}
-                
+              </div> */}
+              
+              <div style={imageAreaStyle}>
+                {resultImage ? (
+                  <canvas
+                    ref={canvasRef}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      cursor: enableROI ? "crosshair" : "default",
+                      imageRendering: "pixelated",
+                    }}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={(e) => {
+                      handleMouseMove(e);
+                      handleMouseMoveCursor(e); // crosshair를 이미지 영역 기준으로
+                    }}
+                    onMouseUp={handleMouseUp}
+                  />
+                ) : (
+                  <span></span>
+                )}
               </div>
+
               <div ref={outputTextRef} style={textAreaStyle}>
                 {Array.isArray(outputText) 
                   ? outputText.map((line, idx) => (
@@ -1751,4 +2098,4 @@ const Simulate = () => {
   );
 };
 
-export default Simulate;
+export default SimulatePro;
