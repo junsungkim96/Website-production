@@ -92,10 +92,10 @@ const Payment = () => {
           await widgets.requestPayment({
             orderId: `ORDER-${Date.now()}`,
             orderName: `${selectedPlan.name} Plan Subscription`,
-            successUrl: window.location.origin + '/success',
+            successUrl: `${window.location.origin}/success?plan=${selectedPlan.name}`,
             failUrl: window.location.origin + '/fail',
-            customerEmail: 'info@qblackai.com', // 실제 사용자로 ***수정 필요**** 
-            customerName: 'QblackAI User', // 실제 사용자 이름으로 ***수정 필요***
+            customerEmail: localStorage.getItem("userEmail"),
+            customerName: localStorage.getItem("userFirstName"),
           });
         } catch (err) {
           console.error('Toss SDK Error:', err);

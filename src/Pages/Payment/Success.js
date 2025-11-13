@@ -32,7 +32,7 @@ export function SuccessPage() {
         setIsConfirmed(true);
 
         // Update plan info in DB
-        const planName = location.state?.planName;
+        const planName = new URLSearchParams(window.location.search).get("plan");
         const userEmail = localStorage.getItem("userEmail");
 
         if(planName && userEmail){
