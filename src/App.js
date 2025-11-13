@@ -72,7 +72,9 @@ const ProtectedRoute = ({children, requiredPlan}) => {
     const requiredLevel = planPriority[requiredPlan];
 
     if (userLevel < requiredLevel){
-      alert(`Access denied. Your current plan (${userPlan}) does not include this feature`);
+      setTimeout(() => {
+        alert(`Access denied. Your current plan "${userPlan}" does not include this feature`);
+      }, 0);
       const redirectRoute = planRoutes[userPlan];
       return <Navigate to={redirectRoute} replace />;
     }
