@@ -58,14 +58,13 @@ const Payment = () => {
       if (!mounted) return;
 
       const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
+      // const clientKey = 'live_gck_E92LAa5PVbvpxbE4DgPzV7YmpXyJ';
       const tossPayments = window.TossPayments(clientKey);
       const customerKey = ANONYMOUS;
       const widgets = tossPayments.widgets({ customerKey });
 
       const usdPrice = selectedPlan.priceUSD;
-      const response = await fetch(
-        'https://api.exchangerate.host/latest?base=USD&symbols=KRW'
-      );
+      const response = await fetch('https://open.er-api.com/v6/latest/USD');
       const data = await response.json();
       const rate = data?.rates?.KRW || 1400;
 

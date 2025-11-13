@@ -111,7 +111,11 @@ const OpticsDesign = () => {
 
   const runRayTrace = async () => {
     setIsSimulationRunning(true);
-    console.log(lensTable);
+
+    setRayTracePreview(null);
+    setPsfPlot(null);
+    setWavefrontPlot(null);
+    setFieldPlot(null);
 
     try {
       const payload = {lensTable};
@@ -260,7 +264,10 @@ const OpticsDesign = () => {
         <button
           onClick={runRayTrace}
           title="Run"
-          style={{ ...iconButtonStyle, cursor: 'pointer' }}
+          style={{ ...iconButtonStyle, 
+                  opacity: isSimulationRunning ? 0.5 : 1,
+                  cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
+          disabled={isSimulationRunning}
         >
           <img src={run} alt="Add" style={{ width: 20, height: 20 }} />
         </button>
