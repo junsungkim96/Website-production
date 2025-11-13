@@ -37,23 +37,23 @@ const ParticleBackground = () => {
     }
 
     try {
-      // const res = await fetch(`/api/get-plan?email=${encodeURIComponent(userEmail)}`);
-      // const data = await res.json();
+      const res = await fetch(`/api/get-plan?email=${encodeURIComponent(userEmail)}`);
+      const data = await res.json();
 
-      // if (!res.ok) {
-      //   console.error("Failed to fetch plan:", data.message);
-      //   navigate("/simulate"); // fallback
-      //   return;
-      // }
+      if (!res.ok) {
+        console.error("Failed to fetch plan:", data.message);
+        navigate("/simulate"); // fallback
+        return;
+      }
 
-      // const { plan, expirationDate } = data;
-      // localStorage.setItem("userPlan", plan);
-      // localStorage.setItem("planExpiresAt", expirationDate);
+      const { plan, expirationDate } = data;
+      localStorage.setItem("userPlan", plan);
+      localStorage.setItem("planExpiresAt", expirationDate);
 
-      // const isExpired = expirationDate && new Date(expirationDate) < new Date();
+      const isExpired = expirationDate && new Date(expirationDate) < new Date();
       
-      let plan = "Basic"
-      let isExpired = false
+      // let plan = "Basic"
+      // let isExpired = false
 
       // 플랜 상태에 따라 라우팅
       if (isExpired || plan === "Free Trial") {
