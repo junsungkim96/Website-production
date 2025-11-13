@@ -15,7 +15,7 @@ export function SuccessPage() {
   // Automatic development env detection
   const hostname = window.location.hostname;
   const isLocal = hostname.includes('localhost') || hostname.includes('127.0.0.1');
-  const API_BASE_URL = isLocal ? 'http://127.0.0.1:8000' : '';
+  const API_BASE_URL = isLocal ? 'http://localhost:8000' : '';
 
   async function confirmPayment() {
     try {
