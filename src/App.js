@@ -55,12 +55,27 @@ const MainLayout = ({ children }) => (
   </div>
 );
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({children, requiredPlan}) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const userPlan = localStorage.getItem('userPlan');
 
   if(!isLoggedIn){
     alert('You must be logged in to access this page')
     return <Navigate to="/login" replace />
+  }
+
+  if (requiredPlan){
+    const planPriority = {"Free Trial": 1, Basic: 2, Pro: 3}
+    const planRoutes = {"Free Trial": "/simulate", Basic: "/simulate-basic", Pro: "/simulate-pro"}
+
+    const userLevel = planPriority[userPlan];
+    const requiredLevel = planPriority[requiredPlan];
+
+    if (userLevel < requiredLevel){
+      alert(`Access denied. Your current plan (${userPlan}) does not include this feature`);
+      const redirectRoute = planRoutes[userPlan];
+      return <Navigate to={redirectRoute} replace />;
+    }
   }
 
   return children

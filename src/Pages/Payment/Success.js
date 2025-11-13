@@ -50,6 +50,8 @@ export function SuccessPage() {
 
             if(updateRes.ok){
               console.log("Plan updated successfully", updateData);
+              
+              localStorage.setItem("userPlan", updateData.plan);
             } else{
               console.error("Plan udpate failed", updateData);
             }
