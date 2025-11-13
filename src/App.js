@@ -122,9 +122,9 @@ const App = () => (
           <Route path="/blog/cv" element={<MainLayout>< CV /></MainLayout>}/>
           
           {/* Simulation */}
-          <Route path="/simulate" element = {<ProtectedRoute> <Simulate/> </ProtectedRoute>} />
-          <Route path="/simulate-basic" element = {<ProtectedRoute> <SimulateBasic/> </ProtectedRoute>} />
-          <Route path="/simulate-pro" element = {<ProtectedRoute> <SimulatePro/> </ProtectedRoute>} />
+          <Route path="/simulate" element = {<ProtectedRoute requiredPlan="Free Trial"> <Simulate/> </ProtectedRoute>} />
+          <Route path="/simulate-basic" element = {<ProtectedRoute requiredPlan="Basic"> <SimulateBasic/> </ProtectedRoute>} />
+          <Route path="/simulate-pro" element = {<ProtectedRoute requiredPlan="Pro"> <SimulatePro/> </ProtectedRoute>} />
 
           {/* Signup & Apply */}
           <Route path="/login" element={< Login />} />
