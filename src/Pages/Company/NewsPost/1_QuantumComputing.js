@@ -11,5 +11,6 @@ export const metadata = {
             CEO Kim researches the field of computer vision, which takes more than 30 minutes each to process data with the current 
             technology. CEO Kim said, "Since there are tens of thousands of data to be processed, it is competitive to introduce 
             quantum computers quickly".
-            `
+            `,
+  alt: "QblackAI's vision on compuer vision and quantum computing"
 };

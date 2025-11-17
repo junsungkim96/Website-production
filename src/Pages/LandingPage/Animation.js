@@ -79,17 +79,15 @@ const ParticleBackground = () => {
       <div style={{height: '6vh'}}/>
 
       {/* Text Content */}
-      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
-        <div style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
-          <div className="catch-phrase">Simulate Your Vision</div>
-        </div>
+      <header style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
+        <h1 className="catch-phrase" style={{ marginTop: '8vh ', marginBottom: '2vh', height: 'auto' }}>
+          Simulate Your Vision
+        </h1>
 
-        <div style={{ marginTop: '2vh', marginBottom: '5vh', height: 'auto' }}>
-          <div className="catch-phrase2">
-            QblackAI is powering the Physical AI revolution  <br/>
-            with next-generation computer vision simulation
-          </div>
-        </div>
+        <h2 className= "catch-phrase2" style={{ marginTop: '2vh', marginBottom: '5vh', height: 'auto' }}>
+          QblackAI is powering the Physical AI revolution  <br/>
+          with next-generation computer vision simulation
+        </h2>
 
         <div style ={{display: 'flex', justifyContent: 'center', gap: isMobile ? '15px' : '30px', marginTop: '5vh', marginBottom: '5vh'}}>
           <Button variant = "light" size = "md"
@@ -105,10 +103,8 @@ const ParticleBackground = () => {
           </Button>
         </div>
 
-        <div>
-          <img className = "eye" src={eye} alt = ""/>
-        </div>
-      </div>
+        <img className="eye" src={eye} alt="Eye-shaped particle overlay representing computer vision" />
+      </header>
 
 
       

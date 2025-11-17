@@ -61,7 +61,7 @@ const News = () => {
                           <div style={{ width: '100%' }}>
                             <img
                               src={post.image}
-                              alt={post.title}
+                              alt={post.alt}
                               style={{
                                 width: '100%',
                                 height: 'auto',

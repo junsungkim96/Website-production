@@ -46,7 +46,8 @@ const Homepage = () => {
         <title>QblackAI | Integrated HW-SW Computer Vision Simulation Platform</title>
         <meta
           name="description"
-          content=""
+          content="QblackAI provides an end-to-end virtual computer vision simulation platform covering hardware and software pipelines. 
+                   Test AI algorithms and camera systems without physical prototypes."
         />
         <link rel="canonical" href="https://qblackai.com/" />
       </Helmet>
@@ -57,98 +58,111 @@ const Homepage = () => {
 
       {/* -----------------------------------------------------------Product-------------------------------------------------------- */}
 
-      <div class="update-container">
-        <div className="left-text">
-          Product
-        </div>
-        <div className="right-text">
-          <p className = "underline" style = {{cursor: 'pointer'}} onClick={() => navigate('/product_features')}>View all product features</p>
-        </div>
-      </div>
-
-      <img className = "pipeline-image" src={product} alt="" />
-      <div className="product-center-text">End-to-End imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms</div>
-      
-
-      <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
-        <div className="row g-4"> {/* Adds gutter (spacing) between cards */}
-
-          {/* Card 1 */}
-          <div className="col-lg-4 col-md-6 d-flex">
-            <div
-              className="product-card-content"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '5vh 1vw',
-                borderRadius: '15px',
-                backgroundColor: '#FFFFFF',
-                minHeight: '25vh',
-                flexGrow: 1,
-                width: '100%',
-              }}
+      <section>
+        <div className="update-container">
+          <h2 className="left-text">
+            Product
+          </h2>
+          <div className="right-text">
+            <p
+              className="underline"
+              style={{ cursor: 'pointer' }}
+              onClick={() => navigate('/product_features')}
             >
-              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
-                <img className="product-image" src={time} alt="" />
-                <p className="strength-title">Save Time</p>
-              </div>
-              <div className="product-text">
-                Achieve system validation ~10x faster with integrated HW & SW virtual simulations
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="col-lg-4 col-md-6 d-flex">
-            <div
-              className="product-card-content"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '5vh 1vw',
-                borderRadius: '15px',
-                backgroundColor: '#FFFFFF',
-                minHeight: '25vh',
-                flexGrow: 1,
-                width: '100%',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
-                <img className="product-image" src={money} alt="" />
-                <p className="strength-title">Save Money</p>
-              </div>
-              <div className="product-text">
-                Reduce system validation costs to ~1/10 with virtual simulation - no need for physical prototypes
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="col-lg-4 col-md-6 d-flex">
-            <div
-              className="product-card-content"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '5vh 1vw',
-                borderRadius: '15px',
-                backgroundColor: '#FFFFFF',
-                minHeight: '25vh',
-                flexGrow: 1,
-                width: '100%',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
-                <img className="product-image" src={optimize} alt="" />
-                <p className="strength-title">Optimize</p>
-              </div>
-              <div className="product-text">
-                Find the right balance between size, cost, and performance
-              </div>
-            </div>
+              View all product features
+            </p>
           </div>
         </div>
-      </div>
+
+        <img
+          className="pipeline-image"
+          src={product}
+          alt="End-to-End computer vision imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms"
+        />
+        <div className="product-center-text">
+          End-to-End imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms
+        </div>
+
+        <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
+          <div className="row g-4">
+            {/* Card 1 */}
+            <article className="col-lg-4 col-md-6 d-flex">
+              <div
+                className="product-card-content"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: '5vh 1vw',
+                  borderRadius: '15px',
+                  backgroundColor: '#FFFFFF',
+                  minHeight: '25vh',
+                  flexGrow: 1,
+                  width: '100%',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
+                  <img className="product-image" src={time} alt="Save time with virtual simulations" />
+                  <p className="strength-title">Save Time</p>
+                </div>
+                <div className="product-text">
+                  Achieve system validation ~10x faster with integrated HW & SW virtual simulations
+                </div>
+              </div>
+            </article>
+
+            {/* Card 2 */}
+            <article className="col-lg-4 col-md-6 d-flex">
+              <div
+                className="product-card-content"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: '5vh 1vw',
+                  borderRadius: '15px',
+                  backgroundColor: '#FFFFFF',
+                  minHeight: '25vh',
+                  flexGrow: 1,
+                  width: '100%',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
+                  <img className="product-image" src={money} alt="Save money with virtual simulations" />
+                  <p className="strength-title">Reduce Cost</p>
+                </div>
+                <div className="product-text">
+                  Minimize validation expenses to roughly 1/10 compared to physical prototypes using virtual simulations
+                </div>
+              </div>
+            </article>
+
+            {/* Card 3 */}
+            <article className="col-lg-4 col-md-6 d-flex">
+              <div
+                className="product-card-content"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: '5vh 1vw',
+                  borderRadius: '15px',
+                  backgroundColor: '#FFFFFF',
+                  minHeight: '25vh',
+                  flexGrow: 1,
+                  width: '100%',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '10%' }}>
+                  <img className="product-image" src={optimize} alt="Optimize balance between size, cost, and performance" />
+                  <p className="strength-title">Optimize</p>
+                </div>
+                <div className="product-text">
+                  Find the right balance between size, cost, and performance
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
 
 
 
@@ -156,108 +170,107 @@ const Homepage = () => {
       <hr class="separator"></hr>
 
       {/* -----------------------------------------------------------Use Cases-------------------------------------------------------- */}
-      <div class="update-container">
-        <div className="left-text">Use Cases</div>
-      </div>
+      <section>
+        <div class="update-container">
+          <h2 className="left-text">Use Cases</h2>
+        </div>
 
-      <div className="use-case" style = {{marginBottom: '25vh'}}>
-        <div className="row">
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div className="use-case-text-title">
-              Autonomous systems
+        <div className="use-case" style = {{marginBottom: '25vh'}}>
+          <div className="row">
+            <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+              <div className="use-case-text-title">
+                Autonomous systems
+              </div>
+              <img className="use-case-image" src={img1} alt="Virtual hardware simulation for autonomous systems AI testing"/>
+              <div className="use-case-text">
+                Validate AI algorithms on a virtual hardware for testing system-level performance
+              </div>
             </div>
-            <img className="use-case-image" src={img1} alt=""/>
-            <div className="use-case-text">
-              Validate AI algorithms on a virtual hardware for testing system-level performance
+            <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+              <div className="use-case-text-title">
+                Visual Inspection in Manufacturing
+              </div>
+              <img className="use-case-image" src={img2} alt = "Simulated visual inspection in manufacturing with different camera hardware and lighting"/>
+              <div className="use-case-text">
+                Test the performance of inspection algorithms in different camera HW and light settings
+              </div>  
             </div>
-          </div>
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div className="use-case-text-title">
-              Visual Inspection in Manufacturing
+            <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
+              <div className="use-case-text-title">
+                Augmented/Virtual Reality
+              </div>
+              <img className="use-case-image" src={img3} alt = "AR/VR hardware simulation for optimal computer vision algorithm setup"/>
+              <div className="use-case-text">
+                Find the best hardware for your specific algorithm needs
+              </div>  
             </div>
-            <img className="use-case-image" src={img2} alt = ""/>
-            <div className="use-case-text">
-              Test the performance of inspection algorithms in different camera HW and light settings
-            </div>  
-          </div>
-          <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
-            <div className="use-case-text-title">
-              Augmented/Virtual Reality
-            </div>
-            <img className="use-case-image" src={img3} alt = ""/>
-            <div className="use-case-text">
-              Find the best hardware for your specific algorithm needs
-            </div>  
           </div>
         </div>
-      </div>
+      </section>
 
       <hr class="separator"></hr>
 
       {/* -----------------------------------------------------------Strengths-------------------------------------------------------- */}
 
-      <div class="update-container" style = {{marginBottom: '10vh', marginTop: '10vh'}}>
-        <div className="left-text">Strengths</div>
+      <section className="update-container" style={{ marginBottom: '10vh', marginTop: '10vh' }}>
+        <h2 className="left-text">
+          Strengths
+        </h2>
         <div className="right-text">
-          <div className = "strengths-card">
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+
+          {/* World Class Accuracy */}
+          <div className="strengths-card">
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <div>
-                <img className="strength-image" src={img6} alt=""/>
+                <img className="strength-image" src={img6} alt="Icon representing world class accuracy" />
               </div>
-              <p className="strength-title">
-                World Class Accuracy
-              </p>
+              <p className="strength-title">World Class Accuracy</p>
             </div>
-            
             <div className="strength-text">
               Recognized by computer vision engineers for its high accuracy
             </div>
           </div>
-          <div className = "strengths-card">
-            
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+
+          {/* Customizable */}
+          <div className="strengths-card">
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <div>
-                <img className="strength-image" src={img5} alt=""/>
+                <img className="strength-image" src={img5} alt="Icon representing system customizability" />
               </div>
-              <p className="strength-title">
-                Customizable
-              </p>
+              <p className="strength-title">Customizable</p>
             </div>
-            
             <div className="strength-text">
               The system is so flexible that you can simulate any vision hardware you want
             </div>
           </div>
-          <div className = "strengths-card">
-            
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+
+          {/* Secure and Private */}
+          <div className="strengths-card">
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <div>
-                <img className="strength-image" src={img4} alt=""/>
+                <img className="strength-image" src={img4} alt="Icon representing secure and private cloud platform" />
               </div>
-              <p className="strength-title">
-                Secure and Private
-              </p>
+              <p className="strength-title">Secure and Private</p>
             </div>
-            
-            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left'}}>
-              <div className="strength-text" style={{marginBottom: '0.7vh'}}>
-                Ensure the security and confidentiality of your design specifications by utilizing on-premise deployment <br/>
-              </div>
+            <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left' }}>
               <div className="strength-text">
-                Keep your data and intellectual property within your own infrastructure
+                Keep your data and intellectual property protected with enterprise-grade security measures
               </div>
             </div>
           </div>
+
         </div>
-      </div>
+      </section>
 
       
       <hr class="separator"></hr>
       
       {/* -----------------------------------------------------------Research-------------------------------------------------------- */}
 
-      <div class="update-container">
-        <div className="left-text">Research</div>
+      <section class="update-container">
+        <h2 className="left-text">
+          Research
+        </h2>
         <div className="right-text">
           <div className="right-small-text">
             We research deep learning based computer vision system optimization
@@ -266,48 +279,50 @@ const Homepage = () => {
             <p>Learn about our research</p>
           </div>
         </div>
-      </div>
+      </section>
       
       <hr class="separator"></hr>
 
       {/* -----------------------------------------------------------Career-------------------------------------------------------- */}
       
-      <div class="update-container">
-        <div className="left-text">
-          Careers at {isSmallScreen ? <br/> : null} {company_name}
-        </div>
-        <div className="right-text">
-          <div className="right-small-text">
-            Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and AI algorithms
+      <section>
+        <div class="update-container">
+          <h2 className="left-text">
+            Careers
+          </h2>
+          <div className="right-text">
+            <div className="right-small-text">
+              Developing a perfect computer vision simulator requires talents from diverse fields such as optics, sensor, image signal processing, and AI algorithms
+            </div>
+            <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
+              <p>View careers</p>
+            </div>
           </div>
-          <div className = "underline" onClick = {()=> navigate('/careers')} style = {{cursor: 'pointer', paddingTop: '2vh'}}>
-            <p>View careers</p>
-          </div>
         </div>
-      </div>
 
-      <div style = {{marginBottom: '10vh'}}>
-        <img className = "full-width-image" src={career} alt = "" />
-        <div className="career-join" style={{ textAlign: 'center', marginBottom: '3vh' }}>
-          Join us in shaping the {isSmallScreen ? <br/> : null} future of technology
+        <div style = {{marginBottom: '10vh'}}>
+          <img className = "full-width-image" src={career} alt = "" />
+          <div className="career-join" style={{ textAlign: 'center', marginBottom: '3vh' }}>
+            Join us in shaping the {isSmallScreen ? <br/> : null} future of technology
+          </div>
+          
+          <div>
+            <Button variant = "light" size = "lg"
+            onClick = {()=> navigate('/careers')}>
+              <div className = "career-button">View Careers</div> 
+            </Button>
+          </div>
         </div>
-        
-        <div>
-          <Button variant = "light" size = "lg"
-          onClick = {()=> navigate('/careers')}>
-            <div className = "career-button">View Careers</div> 
-          </Button>
-        </div>
-      </div>
+      </section>
 
       <hr class="separator"></hr>
 
       {/* -----------------------------------------------------------Contact Us-------------------------------------------------------- */}
       
-      <div class="update-container">
-        <div className="left-text">
+      <section class="update-container">
+        <h2 className="left-text">
           Contact Us
-        </div>
+        </h2>
         <div className="right-text">
           <div className="right-small-text">
             Big ideas start with a simple hello. Let's connect!
@@ -316,7 +331,7 @@ const Homepage = () => {
             <p>Contact us</p>
           </div>
         </div>
-      </div>
+      </section>
 
     </div>
   )
