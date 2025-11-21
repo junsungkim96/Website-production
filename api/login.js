@@ -8,7 +8,7 @@ const client = new MongoClient(uri);
 export default async function handler(req, res){
   const allowedOrigin = 'https://www.qblackai.com'
 
-  res.setHeader('Access-Control-Allow-Origin', allowedOrigin); // 개발 중에는 *로 허용
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 

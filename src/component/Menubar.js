@@ -13,7 +13,6 @@ import { useState, useEffect } from 'react';
 import { company_name } from '../data/Company_data';
 import {productItems, researchItems, companyItems} from '../data/Menu_data';
 
-const API_BASE = 'https://www.qblackai.com/api';
 
 const Menubar = () => {
   const isMobile = window.innerWidth <= 768;
@@ -273,7 +272,7 @@ const Menubar = () => {
                         setHoveredMenu(null);
                         setIsLoggingOut(true);
                         try {
-                          await fetch(`${API_BASE}/logout`, {
+                          await fetch('/api/logout', {
                             method: 'POST', 
                             headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify({email: localStorage.getItem('userEmail')}),

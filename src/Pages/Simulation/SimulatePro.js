@@ -323,7 +323,7 @@ const SimulatePro = () => {
       setIsLoggingOut(true); // 스피너 켜기
 
       // 로그아웃 API 호출
-      await fetch('https://www.qblackai.com/api/logout', {
+      await fetch('/api/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: localStorage.getItem('userEmail') }),

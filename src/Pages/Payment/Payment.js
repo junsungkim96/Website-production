@@ -57,64 +57,44 @@ const Payment = () => {
     async function initToss() {
       if (!mounted) return;
 
-      const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
-      // const clientKey = 'live_gck_E92LAa5PVbvpxbE4DgPzV7YmpXyJ';
+      // TossPayments 초기화
+      // const clientKey = "test_ck_Lex6BJGQOVDBb1pd6ma8W4w2zNbg";
+      const clientKey = "test_ck_EP59LybZ8BBWJD7l5wqQ86GYo7pR";
       const tossPayments = window.TossPayments(clientKey);
+
+      // customerKey 설정 (로그인 사용자 또는 ANONYMOUS)
       const customerKey = ANONYMOUS;
-      const widgets = tossPayments.widgets({ customerKey });
+      const payment = tossPayments.payment({ customerKey });
 
-      const usdPrice = selectedPlan.priceUSD;
-      const response = await fetch('https://open.er-api.com/v6/latest/USD');
-      const data = await response.json();
-      const rate = data?.rates?.KRW || 1400;
-
-      const krwPriceExclVAT = Math.round(usdPrice * rate); // 부가세 제외
-      const krwPrice = Math.round(krwPriceExclVAT * 1.1); // 10% 부가세 포함
-
-      await widgets.setAmount({ currency: 'KRW', value: krwPrice });
-
-      // 중복 렌더링 방지
-      document.getElementById('payment-method').innerHTML = '';
-      document.getElementById('agreement').innerHTML = '';
-
-      await widgets.renderPaymentMethods({
-        selector: '#payment-method',
-        variantKey: 'DEFAULT',
-      });
-      await widgets.renderAgreement({
-        selector: '#agreement',
-        variantKey: 'AGREEMENT',
-      });
-
-      const paymentButton = document.getElementById('payment-button');
+      // 버튼 이벤트 등록
+      const paymentButton = document.getElementById("payment-button");
       paymentButton.onclick = async () => {
         try {
-          await widgets.requestPayment({
-            orderId: `ORDER-${Date.now()}`,
-            orderName: `${selectedPlan.name} Plan Subscription`,
-            successUrl: `${window.location.origin}/success?plan=${selectedPlan.name}`,
-            failUrl: window.location.origin + '/fail',
+          await payment.requestBillingAuth({
+            method: "CARD",
+            successUrl: `${window.location.origin}/success`,
+            failUrl: `${window.location.origin}/fail`,
             customerEmail: localStorage.getItem("userEmail"),
             customerName: localStorage.getItem("userFirstName"),
           });
         } catch (err) {
-          console.error('Toss SDK Error:', err);
-          alert('결제 요청 중 오류가 발생했습니다. 콘솔을 확인하세요.');
+          console.error("Billing Auth Error:", err);
+          alert("카드 등록 중 오류가 발생했습니다.");
         }
       };
     }
 
     if (window.TossPayments) initToss();
     else {
-      const script = document.createElement('script');
-      script.src = 'https://js.tosspayments.com/v2/standard';
+      const script = document.createElement("script");
+      script.src = "https://js.tosspayments.com/v2/standard";
       script.async = true;
       script.onload = initToss;
       document.body.appendChild(script);
     }
 
     return () => { mounted = false; };
-  }, [selectedPlan]);
+  }, []);
 
 
 
@@ -279,7 +259,7 @@ const Payment = () => {
                       fontSize: '17px',
                     }}
                   >
-                    결제하기
+                    카드 등록 후 구독하기
                   </Button>
                 </div>
               </Card.Body>

@@ -7,7 +7,6 @@ import '../../styles/desktop.css';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import {Helmet} from "react-helmet";
 
-const API_BASE = 'https://www.qblackai.com/api';
 
 const Login = () => {
   // step: 1=이메일 입력, 2=비밀번호 입력, 3=reset 이메일 전송, 4=코드 인증, 5=비밀번호 재설정
@@ -59,7 +58,7 @@ const Login = () => {
 // --- API handlers ---
 const handleLogin = async (values, setSubmitting, setFieldError) => {
   try {
-    const res = await fetch(`${API_BASE}/login`, {
+    const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: values.email, password: values.password }),
@@ -86,7 +85,7 @@ const handleLogin = async (values, setSubmitting, setFieldError) => {
 
 const handleSendResetEmail = async (values, setSubmitting) => {
   try {
-    const res = await fetch(`${API_BASE}/send-code`, {
+    const res = await fetch('/api/send-code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: userEmail }),
@@ -109,7 +108,7 @@ const handleSendResetEmail = async (values, setSubmitting) => {
 
 const handleVerifyCode = async (values, setSubmitting) => {
   try {
-    const res = await fetch(`${API_BASE}/verify-code`, {
+    const res = await fetch('/api/verify-code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: userEmail, code: values.code }),
@@ -130,7 +129,7 @@ const handleVerifyCode = async (values, setSubmitting) => {
 
 const handleResetPassword = async (values, setSubmitting) => {
   try {
-    const res = await fetch(`${API_BASE}/reset-password`, {
+    const res = await fetch('/api/reset-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: userEmail, password: values.password }),
