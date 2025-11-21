@@ -4,9 +4,15 @@ import fetch from "node-fetch";
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
-const SECRET_KEY = process.env.TOSS_SECRET_KEY;
+const SECRET_KEY = 'test_sk_vZnjEJeQVxywk0vOkv0ZrPmOoBN0';
 
 export default async function handler(req, res) {
+  const allowedOrigin = 'https://www.qblackai.com';
+
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   // 보안: 스케줄러만 실행하도록 제한 (POST only)
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
@@ -16,6 +22,7 @@ export default async function handler(req, res) {
     await client.connect();
     const db = client.db("licenseDB");
     const users = db.collection("users");
+    console.log('Connected!');
 
     const now = new Date();
 
@@ -49,7 +56,16 @@ export default async function handler(req, res) {
           }
         );
 
-        const data = await response.json();
+        const text = await response.text(); // JSON이 아닐 수도 있으니 text로 먼저 확인
+        console.log("TossPayments response:", text);
+
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch(e) {
+          console.error("Failed to parse TossPayments JSON:", e);
+          continue;
+        }
 
         if (!response.ok) {
           console.error("Billing failed:", data);
