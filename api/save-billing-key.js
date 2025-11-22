@@ -32,9 +32,7 @@ export default async function handler(req, res) {
       {
         $set: {
           billingKey,
-          customerKey,        // 새로 추가된 필드
-          nextBillingAt,
-          lastPaymentAt: new Date(),
+          customerKey,
         }
       },
       { upsert: true } // 사용자가 없으면 새로 생성

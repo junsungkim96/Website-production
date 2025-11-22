@@ -7,7 +7,6 @@ import ReactCountryFlag from "react-country-flag";
 import {FaPaypal} from 'react-icons/fa';
 
 const Payment = () => {
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   const navigate = useNavigate();
   const location = useLocation();
   const planName = location.state?.planName || 'Basic';
@@ -57,6 +56,9 @@ const Payment = () => {
 
   const selectedPlan = plans[planName] || plans.Basic;
 
+  const handleBack = () => navigate('/product_pricing');
+
+
   // 환율 가져오기
   useEffect(() => {
     async function fetchRate() {
@@ -71,10 +73,93 @@ const Payment = () => {
     fetchRate();
   }, []);
 
+  // 환율 정보 가져온 후 KRW 업데이트
   useEffect(() => {
     if (!rate) return;
     setPriceKRW(Math.round(selectedPlan.priceUSD * rate));
   }, [rate, selectedPlan]);
+
+
+  // PayPal 위젯 초기화
+  useEffect(() => {
+    if (currency !== 'USD') return;
+
+    let mounted = true;
+
+    const setupPayPal = async () => {
+      if (!mounted) return;
+      const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
+      const tossPayments = window.TossPayments(clientKey);
+      const widgets = tossPayments.widgets({ customerKey:   ANONYMOUS });
+
+      await widgets.setAmount({
+        currency: "USD",
+        value: selectedPlan.priceUSD,
+      });
+
+      // await Promise.all([
+      //   widgets.renderPaymentMethods({ selector: "#payment-method", variantKey: "PAYPAL" }),
+      //   widgets.renderAgreement({ selector: "#agreement", variantKey: "AGREEMENT" }),
+      // ]);
+
+      const button = document.getElementById("us-payment-button");
+      if (!button) return;
+
+      button.onclick = () => {};
+      // button.onclick = async () => {
+      //   try {
+      //     await widgets.requestPayment({
+      //       orderId: `order_${Date.now()}`,
+      //       orderName: selectedPlan.name,
+      //       successUrl: window.location.origin + "/success",
+      //       failUrl: window.location.origin + "/fail",
+      //       customerEmail: localStorage.getItem("userEmail") || "customer@example.com",
+      //       customerName: localStorage.getItem("userFirstName") || "홍길동",
+      //       customerMobilePhone: localStorage.getItem("userPhone") || "01012345678",
+      //       foreignEasyPay: {
+      //         country: "US",
+      //         products: [
+      //           {
+      //             name: selectedPlan.name,
+      //             quantity: 1,
+      //             unitAmount: selectedPlan.priceUSD,
+      //             currency: 'USD',
+      //             description: selectedPlan.name,
+      //           },
+      //         ],
+      //         shipping: {
+      //           fullName: localStorage.getItem("userFirstName") || "홍길동",
+      //           address: {
+      //             country: 'US',
+      //             line1: '123 Main St',
+      //             line2: '',
+      //             area1: 'CA',
+      //             area2: 'San Jose',
+      //             postalCode: '95112',
+      //           },
+      //         },
+      //         paymentMethodOptions: { paypal: {} },
+      //       },
+      //     });
+      //   } catch (err) {
+      //     console.error("PayPal Payment Error:", err);
+      //     alert("PayPal 결제 중 오류가 발생했습니다.");
+      //   }
+      // };
+    };
+
+    if (window.TossPayments) setupPayPal();
+    else {
+      const script = document.createElement("script");
+      script.src = "https://js.tosspayments.com/v2/standard";
+      script.async = true;
+      script.onload = setupPayPal;
+      document.body.appendChild(script);
+    }
+
+    return () => { mounted = false; };
+  }, [selectedPlan, currency]);
+
 
   // TossPayments 초기화 (KRW 전용)
   useEffect(() => {
@@ -95,16 +180,18 @@ const Payment = () => {
 
       button.onclick = async () => {
         try {
+          const plan = encodeURIComponent(selectedPlan.name);
+          const amount = Math.round(priceKRW * 1.1);
+
           await payment.requestBillingAuth({
             method: 'CARD',
-            successUrl: `${window.location.origin}/success`,
+            successUrl: `${window.location.origin}/success?plan=${plan}&amount=${amount}`,
             failUrl: `${window.location.origin}/fail`,
             customerEmail: localStorage.getItem('userEmail'),
             customerName: localStorage.getItem('userFirstName'),
           });
         } catch (err) {
           console.error('Billing Auth Error:', err);
-          alert('카드 등록 중 오류가 발생했습니다.');
         }
       };
     }
@@ -121,7 +208,6 @@ const Payment = () => {
     return () => { mounted = false; };
   }, [currency]);
 
-  const handleBack = () => navigate('/product_pricing');
 
   return (
     <div style={{ paddingTop: '8vh', minHeight: '85vh' }}>
@@ -348,6 +434,7 @@ const Payment = () => {
                 <div className="d-grid">
                   {currency === 'USD' ? (
                     <Button
+                      id="us-payment-button"
                       size="lg"
                       style={{
                         backgroundColor: '#003087', // PayPal 공식 파란색
@@ -373,7 +460,6 @@ const Payment = () => {
                         e.currentTarget.style.transform = 'translateY(0)';
                         e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
                       }}
-                      onClick={() => window.open('https://www.paypal.com/', '_blank')}
                     >
                       <FaPaypal size={24} /> 
                       Checkout with PayPal
@@ -403,7 +489,7 @@ const Payment = () => {
                         e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
                       }}
                     >
-                      카드 등록 후 구독하기
+                      카드등록 후 구독하기
                     </Button>
                   )}
                 </div>

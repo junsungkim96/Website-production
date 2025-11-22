@@ -13,7 +13,7 @@ export function FailPage() {
     const urlParams = new URLSearchParams(window.location.search);
     setErrorInfo({
       code: urlParams.get("code") || '',
-      message: urlParams.get("message") || '결제에 실패했습니다.',
+      message: urlParams.get("message") || '',
     });
   }, []);
 
@@ -35,7 +35,7 @@ export function FailPage() {
         alt="결제 실패"
         style={{ width: '120px', marginBottom: '20px' }}
       />
-      <h2 style={{ color: '#d9534f', marginBottom: '10px' }}>결제를 실패했어요</h2>
+      <h2 style={{ color: '#d9534f', marginBottom: '10px' }}>Payment Failed</h2>
       <p style={{ marginBottom: '20px', color: '#555', fontSize: '16px' }}>
         {errorInfo.message}
       </p>
@@ -52,7 +52,7 @@ export function FailPage() {
             cursor: 'pointer',
           }}
         >
-          상품 페이지로 돌아가기
+          Go back to Pricings page
         </button>
       </div>
     </div>
