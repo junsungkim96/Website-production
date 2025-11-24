@@ -45,6 +45,7 @@ import SimulateBasic from './Pages/Simulation/SimulateBasic.js';
 import SimulatePro from './Pages/Simulation/SimulatePro.js';
 import DesktopInfo from './Pages/Utils/DesktopLogin.js';
 import Dashboard from './Pages/Utils/Dashboard.js';
+import User from './Pages/Utils/User.js';
 
 import {Analytics} from '@vercel/analytics/react';
 
@@ -136,6 +137,7 @@ const App = () => (
           <Route path="/apply" element={< ApplicationFrom />} />
           <Route path="/submit" element={< Submit /> } />
           <Route path="/desktop-info" element={< DesktopInfo/>} />
+          <Route path="/user" element={<MainLayout>< User /></MainLayout>} />
 
           {/* Contact, Terms of Use & Privacy */}
           <Route path="/contact" element={<MainLayout>< Contact /></MainLayout>}/>
