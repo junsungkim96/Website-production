@@ -51,9 +51,6 @@ const ParticleBackground = () => {
       localStorage.setItem("planExpiresAt", expirationDate);
 
       const isExpired = expirationDate && new Date(expirationDate) < new Date();
-      
-      // let plan = "Basic"
-      // let isExpired = false
 
       // 플랜 상태에 따라 라우팅
       if (isExpired || plan === "Free Trial") {

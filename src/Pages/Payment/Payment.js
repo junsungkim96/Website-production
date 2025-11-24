@@ -103,6 +103,8 @@ const Payment = () => {
 
         const handleClick = async () => {
           try {
+            const plan = encodeURIComponent(selectedPlan.name);
+
             await payment.requestPayment({
               method: "FOREIGN_EASY_PAY",
               amount: {
@@ -111,11 +113,11 @@ const Payment = () => {
               },
               orderId: `order_${Date.now()}`,
               orderName: selectedPlan.name,
-              successUrl: window.location.origin + "/success",
+              successUrl: window.location.origin + `/success_paypal?plan=${plan}&amount=${amount}`,
               failUrl: window.location.origin + "/fail",
-              customerEmail: localStorage.getItem("userEmail") || "customer@example.com",
-              customerName: localStorage.getItem("userFirstName") || "홍길동",
-              customerMobilePhone: localStorage.getItem("userPhone") || "01012345678",
+              customerEmail: localStorage.getItem("userEmail"),
+              customerName: localStorage.getItem("userFirstName"),
+              customerMobilePhone: localStorage.getItem("userPhone"),
 
               // PayPal 옵션
               foreignEasyPay: {
@@ -169,7 +171,7 @@ const Payment = () => {
     async function initToss() {
       if (!mounted) return;
 
-      const clientKey = 'test_ck_EP59LybZ8BBWJD7l5wqQ86GYo7pR';
+      const clientKey = 'test_gck_26DlbXAaV0707M229vx03qY50Q9R';
       const tossPayments = window.TossPayments(clientKey);
       const customerKey = ANONYMOUS;
       const payment = tossPayments.payment({ customerKey });

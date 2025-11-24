@@ -15,6 +15,7 @@ import DownloadPage from './Pages/Product/Download.js';
 import Payment from './Pages/Payment/Payment.js';
 import Refund from './Pages/Payment/Refund.js';
 import {SuccessPage} from './Pages/Payment/Success.js';
+import {SuccessPayPal} from './Pages/Payment/Success_Paypal.js';
 import {FailPage} from './Pages/Payment/Fail.js';
 import Research from './Pages/Research/Research.js';
 import Optics from './Pages/Research/Optics.js';
@@ -101,6 +102,7 @@ const App = () => (
           <Route path="/checkout" element = {<Payment />}/>
           <Route path="/refund" element = {<MainLayout>< Refund /></MainLayout>}/>
           <Route path="/success" element = {<SuccessPage />}/>
+          <Route path="/success_paypal" element = {<SuccessPayPal />}/>
           <Route path="/fail" element = {<FailPage />}/>
           
           {/* Research */}

@@ -18,9 +18,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-  const { email, plan } = req.body;
+  const { email, plan, paymentData } = req.body;
+  console.log(paymentData);
 
-  if (!email || !plan) {
+  if (!email || !plan || !paymentData) {
     return res.status(400).json({ message: "Email and plan are required" });
   }
 
@@ -28,6 +29,7 @@ export default async function handler(req, res) {
     await client.connect();
     const db = client.db("licenseDB");
     const users = db.collection("users");
+    const payments = db.collection("payments");
 
     const user = await users.findOne({ email });
     if (!user) {
@@ -68,8 +70,16 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: "Failed to update plan" });
     }
 
+    // payment-confirm 데이터 그대로 결제 기록 저장
+    await payments.insertOne({
+      userEmail: email,
+      plan: plan,
+      paymentData: {...paymentData},
+      createdAt: new Date(),
+    });
+
     res.status(200).json({
-      message: "Plan updated successfully",
+      message: "Plan updated and payment recorded successfully",
       plan,
       expirationDate,
     });
