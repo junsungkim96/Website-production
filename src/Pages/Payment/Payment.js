@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
-import { ANONYMOUS } from "@tosspayments/tosspayments-sdk";
+import { loadTossPayments, ANONYMOUS } from "@tosspayments/tosspayments-sdk";
 import ReactCountryFlag from "react-country-flag";
 import {FaPaypal} from 'react-icons/fa';
 
@@ -82,83 +82,82 @@ const Payment = () => {
 
   // PayPal 위젯 초기화
   useEffect(() => {
-    if (currency !== 'USD') return;
+    if (currency !== "USD") return; // USD일 때만 PayPal 초기화
 
     let mounted = true;
+    let cleanupClick = null;
 
     const setupPayPal = async () => {
-      if (!mounted) return;
-      const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
-      const tossPayments = window.TossPayments(clientKey);
-      const widgets = tossPayments.widgets({ customerKey:   ANONYMOUS });
+      try {
+        const clientKey = "test_ck_ALnQvDd2VJqOwQ0XeeYP3Mj7X41m";
+        const tossPayments = await loadTossPayments(clientKey);
 
-      await widgets.setAmount({
-        currency: "USD",
-        value: selectedPlan.priceUSD,
-      });
+        if (!mounted) return;
 
-      // await Promise.all([
-      //   widgets.renderPaymentMethods({ selector: "#payment-method", variantKey: "PAYPAL" }),
-      //   widgets.renderAgreement({ selector: "#agreement", variantKey: "AGREEMENT" }),
-      // ]);
+        // 비회원 결제 (ANONYMOUS)
+        const payment = tossPayments.payment({ customerKey: ANONYMOUS });
 
-      const button = document.getElementById("us-payment-button");
-      if (!button) return;
+        // 버튼
+        const button = document.getElementById("us-payment-button");
+        const amount = Number((selectedPlan.priceUSD * 1.1).toFixed(2));
 
-      button.onclick = () => {};
-      // button.onclick = async () => {
-      //   try {
-      //     await widgets.requestPayment({
-      //       orderId: `order_${Date.now()}`,
-      //       orderName: selectedPlan.name,
-      //       successUrl: window.location.origin + "/success",
-      //       failUrl: window.location.origin + "/fail",
-      //       customerEmail: localStorage.getItem("userEmail") || "customer@example.com",
-      //       customerName: localStorage.getItem("userFirstName") || "홍길동",
-      //       customerMobilePhone: localStorage.getItem("userPhone") || "01012345678",
-      //       foreignEasyPay: {
-      //         country: "US",
-      //         products: [
-      //           {
-      //             name: selectedPlan.name,
-      //             quantity: 1,
-      //             unitAmount: selectedPlan.priceUSD,
-      //             currency: 'USD',
-      //             description: selectedPlan.name,
-      //           },
-      //         ],
-      //         shipping: {
-      //           fullName: localStorage.getItem("userFirstName") || "홍길동",
-      //           address: {
-      //             country: 'US',
-      //             line1: '123 Main St',
-      //             line2: '',
-      //             area1: 'CA',
-      //             area2: 'San Jose',
-      //             postalCode: '95112',
-      //           },
-      //         },
-      //         paymentMethodOptions: { paypal: {} },
-      //       },
-      //     });
-      //   } catch (err) {
-      //     console.error("PayPal Payment Error:", err);
-      //     alert("PayPal 결제 중 오류가 발생했습니다.");
-      //   }
-      // };
+        const handleClick = async () => {
+          try {
+            await payment.requestPayment({
+              method: "FOREIGN_EASY_PAY",
+              amount: {
+                currency: "USD",
+                value: amount,
+              },
+              orderId: `order_${Date.now()}`,
+              orderName: selectedPlan.name,
+              successUrl: window.location.origin + "/success",
+              failUrl: window.location.origin + "/fail",
+              customerEmail: localStorage.getItem("userEmail") || "customer@example.com",
+              customerName: localStorage.getItem("userFirstName") || "홍길동",
+              customerMobilePhone: localStorage.getItem("userPhone") || "01012345678",
+
+              // PayPal 옵션
+              foreignEasyPay: {
+                provider: "PAYPAL",
+                country: "US",
+                paymentMethodOptions: {
+                  paypal: {
+                    // PayPal STC 옵션
+                    setTransactionContext: {
+                      sender_account_id: "guest_01",
+                      sender_first_name: "Guest",
+                      sender_last_name: "User",
+                      sender_email: "guest@example.com",
+                      sender_phone: "(1) 123 456 7890",
+                      sender_country_code: "US",
+                      sender_create_date: "2021-01-01T00:00:00.000-00:00",
+                    },
+                  },
+                },
+              },
+            });
+          } catch (err) {
+            console.error("PayPal Payment Error:", err);
+            alert("PayPal 결제 중 오류가 발생했습니다.");
+          }
+        };
+
+        button.addEventListener("click", handleClick);
+        cleanupClick = () => button.removeEventListener("click", handleClick);
+      } catch (err) {
+        console.error("PayPal 초기화 실패:", err);
+      }
     };
 
-    if (window.TossPayments) setupPayPal();
-    else {
-      const script = document.createElement("script");
-      script.src = "https://js.tosspayments.com/v2/standard";
-      script.async = true;
-      script.onload = setupPayPal;
-      document.body.appendChild(script);
-    }
+    setupPayPal();
 
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+      if (cleanupClick) cleanupClick();
+    };
   }, [selectedPlan, currency]);
+
 
 
   // TossPayments 초기화 (KRW 전용)
