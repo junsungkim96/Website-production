@@ -25,8 +25,6 @@ export default async function handler(req, res) {
     const db = client.db("licenseDB");
     const users = db.collection("users");
 
-    const nextBillingAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-
     await users.updateOne(
       { email },
       {

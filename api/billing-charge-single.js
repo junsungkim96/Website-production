@@ -45,7 +45,7 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: amount || 10000,
+          amount: amount,
           customerKey: user.customerKey,
           orderId: "order_" + Date.now(),
           orderName: plan,
