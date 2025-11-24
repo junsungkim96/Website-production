@@ -106,7 +106,7 @@ const Product = () => {
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/optics.jpg"}
           title="QblackAI video demonstrating optical performance simulation including lens sharpness and distortion">
-          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/optics-GhD7QB5N2OyqsTLdYO6fAN5iOXTalY.mp4" />
+          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/optics.mp4" />
           Your browser does not support the video tag.
         </video>
       </section>
@@ -132,7 +132,7 @@ const Product = () => {
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/sensor.jpg"}
           title="QblackAI video demonstrating sensor simulation including dynamic range, resolution, and noise">
-          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/sensor-wRmSwhW4Xs5iwzRbyv3u5RQAvNs2fE.mp4" />
+          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/sensor.mp4" />
           Your browser does not support the video tag.
         </video>
       </section>
@@ -158,7 +158,7 @@ const Product = () => {
         </div>
         <video className = "video-container" controls autoPlay={false} loop = {false} muted poster = {"/img/isp.jpg"} 
           title="QblackAI video demonstrating the full ISP pipeline simulation including demosaicing, noise reduction, and color correction">
-          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/isp-FhVv0cepVhKRz0bXDDbeyyUYKR8syD.mp4" />
+          <source src="https://8puowjmkndisb60h.public.blob.vercel-storage.com/isp.mp4" />
           Your browser does not support the video tag.
         </video>
       </section>
