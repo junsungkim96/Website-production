@@ -68,7 +68,9 @@ const handleLogin = async (values, setSubmitting, setFieldError) => {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userEmail', values.email);
       localStorage.setItem('userFirstName', data.firstName);
+      localStorage.setItem('userLastName', data.lastName);
       localStorage.setItem('userPlan', data.plan);
+      localStorage.setItem('date', data.date);
       window.dispatchEvent(new Event('login'));
       navigate('/');
     } else {

@@ -117,7 +117,7 @@ const Payment = () => {
               failUrl: window.location.origin + "/fail",
               customerEmail: localStorage.getItem("userEmail"),
               customerName: localStorage.getItem("userFirstName"),
-              customerMobilePhone: "",
+              customerMobilePhone: "0000000000",
 
               // PayPal 옵션
               foreignEasyPay: {
@@ -129,11 +129,11 @@ const Payment = () => {
                     setTransactionContext: {
                       sender_account_id: localStorage.getItem("userEmail"),
                       sender_first_name: localStorage.getItem("userFirstName"),
-                      sender_last_name: "",
+                      sender_last_name: localStorage.getItem('userLastName'),
                       sender_email: localStorage.getItem("userEmail"),
-                      sender_phone: "",
-                      sender_country_code: "US",
-                      sender_create_date: "",
+                      sender_phone: "0000000000",
+                      sender_country_code: "KR",
+                      sender_create_date: localStorage.getItem('date'),
                     },
                   },
                 },
