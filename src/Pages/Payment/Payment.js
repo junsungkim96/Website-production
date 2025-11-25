@@ -117,7 +117,7 @@ const Payment = () => {
               failUrl: window.location.origin + "/fail",
               customerEmail: localStorage.getItem("userEmail"),
               customerName: localStorage.getItem("userFirstName"),
-              customerMobilePhone: localStorage.getItem("userPhone"),
+              customerMobilePhone: "",
 
               // PayPal 옵션
               foreignEasyPay: {
@@ -127,13 +127,13 @@ const Payment = () => {
                   paypal: {
                     // PayPal STC 옵션
                     setTransactionContext: {
-                      sender_account_id: "guest_01",
-                      sender_first_name: "Guest",
-                      sender_last_name: "User",
-                      sender_email: "guest@example.com",
-                      sender_phone: "(1) 123 456 7890",
+                      sender_account_id: localStorage.getItem("userEmail"),
+                      sender_first_name: localStorage.getItem("userFirstName"),
+                      sender_last_name: "",
+                      sender_email: localStorage.getItem("userEmail"),
+                      sender_phone: "",
                       sender_country_code: "US",
-                      sender_create_date: "2021-01-01T00:00:00.000-00:00",
+                      sender_create_date: "",
                     },
                   },
                 },
