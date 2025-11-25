@@ -76,12 +76,19 @@ export default async function handler(req, res) {
       plan: plan,
       paymentData: {...paymentData},
       createdAt: new Date(),
+      autoBilling: false,
     });
+
+    const paymentHistory = await payments
+      .find({userEmail: email})
+      .sort({createdAt: -1})
+      .toArray();
 
     res.status(200).json({
       message: "Plan updated and payment recorded successfully",
       plan,
       expirationDate,
+      payments: paymentHistory,
     });
   } catch (error) {
     console.error("Error updating plan:", error);

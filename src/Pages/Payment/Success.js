@@ -56,6 +56,8 @@ export function SuccessPage() {
             customerKey,
           }),
         });
+        localStorage.setItem('userPlan', plan);
+        localStorage.setItem('autoBilling', true);
 
         if (!saveRes.ok) {
           console.error(await saveRes.json());
@@ -83,6 +85,8 @@ export function SuccessPage() {
           setStatus("Payment failed.");
           return;
         }
+
+        localStorage.setItem('payments', JSON.stringify(chargeJson.payments));
 
         // 4) Success
         setStatus("Payment is completed and subscription is activated");

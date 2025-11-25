@@ -106,7 +106,7 @@ const Pricing = () => {
       features: [
         'All Basic Tier features',
         'GPU-based simulations',
-        'Access to extensive lens, sensor and ISP database',
+        'Access to extensive lens, sensor and ISP database (Available Soon)',
         'Advanced automation and analytics tools',
         'Support via email',
         'Access to webinars and tutorials',

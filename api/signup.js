@@ -40,7 +40,8 @@ export default async function handler(req, res){
       loginCount: 0,
       plan: "Free Trial",
       isActive: true,
-      roles: ["user"]
+      roles: ["user"],
+      autoBilling: false,
     });
 
     res.status(201).json({message: 'User created'});

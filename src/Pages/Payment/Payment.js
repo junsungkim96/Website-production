@@ -171,7 +171,7 @@ const Payment = () => {
     async function initToss() {
       if (!mounted) return;
 
-      const clientKey = 'test_gck_26DlbXAaV0707M229vx03qY50Q9R';
+      const clientKey = 'test_ck_EP59LybZ8BBWJD7l5wqQ86GYo7pR';
       const tossPayments = window.TossPayments(clientKey);
       const customerKey = ANONYMOUS;
       const payment = tossPayments.payment({ customerKey });

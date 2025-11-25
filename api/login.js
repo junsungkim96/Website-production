@@ -1,6 +1,5 @@
 import {MongoClient} from 'mongodb';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
@@ -29,6 +28,7 @@ export default async function handler(req, res){
     await client.connect();
     const db = client.db('licenseDB');
     const users = db.collection('users');
+    const payments = db.collection('payments');
 
     const user = await users.findOne({email});
     if(!user){
@@ -57,8 +57,13 @@ export default async function handler(req, res){
       }
     )
 
+    const paymentHistory = await payments
+      .find({userEmail: email})
+      .sort({createdAt: -1})
+      .toArray();
+
     // login successful
-    res.status(200).json({message: 'Login successful', firstName: user.firstName, lastName: user.lastName, plan: user.plan, date: user.createdAt});
+    res.status(200).json({message: 'Login successful', firstName: user.firstName, lastName: user.lastName, plan: user.plan, date: user.expirationDate, payments: paymentHistory, autoBilling: user.autoBilling ?? false});
   } catch(error){
     console.error(error);
     res.status(500).json({message: error.message || 'Internal server error'});

@@ -266,13 +266,13 @@ const Menubar = () => {
                         }  
                       },
                     },
-                    // {
-                    //   label: 'User',
-                    //   onClick: () => {
-                    //     setHoveredMenu(null);
-                    //     navigate('/user');
-                    //   }
-                    // },
+                    {
+                      label: 'User',
+                      onClick: () => {
+                        setHoveredMenu(null);
+                        navigate('/user');
+                      }
+                    },
                     {
                       label: 'Logout',
                       onClick: async() => {

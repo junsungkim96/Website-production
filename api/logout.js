@@ -43,7 +43,6 @@ export default async function handler(req, res) {
       {
         $set: {
           isLoggedIn: false,
-          lastLogoutAt: new Date()
         }
       }
     );

@@ -100,11 +100,17 @@ export default async function handler(req, res) {
       createdAt: new Date(),
     });
 
+    const paymentHistory = await payments
+      .find({userEmail: email})
+      .sort({createdAt: -1})
+      .toArray();
+
     return res.status(200).json({
       message: "Billing succeeded, plan updated, payment recorded",
       plan,
       expirationDate,
       billingData,
+      payments: paymentHistory
     });
   } catch (err) {
     console.error("Billing error:", err);

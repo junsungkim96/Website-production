@@ -31,6 +31,7 @@ export default async function handler(req, res) {
         $set: {
           billingKey,
           customerKey,
+          autoBilling: true,
         }
       },
       { upsert: true } // 사용자가 없으면 새로 생성

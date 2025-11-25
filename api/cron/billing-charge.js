@@ -22,7 +22,6 @@ export default async function handler(req, res) {
     await client.connect();
     const db = client.db("licenseDB");
     const users = db.collection("users");
-    console.log('Connected!');
 
     const now = new Date();
 
@@ -30,7 +29,8 @@ export default async function handler(req, res) {
     const billingUsers = await users
       .find({
         billingKey: { $exists: true },
-        nextBillingAt: { $lte: now }
+        nextBillingAt: { $lte: now },
+        autoBilling: true
       })
       .toArray();
 
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
               amount: 10000, // ❗ 원하는 가격
               customerKey: user.customerKey,
               orderId: "order_" + Date.now(),
-              orderName: "Pro Subscription"
+              orderName: user.plan + " Subscription"
             }),
           }
         );
@@ -72,13 +72,24 @@ export default async function handler(req, res) {
           continue;
         }
 
-        // 결제 성공 → nextBillingAt 갱신
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        const day = now.getDate();
+
+        let nextMonth = new Date(year, month + 1, day);
+        if (nextMonth.getDate() !== day){
+          //월말 처리
+          const corrected = new Date(year, month + 2, 0);
+          nextMonth.setDate(corrected.getDate());
+        }
+
+        // 결제 성공 → expirationDate 갱신
         await users.updateOne(
           { _id: user._id },
           {
             $set: {
-              lastPaymentAt: new Date(),
-              nextBillingAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+              expirationDate: nextMonth
             }
           }
         );

@@ -71,6 +71,8 @@ const handleLogin = async (values, setSubmitting, setFieldError) => {
       localStorage.setItem('userLastName', data.lastName);
       localStorage.setItem('userPlan', data.plan);
       localStorage.setItem('date', data.date);
+      localStorage.setItem('payments', JSON.stringify(data.payments));
+      localStorage.setItem('autoBilling', data.autoBilling);
       window.dispatchEvent(new Event('login'));
       navigate('/');
     } else {

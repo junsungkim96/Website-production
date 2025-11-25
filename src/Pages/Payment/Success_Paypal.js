@@ -64,6 +64,8 @@ export function SuccessPayPal() {
 				return;
 			}
 
+			localStorage.setItem('payments', JSON.stringify(updateData.payments));
+
 			// 3️⃣ 모든 처리 성공
 			setStatus("Payment completed successfully!");
 			alert("Payment successful and plan activated!");
