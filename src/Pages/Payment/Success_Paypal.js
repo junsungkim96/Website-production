@@ -65,6 +65,7 @@ export function SuccessPayPal() {
 			}
 
 			localStorage.setItem('payments', JSON.stringify(updateData.payments));
+			localStorage.setItem('expireDate', updateData.expirationDate);
 
 			// 3️⃣ 모든 처리 성공
 			setStatus("Payment completed successfully!");

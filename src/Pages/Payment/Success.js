@@ -87,6 +87,7 @@ export function SuccessPage() {
         }
 
         localStorage.setItem('payments', JSON.stringify(chargeJson.payments));
+        localStorage.setItem('expireDate', chargeJson.expirationDate);
 
         // 4) Success
         setStatus("Payment is completed and subscription is activated");

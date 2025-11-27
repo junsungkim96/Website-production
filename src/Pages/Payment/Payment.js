@@ -133,7 +133,7 @@ const Payment = () => {
                       sender_email: localStorage.getItem("userEmail"),
                       sender_phone: "0000000000",
                       sender_country_code: "KR",
-                      sender_create_date: localStorage.getItem('date'),
+                      sender_create_date: localStorage.getItem('createDate'),
                     },
                   },
                 },

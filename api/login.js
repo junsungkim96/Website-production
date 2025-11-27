@@ -63,7 +63,7 @@ export default async function handler(req, res){
       .toArray();
 
     // login successful
-    res.status(200).json({message: 'Login successful', firstName: user.firstName, lastName: user.lastName, plan: user.plan, date: user.expirationDate, payments: paymentHistory, autoBilling: user.autoBilling ?? false});
+    res.status(200).json({message: 'Login successful', firstName: user.firstName, lastName: user.lastName, plan: user.plan, createDate: user.createdAt, expireDate: user.expirationDate, payments: paymentHistory, autoBilling: user.autoBilling ?? false});
   } catch(error){
     console.error(error);
     res.status(500).json({message: error.message || 'Internal server error'});

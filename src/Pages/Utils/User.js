@@ -55,7 +55,7 @@ const User = () => {
     const firstName = localStorage.getItem('userFirstName');
     const lastName = localStorage.getItem('userLastName');
     const plan = localStorage.getItem('userPlan');
-    const date = localStorage.getItem('date');
+    const date = localStorage.getItem('expireDate');
     const paymentsRaw = localStorage.getItem('payments');
     setAutoBilling(localStorage.getItem('autoBilling') === 'true');
 
@@ -101,7 +101,7 @@ const User = () => {
           { label: 'Last Name', value: userInfo.lastName },
           { label: 'Current Plan', value: userInfo.plan },
           { label: 'Automatic Billing', value: autoBilling ? 'Enabled' : 'Disabled'},
-          { label: 'Expiration Date', value: userInfo.date ? new Date(userInfo.date).toLocaleDateString() : 'N/A' },
+          { label: 'Expiration Date', value: userInfo.date === 'undefined' ? 'N/A' :  new Date(userInfo.date).toLocaleDateString() },
           { label: 'Payment History', value: null } // Payment History 라벨만 표시
         ].map((item, idx) => (
           <Row key={idx} className="mb-5">
