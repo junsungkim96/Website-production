@@ -161,12 +161,6 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-
-      {/* ✅ 안내 문구 추가 */}
-      <div className="pricing-alert">
-        ⚠️ Basic & Pro plan are temporarily unavailable due to ongoing PG integration and review. <br/>  
-        The payment feature is expected to be reactivated in November.
-      </div>
       
       <Container style={{ marginTop: '5vh', marginBottom: '10vh' }}>
         <Row>
