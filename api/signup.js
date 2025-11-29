@@ -29,6 +29,10 @@ export default async function handler(req, res){
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log('Hashed password:', hashedPassword);
 
+    // Calculate expiration date (7days from now)
+    const expirationDate = new Date();
+    expirationDate.setDate(expiration.getDate() + 7);
+
     // Store User
     await users.insertOne({
       firstName,
@@ -42,6 +46,7 @@ export default async function handler(req, res){
       isActive: true,
       roles: ["user"],
       autoBilling: false,
+      expirationDate,
     });
 
     res.status(201).json({message: 'User created'});

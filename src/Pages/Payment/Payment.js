@@ -80,7 +80,7 @@ const Payment = () => {
   }, [rate, selectedPlan]);
 
 
-  // PayPal 위젯 초기화
+  // ***** 달러 PayPal 위젯 초기화 *****
   useEffect(() => {
     if (currency !== "USD") return; // USD일 때만 PayPal 초기화
 
@@ -90,6 +90,7 @@ const Payment = () => {
     const setupPayPal = async () => {
       try {
         const clientKey = "test_ck_ALnQvDd2VJqOwQ0XeeYP3Mj7X41m";
+        // const clientKey = "live_ck_Z1aOwX7K8mW4xv1E6qwqVyQxzvNP";
         const tossPayments = await loadTossPayments(clientKey);
 
         if (!mounted) return;
@@ -162,7 +163,7 @@ const Payment = () => {
 
 
 
-  // TossPayments 초기화 (KRW 전용)
+  // ***** 원화 빌링결제 초기화 (KRW 전용) *****
   useEffect(() => {
     if (currency !== 'KRW') return;
 
@@ -172,6 +173,7 @@ const Payment = () => {
       if (!mounted) return;
 
       const clientKey = 'test_ck_EP59LybZ8BBWJD7l5wqQ86GYo7pR';
+      // const clientKey = 'live_ck_GePWvyJnrKOvznggnmmqrgLzN97E';
       const tossPayments = window.TossPayments(clientKey);
       const customerKey = ANONYMOUS;
       const payment = tossPayments.payment({ customerKey });
@@ -230,6 +232,12 @@ const Payment = () => {
       >
         <ArrowLeft size={22} color="black" style={{ marginRight: '8px' }} />
         <span style={{ color: 'black', fontSize: '18px', fontWeight: '500' }}>Back</span>
+      </div>
+
+      {/* ✅ 안내 문구 추가 */}
+      <div className="pricing-alert" style = {{marginBottom: '50px'}}>
+        ⚠️ Monthly subscriptions are available only in Korean won. <br/>  
+        US dollar payments are supported for one-time purhcases only.
       </div>
 
       <Container>

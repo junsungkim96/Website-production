@@ -35,19 +35,22 @@ const Pricing = () => {
 
       const { plan, expirationDate } = data;
       localStorage.setItem("userPlan", plan);
-      localStorage.setItem("planExpiresAt", expirationDate);
 
       const isExpired = expirationDate && new Date(expirationDate) < new Date();
-      
+    
+      if(isExpired){
+        alert("Your plan is expired.");
+        navigate(0);
+        return;
+      }
+
       // 플랜 상태에 따라 라우팅
-      if (isExpired || plan === "Free Trial") {
+      if (plan === "Free Trial") {
         navigate("/simulate");
       } else if (plan === "Basic") {
         navigate("/simulate-basic");
       } else if (plan === "Pro") {
         navigate("/simulate-pro");
-      } else {
-        navigate("/simulate"); // fallback
       }
 
     } catch (err) {
