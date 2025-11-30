@@ -30,7 +30,7 @@ const Dashboard = () => {
     mau: 0,
     stickiness: 0,
     signups: [],
-    logins: [],
+    paidUsers: [],
   });
   
   const [period, setPeriod] = useState('7d'); // 기본 7일
@@ -45,13 +45,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const response = await fetch('/api/dashboard');
+        const response = await fetch('/api/log/dashboard');
         if(!response.ok) throw new Error(`HTTP error. status: ${response.status}`);
         const data = await response.json();
         setMetrics(data);
       } catch (err) {
         console.error('Error fetching dashboard metrics:', err);
-      } finally {
       }
     };
 
@@ -85,10 +84,23 @@ const Dashboard = () => {
     ]
   };
 
-  const chartoptions = {
-    responsive: true,         // 반응형 유지
-    maintainAspectRatio: true, // 캔버스 비율 유지
-    aspectRatio: 2,            // 가로:세로 비율 (예: 2 = 가로가 세로의 2배)
+  const paidChartData = {
+    labels: filterByPeriod(metrics.paidUsers).map(p => p.date),
+    datasets: [
+      {
+        label: 'Paid Users',
+        data: filterByPeriod(metrics.paidUsers).map(p => p.count),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        tension: 0.3
+      }
+    ]
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
     plugins: {
       legend: {
         display: true,
@@ -111,24 +123,9 @@ const Dashboard = () => {
       },
       y: {
         beginAtZero: true,
-        ticks: {
-          count: 5
-        }
+        ticks: { count: 5 }
       }
     }
-  };
-
-  const loginChartData = {
-    labels: filterByPeriod(metrics.logins).map(l => l.date),
-    datasets: [
-      {
-        label: 'Logins',
-        data: filterByPeriod(metrics.logins).map(l => l.count),
-        borderColor: 'rgb(54, 162, 235)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        tension: 0.3
-      }
-    ]
   };
 
   return (
@@ -166,11 +163,11 @@ const Dashboard = () => {
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
-          <Line data={signupChartData} options={chartoptions}/>
+          <Line data={signupChartData} options={chartOptions}/>
         </div>
 
         <div className="chart">
-          <h1>Logins</h1>
+          <h1>Active Subscribers</h1>
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
@@ -180,11 +177,11 @@ const Dashboard = () => {
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
-          <Line data={loginChartData} options={chartoptions}/>
+          <Line data={paidChartData} options={chartOptions}/>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;
