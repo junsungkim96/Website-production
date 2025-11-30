@@ -921,6 +921,8 @@ const SimulateBasic = () => {
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
 
   const handleRunSimulation = async () => {
+    let errorOccurred = null;
+
     setIsSimulationRunning(true);
     setResultImage(null);
 
@@ -1024,12 +1026,36 @@ const SimulateBasic = () => {
       setOutputText(prev => [...prev, "\n"]);
 
     } catch (error) {
+      errorOccurred = error;
       if (error.name === "AbortError") return;
       console.error(error);
       setOutputText(prev => [...prev, "Simulation failed:" + error.message]);
     } finally {
       if (!abortControllerRef.current.aborted){
         setIsSimulationRunning(false);
+      }
+
+      try {
+        await fetch(`/api/log/simulation`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            userId: localStorage.getItem('userEmail'),
+            plan: localStorage.getItem('userPlan'),
+            timestamp: new Date().toISOString(),
+            status: abortControllerRef.current.aborted ? "aborted" : (errorOccurred ? "failed" : "completed"),
+            inputs: {
+              illuminant: selectedIlluminant,
+              scene: selectedScene,
+              optics: selectedOptics,
+              sensor: selectedSensor,
+              isp: selectedISP,
+              algorithm: selectedAlgorithm
+            }
+          })
+        });
+      } catch(logErr){
+        console.warn("Failed to log simulation:", logErr);
       }
     }
   };

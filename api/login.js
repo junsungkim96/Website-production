@@ -53,7 +53,6 @@ export default async function handler(req, res){
           lastLoginAt: new Date(),
           isLoggedIn: true
         },
-        $inc: {loginCount: 1}
       }
     )
 
