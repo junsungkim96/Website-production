@@ -36,7 +36,7 @@ import OpticsDesign from './Optics';
 import Joyride, {STATUS} from "react-joyride";
 import {Helmet} from "react-helmet";
 
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL } from '../../config_gpu';
 
 
 const SimulatePro = () => {
