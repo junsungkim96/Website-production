@@ -1,4 +1,4 @@
 export const API_BASE_URL = 
     process.env.NODE_ENV === 'production'
-    ? 'https://35.185.133.19:8000'
+    ? 'https://api.qblackai.com'
     : 'http://127.0.0.1:8000';
