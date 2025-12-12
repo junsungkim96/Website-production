@@ -781,7 +781,7 @@ const Simulate = () => {
       errorOccurred = error;
       if (error.name === "AbortError") return;
       console.error(error);
-      setOutputText(prev => [...prev, "Simulation failed:" + error.message]);
+      setOutputText(prev => [...prev, "Simulation failed:" + error.message, "\n"]);
     } finally {
       if (!abortControllerRef.current.aborted){
         setIsSimulationRunning(false);
@@ -1145,7 +1145,7 @@ const Simulate = () => {
         <div style={sidebarHeaderStyle}>
           <div
             style={logoContainerStyle}
-            onMouseEnter={() => setLogoHovered(true)}
+            onMouseEnter={() => {setTimeout(()=>setLogoHovered(true), 100)}}
             onMouseLeave={() => setLogoHovered(false)}
             onClick={handleLogoClick}
           >
@@ -1274,8 +1274,7 @@ const Simulate = () => {
               boxSizing: 'border-box',
               paddingTop: '8px',
               pointerEvents: 'auto',
-              position: 'relative',
-              width: '210px',
+              position: 'relative'
             }}
           >
             {/* User initial */}
