@@ -376,7 +376,7 @@ const SimulatePro = () => {
   const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "apple.jpg"];
   const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye"];
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
-  const isps = ["", "Fast-openISP"];
+  const isps = ["", "OpenISP"];
   const algorithms = ["", "DETR", "MiDaS_DPT_Small"];
 
   // Main UI logic
@@ -1988,7 +1988,7 @@ const SimulatePro = () => {
                 <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
                   <select id="isp-select" style={selectStyle} value={selectedISP} onChange={(e) => setSelectedISP(e.target.value)}>{isps.map((i, idx) => <option key={idx}>{i}</option>)}</select>
                   
-                  <button id="isp-param-select" style={iconButtonStyle} onClick={() => {if(selectedISP === 'Fast-openISP'){setIsIspDialogOpen(true);}}}>
+                  <button id="isp-param-select" style={iconButtonStyle} onClick={() => {if(selectedISP === 'OpenISP'){setIsIspDialogOpen(true);}}}>
                     <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
                   </button>
 
