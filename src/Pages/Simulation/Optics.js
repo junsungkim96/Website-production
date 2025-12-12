@@ -217,6 +217,7 @@ const OpticsDesign = () => {
         height: '100vh',
         padding: '0px',
         boxSizing: 'border-box',
+        overflow: 'hidden',
       }}
     >
       {/* Top Menu Bar */}
@@ -228,7 +229,7 @@ const OpticsDesign = () => {
           gap: '10px',
           background: '#f5f5f5',
           borderBottom: '1px solid #ccc',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <button
@@ -301,6 +302,7 @@ const OpticsDesign = () => {
           minHeight: 0,
           padding: '12px 14px',
           boxSizing: 'border-box',
+          overflow: 'hidden',
         }}
       >
         <div
@@ -314,6 +316,7 @@ const OpticsDesign = () => {
             overflow: 'hidden',
             background: '#fff',
             minWidth: 0,
+            overflow: 'hidden'
           }}
         >
           <h5 style={{ marginBottom: '6px' }}>Lens Data</h5>
@@ -505,6 +508,7 @@ const OpticsDesign = () => {
             flexDirection: 'column',
             overflow: 'hidden',
             position: 'relative',
+            flexShrink: 0,
           }}
         >
           <h5 style={{ margin: '4px 0 6px 4px' }}>Lens Layout</h5>
@@ -534,54 +538,60 @@ const OpticsDesign = () => {
           background: '#fff',
           flex: 1,
           boxSizing: 'border-box',
+          flexShrink: 0,
+          overflowY: 'auto',
         }}
       >
+        {/* PSF Plot */}
         <div style={plotBoxStyle}>
-          <h5 style={{ ...plotTitleStyle, fontSize: '14px', color: '#444' }}>
-            PSF Plot
-          </h5>
-          <div style={{ fontSize: '14px', color: '#777' }}>{psfPlot}</div>
+          <h5 style={plotTitleRowStyle}>PSF Plot</h5>
+          <div style={plotContentStyle}>{psfPlot}</div>
         </div>
+
+        {/* Wavefront Map */}
         <div style={plotBoxStyle}>
-          <h5 style={{ ...plotTitleStyle, fontSize: '14px', color: '#444' }}>
-            Wavefront Map
-          </h5>
-          <div style={{ fontSize: '14px', color: '#444' }}>{wavefrontPlot}</div>
+          <h5 style={plotTitleRowStyle}>Wavefront Map</h5>
+          <div style={plotContentStyle}>{wavefrontPlot}</div>
         </div>
+
+        {/* Field Curvature */}
         <div style={plotBoxStyle}>
-          <h5 style={{ ...plotTitleStyle, fontSize: '14px', color: '#444' }}>
-            Field Curvature / Distortion
-          </h5>
-          <div style={{ fontSize: '14px', color: '#444' }}>{fieldPlot}</div>
+          <h5 style={plotTitleRowStyle}>Field Curvature / Distortion</h5>
+          <div style={plotContentStyle}>{fieldPlot}</div>
         </div>
       </div>
     </div>
   );
 };
 
+
 // 공통 스타일
 const plotBoxStyle = {
   border: '1px solid #ccc',
   borderRadius: '8px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: '#777',
-  fontSize: '14px',
   background: '#fff',
   minHeight: '180px',
-  position: 'relative',
-  paddingTop: '6px',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '8px',
+  overflow: 'hidden',
 };
 
-const plotTitleStyle = {
-  position: 'absolute',
-  top: '8px',
-  left: '10px',
+const plotTitleRowStyle = {
   margin: 0,
-  fontSize: '13px',
+  marginBottom: '6px',
+  fontSize: '14px',  // 너가 쓰던 크기 유지
   color: '#444',
+  flexShrink: 0,
+};
+
+const plotContentStyle = {
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  overflow: 'hidden',
+  minHeight: 0, // grid 내부에서 필수
 };
 
 export default OpticsDesign;
