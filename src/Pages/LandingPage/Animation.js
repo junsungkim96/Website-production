@@ -2,13 +2,14 @@ import Particles from 'react-tsparticles';  // Import particles.js wrapper
 import { loadFull } from 'tsparticles';  // Import loadFull to enable all features
 import eye from '../../img/homepage/eye_diamond.png';
 import Button from 'react-bootstrap/Button';
-import {useLayoutEffect} from 'react';
+import {useState, useLayoutEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 const ParticleBackground = () => {
   const navigate = useNavigate();
   const isMobile = window.innerWidth <= 768;
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const particlesInit = async (main) => {
     // Initialize the full version of particles.js
@@ -20,6 +21,8 @@ const ParticleBackground = () => {
   }, []);
 
   const freeTrial = async () => {
+    setIsNavigating(true);
+
     if (isMobile) {
       navigate("/desktop-info");
       return;
@@ -69,6 +72,7 @@ const ParticleBackground = () => {
 
     } catch (err) {
       console.error("Error fetching plan info:", err);
+      setIsNavigating(false);
       navigate("/simulate");
     }
   };
@@ -76,6 +80,36 @@ const ParticleBackground = () => {
 
   return (
     <div style={{ position: 'relative', height: '105vh', width: '90%', marginLeft: 'auto', marginRight: 'auto', pointerEvents: 'auto' }}>
+
+      {/* spinner overlay */}
+      {isNavigating && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // 조금 더 어둡게
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              width: '60px',
+              height: '60px',
+              border: '6px solid rgba(255,255,255,0.3)', // 연한 테두리
+              borderTop: '6px solid #fff', // 흰색 회전
+              borderRadius: '50%',
+              animation: 'spin 1s linear infinite',
+              boxShadow: '0 0 10px rgba(0,0,0,0.3)', // 살짝 그림자
+            }}
+          />
+        </div>
+      )}
       
       <div style={{height: '6vh'}}/>
 

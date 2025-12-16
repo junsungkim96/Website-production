@@ -12,6 +12,9 @@ import plus from '../../img/simulate/plus.svg';
 import minus from '../../img/simulate/minus.svg';
 import stop from '../../img/simulate/stop.svg';
 import upload from '../../img/simulate/upload.svg';
+import lens from '../../img/simulate/lens.png';
+import raytrace from '../../img/simulate/optics.png';
+import analytics from '../../img/simulate/analytics.png';
 
 const OpticsDesign = () => {
   const iconButtonStyle = {
@@ -264,20 +267,30 @@ const OpticsDesign = () => {
         </button>
         <button
           onClick={runRayTrace}
-          title="Run"
+          title="Draw Lens"
           style={{ ...iconButtonStyle, 
                   opacity: isSimulationRunning ? 0.5 : 1,
                   cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
           disabled={isSimulationRunning}
         >
-          <img src={run} alt="Add" style={{ width: 20, height: 20 }} />
+          <img src={lens} alt="Add" style={{ width: 20, height: 20, imageRendering: 'auto' }} />
         </button>
         <button
+          onClick={runRayTrace}
+          title="Ray trace"
+          style={{ ...iconButtonStyle, 
+                  opacity: isSimulationRunning ? 0.5 : 1,
+                  cursor: isSimulationRunning ? "not-allowed" : "pointer"}}
+          disabled={isSimulationRunning}
+        >
+          <img src={raytrace} alt="Add" style={{ width: 20, height: 20 }} />
+        </button>
+        {/* <button
           title="Stop"
           style={{ ...iconButtonStyle}}
         >
           <img src={stop} alt="Stop" style={{ width: 20, height: 20 }} />
-        </button>
+        </button> */}
         {/* <button
           title="Save"
           style={{ ...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed' }}
@@ -286,9 +299,15 @@ const OpticsDesign = () => {
         </button> */}
         <button
           style={{ ...iconButtonStyle}}
-          title="Share"
+          title="Ray Trace & Analytics"
         >
-          <img src={upload} alt="Share" style={{ width: 20, height: 20 }} />
+          <img src={analytics} alt="Analytics" style={{ width: 20, height: 20 }} />
+        </button>
+        <button
+          style={{ ...iconButtonStyle}}
+          title="Export Lens Design to System Optimization menu"
+        >
+          <img src={upload} alt="Export" style={{ width: 20, height: 20 }} />
         </button>
       </div>
 
