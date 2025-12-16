@@ -1,36 +1,59 @@
 import React, { useState, useEffect } from "react";
+import QuantumEfficiencyDialog from "./sensor_qe.js";
+import spectrum from '../../../img/simulate/spectrum.svg';
+import SpectrumPlot from './qe_plot.js';
 
 const SensorDialog = ({ onSubmit, onClose, initialValues }) => {
   const [inputs, setInputs] = useState({
-    voltage_swing: "1.15",          // Voltage Swing (V)
-    well_capacity: "9000",        // Well Capacity (e)
-    fill_factor: "0.45",        // Fill Factor
-    pixel_size: "2.2",         // Pixel Size (µm)
-    dark_voltage: "10",          // Dark Voltage (µV/s)
-    read_noise: "0.96",        // Read Noise (mV)
-    prnu: "0.2218",      // PRNU (%)
-    dsnu: "1",           // DSNU (mV)
-    analog_gain: "1",           // Analog Gain
-    analog_offset: "0",          // Analog Offset
-    rows: "400",        // Rows
-    cols: "600",        // Cols
+    voltage_swing: "1.15",
+    well_capacity: "9000",
+    fill_factor: "0.45",
+    pixel_size: "2.2",
+    dark_voltage: "10",
+    read_noise: "0.96",
+    prnu: "0.22",
+    dsnu: "1",
+    analog_gain: "1",
+    analog_offset: "0",
+    rows: "400",
+    cols: "600",
   });
 
+  const [showQEDialog, setShowQEDialog] = useState(false);
+  const [qeData, setQeData] = useState(null);
+
+  // ✅ ESC + ENTER 처리 (포커스 불필요)
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleKey = (e) => {
       if (e.key === "Escape") {
-        if (onClose) onClose();
+        if (showQEDialog) setShowQEDialog(false);
+        else if (onClose) onClose();
+      }
+
+      if (e.key === "Enter" && !showQEDialog) {
+        e.preventDefault();
+        handleSubmit();
       }
     };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
 
-  useEffect(()=>{
-    if(initialValues){
-      setInputs((prev)=>({...prev, ...initialValues}))
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [showQEDialog, onClose, inputs, qeData]);
+
+  useEffect(() => {
+    if (!initialValues) return;
+
+    const { qe, ...rest } = initialValues;
+
+    setInputs((prev) => ({
+      ...prev,
+      ...rest,
+    }));
+
+    if (Array.isArray(qe)) {
+      setQeData(qe.map(row => [...row]));
     }
-  }, [initialValues])
+  }, [initialValues]);
 
   const labels = [
     { key: "voltage_swing", text: "Voltage Swing (V)" },
@@ -52,37 +75,82 @@ const SensorDialog = ({ onSubmit, onClose, initialValues }) => {
   };
 
   const handleSubmit = () => {
-    if (onSubmit) onSubmit(inputs);
+    if (onSubmit) {
+      onSubmit({
+        ...inputs,
+        qe: qeData.map(row => row.map(v => Number(v))),
+      });
+    }
     if (onClose) onClose();
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSubmit();
+  const openQESpectrumPlot = () => {
+    if (!qeData) return;
+
+    const wavelength = Array.from({ length: 31 }, (_, i) => 400 + i * 10);
+    const R = qeData.map(v => v[0]);
+    const G = qeData.map(v => v[1]);
+    const B = qeData.map(v => v[2]);
+
+    SpectrumPlot(wavelength, { R, G, B });
   };
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.dialog}>
-        <h2 style={styles.title}>Sensor Parameters</h2>
-        <div style={styles.grid}>
-          {labels.map(({ key, text }) => (
-            <React.Fragment key={key}>
-              <label style={styles.label}>{text}</label>
-              <input
-                type="text"
-                value={inputs[key]}
-                onChange={(e) => handleChange(key, e.target.value)}
-                style={styles.input}
-                onKeyDown={handleKeyPress}
-              />
-            </React.Fragment>
-          ))}
+    <>
+      <div style={styles.overlay}>
+        <div style={styles.dialog}>
+          <h2 style={styles.title}>Sensor Parameters</h2>
+
+          <div style={styles.grid}>
+            <label style={styles.label}>Quantum Efficiency</label>
+            <div style={styles.qeRow}>
+              <button
+                style={styles.qeButton}
+                onClick={() => setShowQEDialog(true)}
+              >
+                Edit
+              </button>
+              <button
+                style={styles.iconButtonStyle}
+                onClick={openQESpectrumPlot}
+                id="QE-plot"
+                title="QE"
+              >
+                <img
+                  src={spectrum}
+                  alt="Spectrum"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </button>
+            </div>
+
+            {labels.map(({ key, text }) => (
+              <React.Fragment key={key}>
+                <label style={styles.label}>{text}</label>
+                <input
+                  type="text"
+                  value={inputs[key]}
+                  onChange={(e) => handleChange(key, e.target.value)}
+                  style={styles.input}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+
+          <button onClick={handleSubmit} style={styles.button}>
+            Modify
+          </button>
         </div>
-        <button onClick={handleSubmit} style={styles.button}>
-          Modify
-        </button>
       </div>
-    </div>
+
+      {showQEDialog && (
+        <QuantumEfficiencyDialog
+          initialData={qeData}
+          onSubmit={(data) => setQeData(data)}
+          onClose={() => setShowQEDialog(false)}
+        />
+      )}
+    </>
   );
 };
 
@@ -103,7 +171,7 @@ const styles = {
     backgroundColor: "#fff",
     padding: "25px",
     borderRadius: "8px",
-    width: "480px",
+    width: "520px",
     textAlign: "center",
     boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
     color: "#000",
@@ -124,7 +192,6 @@ const styles = {
   },
   label: {
     textAlign: "left",
-    alignSelf: "center",
   },
   input: {
     width: "100%",
@@ -133,6 +200,23 @@ const styles = {
     border: "1px solid #ccc",
     backgroundColor: "#fff",
     color: "#000",
+    boxSizing: "border-box",
+  },
+  qeRow: {
+    display: "flex",
+    gap: "8px",
+    alignItems: "center",
+    justifyContent: "left",
+  },
+  qeButton: {
+    padding: "5px 15px",
+    border: "none",
+    borderRadius: "4px",
+    backgroundColor: "#555",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "15px",
+    whiteSpace: "nowrap",
   },
   button: {
     padding: "6px 16px",
@@ -142,6 +226,22 @@ const styles = {
     color: "#fff",
     cursor: "pointer",
     fontWeight: "bold",
+  },
+  iconButtonStyle: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '32px',
+    height: '32px',
+    minWidth: '30px',
+    minHeight: '30px',
+    padding: '0px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    background: '#fff',
+    cursor: 'pointer',
+    boxSizing: 'border-box',
+    flexShrink: 0,
   },
 };
 
