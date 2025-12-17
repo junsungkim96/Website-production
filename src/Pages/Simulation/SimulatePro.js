@@ -44,7 +44,8 @@ const SimulatePro = () => {
   const [runTour, setRunTour] = useState(false);
   const [showStageMenu, setShowStageMenu] = useState(false);
 
-  const stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
+  const system_stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
+  const optics_stages = ["Double-Gauss"]
 
   const stageStepsMap = {
     Scene: [
@@ -109,7 +110,14 @@ const SimulatePro = () => {
     ]
   };
 
+  const [opticsPreset, setOpticsPreset] = useState(null);
+  
   const startTutorial = (stage) => {
+    if (stage === "Double-Gauss"){
+      setOpticsPreset("DOUBLE_GAUSS");
+      setShowStageMenu(false);
+      return;
+    }
     setTutorialSteps(stageStepsMap[stage]);
     setRunTour(true);
     setShowStageMenu(false);
@@ -1538,11 +1546,11 @@ const SimulatePro = () => {
           </div>
         ))}
 
-        {/* Tutorial button + User info */}
+          {/* Tutorial button + User info */}
         <div style={{ marginTop: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           
           {/* Tutorial button */}
-          {sidebarExpanded && activeMenu === 'System Optimization' && (
+          {sidebarExpanded && (
             <button
               onClick={() => setShowStageMenu(prev => !prev)}
               style={{
@@ -1590,7 +1598,30 @@ const SimulatePro = () => {
                 }}
                 onClick={(e) => e.stopPropagation()} // 모달 내부 클릭은 닫기 방지
               >
-                {stages.map(stage => (
+                {activeMenu === "System Optimization" && 
+                  system_stages.map(stage => (
+                  <button
+                    key={stage}
+                    onClick={() => startTutorial(stage)}
+                    style={{
+                      display: 'block',
+                      margin: '6px 0',
+                      width: '100%',
+                      padding: '8px 12px',
+                      border: '1px solid #ddd',
+                      borderRadius: 4,
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      textAlign: 'center',
+                      backgroundColor: '#fafafa'
+                    }}
+                  >
+                    {stage}
+                  </button>
+                ))}
+
+                {activeMenu === "Optics Design" && 
+                  optics_stages.map(stage => (
                   <button
                     key={stage}
                     onClick={() => startTutorial(stage)}
@@ -2178,7 +2209,7 @@ const SimulatePro = () => {
 
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
-            <OpticsDesign />
+            <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)}/>
           </div>
         )}
       </div>
