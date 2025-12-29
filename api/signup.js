@@ -31,7 +31,7 @@ export default async function handler(req, res){
 
     // Calculate expiration date (7days from now)
     const expirationDate = new Date();
-    expirationDate.setDate(expiration.getDate() + 7);
+    expirationDate.setDate(expirationDate.getDate() + 7);
 
     // Store User
     await users.insertOne({
