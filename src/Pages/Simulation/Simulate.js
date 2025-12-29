@@ -202,7 +202,7 @@ const Simulate = () => {
 
   const illuminants = ["", "Custom", "D50", "D55", "D65", "D75", "Illuminant A", "Illuminant B", "Illuminant C", "Fluorescent", "Tungsten"];
   const scenes = ["", "Macbeth", "Point Array", "Gridlines", "Slanted Edge", "Rings Rays", "apple.jpg"];
-  const optics = ["", "Cooke Triplet", "Double-Gauss", "Fisheye"];
+  const [optics, setOptics] = useState(["", "Cooke Triplet", "Double-Gauss", "Fisheye"]);
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "OpenISP"];
   const algorithms = ["", "DETR", "MiDaS_DPT_Small"];
@@ -1864,7 +1864,17 @@ const Simulate = () => {
 
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
-            <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)}/>
+            <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)} 
+              onExport={(filename) => {
+                setOptics(prev =>
+                  prev.includes(filename) ? prev : [...prev, filename]
+                );
+
+                setSelectedOptics(filename);
+
+                setActiveMenu("System Optimization");
+              }}
+            />
           </div>
         )}
       </div>

@@ -603,8 +603,9 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
         </button>
         <button
           onClick={exportDesign}
-          style={{ ...iconButtonStyle}}
+          style={{ ...iconButtonStyle, opacity: 0.5, cursor: "not-allowed"}}
           title="Export Lens Design to System Optimization menu"
+          disabled
         >
           <img src={upload} alt="Export" style={{ width: 20, height: 20 }} />
         </button>
