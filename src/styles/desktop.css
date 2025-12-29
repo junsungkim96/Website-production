@@ -674,3 +674,12 @@ p2{
   font-size: 16px;
   line-height: 1.6;
 }
+
+.material-select {
+  background: #fff;
+  transition: background 0s ease;
+}
+
+.material-select.open {
+  background: #eaeaea;
+}

@@ -373,6 +373,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
             .map(v => Number(v))
         }
       };
+      console.log(payload);
 
       const response = await fetch(`${API_BASE_URL}/raytrace`, {
         method: 'POST',
@@ -887,6 +888,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
               <div
                 style={{
                   flex: 1,
+                  overflowX: 'auto',
                   overflowY: 'auto',
                   minHeight: 0,
                   padding: '6px',
@@ -907,10 +909,10 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                     <tr>
                       <th style={{ width: '50px', padding: '6px 8px', fontWeight: 500 }}>Surf</th>
                       <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Type</th>
-                      <th style={{ width: '100px', padding: '6px 8px', fontWeight: 500 }}>Curvature</th>
-                      <th style={{ width: '100px', padding: '6px 8px', fontWeight: 500 }}>Thickness</th>
-                      <th style={{ width: '120px', padding: '6px 8px 6px 20px', fontWeight: 500 }}>Material</th>
-                      <th style={{ width: '100px', padding: '6px 8px', fontWeight: 500 }}>Clear Aperture</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Curvature</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Thickness</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Material</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Clear Aperture</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -928,7 +930,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                             <select
                               value={row.type}
                               onChange={(e) => updateValue(idx, 'type', e.target.value)}
-                              style={{ width: '110px', height: '28px' }}
+                              style={{ width: '110px', height: '28px', boxSizing: 'border-box' }}
                               disabled={isObject || isImage} // Object, Image 수정 불가
                             >
                               <option value=""></option>
@@ -960,16 +962,34 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                           </td>
 
                           {/* Material */}
-                          <td style={{ padding: '4px 8px 4px 20px' }}>
+                          <td style={{ padding: '4px 8px ' }}>
                             <select
                               value={row.material}
                               onChange={(e) => updateValue(idx, 'material', e.target.value)}
+                              onMouseDown={(e) => e.currentTarget.classList.add('open')}
+                              onBlur={(e) => e.currentTarget.classList.remove('open')}
+                              className="material-select"
                               style={{ width: '110px', height: '28px' }}
-                              disabled={isObject || isImage} // Object, Image 수정 불가
+                              disabled={isObject || isImage}
                             >
                               <option value=""></option>
+
+                              {/* Air */}
                               <option value="AIR">AIR</option>
-                              <option value="BK7">BK7</option>
+
+                              {/* Crown glasses */}
+                              <option value="N-BK7">N-BK7</option>
+                              <option value="N-BAK4">N-BAK4</option>
+                              <option value="N-K5">N-K5</option>
+
+                              {/* Flint glasses */}
+                              <option value="N-SF5">N-SF5</option>
+                              <option value="N-SF10">N-SF10</option>
+                              <option value="N-SF11">N-SF11</option>
+
+                              {/* Special */}
+                              <option value="FUSED_SILICA">FUSED SILICA</option>
+                              <option value="CAF2">CaF2</option>
                             </select>
                           </td>
 
