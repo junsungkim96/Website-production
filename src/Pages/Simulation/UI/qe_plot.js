@@ -10,7 +10,7 @@ const SpectrumPlot = (wave, qe) => {
   const plotWindow = window.open(
     "",
     "_blank",
-    `width=${width},height=${height},top=${top},left=${left}`
+    `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes`
   );
 
   if (!plotWindow) {
@@ -23,9 +23,29 @@ const SpectrumPlot = (wave, qe) => {
   <head>
     <title>Quantum Efficiency Spectrum</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    </style>
   </head>
   <body>
-    <canvas id="qeChart" width="800" height="600"></canvas>
+    <div id="container">
+      <canvas id="qeChart"></canvas>
+    </div>
+
     <script>
       const ctx = document.getElementById('qeChart').getContext('2d');
 
@@ -38,39 +58,57 @@ const SpectrumPlot = (wave, qe) => {
               label: 'R',
               data: ${JSON.stringify(qe.R)},
               borderColor: 'red',
-              fill: false
+              borderWidth: 1.5,
+              pointRadius: 0
             },
             {
               label: 'G',
               data: ${JSON.stringify(qe.G)},
               borderColor: 'green',
-              fill: false
+              borderWidth: 1.5,
+              pointRadius: 0
             },
             {
               label: 'B',
               data: ${JSON.stringify(qe.B)},
               borderColor: 'blue',
-              fill: false
+              borderWidth: 1.5,
+              pointRadius: 0
             }
           ]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: 6 },
           plugins: {
-            legend: { display: true },
+            legend: {
+              labels: { font: { size: 5 } }
+            },
             title: {
               display: true,
-              text: 'Quantum Efficiency vs Wavelength'
+              text: 'Quantum Efficiency vs Wavelength',
+              font: { size: 8 }
             }
           },
           scales: {
             x: {
-              title: { display: true, text: 'Wavelength (nm)' }
+              ticks: { font: { size: 7 } },
+              title: {
+                display: true,
+                text: 'Wavelength (nm)',
+                font: { size: 7 }
+              }
             },
             y: {
               min: 0,
               max: 1,
-              title: { display: true, text: 'Quantum Efficiency' }
+              ticks: { font: { size: 7 } },
+              title: {
+                display: true,
+                text: 'Quantum Efficiency',
+                font: { size: 7 }
+              }
             }
           }
         }

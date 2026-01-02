@@ -909,10 +909,10 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                     <tr>
                       <th style={{ width: '50px', padding: '6px 8px', fontWeight: 500 }}>Surf</th>
                       <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Type</th>
-                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Curvature</th>
-                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Thickness</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Curvature (mm)</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Thickness (mm)</th>
                       <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Material</th>
-                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Clear Aperture</th>
+                      <th style={{ width: '110px', padding: '6px 8px', fontWeight: 500 }}>Clear Aperture (mm)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -957,7 +957,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                               value={row.thickness}
                               onChange={(e) => updateValue(idx, 'thickness', e.target.value)}
                               style={{ width: '110px', height: '28px' }}
-                              disabled={isImage} // Image 수정 불가, Object는 수정 가능
+                              disabled={isObject || isImage} // Image 수정 불가, Object는 수정 가능. 현재는 둘다 불가
                             />
                           </td>
 
@@ -1077,9 +1077,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
               </div>
 
               <div style={plotContentStyle}>
-                {wavefrontPlot[wavefrontTab] || (
-                  <div style={DisabledStyle}></div>
-                )}
+                {wavefrontPlot[wavefrontTab] || <div style={DisabledStyle}></div>}
               </div>
             </div>
 
