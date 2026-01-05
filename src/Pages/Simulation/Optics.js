@@ -158,6 +158,8 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
   const [psfPlot, setPsfPlot] = useState(emptyPlots);
   const [mtfPlot, setMtfPlot] = useState(emptyPlots);
 
+  const [analyticsData, setAnalyticsData] = useState(null);
+
   const [lensTable, setLensTable] = useState([
     {
       surf: 0,
@@ -470,8 +472,20 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         );
+      } 
+      
+      // -------------------------------
+      // 2. Summary
+      // -------------------------------
+      const summary = data.find(d => d.type === "summary")?.data;
+      if (summary) {
+        setAnalyticsData(summary);
       }
 
+
+      // -------------------------------
+      // 3. Wavefront, PSF, MTF
+      // -------------------------------
       const wf = { ...emptyPlots };
       const psf = { ...emptyPlots };
       const mtf = { ...emptyPlots };
@@ -506,18 +520,26 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
   };
 
   const exportDesign = () => {
-    // 1️⃣ Wavefront 결과 체크 (0F 기준)
+    // Wavefront 결과 체크 (0F 기준)
     if (!wavefrontPlot || !wavefrontPlot["0F"]) {
       alert("Please run Ray Trace & Analytics for lens design export");
       return;
     }
 
-    // 2️⃣ 파일 이름 입력
+    // 파일 이름 입력
     const filename = prompt("Enter optics file name");
     if (!filename) return;
 
-    // 3️⃣ 부모로 파일 이름만 전달
-    onExport(filename);
+    if (!analyticsData){
+      alert("No analytics data to export");
+      return;
+    }
+
+    // 부모로 파일 이름과 데이터 전달
+    onExport({
+      filename,
+      analytics: analyticsData
+    });
   };
 
   return (
@@ -604,9 +626,9 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
         </button>
         <button
           onClick={exportDesign}
-          style={{ ...iconButtonStyle, opacity: 0.5, cursor: "not-allowed"}}
+          style={{ ...iconButtonStyle}}
           title="Export Lens Design to System Optimization menu"
-          disabled
+          // disabled
         >
           <img src={upload} alt="Export" style={{ width: 20, height: 20 }} />
         </button>
