@@ -134,6 +134,7 @@ const SimulatePro = () => {
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [logoHovered, setLogoHovered] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(240);
+  const hoverTimeoutRef = useRef(null);
 
   const [resultImage, setResultImage] = useState(null);
   const [outputText, setOutputText] = useState([]);
@@ -1512,8 +1513,18 @@ const SimulatePro = () => {
         <div style={sidebarHeaderStyle}>
           <div
             style={logoContainerStyle}
-            onMouseEnter={() => {setTimeout(()=>setLogoHovered(true), 100)}}
-            onMouseLeave={() => setLogoHovered(false)}
+            onMouseEnter={() => {
+              hoverTimeoutRef.current = setTimeout(() => {
+                setLogoHovered(true);
+              }, 50);
+            }}
+            onMouseLeave={() => {
+              if (hoverTimeoutRef.current) {
+                clearTimeout(hoverTimeoutRef.current);
+                hoverTimeoutRef.current = null;
+              }
+              setLogoHovered(false);
+            }}
             onClick={handleLogoClick}
           >
             {!sidebarExpanded && logoHovered ? (

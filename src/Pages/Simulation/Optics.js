@@ -81,7 +81,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
 
     // -------- Lens 6 --------
     { surf: 12, type: 'Refractive', curvature: 221.14, thickness: 7.98, material: 'N-BK7', clearAperture: 23.0 },
-    { surf: 13, type: 'Refractive', curvature: -40.79, thickness: 61.42, material: 'AIR',  clearAperture: 23.0 },
+    { surf: 13, type: 'Refractive', curvature: -42.79, thickness: 61.42, material: 'AIR',  clearAperture: 23.0 },
 
     // Image
     { surf: 14, type: 'Image', curvature: 0.0, thickness: 0.0, material: 'AIR', clearAperture: Infinity },
@@ -314,7 +314,17 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      if (!response.ok) throw new Error("Draw Lens failed");
+      if (!response.ok) {
+        let errorMessage = "Lens drawing failed";
+
+        try {
+          const errData = await response.json();
+          if (errData.detail) errorMessage = errData.detail;
+        } catch (_) {}
+
+        throw new Error(errorMessage);
+      }
+
       const data = await response.json();
       setRayTracePreview(
         <div
@@ -338,6 +348,15 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
           />
         </div>
       );
+
+      if (data.warnings && data.warnings.length > 0) {
+        setTimeout(() => {
+          alert(
+            "⚠️ Error: Invalid surface parameter\n\n" +
+            data.warnings.join("\n\n")
+          );
+        }, 0);
+      }
             
     } catch (err) {
       console.error(err);
@@ -410,6 +429,15 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
           />
         </div>
       );
+
+      if (data.warnings && data.warnings.length > 0) {
+        setTimeout(() => {
+          alert(
+            "⚠️ Error: Invalid surface parameter\n\n" +
+            data.warnings.join("\n\n")
+          );
+        }, 0);
+      }
 
     } catch (err) {
       console.error("Raytrace failed:", err);
