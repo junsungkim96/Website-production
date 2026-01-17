@@ -156,7 +156,7 @@ const Menubar = () => {
                 onMouseEnter={() => setHoveredMenu(menu.title)}
                 onMouseLeave={() => setHoveredMenu(null)}
               >
-                <span className="custom-dropdown-title">
+                <span className="custom-dropdown-title" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                   {menu.title}
                   <span
                     className={`custom-dropdown-icon ${hoveredMenu === menu.title ? 'open' : ''}`}
@@ -169,6 +169,7 @@ const Menubar = () => {
                   {menu.items.map((item, i) => (
                     <div
                       className="dropdown-item"
+                      style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}
                       key={i}
                       onClick={() => {
                         setHoveredMenu(null);
@@ -193,7 +194,7 @@ const Menubar = () => {
                 }
               }}
             >
-              <span className="custom-dropdown-title"
+              <span className="custom-dropdown-title" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}
               >
                 {isLoggedIn ? userFirstName : 'Login'}
                 {isLoggedIn && (
@@ -305,6 +306,7 @@ const Menubar = () => {
                       className="dropdown-item"
                       key={i}
                       onClick={item.onClick}
+                      style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}
                     >
                       {item.label}
                     </div>

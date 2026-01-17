@@ -39,6 +39,7 @@ const Footer = () => {
                   }
                 }}
                 className = "footer-font"
+                style={{fontFamily: 'Inter, sans-serif'}}
               >
                 {item}
               </div>
@@ -73,6 +74,7 @@ const Footer = () => {
                   }
                 }}
                 className = "footer-font"
+                style={{fontFamily: 'Inter, sans-serif'}}
               >
                 {item}
               </div>
@@ -110,6 +112,7 @@ const Footer = () => {
                   }
                 }}
                 className = "footer-font"
+                style={{fontFamily: 'Inter, sans-serif'}}
               >
                 {item}
               </div>
@@ -166,12 +169,13 @@ const Footer = () => {
             >
               <div
                 className="footer-right"
+                style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 Back to top
               </div>
 
-              <div className="footer-right" style={{ marginTop: '1vh' }}>
+              <div className="footer-right" style={{ marginTop: '1vh', fontFamily: 'Inter, sans-serif', fontWeight: 300 }}>
                 © Copyright {company_name}. All Rights Reserved
               </div>
             </Col>

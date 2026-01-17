@@ -104,7 +104,7 @@ const Homepage = () => {
                   <img className="product-image" src={time} alt="Save time with virtual simulations" />
                   <p className="strength-title">Save Time</p>
                 </div>
-                <div className="product-text">
+                <div className="product-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                   Achieve system validation ~10x faster with integrated HW & SW virtual simulations
                 </div>
               </div>
@@ -129,7 +129,7 @@ const Homepage = () => {
                   <img className="product-image" src={money} alt="Save money with virtual simulations" />
                   <p className="strength-title">Reduce Cost</p>
                 </div>
-                <div className="product-text">
+                <div className="product-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                   Minimize validation expenses to roughly 1/10 compared to physical prototypes using virtual simulations
                 </div>
               </div>
@@ -154,7 +154,7 @@ const Homepage = () => {
                   <img className="product-image" src={optimize} alt="Optimize balance between size, cost, and performance" />
                   <p className="strength-title">Optimize</p>
                 </div>
-                <div className="product-text">
+                <div className="product-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                   Find the right balance between size, cost, and performance
                 </div>
               </div>
@@ -182,7 +182,7 @@ const Homepage = () => {
                 Autonomous systems
               </div>
               <img className="use-case-image" src={img1} alt="Virtual hardware simulation for autonomous systems AI testing"/>
-              <div className="use-case-text">
+              <div className="use-case-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                 Validate AI algorithms on a virtual hardware for testing system-level performance
               </div>
             </div>
@@ -191,7 +191,7 @@ const Homepage = () => {
                 Visual Inspection in Manufacturing
               </div>
               <img className="use-case-image" src={img2} alt = "Simulated visual inspection in manufacturing with different camera hardware and lighting"/>
-              <div className="use-case-text">
+              <div className="use-case-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                 Test the performance of inspection algorithms in different camera HW and light settings
               </div>  
             </div>
@@ -200,7 +200,7 @@ const Homepage = () => {
                 Augmented/Virtual Reality
               </div>
               <img className="use-case-image" src={img3} alt = "AR/VR hardware simulation for optimal computer vision algorithm setup"/>
-              <div className="use-case-text">
+              <div className="use-case-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                 Find the best hardware for your specific algorithm needs
               </div>  
             </div>
@@ -226,7 +226,7 @@ const Homepage = () => {
               </div>
               <p className="strength-title">World Class Accuracy</p>
             </div>
-            <div className="strength-text">
+            <div className="strength-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
               Recognized by computer vision engineers for its high accuracy
             </div>
           </div>
@@ -239,7 +239,7 @@ const Homepage = () => {
               </div>
               <p className="strength-title">Customizable</p>
             </div>
-            <div className="strength-text">
+            <div className="strength-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
               The system is so flexible that you can simulate any vision hardware you want
             </div>
           </div>
@@ -253,7 +253,7 @@ const Homepage = () => {
               <p className="strength-title">Secure and Private</p>
             </div>
             <div style={{ fontSize: '1.5vh', color: 'black', textAlign: 'left' }}>
-              <div className="strength-text">
+              <div className="strength-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
                 Keep your data and intellectual property protected with enterprise-grade security measures
               </div>
             </div>
