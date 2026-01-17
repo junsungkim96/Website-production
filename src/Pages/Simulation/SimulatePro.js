@@ -1558,7 +1558,30 @@ const SimulatePro = () => {
             }}
           >
             <img src={item.icon} alt={item.name} style={iconStyle} />
-            {sidebarExpanded && <span>{item.name}</span>}
+            {/* {sidebarExpanded && <span>{item.name}</span>} */}
+            {sidebarExpanded && (
+              <>
+                <span>{item.name}</span>
+
+                {item.name === 'Optics Design' && (
+                  <span
+                    style={{
+                      marginLeft: '8px',
+                      padding: '4px 6px',
+                      fontSize: '10px',
+                      fontWeight: 600,
+                      borderRadius: '8px',
+                      backgroundColor: '#ff9800',
+                      color: '#fff',
+                      lineHeight: 1,
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.25)',
+                    }}
+                  >
+                    BETA
+                  </span>
+                )}
+              </>
+            )}
           </div>
         ))}
 
