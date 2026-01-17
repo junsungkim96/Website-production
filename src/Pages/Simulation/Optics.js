@@ -980,7 +980,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                             <select
                               value={row.type}
                               onChange={(e) => updateValue(idx, 'type', e.target.value)}
-                              style={{ width: '110px', height: '28px', boxSizing: 'border-box' }}
+                              style={{ width: '100%', height: '28px', boxSizing: 'border-box' }}
                               disabled={isObject || isImage} // Object, Image 수정 불가
                             >
                               <option value=""></option>
@@ -996,7 +996,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                             <input
                               value={row.curvature}
                               onChange={(e) => updateValue(idx, 'curvature', e.target.value)}
-                              style={{ width: '110px', height: '28px' }}
+                              style={{ width: '100%', height: '28px' }}
                               disabled={isObject || isImage} // Object, Image 수정 불가
                             />
                           </td>
@@ -1006,7 +1006,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                             <input
                               value={row.thickness}
                               onChange={(e) => updateValue(idx, 'thickness', e.target.value)}
-                              style={{ width: '110px', height: '28px' }}
+                              style={{ width: '100%', height: '28px' }}
                               disabled={isObject || isImage} // Image 수정 불가, Object는 수정 가능. 현재는 둘다 불가
                             />
                           </td>
@@ -1019,7 +1019,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                               onMouseDown={(e) => e.currentTarget.classList.add('open')}
                               onBlur={(e) => e.currentTarget.classList.remove('open')}
                               className="material-select"
-                              style={{ width: '110px', height: '28px' }}
+                              style={{ width: '100%', height: '28px' }}
                               disabled={isObject || isImage}
                             >
                               <option value=""></option>
@@ -1048,7 +1048,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                             <input
                               value={row.clearAperture}
                               onChange={(e) => updateValue(idx, 'clearAperture', e.target.value)}
-                              style={{ width: '110px', height: '28px' }}
+                              style={{ width: '100%', height: '28px' }}
                               disabled={isObject || isImage} // Object, Image 수정 불가
                             />
                           </td>
