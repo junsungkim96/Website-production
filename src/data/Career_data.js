@@ -1,9 +1,9 @@
 let data = [
   {
-    role: 'Optical Engineer',
+    role: 'Optics SW Engineer',
     location: 'Seoul, South Korea',
     description: 
-    `We are looking for an experienced Optical Engineer with expertise in optical design tools such as Zemax or CodeV. In this role, you will work closely with software engineers to develop ray tracing and point spread function (PSF) generation tools. You'll also collaborate with a cross-functional team to optimize the entire computer vision system by creating novel optical solutions for imaging sensors.
+    `We are looking for an experienced Optics SW Engineer with expertise in optical design tools such as Zemax or CodeV. In this role, you will work closely with software engineers to develop ray tracing and point spread function (PSF) generation tools. You'll also collaborate with a cross-functional team to optimize the entire computer vision system by creating novel optical solutions for imaging sensors.
     
     Key Responsibilities:
     
@@ -41,6 +41,7 @@ let data = [
     <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
       <li>Bachelor’s or Master’s degree in Optical Engineering, Physics, Electrical Engineering, or a related field.</li>
       <li>3+ years of experience in optical design, with a focus on optical systems for sensors or imaging applications.</li>
+      <li>Programming experience in at least one of the coding languages: C, C++, Python</li>
       <li>Proficiency with optical design software such as Zemax, CodeV, or similar tools.</li>
       <li>Strong understanding of optical principles, including light propagation, ray tracing, and lens design.</li>
       <li>Excellent problem-solving skills and ability to collaborate effectively in a multidisciplinary team.</li>
@@ -60,131 +61,131 @@ let data = [
     </ul>`
     
   },
-  {
-    role: 'Sensor Engineer',
-    location: 'Seoul, South Korea',
-    description: 
-    `We are seeking a Sensor Characterization Engineer to lead the evaluation and optimization of imaging sensors for our state-of-the-art computer vision systems. This role involves analyzing sensor performance, optimizing calibration, and ensuring seamless integration within our end-to-end imaging pipeline, including illuminants, optics, actuators, and algorithms.
+  // {
+  //   role: 'Sensor Engineer',
+  //   location: 'Seoul, South Korea',
+  //   description: 
+  //   `We are seeking a Sensor Characterization Engineer to lead the evaluation and optimization of imaging sensors for our state-of-the-art computer vision systems. This role involves analyzing sensor performance, optimizing calibration, and ensuring seamless integration within our end-to-end imaging pipeline, including illuminants, optics, actuators, and algorithms.
     
-    Key Responsibilities:
+  //   Key Responsibilities:
     
-    1. Sensor Evaluation and Testing:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Perform in-depth characterization of imaging sensors, including CMOS and CCD technologies, across various conditions (light levels, temperatures, etc.).</li>
-      <li>Design and execute experiments to assess parameters such as sensitivity, dynamic range, noise, linearity, and color accuracy.</li>
-    </ul>
-    2. System Integration:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Collaborate with cross-functional teams to integrate sensors into the full imaging pipeline, from illuminants to image processing algorithms.</li>
-      <li>Ensure sensor performance aligns with system-level requirements and end-use applications.</li>
-    </ul>
-    3. Calibration and Optimization:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Develop and implement sensor calibration procedures, including dark current, white balance, and defect pixel correction.</li>
-      <li>Optimize sensor settings (exposure, gain, etc.) to maximize image quality and minimize artifacts.</li>
-    </ul>
-    4. Simulation and Modeling:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Utilize digital twin simulators and other modeling tools to predict sensor behavior and identify performance bottlenecks.</li>
-      <li>Validate simulation results against real-world measurements to improve accuracy and reliability.</li>
-    </ul>
-    5. Data Analysis and Reporting:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Analyze experimental and field data to derive actionable insights for sensor performance improvements.</li>
-      <li>Prepare detailed technical documentation, reports, and presentations for internal and external stakeholders.</li>
-    </ul>
-    6. Collaboration and Innovation:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Work closely with hardware, software, and algorithm teams to ensure end-to-end system optimization.</li>
-      <li>Stay up-to-date with the latest advancements in sensor technologies and provide recommendations for new implementations.</li>
-    </ul>
-    Required Qualifications:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Bachelor’s or Master’s degree in Electrical Engineering, Computer Engineering, Physics, or a related field.</li>
-      <li>3+ years of experience in imaging sensor evaluation and characterization.</li>
-      <li>Strong understanding of sensor technologies (e.g., CMOS, CCD) and their performance metrics.</li>
-      <li>Hands-on experience with test equipment such as oscilloscopes, spectrometers, and light sources.</li>
-      <li>Proficiency in programming/scripting languages (e.g., Python, MATLAB, or C++) for data analysis and automation.</li>
-      <li>Familiarity with image processing concepts and tools, including color science and ISP tuning.</li>
-      <li>Excellent problem-solving skills and attention to detail.</li>
-    </ul>
-    Preferred Qualifications:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Experience with end-to-end imaging systems or computer vision applications.</li>
-      <li>Knowledge of digital twin simulators or related simulation technologies.</li>
-      <li>Understanding of optical systems, including lenses and illumination design.</li>
-      <li>Familiarity with AI/ML-based approaches for sensor optimization and calibration.</li>
-    </ul>
-    Why Join Us?
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Be part of a pioneering team shaping the future of imaging and computer vision.</li>
-      <li>Work on impactful projects that integrate hardware and software for innovative solutions.</li>
-      <li>Collaborative work environment with opportunities for growth and professional development.</li>
-    </ul>`
-  }, 
-  {
-    role: 'Software Engineer',
-    location: 'Seoul, South Korea',
-    description: 
-    `We are looking for a talented Software Engineer to join our dynamic team, focused on developing cutting-edge software solutions for our computer vision systems. In this role, you will collaborate with hardware engineers, optical engineers, and algorithm specialists to design, build, and optimize software that drives the next generation of imaging technology.
+  //   1. Sensor Evaluation and Testing:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Perform in-depth characterization of imaging sensors, including CMOS and CCD technologies, across various conditions (light levels, temperatures, etc.).</li>
+  //     <li>Design and execute experiments to assess parameters such as sensitivity, dynamic range, noise, linearity, and color accuracy.</li>
+  //   </ul>
+  //   2. System Integration:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Collaborate with cross-functional teams to integrate sensors into the full imaging pipeline, from illuminants to image processing algorithms.</li>
+  //     <li>Ensure sensor performance aligns with system-level requirements and end-use applications.</li>
+  //   </ul>
+  //   3. Calibration and Optimization:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Develop and implement sensor calibration procedures, including dark current, white balance, and defect pixel correction.</li>
+  //     <li>Optimize sensor settings (exposure, gain, etc.) to maximize image quality and minimize artifacts.</li>
+  //   </ul>
+  //   4. Simulation and Modeling:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Utilize digital twin simulators and other modeling tools to predict sensor behavior and identify performance bottlenecks.</li>
+  //     <li>Validate simulation results against real-world measurements to improve accuracy and reliability.</li>
+  //   </ul>
+  //   5. Data Analysis and Reporting:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Analyze experimental and field data to derive actionable insights for sensor performance improvements.</li>
+  //     <li>Prepare detailed technical documentation, reports, and presentations for internal and external stakeholders.</li>
+  //   </ul>
+  //   6. Collaboration and Innovation:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Work closely with hardware, software, and algorithm teams to ensure end-to-end system optimization.</li>
+  //     <li>Stay up-to-date with the latest advancements in sensor technologies and provide recommendations for new implementations.</li>
+  //   </ul>
+  //   Required Qualifications:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Bachelor’s or Master’s degree in Electrical Engineering, Computer Engineering, Physics, or a related field.</li>
+  //     <li>3+ years of experience in imaging sensor evaluation and characterization.</li>
+  //     <li>Strong understanding of sensor technologies (e.g., CMOS, CCD) and their performance metrics.</li>
+  //     <li>Hands-on experience with test equipment such as oscilloscopes, spectrometers, and light sources.</li>
+  //     <li>Proficiency in programming/scripting languages (e.g., Python, MATLAB, or C++) for data analysis and automation.</li>
+  //     <li>Familiarity with image processing concepts and tools, including color science and ISP tuning.</li>
+  //     <li>Excellent problem-solving skills and attention to detail.</li>
+  //   </ul>
+  //   Preferred Qualifications:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Experience with end-to-end imaging systems or computer vision applications.</li>
+  //     <li>Knowledge of digital twin simulators or related simulation technologies.</li>
+  //     <li>Understanding of optical systems, including lenses and illumination design.</li>
+  //     <li>Familiarity with AI/ML-based approaches for sensor optimization and calibration.</li>
+  //   </ul>
+  //   Why Join Us?
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Be part of a pioneering team shaping the future of imaging and computer vision.</li>
+  //     <li>Work on impactful projects that integrate hardware and software for innovative solutions.</li>
+  //     <li>Collaborative work environment with opportunities for growth and professional development.</li>
+  //   </ul>`
+  // }, 
+  // {
+  //   role: 'Software Engineer',
+  //   location: 'Seoul, South Korea',
+  //   description: 
+  //   `We are looking for a talented Software Engineer to join our dynamic team, focused on developing cutting-edge software solutions for our computer vision systems. In this role, you will collaborate with hardware engineers, optical engineers, and algorithm specialists to design, build, and optimize software that drives the next generation of imaging technology.
 
-    Key Responsibilities:
+  //   Key Responsibilities:
 
-    1. Software Development and Integration:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Design, develop, and maintain software solutions that support our computer vision systems and imaging sensors.</li>
-      <li>Integrate software with optical hardware and sensors to ensure seamless functionality across the entire imaging pipeline.</li>
-    </ul>
-    2. Algorithm Development and Optimization:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Collaborate with algorithm engineers to implement and optimize image processing and computer vision algorithms.</li>
-      <li>Develop efficient code to process and analyze large image datasets, focusing on speed, accuracy, and scalability.</li>
-    </ul>
-    3. Performance Tuning:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Analyze software performance and identify bottlenecks in the imaging pipeline.</li>
-      <li>Optimize code for maximum performance, ensuring real-time or near-real-time processing capabilities.</li>
-    </ul>
-    4. Cross-Functional Collaboration:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Work closely with hardware and optical engineering teams to ensure software and hardware integration meets system-level requirements.</li>
-      <li>Collaborate with sensor engineers to ensure smooth integration of sensor data into software frameworks.</li>
-    </ul>
-    5. Testing and Quality Assurance:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Develop and execute automated tests to ensure the stability, reliability, and performance of the software.</li>
-      <li>Participate in code reviews and ensure the adherence to best practices in software development.</li>
-    </ul>
-    6. Documentation and Reporting:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Create clear, concise, and thorough technical documentation for the software and algorithms developed.</li>
-      <li>Provide regular updates on project progress and communicate effectively with stakeholders across the organization.</li>
-    </ul>
-    Required Qualifications:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Bachelor’s or Master’s degree in Computer Science, Software Engineering, Electrical Engineering, or a related field.</li>
-      <li>3+ years of experience in software development, preferably in image processing or computer vision applications.</li>
-      <li>Strong programming skills in languages such as Python, C++, or Java, with experience in software design and development.</li>
-      <li>Experience with computer vision libraries and frameworks (e.g., OpenCV, TensorFlow, PyTorch) and familiarity with image processing techniques.</li>
-      <li>Familiarity with software version control tools, such as Git.</li>
-      <li>Excellent problem-solving skills and ability to work in a collaborative, cross-disciplinary team environment.</li>
-    </ul>
-    Preferred Qualifications:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Experience with embedded systems and real-time software development.</li>
-      <li>Familiarity with multi-threading and parallel computing techniques for processing large-scale data.</li>
-      <li>Experience working with GPU-accelerated computing for image processing and machine learning tasks.</li>
-      <li>Familiarity with cloud computing platforms (e.g., AWS, Google Cloud) and distributed computing.</li>
-    </ul>
-    Why Join Us?
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Be part of a pioneering team at the forefront of imaging technology and computer vision systems.</li>
-      <li>Work on exciting projects with cutting-edge technologies in a fast-paced and dynamic environment.</li>
-      <li>Collaborate with a multidisciplinary team and contribute to the optimization of end-to-end computer vision solutions.</li>
-      <li>Opportunities for growth, professional development, and the ability to make a significant impact on the company's success.</li>
-    </ul>`
+  //   1. Software Development and Integration:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Design, develop, and maintain software solutions that support our computer vision systems and imaging sensors.</li>
+  //     <li>Integrate software with optical hardware and sensors to ensure seamless functionality across the entire imaging pipeline.</li>
+  //   </ul>
+  //   2. Algorithm Development and Optimization:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Collaborate with algorithm engineers to implement and optimize image processing and computer vision algorithms.</li>
+  //     <li>Develop efficient code to process and analyze large image datasets, focusing on speed, accuracy, and scalability.</li>
+  //   </ul>
+  //   3. Performance Tuning:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Analyze software performance and identify bottlenecks in the imaging pipeline.</li>
+  //     <li>Optimize code for maximum performance, ensuring real-time or near-real-time processing capabilities.</li>
+  //   </ul>
+  //   4. Cross-Functional Collaboration:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Work closely with hardware and optical engineering teams to ensure software and hardware integration meets system-level requirements.</li>
+  //     <li>Collaborate with sensor engineers to ensure smooth integration of sensor data into software frameworks.</li>
+  //   </ul>
+  //   5. Testing and Quality Assurance:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Develop and execute automated tests to ensure the stability, reliability, and performance of the software.</li>
+  //     <li>Participate in code reviews and ensure the adherence to best practices in software development.</li>
+  //   </ul>
+  //   6. Documentation and Reporting:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Create clear, concise, and thorough technical documentation for the software and algorithms developed.</li>
+  //     <li>Provide regular updates on project progress and communicate effectively with stakeholders across the organization.</li>
+  //   </ul>
+  //   Required Qualifications:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Bachelor’s or Master’s degree in Computer Science, Software Engineering, Electrical Engineering, or a related field.</li>
+  //     <li>3+ years of experience in software development, preferably in image processing or computer vision applications.</li>
+  //     <li>Strong programming skills in languages such as Python, C++, or Java, with experience in software design and development.</li>
+  //     <li>Experience with computer vision libraries and frameworks (e.g., OpenCV, TensorFlow, PyTorch) and familiarity with image processing techniques.</li>
+  //     <li>Familiarity with software version control tools, such as Git.</li>
+  //     <li>Excellent problem-solving skills and ability to work in a collaborative, cross-disciplinary team environment.</li>
+  //   </ul>
+  //   Preferred Qualifications:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Experience with embedded systems and real-time software development.</li>
+  //     <li>Familiarity with multi-threading and parallel computing techniques for processing large-scale data.</li>
+  //     <li>Experience working with GPU-accelerated computing for image processing and machine learning tasks.</li>
+  //     <li>Familiarity with cloud computing platforms (e.g., AWS, Google Cloud) and distributed computing.</li>
+  //   </ul>
+  //   Why Join Us?
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Be part of a pioneering team at the forefront of imaging technology and computer vision systems.</li>
+  //     <li>Work on exciting projects with cutting-edge technologies in a fast-paced and dynamic environment.</li>
+  //     <li>Collaborate with a multidisciplinary team and contribute to the optimization of end-to-end computer vision solutions.</li>
+  //     <li>Opportunities for growth, professional development, and the ability to make a significant impact on the company's success.</li>
+  //   </ul>`
 
-  }
+  // }
 
   // {
   //   role: 'Account Director, Platform',
