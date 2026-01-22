@@ -7,6 +7,39 @@ const client = new MongoClient(uri);
 // const SECRET_KEY = 'test_sk_vZnjEJeQVxywk0vOkv0ZrPmOoBN0';
 const SECRET_KEY = process.env.SECRET_KEY;
 
+const plans = {
+  Trial: {
+    name: 'Trial',
+    priceUSD: 0,
+  },
+  Basic: {
+    name: 'Basic',
+    priceUSD: 499,
+  },
+  Pro: {
+    name: 'Pro',
+    priceUSD: 2499,
+  },
+};
+
+async function getUSDtoKRWRate() {
+  const res = await fetch("https://open.er-api.com/v6/latest/USD");
+  const data = await res.json();
+  return data.rates.KRW;
+}
+
+function calculateAmountKRW(planName, rate) {
+  const plan = plans[planName];
+
+  if (!plan) {
+    throw new Error(`Invalid plan: ${planName}`);
+  }
+
+  const priceKRW = Math.round(plan.priceUSD * rate);
+  const amount = Math.round(priceKRW * 1.1); // VAT 10%
+
+  return amount;
+}
 export default async function handler(req, res) {
   if (req.headers['authorization'] !== `Bearer ${process.env.CRON_SECRET}`) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -38,10 +71,18 @@ export default async function handler(req, res) {
 
     console.log("Billing target users:", billingUsers.length);
 
+    const rate = await getUSDtoKRWRate();
+ 
+    if (!rate || rate <= 0) {
+      throw new Error("Invalid exchange rate");
+    }
+
     for (const user of billingUsers) {
       try {
         const authHeader =
           "Basic " + Buffer.from(SECRET_KEY + ":").toString("base64");
+
+        const amount = calculateAmountKRW(user.plan, rate);
 
         const response = await fetch("https://api.tosspayments.com/v1/billing/" + user.billingKey,{
             method: "POST",
@@ -50,7 +91,7 @@ export default async function handler(req, res) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              amount: 10000, // ❗ 원하는 가격
+              amount: amount,
               customerKey: user.customerKey,
               orderId: "order_" + Date.now(),
               orderName: user.plan + " Subscription"
