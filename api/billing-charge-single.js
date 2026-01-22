@@ -3,7 +3,8 @@ import fetch from "node-fetch";
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
-const SECRET_KEY = 'test_sk_vZnjEJeQVxywk0vOkv0ZrPmOoBN0';
+// const SECRET_KEY = 'test_sk_vZnjEJeQVxywk0vOkv0ZrPmOoBN0';
+const SECRET_KEY = process.env.SECRET_KEY;
 
 export default async function handler(req, res) {
   const allowedOrigin = "https://www.qblackai.com";

@@ -1,7 +1,8 @@
 // api/payment-confirm.js
 import fetch from 'node-fetch';
 
-const SECRET_KEY = "test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6"; // 실제 환경에서는 .env 사용
+// const SECRET_KEY = "test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6"; // 실제 환경에서는 .env 사용
+const SECRET_KEY = process.env.SECRET_KEY_PAYPAL;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

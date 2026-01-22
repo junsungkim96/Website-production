@@ -89,8 +89,8 @@ const Payment = () => {
 
     const setupPayPal = async () => {
       try {
-        const clientKey = "test_ck_ALnQvDd2VJqOwQ0XeeYP3Mj7X41m";
-        // const clientKey = "live_ck_Z1aOwX7K8mW4xv1E6qwqVyQxzvNP";
+        // const clientKey = "test_ck_ALnQvDd2VJqOwQ0XeeYP3Mj7X41m";
+        const clientKey = "live_ck_Z1aOwX7K8mW4xv1E6qwqVyQxzvNP";
         const tossPayments = await loadTossPayments(clientKey);
 
         if (!mounted) return;
@@ -172,8 +172,8 @@ const Payment = () => {
     async function initToss() {
       if (!mounted) return;
 
-      const clientKey = 'test_ck_EP59LybZ8BBWJD7l5wqQ86GYo7pR';
-      // const clientKey = 'live_ck_GePWvyJnrKOvznggnmmqrgLzN97E';
+      // const clientKey = 'test_ck_EP59LybZ8BBWJD7l5wqQ86GYo7pR';
+      const clientKey = 'live_ck_GePWvyJnrKOvznggnmmqrgLzN97E';
       const tossPayments = window.TossPayments(clientKey);
       const customerKey = ANONYMOUS;
       const payment = tossPayments.payment({ customerKey });
