@@ -3,19 +3,16 @@ import React from 'react';
 const SpectrumPlot = (wave, energy) => {
   if (!wave || !energy) return;
 
-  // 팝업 크기
   const width = 900;
   const height = 700;
 
-  // 화면 중앙 좌표 계산
   const left = window.screenX + (window.outerWidth - width) / 2;
   const top = window.screenY + (window.outerHeight - height) / 2;
 
-  // 새 브라우저 창 열기 (중앙)
   const plotWindow = window.open(
     "",
     "_blank",
-    `width=${width},height=${height},top=${top},left=${left}`
+    `popup=yes,width=${width},height=${height},left=${left},top=${top},resizable=yes`
   );
 
   if (!plotWindow) {
@@ -23,76 +20,97 @@ const SpectrumPlot = (wave, energy) => {
     return;
   }
 
-  // 플롯용 HTML 생성
   const html = `
-    <html>
-      <head>
-        <title>Spectrum Plot</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      </head>
-      <body>
-        <canvas id="spectrumChart" width="800" height="600"></canvas>
-        <script>
-          const ctx = document.getElementById('spectrumChart').getContext('2d');
-          const data = {
-            labels: ${JSON.stringify(wave)},
-            datasets: [{
+<html>
+  <head>
+    <title>Energy Spectrum</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <canvas id="energyChart"></canvas>
+    </div>
+
+    <script>
+      const ctx = document.getElementById('energyChart').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ${JSON.stringify(wave)},
+          datasets: [
+            {
+              label: 'Energy',
               data: ${JSON.stringify(energy)},
               borderColor: 'rgba(75,192,192,1)',
-              backgroundColor: 'rgba(75,192,192,0.2)',
-              fill: true
-            }]
-          };
-          const options = {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
+              borderWidth: 1.5,
+              pointRadius: 0,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: 6 },
+          plugins: {
+            legend: {
+              labels: { font: { size: 5 } }
+            },
+            title: {
+              display: true,
+              text: 'Energy vs Wavelength',
+              font: { size: 8 }
+            },
+            tooltip: {
+              titleFont: { size: 7 },
+              bodyFont: { size: 7 },
+              footerFont: { size: 7 },
+              padding: 4,
+              caretSize: 4
+            }
+          },
+          scales: {
+            x: {
+              ticks: { font: { size: 7 } },
               title: {
                 display: true,
-                text: 'Energy vs Wavelength',
-                font: {
-                  size: 10    // ← 타이틀 글자 크기
-                }
+                text: 'Wavelength (nm)',
+                font: { size: 7 }
               }
             },
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: 'Wavelength (nm)',
-                  font: {
-                    size: 7  // ← 축 제목
-                  }
-                },
-                ticks: {
-                  font: {
-                    size: 7   // ← 눈금 글자
-                  }
-                }
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: 'Energy (a.u.)',
-                  font: {
-                    size: 7
-                  }
-                },
-                ticks: {
-                  font: {
-                    size: 7
-                  }
-                }
+            y: {
+              ticks: { font: { size: 7 } },
+              title: {
+                display: true,
+                text: 'Energy (a.u.)',
+                font: { size: 7 }
               }
             }
-          };
-          new Chart(ctx, { type: 'line', data, options });
-        </script>
-      </body>
-    </html>
-  `;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+`;
 
   plotWindow.document.write(html);
   plotWindow.document.close();
