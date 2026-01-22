@@ -37,7 +37,6 @@ const SpectrumPlot = (wave, energy) => {
           const data = {
             labels: ${JSON.stringify(wave)},
             datasets: [{
-              label: 'Energy vs Wavelength',
               data: ${JSON.stringify(energy)},
               borderColor: 'rgba(75,192,192,1)',
               backgroundColor: 'rgba(75,192,192,0.2)',
@@ -47,12 +46,46 @@ const SpectrumPlot = (wave, energy) => {
           const options = {
             responsive: true,
             plugins: {
-              legend: { display: true },
-              title: { display: true, text: 'Energy vs Wavelength' }
+              legend: {
+                display: false,
+              },
+              title: {
+                display: true,
+                text: 'Energy vs Wavelength',
+                font: {
+                  size: 10    // ← 타이틀 글자 크기
+                }
+              }
             },
             scales: {
-              x: { title: { display: true, text: 'Wavelength (nm)' } },
-              y: { title: { display: true, text: 'Energy (a.u.)' } }
+              x: {
+                title: {
+                  display: true,
+                  text: 'Wavelength (nm)',
+                  font: {
+                    size: 7  // ← 축 제목
+                  }
+                },
+                ticks: {
+                  font: {
+                    size: 7   // ← 눈금 글자
+                  }
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Energy (a.u.)',
+                  font: {
+                    size: 7
+                  }
+                },
+                ticks: {
+                  font: {
+                    size: 7
+                  }
+                }
+              }
             }
           };
           new Chart(ctx, { type: 'line', data, options });

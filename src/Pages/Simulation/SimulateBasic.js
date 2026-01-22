@@ -111,6 +111,9 @@ const SimulateBasic = () => {
   };
 
   const [opticsPreset, setOpticsPreset] = useState(null);
+
+  const [opticsAnalytics, setOpticsAnalytics] = useState({});
+
   
   const startTutorial = (stage) => {
     if (stage === "Double-Gauss"){
@@ -723,8 +726,7 @@ const SimulateBasic = () => {
     // Sensor
     setSelectedSensor('');
     setSensorValues({
-      qe: 
-      [
+      qe: [
         [0.01401, 0.00547, 0.00889],
         [0.01026, 0.00860, 0.06366],
         [0.00923, 0.01513, 0.14026],
@@ -898,6 +900,7 @@ const SimulateBasic = () => {
       selectedScene,
       sceneFile: "",
       selectedOptics,
+      opticsAnalytics: opticsAnalytics[selectedOptics] ?? null,
       macbethParams: macbeth,
       pointarrayParams: pointarray,
       gridlinesParams: gridlines,
@@ -1039,7 +1042,8 @@ const SimulateBasic = () => {
       ringsraysParams: ringsraysParams, 
       sceneFileParams: sceneFileParams, 
       sceneFileIlluminantData: sceneFileIlluminantData, 
-      optics: selectedOptics, 
+      optics: selectedOptics,
+      opticsAnalytics: opticsAnalytics[selectedOptics],
       sensor: selectedSensor, 
       sensorParams: sensorValues, 
       isp: selectedISP, 
@@ -1581,7 +1585,7 @@ const SimulateBasic = () => {
           </div>
         ))}
 
-        {/* Tutorial button + User info */}
+          {/* Tutorial button + User info */}
         <div style={{ marginTop: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           
           {/* Tutorial button */}
@@ -2245,12 +2249,16 @@ const SimulateBasic = () => {
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
             <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)} 
-              onExport={(filename) => {
+              onExport={({filename, analytics}) => {
                 setOptics(prev =>
                   prev.includes(filename) ? prev : [...prev, filename]
                 );
 
                 setSelectedOptics(filename);
+                setOpticsAnalytics(prev => ({
+                  ...prev,
+                  [filename]: analytics
+                }))
 
                 setActiveMenu("System Optimization");
               }}
