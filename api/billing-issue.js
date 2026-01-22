@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
-// const SECRET_KEY = process.env.TOSS_SECRET_KEY;
-const SECRET_KEY = 'test_sk_vZnjEJeQVxywk0vOkv0ZrPmOoBN0';
+const SECRET_KEY = process.env.TOSS_SECRET_KEY;
+// const SECRET_KEY = 'test_sk_vZnjEJeQVxywk0vOkv0ZrPmOoBN0';
 
 export default async function handler(req, res) {
   const allowedOrigin = 'https://www.qblackai.com'
