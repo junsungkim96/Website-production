@@ -83,7 +83,7 @@ const Signup = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        setServerMessage(data.message || 'Verification code sent.');
+        setServerMessage('');
       } else {
         setServerMessage(data.message || 'Failed to send verification.');
       }
@@ -103,7 +103,7 @@ const Signup = () => {
       const data = await res.json();
       if (res.ok) {
         setEmailVerified(true);
-        setServerMessage('Email verified!');
+        setServerMessage('');
         return true;
       } else {
         setServerMessage(data.message || 'Verification failed.');
