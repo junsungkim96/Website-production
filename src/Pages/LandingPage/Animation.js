@@ -111,7 +111,7 @@ const ParticleBackground = () => {
         </div>
       )}
       
-      <div style={{height: '6vh'}}/>
+      <div style={{height: '10vh'}}/>
 
       {/* Text Content */}
       <header style={{ position: 'relative', zIndex: 1, textAlign: 'center', color: 'white'}}>
