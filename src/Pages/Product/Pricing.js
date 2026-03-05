@@ -148,7 +148,7 @@ const Pricing = () => {
   return (
     <div style={{ marginBottom: '200px', paddingTop: '10vh', minHeight: '80vh'}}>
       <Helmet>
-        <title>Product</title>
+        <title>Pricing</title>
         <meta
           name="description"
           content="Learn about our product pricings"

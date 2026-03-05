@@ -235,9 +235,15 @@ const Payment = () => {
       </div>
 
       {/* ✅ 안내 문구 추가 */}
-      <div className="pricing-alert" style = {{marginBottom: '50px'}}>
+      {/* <div className="pricing-alert" style = {{marginBottom: '50px'}}>
         ⚠️ Monthly subscriptions are available only in Korean won. <br/>  
         US dollar payments are supported for one-time purhcases only.
+      </div> */}
+
+      {/* ✅ 안내 문구 추가 */}
+      <div className="pricing-alert" style = {{marginBottom: '50px'}}>
+        ⚠️ Paid plan is temporarily unavailable due to ongoing PG integration and review. <br/>  
+        The payment feature is expected to be reactivated in April.
       </div>
 
       <Container>
