@@ -155,9 +155,27 @@ const Footer = () => {
                   marginBottom: '0.5vh',
                 }}
               >
-                상호: 큐블랙에이아이 | 대표: 김준성 | 전화: 0507-1460-0620 <br />
-                사업자등록번호: 484-50-00824 | 통신판매업 신고번호: 2025-서울마포-1151<br />
-                주소: 서울특별시 마포구 마포대로 92, A동 3층 | 이메일: info@qblackai.com
+                <div>
+                  QblackAI Inc. (큐블랙에이아이(주))
+                  <span className="d-none d-md-inline"> | </span>
+                  <span className="d-block d-md-inline">CEO: Junsung Kim</span>
+                  <span className="d-none d-md-inline"> | </span>
+                  <span className="d-block d-md-inline">Tel: +82-507-1460-0620</span>
+                </div>
+
+                <div>
+                  Business Registration Number: 469-81-04015
+                  <span className="d-none d-md-inline"> | </span>
+                  <span className="d-block d-md-inline">
+                    Mail Order Business Registration: 2026-Seoul-Mapo-0619
+                  </span>
+                </div>
+
+                <div>
+                  3F, Building A, 92 Mapo-daero, Mapo-gu, Seoul, Republic of Korea
+                  <span className="d-none d-md-inline"> | </span>
+                  <span className="d-block d-md-inline">Email: info@qblackai.com</span>
+                </div>
               </div>
             </Col>
 
