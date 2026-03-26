@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useNavigate} from 'react-router-dom';
-import {company_name} from '../data/Company_data';
 import linkedin from '../img/sns/linkedin_white.png';
 import youtube from '../img/sns/youtube_white.png';
 import medium from '../img/sns/medium_white.png';
@@ -194,7 +193,7 @@ const Footer = () => {
               </div>
 
               <div className="footer-right" style={{ marginTop: '1vh', fontFamily: 'Inter, sans-serif', fontWeight: 300 }}>
-                © Copyright {company_name}. All Rights Reserved
+                © Copyright QblackAI Inc. All Rights Reserved
               </div>
             </Col>
           </Row>

@@ -1,66 +1,66 @@
 let data = [
-  {
-    role: 'Optics SW Engineer',
-    location: 'Seoul, South Korea',
-    description: 
-    `We are looking for an experienced Optics SW Engineer with expertise in optical design tools such as Zemax or CodeV. In this role, you will work closely with software engineers to develop ray tracing and point spread function (PSF) generation tools. You'll also collaborate with a cross-functional team to optimize the entire computer vision system by creating novel optical solutions for imaging sensors.
+  // {
+  //   role: 'Optics SW Engineer',
+  //   location: 'Seoul, South Korea',
+  //   description: 
+  //   `We are looking for an experienced Optics SW Engineer with expertise in optical design tools such as Zemax or CodeV. In this role, you will work closely with software engineers to develop ray tracing and point spread function (PSF) generation tools. You'll also collaborate with a cross-functional team to optimize the entire computer vision system by creating novel optical solutions for imaging sensors.
     
-    Key Responsibilities:
+  //   Key Responsibilities:
     
-    1. Optical Sensor Design:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Design and optimize optical systems for sensor applications, including imaging systems, lenses, and light sources using tools like Zemax and CodeV.</li>
-      <li>Simulate optical behavior and assess performance across various operating conditions to ensure high image quality and sensor performance.</li>
-    </ul>
-    2. Ray Tracing and PSF Generation:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Collaborate with software engineers to develop ray tracing models and point spread function generation tools to improve sensor accuracy.</li>
-      <li>Implement simulation techniques to predict sensor behavior in real-world conditions.</li>
-    </ul>
-    3. System-Level Optimization:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Work with cross-functional teams to integrate optical designs into a full imaging pipeline, from illuminants to processing algorithms.</li>
-      <li>Ensure that optical systems meet system-level performance criteria and enhance the sensor’s functionality in the broader system.</li>
-    </ul>
-    4. Sensor Performance Evaluation:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Design and execute experiments to test optical system performance under varying environmental conditions such as light levels and temperature fluctuations.</li>
-      <li>Analyze test results to refine optical designs and improve overall sensor performance.</li>
-    </ul>
-    5. Innovative Solutions:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Develop innovative optical solutions that contribute to the optimization of the entire computer vision system.</li>
-      <li>Utilize state-of-the-art optical modeling tools to identify and solve performance bottlenecks.</li>
-    </ul>
-    6. Collaboration and Cross-Disciplinary Integration:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Collaborate with hardware, software, and algorithm teams to integrate optical designs with sensor technologies.</li>
-      <li>Stay up to date with advancements in optical engineering and sensor design to ensure cutting-edge solutions for the team.</li>
-    </ul>
-    Required Qualifications:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Bachelor’s or Master’s degree in Optical Engineering, Physics, Electrical Engineering, or a related field.</li>
-      <li>3+ years of experience in optical design, with a focus on optical systems for sensors or imaging applications.</li>
-      <li>Programming experience in at least one of the coding languages: C, C++, Python</li>
-      <li>Proficiency with optical design software such as Zemax, CodeV, or similar tools.</li>
-      <li>Strong understanding of optical principles, including light propagation, ray tracing, and lens design.</li>
-      <li>Excellent problem-solving skills and ability to collaborate effectively in a multidisciplinary team.</li>
-    </ul>
-    Preferred Qualifications:
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Experience with ray tracing and point spread function generation for sensor applications.</li>
-      <li>Familiarity with imaging sensors and their integration into computer vision systems.</li>
-      <li>Knowledge of digital twin simulators or related simulation tools.</li>
-      <li>Experience with AI/ML-based techniques for sensor optimization.</li>
-    </ul>
-    Why Join Us?
-    <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
-      <li>Be part of a pioneering team shaping the future of sensor technologies in computer vision systems.</li>
-      <li>Work on innovative projects that integrate optical design with cutting-edge sensor and software technologies.</li>
-      <li>Collaborative work environment with ample opportunities for growth and professional development.</li>
-    </ul>`
+  //   1. Optical Sensor Design:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Design and optimize optical systems for sensor applications, including imaging systems, lenses, and light sources using tools like Zemax and CodeV.</li>
+  //     <li>Simulate optical behavior and assess performance across various operating conditions to ensure high image quality and sensor performance.</li>
+  //   </ul>
+  //   2. Ray Tracing and PSF Generation:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Collaborate with software engineers to develop ray tracing models and point spread function generation tools to improve sensor accuracy.</li>
+  //     <li>Implement simulation techniques to predict sensor behavior in real-world conditions.</li>
+  //   </ul>
+  //   3. System-Level Optimization:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Work with cross-functional teams to integrate optical designs into a full imaging pipeline, from illuminants to processing algorithms.</li>
+  //     <li>Ensure that optical systems meet system-level performance criteria and enhance the sensor’s functionality in the broader system.</li>
+  //   </ul>
+  //   4. Sensor Performance Evaluation:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Design and execute experiments to test optical system performance under varying environmental conditions such as light levels and temperature fluctuations.</li>
+  //     <li>Analyze test results to refine optical designs and improve overall sensor performance.</li>
+  //   </ul>
+  //   5. Innovative Solutions:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Develop innovative optical solutions that contribute to the optimization of the entire computer vision system.</li>
+  //     <li>Utilize state-of-the-art optical modeling tools to identify and solve performance bottlenecks.</li>
+  //   </ul>
+  //   6. Collaboration and Cross-Disciplinary Integration:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Collaborate with hardware, software, and algorithm teams to integrate optical designs with sensor technologies.</li>
+  //     <li>Stay up to date with advancements in optical engineering and sensor design to ensure cutting-edge solutions for the team.</li>
+  //   </ul>
+  //   Required Qualifications:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Bachelor’s or Master’s degree in Optical Engineering, Physics, Electrical Engineering, or a related field.</li>
+  //     <li>3+ years of experience in optical design, with a focus on optical systems for sensors or imaging applications.</li>
+  //     <li>Programming experience in at least one of the coding languages: C, C++, Python</li>
+  //     <li>Proficiency with optical design software such as Zemax, CodeV, or similar tools.</li>
+  //     <li>Strong understanding of optical principles, including light propagation, ray tracing, and lens design.</li>
+  //     <li>Excellent problem-solving skills and ability to collaborate effectively in a multidisciplinary team.</li>
+  //   </ul>
+  //   Preferred Qualifications:
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Experience with ray tracing and point spread function generation for sensor applications.</li>
+  //     <li>Familiarity with imaging sensors and their integration into computer vision systems.</li>
+  //     <li>Knowledge of digital twin simulators or related simulation tools.</li>
+  //     <li>Experience with AI/ML-based techniques for sensor optimization.</li>
+  //   </ul>
+  //   Why Join Us?
+  //   <ul style={{ listStyleType: 'circle', paddingLeft: '1vw' }}>
+  //     <li>Be part of a pioneering team shaping the future of sensor technologies in computer vision systems.</li>
+  //     <li>Work on innovative projects that integrate optical design with cutting-edge sensor and software technologies.</li>
+  //     <li>Collaborative work environment with ample opportunities for growth and professional development.</li>
+  //   </ul>`
     
-  },
+  // },
   // {
   //   role: 'Sensor Engineer',
   //   location: 'Seoul, South Korea',
