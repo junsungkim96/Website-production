@@ -155,7 +155,7 @@ const Footer = () => {
                 }}
               >
                 <div>
-                  QblackAI Inc. (큐블랙에이아이(주))
+                  QblackAI Inc.
                   <span className="d-none d-md-inline"> | </span>
                   <span className="d-block d-md-inline">CEO: Junsung Kim</span>
                   <span className="d-none d-md-inline"> | </span>

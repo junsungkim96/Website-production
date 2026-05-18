@@ -27,15 +27,15 @@ const FoundingStory = () => {
         content: 
         `
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
-            The Journey to Innovation: Why I Founded My Company
+            The Journey to Innovation: Why I Founded This Company
         </p>
 
         Ever since I was a child, I’ve been fascinated by science and technology. While my classmates spent their time playing games,
-        I was busy asking endless questions about the world around me—how light bends, how machines work, and why things behave the 
+        I was busy asking endless questions about the world around me, how light bends, how machines work, and why things behave the 
         way they do. This natural curiosity led me to study physics, where I developed a deep appreciation for how fundamental 
         principles could explain the complexities of the universe.
 
-        But alongside my love for physics, another interest started to grow—software engineering. Unlike my structured coursework
+        But alongside my love for physics, another interest started to grow, software engineering. Unlike my structured coursework
         in physics, programming was something I taught myself. I was drawn to the idea that, with the right code, I could create
         something entirely new. I spent countless hours experimenting, building, and refining my skills, slowly realizing that the 
         fusion of physics and software could open doors to incredible possibilities.
@@ -46,15 +46,15 @@ const FoundingStory = () => {
         </p>
 
         My journey into computer vision truly began when I started working in the camera industry. For over two years, I was 
-        deeply involved in the development of imaging systems, analyzing how light interacted with camera hardware—lenses, sensors, 
-        and image processing algorithms—to produce a final image. It was an eye-opening experience, but it also exposed me to a 
-        fundamental problem in the industry: inefficiency.
+        deeply involved in the development of imaging systems, analyzing how light interacted with camera hardware, lenses, sensors, 
+        and image processing algorithms, to produce a final image. It was an eye-opening experience, but it also exposed me to a 
+        fundamental problem in the industry, inefficiency.
 
         I couldn’t understand the conventions of the computer vision industry. It baffled me how training data was fed into 
         machine learning models indiscriminately, without considering the differences in lighting conditions, camera hardware, 
         or image processing algorithms. Every camera system sees the world differently. A slight change in sensor type, lens 
         configuration, or ISP (Image Signal Processing) pipeline can completely alter the appearance of an image. And yet, 
-        many companies in the industry were treating all images as if they were the same—blindly applying deep learning techniques 
+        many companies in the industry were treating all images as if they were the same, blindly applying deep learning techniques 
         without truly understanding the underlying physics of image formation.
 
         This approach was inefficient. Companies spent enormous amounts of time and resources collecting data, training models, 
@@ -66,10 +66,10 @@ const FoundingStory = () => {
             A Vision for Change: Building the Future of Computer Vision
         </p>
         
-        This realization led me to take a bold step—founding my own company. I wanted to change the way computer vision 
+        This realization led me to take a bold step, founding my own company. I wanted to change the way computer vision 
         systems were developed by introducing a more systematic, physics-driven approach. Instead of relying on brute-force 
         data collection and blind training, I envisioned a solution where developers could simulate real-world conditions 
-        before even collecting data—allowing them to optimize models with precision.
+        before even collecting data, allowing them to optimize models with precision.
 
 
         By combining physics-based simulation with deep learning, I set out to build a platform that could model the entire 
@@ -79,17 +79,17 @@ const FoundingStory = () => {
 
         Starting a company wasn’t easy. There were moments of doubt, setbacks, and challenges that seemed impossible to 
         overcome. But every time I looked back at the inefficiencies in the industry, I knew I was on the right path. 
-        The industry didn’t need another incremental improvement—it needed a fundamental shift.
+        The industry didn’t need another incremental improvement, it needed a fundamental shift.
 
 
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Looking Ahead: Redefining Computer Vision
         </p>
         
-        Today, we’re building that future. My company is more than just a business—it’s a mission to transform how 
+        Today, we’re building that future. My company is more than just a business, it’s a mission to transform how 
         computer vision is developed and applied. We believe in leveraging simulation to drive smarter, faster, and 
         more efficient innovation, and we’re just getting started.
-    
+
         The future of computer vision shouldn’t be dictated by trial-and-error experimentation. It should be precise, 
         predictable, and optimized from the ground up. And that’s exactly what we’re here to create.
         `

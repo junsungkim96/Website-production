@@ -25,76 +25,88 @@ const CV = () => {
         link: "/blog/cv",
         content: 
         `
-        Computer vision is no longer just a research topic—it’s the backbone of modern technology, quietly powering 
-        everything from autonomous vehicles and industrial robotics to smartphones and healthcare diagnostics. As 
-        the demand for smarter and faster visual intelligence grows, so does the need for a fundamental shift in 
-        how we design these systems.
+        Computer vision is no longer just a research topic. It has become a core layer of modern technology, quietly powering 
+        autonomous vehicles, industrial robotics, smartphones, and healthcare systems. As demand for smarter and faster visual 
+        intelligence continues to grow, the industry now faces a bigger challenge: rethinking how these systems are designed 
+        from the ground up.
 
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             The Old Paradigm: Trial, Error, and Endless Data
         </p>
-        Traditionally, designing computer vision systems has involved a lot of trial and error. Engineers collect 
-        massive datasets, train neural networks, test them in the real world, tweak the model, and repeat. This 
-        brute-force approach works, but it’s slow, expensive, and often opaque. It also struggles to generalize 
-        across different environments, lighting conditions, or hardware setups.
 
-        As vision systems become more embedded in safety-critical applications—think autonomous driving or surgical 
-        robotics—this guesswork becomes unacceptable.
+        Traditionally, computer vision development has relied heavily on trial and error. Engineers gather massive datasets, 
+        train neural networks, deploy them in the real world, adjust the model, and repeat the process again and again. 
+        Although this brute-force workflow can produce results, it is slow, expensive, and difficult to interpret. It also 
+        struggles to adapt across different lighting conditions, environments, and camera hardware configurations.
+
+        As computer vision becomes deeply integrated into safety-critical applications such as autonomous driving and surgical 
+        robotics, relying on guesswork is no longer sustainable.
 
 
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Design, Simulate, Optimize
         </p>
-        The future of computer vision design lies in precision—in understanding the full imaging pipeline, not 
-        just the algorithm at the end. It means simulating the entire system—from optics and sensors to image 
-        signal processing (ISP) and AI—before touching any real hardware.
 
-        Why simulate? Because simulation enables fast iteration, controlled experimentation, and physics-informed 
-        optimization. Developers can predict how a lens will affect performance under low light, how sensor noise 
-        will propagate through a neural network, or how ISP parameters might bias a model’s output. This unlocks 
-        a whole new level of insight and control.
+        The future of computer vision design will be driven by precision. Instead of focusing only on the neural network, 
+        developers must understand and optimize the entire imaging pipeline. That includes optics, sensors, image signal 
+        processing (ISP), and AI models working together as one system.
+
+        Simulation plays a critical role in this transition. By building virtual environments that reproduce real-world imaging 
+        physics, developers can iterate faster, experiment under controlled conditions, and optimize systems before deploying 
+        physical hardware.
+
+        A simulation platform can predict how a lens behaves under low-light conditions, how sensor noise propagates through a 
+        neural network, or how ISP parameters influence downstream AI performance. This creates a level of visibility and 
+        control that traditional workflows simply cannot provide.
 
 
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             A Shift from Data-Centric to Design-Centric
         </p>
-        We are now entering a design-centric era of computer vision, where the focus shifts from just collecting 
-        more data to intelligently designing the system itself. This means:
 
-        Co-optimizing hardware and software together rather than treating them as separate silos.
+        Computer vision is entering a new era. Instead of endlessly collecting more data, the industry is beginning to focus on 
+        designing better systems.
 
-        Simulating sensor performance before selecting the hardware.
+        This shift introduces several important changes:
 
-        Training models on synthetic, labeled images generated from a virtual environment.
+        Co-optimizing hardware and software together rather than treating them as independent components.
 
-        Using AI to optimize the ISP pipeline for downstream tasks, not just for visual aesthetics.
+        Simulating sensor characteristics before selecting camera hardware.
 
-        These capabilities are no longer theoretical—they are becoming reality through advanced simulation platforms 
-        and AI-driven design tools.
+        Training AI models using synthetic, fully labeled images generated in virtual environments.
+
+        Optimizing ISP pipelines for downstream AI performance instead of only improving image aesthetics.
+
+        These ideas are no longer theoretical concepts. Advanced simulation platforms and AI-driven design tools are already 
+        making them practical and scalable.
 
 
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Bridging Physics and Deep Learning
         </p>
-        One of the most exciting frontiers is the fusion of physics-based modeling with data-driven AI. By incorporating 
-        the laws of optics, image formation, and sensor response into training loops, we can build models that are more
-        robust, interpretable, and adaptable. This hybrid approach reduces reliance on labeled data while improving generalization in the real world.
 
-        Imagine training a vision model not just with labeled photos, but with a simulation that knows how light behaves, 
-        how noise is generated, and how images are processed. The result? A model that’s not only accurate but grounded in the physical world it’s meant to interpret.
+        One of the most exciting developments in the field is the integration of physics-based modeling with deep learning. 
+        By incorporating optics, image formation, and sensor behavior directly into AI training pipelines, developers can build 
+        models that are more robust, interpretable, and adaptable to real-world conditions.
+
+        This hybrid approach reduces dependence on massive labeled datasets while improving generalization performance.
+
+        Imagine training a vision model using a simulation environment that understands how light propagates, how sensors generate 
+        noise, and how imaging pipelines process information. The result is not just a more accurate model, but a system that is 
+        fundamentally grounded in physical reality.
 
 
         <p style="font-size: 25px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; margin-top: 5vh; margin-bottom: 1vh;">
             Conclusion: Vision by Design, Not by Accident
         </p>
-        The future of computer vision design will be defined by simulation, co-optimization, and system-level intelligence. 
-        Instead of relying on guesswork and overfitting to large datasets, we’ll build systems that are intentionally 
-        crafted—from photon to inference.
 
-        As the tools and platforms for virtual design mature, developers will gain the power to simulate, analyze, and 
-        optimize every stage of the imaging pipeline. And with that, we’ll finally move beyond vision as a black box—and 
-        into an era of transparent, explainable, and intelligent vision systems, designed from the ground up for the 
-        real world.
+        The future of computer vision will be shaped by simulation, co-optimization, and system-level intelligence. 
+        Instead of depending on guesswork and excessive data collection, developers will build systems that are intentionally 
+        engineered from photon to inference.
+
+        As virtual design tools continue to mature, engineers will gain the ability to simulate, analyze, and optimize every 
+        stage of the imaging pipeline before deployment. This transition will move computer vision beyond black-box development 
+        and toward a future of transparent, explainable, and physically grounded AI systems built for the real world.
         `
 
     }];
