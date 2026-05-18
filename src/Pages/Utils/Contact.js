@@ -166,7 +166,7 @@ const Contact = () => {
                       >
                         Privacy Policy
                       </a>
-                      &nbsp;of Qblack AI
+                      &nbsp;of QblackAI
                       <span className="text-danger"> *</span>
                     </Form.Label>
                   </div>
