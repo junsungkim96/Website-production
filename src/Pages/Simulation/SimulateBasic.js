@@ -45,7 +45,8 @@ const SimulateBasic = () => {
   const [showStageMenu, setShowStageMenu] = useState(false);
 
   const system_stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
-  const optics_stages = ["Double-Gauss"]
+  // const optics_stages = ["Double-Gauss", "Cooke Triplet"];
+  const optics_stages = ["Cooke Triplet"];
 
   const stageStepsMap = {
     Scene: [
@@ -118,6 +119,11 @@ const SimulateBasic = () => {
   const startTutorial = (stage) => {
     if (stage === "Double-Gauss"){
       setOpticsPreset("DOUBLE_GAUSS");
+      setShowStageMenu(false);
+      return;
+    }
+    else if (stage === "Cooke Triplet"){
+      setOpticsPreset("COOKE TRIPLET");
       setShowStageMenu(false);
       return;
     }
@@ -1563,7 +1569,7 @@ const SimulateBasic = () => {
               <>
                 <span>{item.name}</span>
 
-                {item.name === 'Optics Design' && (
+                {/* {item.name === 'Optics Design' && (
                   <span
                     style={{
                       marginLeft: '8px',
@@ -1579,7 +1585,7 @@ const SimulateBasic = () => {
                   >
                     BETA
                   </span>
-                )}
+                )} */}
               </>
             )}
           </div>

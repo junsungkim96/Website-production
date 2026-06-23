@@ -87,11 +87,25 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
     { surf: 14, type: 'Image', curvature: 0.0, thickness: 0.0, material: 'AIR', clearAperture: Infinity },
   ];
 
+  const COOKE_TRIPLET_PRESET = [
+    { surf: 0, type: 'Object',      curvature: 0.0,         thickness: Infinity, material: 'AIR',   clearAperture: 'auto' },
+    { surf: 1, type: 'Refractive', curvature: 22.01359,    thickness: 3.25896,  material: 'SK16',  clearAperture: 'auto' },
+    { surf: 2, type: 'Refractive', curvature: -435.76044,  thickness: 6.00755,  material: 'AIR',   clearAperture: 'auto' },
+    { surf: 3, type: 'Refractive', curvature: -22.21328,   thickness: 0.99997,  material: 'F2',    clearAperture: 'auto' },
+    { surf: 4, type: 'Stop',       curvature: 20.29192,    thickness: 4.75041,  material: 'AIR',   clearAperture: 10.0 },
+    { surf: 5, type: 'Refractive', curvature: 79.68360,    thickness: 2.95208,  material: 'SK16',  clearAperture: 'auto' },
+    { surf: 6, type: 'Refractive', curvature: -18.39533,   thickness: 42.20778, material: 'AIR',   clearAperture: 'auto' },
+    { surf: 7, type: 'Image',      curvature: 0.0,         thickness: 0.0,      material: 'AIR',   clearAperture: 'auto' },
+  ];
+
 
 
   useEffect(() => {
     if (preset === 'DOUBLE_GAUSS') {
       setLensTable(DOUBLE_GAUSS_PRESET);
+      onPresetConsumed?.();
+    } else if (preset === 'COOKE TRIPLET'){
+      setLensTable(COOKE_TRIPLET_PRESET);
       onPresetConsumed?.();
     }
   }, [preset, onPresetConsumed]);
@@ -149,14 +163,13 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
   const [rayTracePreview, setRayTracePreview] = useState(null);
 
-  const [wavefrontTab, setWavefrontTab] = useState("0F");
+  const [spotTab, setSpotTab] = useState("0F");
   const [psfTab, setPsfTab] = useState("0F");
-  const [mtfTab, setMtfTab] = useState("0F");
 
   const emptyPlots = {"0F": null, "0.7F": null, "1F": null};
-  const [wavefrontPlot, setWavefrontPlot] = useState(emptyPlots);
+  const [spotPlot, setSpotPlot] = useState(emptyPlots);
   const [psfPlot, setPsfPlot] = useState(emptyPlots);
-  const [mtfPlot, setMtfPlot] = useState(emptyPlots);
+  const [mtfPlot, setMtfPlot] = useState(0);
 
   const [analyticsData, setAnalyticsData] = useState(null);
 
@@ -222,8 +235,8 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
     setIsRaytraceRunning(false);
     setIsSimulationRunning(false);
     setPsfPlot(emptyPlots);
-    setWavefrontPlot(emptyPlots);
-    setMtfPlot(emptyPlots);
+    setSpotPlot(emptyPlots);
+    setMtfPlot(null);
     setRayTracePreview(null);
   };
 
@@ -282,8 +295,8 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
   const drawLens = async () => {
     setRayTracePreview(null);
     setPsfPlot(emptyPlots);
-    setWavefrontPlot(emptyPlots);
-    setMtfPlot(emptyPlots);
+    setSpotPlot(emptyPlots);
+    setMtfPlot(null);
 
     // 렌즈 Layout만 그리는 코드
     setIsDrawLensRunning(true);
@@ -370,8 +383,8 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
 
     setRayTracePreview(null);
     setPsfPlot(emptyPlots);
-    setWavefrontPlot(emptyPlots);
-    setMtfPlot(emptyPlots);
+    setSpotPlot(emptyPlots);
+    setMtfPlot(null);
 
     try {
       const payload = {
@@ -446,14 +459,14 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
     }
   };
 
-  
-  const runAnalytics = async() => {
+
+  const runAnalytics = async () => {
     setIsSimulationRunning(true);
 
     setRayTracePreview(null);
-    setPsfPlot(emptyPlots);
-    setWavefrontPlot(emptyPlots);
-    setMtfPlot(emptyPlots);
+    setSpotPlot({ "0F": null, "0.7F": null, "1F": null });
+    setPsfPlot({ "0F": null, "0.7F": null, "1F": null });
+    setMtfPlot(null);
 
     try {
       const payload = {
@@ -468,28 +481,31 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
 
         system: {
           fields: fields
-            .filter(v => v !=="" && v !== null)
-            .map(v => ({angle: Number(v), weight: 1.0})),
-          
+            .filter(v => v !== "" && v !== null)
+            .map(v => ({ angle: Number(v), weight: 1.0 })),
+
           wavelengths: wavelengths
-            .filter(v => v !=="" && v !== null)
+            .filter(v => v !== "" && v !== null)
             .map(v => Number(v))
         }
       };
 
       const response = await fetch(`${API_BASE_URL}/runanalytics`, {
-        method: 'POST',
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) throw new Error("Failed to run raytrace");
+      if (!response.ok)
+        throw new Error("Failed to run analytics");
 
       const data = await response.json();
 
-      // -------------------------------
-      // 1. Raytrace (type === raytrace)
-      // -------------------------------
+      console.log(data);
+
+      //--------------------------------
+      // Raytrace
+      //--------------------------------
       const raytrace = data.find(d => d.type === "raytrace");
 
       if (raytrace) {
@@ -497,59 +513,95 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
           <img
             src={raytrace.image}
             alt="Ray Trace"
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain"
+            }}
           />
         );
-      } 
-      
-      // -------------------------------
-      // 2. Summary
-      // -------------------------------
-      const summary = data.find(d => d.type === "summary")?.data;
-      if (summary) {
-        setAnalyticsData(summary);
       }
 
+      //--------------------------------
+      // Summary
+      //--------------------------------
+      const summary = data.find(d => d.type === "summary")?.data;
 
-      // -------------------------------
-      // 3. Wavefront, PSF, MTF
-      // -------------------------------
-      const wf = { ...emptyPlots };
-      const psf = { ...emptyPlots };
-      const mtf = { ...emptyPlots };
+      if (summary)
+        setAnalyticsData(summary);
+
+      //--------------------------------
+      // Spot / PSF / MTF
+      //--------------------------------
+      const spot = { "0F": null, "0.7F": null, "1F": null };
+      const psf = {};
+      let mtf = null;
 
       data.forEach(d => {
-        if (d.field === null) return;
 
-        const tab = d.field;
+        if (!d.image) return;
 
         const img = (
           <img
             src={d.image}
-            alt={`${d.type} ${tab}`}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            alt={d.type}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain"
+            }}
           />
         );
 
-        if (d.type === "wavefront") wf[tab] = img;
-        if (d.type === "psf")       psf[tab] = img;
-        if (d.type === "mtf")       mtf[tab] = img;
+        //--------------------------------
+        // Spot
+        //--------------------------------
+        if (d.type === "spot") {
+
+          const fieldKey =
+            d.field === 0 ? "0F" :
+            d.field === 1 ? "0.7F" :
+            "1F";
+
+          spot[fieldKey] = img;
+        }
+
+        //--------------------------------
+        // PSF
+        //--------------------------------
+        if (d.type === "psf") {
+
+          const fieldKey =
+            d.field === 0 ? "0F" :
+            d.field === 1 ? "0.7F" :
+            "1F";
+
+          psf[fieldKey] = img;
+        }
+
+        //--------------------------------
+        // MTF
+        //--------------------------------
+        if (d.type === "mtf") {
+          mtf = img;
+        }
       });
 
-      setWavefrontPlot(wf);
+      setSpotPlot(spot);
       setPsfPlot(psf);
       setMtfPlot(mtf);
 
     } catch (err) {
-      console.error("Raytrace failed:", err);
+      console.error("Analytics failed:", err);
     } finally {
       setIsSimulationRunning(false);
     }
   };
 
+
   const exportDesign = () => {
     // Wavefront 결과 체크 (0F 기준)
-    if (!wavefrontPlot || !wavefrontPlot["0F"]) {
+    if (!spotPlot || !spotPlot["0F"]) {
       alert("Please run Ray Trace & Analytics for lens design export");
       return;
     }
@@ -622,7 +674,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
         >
           <img src={minus} alt="Delete" style={{ width: 20, height: 20 }} />
         </button>
-        <button
+        {/* <button
           onClick={drawLens}
           title="Draw Lens"
           style={{ ...iconButtonStyle,
@@ -631,7 +683,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
           disabled={isDrawLensRunning}
         >
           <img src={lens} alt="Add" style={{ width: 20, height: 20, imageRendering: 'auto' }} />
-        </button>
+        </button> */}
         <button
           onClick={runRayTrace}
           title="Ray trace"
@@ -985,7 +1037,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                             >
                               <option value=""></option>
                               <option value="Object">Object</option>
-                              <option value="Refractive">Refractive</option>
+                              <option value="Refractive">Standard</option>
                               <option value="Stop">Stop</option>
                               <option value="Image">Image</option>
                             </select>
@@ -1031,11 +1083,14 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                               <option value="N-BK7">N-BK7</option>
                               <option value="N-BAK4">N-BAK4</option>
                               <option value="N-K5">N-K5</option>
+                              <option value="SK16">SK16</option>
 
                               {/* Flint glasses */}
                               <option value="N-SF5">N-SF5</option>
                               <option value="N-SF10">N-SF10</option>
                               <option value="N-SF11">N-SF11</option>
+                              <option value="F2">F2</option>
+                              
 
                               {/* Special */}
                               <option value="FUSED_SILICA">FUSED SILICA</option>
@@ -1107,27 +1162,27 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
             }}
           >
 
-            {/* Wavefront Map */}
+            {/* Spot Diagram */}
             <div style={plotBoxStyle}>
-              <h5 style={plotTitleRowStyle}>Wavefront Map</h5>
+              <h5 style={plotTitleRowStyle}>Spot Diagram</h5>
 
               <div style={TabBarStyle}>
                 {["0F", "0.7F", "1F"].map(tab => (
                   <div
                     key={tab}
-                    onClick={() => setWavefrontTab(tab)}
+                    onClick={() => setSpotTab(tab)}
                     style={{
                       ...TabStyle,
-                      ...(wavefrontTab === tab ? TabActiveStyle : {})
+                      ...(spotTab === tab ? TabActiveStyle : {})
                     }}
                   >
                     {tab}
                   </div>
                 ))}
               </div>
-
               <div style={plotContentStyle}>
-                {wavefrontPlot[wavefrontTab] || <div style={DisabledStyle}></div>}
+                {/* {wavefrontPlot[wavefrontTab] || <div style={DisabledStyle}></div>} */}
+                {spotPlot[spotTab] || <div style={DisabledStyle}></div>}
               </div>
             </div>
 
@@ -1136,7 +1191,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
             <div style={plotBoxStyle}>
               <h5 style={plotTitleRowStyle}>PSF Plot</h5>
 
-              {/* Tabs */}
+              {/* Field Tabs */}
               <div style={TabBarStyle}>
                 {["0F", "0.7F", "1F"].map(tab => (
                   <div
@@ -1154,7 +1209,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
 
               {/* Content */}
               <div style={plotContentStyle}>
-                {psfPlot[psfTab] || <div style={DisabledStyle}></div>}
+                {psfPlot?.[psfTab] || <div style={DisabledStyle}></div>}
               </div>
             </div>
 
@@ -1163,26 +1218,11 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
             <div style={plotBoxStyle}>
               <h5 style={plotTitleRowStyle}>MTF</h5>
 
-              {/* Tabs */}
-              <div style={TabBarStyle}>
-                {["0F", "0.7F", "1F"].map(tab => (
-                  <div
-                    key={tab}
-                    onClick={() => setMtfTab(tab)}
-                    style={{
-                      ...TabStyle,
-                      ...(mtfTab === tab ? TabActiveStyle : {})
-                    }}
-                  >
-                    {tab}
-                  </div>
-                ))}
-              </div>
-
               {/* Content */}
               <div style={plotContentStyle}>
-                {mtfPlot[mtfTab] || <div style={DisabledStyle}></div>}
+                {mtfPlot || <div style={DisabledStyle}></div>}
               </div>
+
             </div>
           </div>
         </div>

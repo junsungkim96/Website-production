@@ -45,7 +45,8 @@ const Simulate = () => {
   const [showStageMenu, setShowStageMenu] = useState(false);
 
   const system_stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
-  const optics_stages = ["Double-Gauss"]
+  // const optics_stages = ["Double-Gauss", "Cooke Triplet"];
+  const optics_stages = ["Cooke Triplet"];
 
   const stageStepsMap = {
     Scene: [
@@ -115,6 +116,11 @@ const Simulate = () => {
   const startTutorial = (stage) => {
     if (stage === "Double-Gauss"){
       setOpticsPreset("DOUBLE_GAUSS");
+      setShowStageMenu(false);
+      return;
+    }
+    else if (stage === "Cooke Triplet"){
+      setOpticsPreset("COOKE TRIPLET");
       setShowStageMenu(false);
       return;
     }
@@ -1256,11 +1262,11 @@ const Simulate = () => {
             ref={(el) => (menuRefs.current[index] = el)}
             style={{
               ...sidebarItemStyle(activeMenu === item.name),
-              cursor: ['Optics Design', 'Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
-              opacity: ['Optics Design', 'Sensor Design'].includes(item.name) ? 0.5 : 1
+              cursor: ['Sensor Design'].includes(item.name) ? 'not-allowed' : 'pointer',
+              opacity: ['Sensor Design'].includes(item.name) ? 0.5 : 1
             }}
             onClick={() => {
-              if (!['Optics Design', 'Sensor Design'].includes(item.name)) {
+              if (!['Sensor Design'].includes(item.name)) {
               // if (item.name !== 'Sensor Design'){
                 setActiveMenu(item.name);
               }
@@ -1272,7 +1278,7 @@ const Simulate = () => {
               <>
                 <span>{item.name}</span>
 
-                {item.name === 'Optics Design' && (
+                {/* {item.name === 'Optics Design' && (
                   <span
                     style={{
                       marginLeft: '8px',
@@ -1288,7 +1294,7 @@ const Simulate = () => {
                   >
                     BETA
                   </span>
-                )}
+                )} */}
               </>
             )}
           </div>
