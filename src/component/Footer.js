@@ -158,8 +158,6 @@ const Footer = () => {
                   QblackAI Inc.
                   <span className="d-none d-md-inline"> | </span>
                   <span className="d-block d-md-inline">CEO: Junsung Kim</span>
-                  <span className="d-none d-md-inline"> | </span>
-                  <span className="d-block d-md-inline">Tel: +82-507-1460-0620</span>
                 </div>
 
                 <div>

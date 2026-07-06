@@ -64,6 +64,10 @@ const Careers = () => {
       </div>
 
       <hr class="separator"></hr>
+
+      <div className="career-left-text">
+        <p style = {{fontSize: '23px'}}>No open positions</p>
+      </div>
       
       {data.map((a, i) => (
         <React.Fragment key={i}>
