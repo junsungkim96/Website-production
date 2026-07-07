@@ -45,8 +45,8 @@ const Simulate = () => {
   const [showStageMenu, setShowStageMenu] = useState(false);
 
   const system_stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
+  const optics_stages = ["Double-Gauss", "Cooke Triplet", "Fisheye"];
   // const optics_stages = ["Double-Gauss", "Cooke Triplet"];
-  const optics_stages = ["Cooke Triplet"];
 
   const stageStepsMap = {
     Scene: [
@@ -121,6 +121,11 @@ const Simulate = () => {
     }
     else if (stage === "Cooke Triplet"){
       setOpticsPreset("COOKE TRIPLET");
+      setShowStageMenu(false);
+      return;
+    }
+    else if (stage === "Fisheye"){
+      setOpticsPreset("FISHEYE");
       setShowStageMenu(false);
       return;
     }
@@ -334,6 +339,8 @@ const Simulate = () => {
   }
 
   // Optics 
+  const [opticsAnalytics, setOpticsAnalytics] = useState(null);
+  const [opticsData, setOpticsData] = useState([]);
   const [selectedOptics, setSelectedOptics] = useState('');
   const [opticsFile, setOpticsFile] = useState('');
 
@@ -722,6 +729,7 @@ const Simulate = () => {
       selectedScene,
       sceneFile: "",
       selectedOptics,
+      opticsAnalytics: opticsAnalytics ?? null,
       macbethParams: macbeth,
       pointarrayParams: pointarray,
       gridlinesParams: gridlines,
@@ -748,9 +756,9 @@ const Simulate = () => {
       .catch((err) => console.error("FOV check error:", err));
   };
 
-  useEffect(()=>{
-    fovCheck();
-  }, [selectedScene, selectedOptics]);
+  // useEffect(()=>{
+  //   fovCheck();
+  // }, [selectedScene, selectedOptics]);
 
   const detectDevice = () => {
     fetch(`${API_BASE_URL}/get_device`, { method: "POST" })
@@ -793,6 +801,32 @@ const Simulate = () => {
     const photonValues = customIlluminantData.map(row => Number(row[0]));
 
     try {
+      const payload = opticsData[selectedOptics]?.opticsPayload ?? null;
+      
+      const response = await fetch(`${API_BASE_URL}/simulate_optics`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok)
+        throw new Error("Failed to run analytics");
+
+      const data = await response.json();
+      console.log('Data:', data);
+
+      //--------------------------------
+      // Summary
+      //--------------------------------
+      const summary = data.find(d => d.type === "summary")?.data;
+
+      if (summary)
+        setOpticsAnalytics(summary);
+    } catch (err) {
+      console.error("Optics precalculation failed:", err);
+    } 
+
+    try {
       const response = await fetch(`${API_BASE_URL}/simulate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -811,6 +845,7 @@ const Simulate = () => {
           sceneFileParams: sceneFileParams,
           sceneFileIlluminantData: sceneFileIlluminantData,
           optics: selectedOptics,
+          opticsAnalytics: opticsAnalytics,
           sensor: selectedSensor,
           sensorParams: sensorValues,
           isp: selectedISP,
@@ -870,27 +905,29 @@ const Simulate = () => {
         setIsSimulationRunning(false);
       }
 
-      try {
-        await fetch(`/api/log/simulation`, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            userId: localStorage.getItem('userEmail'),
-            plan: localStorage.getItem('userPlan'),
-            timestamp: new Date().toISOString(),
-            status: abortControllerRef.current.aborted ? "aborted" : (errorOccurred ? "failed" : "completed"),
-            inputs: {
-              illuminant: selectedIlluminant,
-              scene: selectedScene,
-              optics: selectedOptics,
-              sensor: selectedSensor,
-              isp: selectedISP,
-              algorithm: selectedAlgorithm
-            }
-          })
-        });
-      } catch(logErr){
-        console.warn("Failed to log simulation:", logErr);
+      if (process.env.NODE_ENV === 'production'){
+        try {
+          await fetch(`/api/log/simulation`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              userId: localStorage.getItem('userEmail'),
+              plan: localStorage.getItem('userPlan'),
+              timestamp: new Date().toISOString(),
+              status: abortControllerRef.current.aborted ? "aborted" : (errorOccurred ? "failed" : "completed"),
+              inputs: {
+                illuminant: selectedIlluminant,
+                scene: selectedScene,
+                optics: selectedOptics,
+                sensor: selectedSensor,
+                isp: selectedISP,
+                algorithm: selectedAlgorithm
+              }
+            })
+          });
+        } catch(logErr){
+          console.warn("Failed to log simulation:", logErr);
+        }
       }
 
     }
@@ -1643,7 +1680,7 @@ const Simulate = () => {
                   </select>
                   
                   <button style={iconButtonStyle} onClick={() => setIsIlluminantLuminanceDialogOpen(true)} id="illuminant-param-select">
-                    <img src={parameter} alt="Params" style={{ width: '20px', height: '20px' }} />
+                    <img src={brightness} alt="Params" style={{ width: '20px', height: '20px' }} />
                   </button>
 
                   {isIlluminantLuminanceDialogOpen && (
@@ -1762,7 +1799,7 @@ const Simulate = () => {
               <div style={sectionStyle}>
                 <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
                 <select id="optics-select" style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1782,7 +1819,7 @@ const Simulate = () => {
                       }
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1905,10 +1942,17 @@ const Simulate = () => {
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
             <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)} 
-              onExport={(filename) => {
+              onExport={({filename, opticsPayload}) => {
                 setOptics(prev =>
                   prev.includes(filename) ? prev : [...prev, filename]
                 );
+
+                setOpticsData(prev => ({
+                  ...prev,
+                  [filename]:{
+                    opticsPayload: opticsPayload
+                  }
+                }));
 
                 setSelectedOptics(filename);
 
