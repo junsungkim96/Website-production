@@ -715,7 +715,7 @@ const Simulate = () => {
     }
   }, [outputText])
 
-  const fovCheck = ({
+  const fovCheck = async ({
     macbeth = macbethParams,
     pointarray = pointarrayParams,
     gridlines = gridlinesParams,
@@ -725,11 +725,32 @@ const Simulate = () => {
   } = {}) => {
     if (!(selectedScene && selectedOptics)) return;
 
+    let max_fov = null;
+
+    try {
+      const opticsPayload = opticsData[selectedOptics]?.opticsPayload ?? null;
+      
+      if (opticsPayload){        
+        const response = await fetch(`${API_BASE_URL}/max_fov`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(opticsPayload)
+        });
+
+        if (!response.ok)
+          throw new Error("Failed to optics max fov");
+
+        max_fov = await response.json();
+      }
+    } catch (err) {
+      console.error("Optics max fov calculation failed:", err);
+    } 
+    
     const payload = {
       selectedScene,
       sceneFile: "",
       selectedOptics,
-      opticsAnalytics: opticsAnalytics ?? null,
+      max_fov: max_fov,
       macbethParams: macbeth,
       pointarrayParams: pointarray,
       gridlinesParams: gridlines,
@@ -756,9 +777,9 @@ const Simulate = () => {
       .catch((err) => console.error("FOV check error:", err));
   };
 
-  // useEffect(()=>{
-  //   fovCheck();
-  // }, [selectedScene, selectedOptics]);
+  useEffect(()=>{
+    fovCheck();
+  }, [selectedScene, selectedOptics]);
 
   const detectDevice = () => {
     fetch(`${API_BASE_URL}/get_device`, { method: "POST" })
@@ -803,27 +824,52 @@ const Simulate = () => {
     try {
       const payload = opticsData[selectedOptics]?.opticsPayload ?? null;
       
-      const response = await fetch(`${API_BASE_URL}/simulate_optics`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+      if(payload){
+        setOutputText(prev => [...prev,  "Optics psf calculation started"]);
+        
+        const response = await fetch(`${API_BASE_URL}/simulate_optics`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
 
-      if (!response.ok)
-        throw new Error("Failed to run analytics");
+        if (!response.ok)
+          throw new Error("Failed to run analytics");
 
-      const data = await response.json();
-      console.log('Data:', data);
+        const data = await response.json();
 
-      //--------------------------------
-      // Summary
-      //--------------------------------
-      const summary = data.find(d => d.type === "summary")?.data;
+        //--------------------------------
+        // Summary
+        //--------------------------------
+        const summary = data.find(d => d.type === "summary")?.data;
 
-      if (summary)
-        setOpticsAnalytics(summary);
+        if (summary)
+          setOpticsAnalytics(summary);
+
+        setOutputText(prev => [...prev,  "Optics psf calculation ended"]);
+      }
     } catch (err) {
       console.error("Optics precalculation failed:", err);
+    }
+    
+    let max_fov = null;
+    try {
+      const opticsPayload = opticsData[selectedOptics]?.opticsPayload ?? null;
+      
+      if (opticsPayload){        
+        const response = await fetch(`${API_BASE_URL}/max_fov`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(opticsPayload)
+        });
+
+        if (!response.ok)
+          throw new Error("Failed to optics max fov");
+
+        max_fov = await response.json();
+      }
+    } catch (err) {
+      console.error("Optics max fov calculation failed:", err);
     } 
 
     try {
@@ -846,6 +892,7 @@ const Simulate = () => {
           sceneFileIlluminantData: sceneFileIlluminantData,
           optics: selectedOptics,
           opticsAnalytics: opticsAnalytics,
+          max_fov: max_fov,
           sensor: selectedSensor,
           sensorParams: sensorValues,
           isp: selectedISP,
