@@ -45,8 +45,8 @@ const SimulatePro = () => {
   const [showStageMenu, setShowStageMenu] = useState(false);
 
   const system_stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
-  // const optics_stages = ["Double-Gauss", "Cooke Triplet"];
-  const optics_stages = ["Cooke Triplet"];
+  const optics_stages = ["Double-Gauss", "Cooke Triplet"];
+  // const optics_stages = ["Cooke Triplet"];
 
   const stageStepsMap = {
     Scene: [
@@ -112,9 +112,6 @@ const SimulatePro = () => {
   };
 
   const [opticsPreset, setOpticsPreset] = useState(null);
-
-  const [opticsAnalytics, setOpticsAnalytics] = useState({});
-
   
   const startTutorial = (stage) => {
     if (stage === "Double-Gauss"){
@@ -124,6 +121,11 @@ const SimulatePro = () => {
     }
     else if (stage === "Cooke Triplet"){
       setOpticsPreset("COOKE TRIPLET");
+      setShowStageMenu(false);
+      return;
+    }
+    else if (stage === "Fisheye"){
+      setOpticsPreset("FISHEYE");
       setShowStageMenu(false);
       return;
     }
@@ -518,6 +520,8 @@ const SimulatePro = () => {
   }
 
   // Optics 
+  const [opticsAnalytics, setOpticsAnalytics] = useState(null);
+  const [opticsData, setOpticsData] = useState([]);
   const [selectedOptics, setSelectedOptics] = useState('');
   const [opticsFile, setOpticsFile] = useState('');
 
@@ -892,7 +896,7 @@ const SimulatePro = () => {
     }
   }, [outputText])
 
-  const fovCheck = ({
+  const fovCheck = async ({
     macbeth = macbethParams,
     pointarray = pointarrayParams,
     gridlines = gridlinesParams,
@@ -902,11 +906,32 @@ const SimulatePro = () => {
   } = {}) => {
     if (!(selectedScene && selectedOptics)) return;
 
+    let max_fov = null;
+
+    try {
+      const opticsPayload = opticsData[selectedOptics]?.opticsPayload ?? null;
+      
+      if (opticsPayload){        
+        const response = await fetch(`${API_BASE_URL}/max_fov`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(opticsPayload)
+        });
+
+        if (!response.ok)
+          throw new Error("Failed to optics max fov");
+
+        max_fov = await response.json();
+      }
+    } catch (err) {
+      console.error("Optics max fov calculation failed:", err);
+    } 
+    
     const payload = {
       selectedScene,
       sceneFile: "",
       selectedOptics,
-      opticsAnalytics: opticsAnalytics[selectedOptics] ?? null,
+      max_fov: max_fov,
       macbethParams: macbeth,
       pointarrayParams: pointarray,
       gridlinesParams: gridlines,
@@ -1021,55 +1046,85 @@ const SimulatePro = () => {
     // Extract only the photon values
     const photonValues = customIlluminantData.map(row => Number(row[0]));
 
-    let sceneFileContent = "";
-    if (sceneFileObj instanceof File){
-      sceneFileContent = await new Promise((resolve, reject)=> {
-        const reader = new FileReader();
-        reader.onload = e => resolve(e.target.result.split(",")[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(sceneFileObj);
-      })
-    } else if (typeof sceneFileObj === "string"){
-      sceneFileContent = sceneFileObj;
-    }
+    try {
+      const payload = opticsData[selectedOptics]?.opticsPayload ?? null;
+      
+      if(payload){
+        setOutputText(prev => [...prev,  "Optics psf calculation started"]);
+        
+        const response = await fetch(`${API_BASE_URL}/simulate_optics`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
 
-    const snapshot = {
-      illuminant: selectedIlluminant,
-      illuminantLuminance: illuminantLuminanceValue,
-      illuminantCustomPhotons: photonValues,
-      scene: selectedScene, 
-      sceneFileName: sceneFile, // 파일 이름
-      sceneFile: sceneFileContent, // 파일 데이터
-      sceneLuminance: sceneLuminanceValue, 
-      macbethParams: macbethParams, 
-      pointarrayParams: pointarrayParams, 
-      gridlinesParams: gridlinesParams, 
-      slantededgeParams: slantededgeParams, 
-      ringsraysParams: ringsraysParams, 
-      sceneFileParams: sceneFileParams, 
-      sceneFileIlluminantData: sceneFileIlluminantData, 
-      optics: selectedOptics,
-      opticsAnalytics: opticsAnalytics[selectedOptics],
-      sensor: selectedSensor, 
-      sensorParams: sensorValues, 
-      isp: selectedISP, 
-      ispParams: ispValues, 
-      algorithm: selectedAlgorithm
-    }
+        if (!response.ok)
+          throw new Error("Failed to run analytics");
 
-    setSimulationHistory(prev => {
-      const trimmed = prev.slice(0, historyIndex + 1);
-      const updated = [...trimmed, snapshot];
-      setHistoryIndex(updated.length - 1);
-      return updated;
-    })
+        const data = await response.json();
+
+        //--------------------------------
+        // Summary
+        //--------------------------------
+        const summary = data.find(d => d.type === "summary")?.data;
+
+        if (summary)
+          setOpticsAnalytics(summary);
+
+        setOutputText(prev => [...prev,  "Optics psf calculation ended"]);
+      }
+    } catch (err) {
+      console.error("Optics precalculation failed:", err);
+    }
+    
+    let max_fov = null;
+    try {
+      const opticsPayload = opticsData[selectedOptics]?.opticsPayload ?? null;
+      
+      if (opticsPayload){        
+        const response = await fetch(`${API_BASE_URL}/max_fov`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(opticsPayload)
+        });
+
+        if (!response.ok)
+          throw new Error("Failed to optics max fov");
+
+        max_fov = await response.json();
+      }
+    } catch (err) {
+      console.error("Optics max fov calculation failed:", err);
+    } 
 
     try {
       const response = await fetch(`${API_BASE_URL}/simulate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(snapshot),
-        signal: controller.signal,
+        body: JSON.stringify({
+          illuminant: selectedIlluminant,
+          illuminantLuminance: illuminantLuminanceValue,
+          illuminantCustomPhotons: photonValues,
+          scene: selectedScene,
+          sceneFile: sceneFile,
+          sceneLuminance: sceneLuminanceValue,
+          macbethParams: macbethParams,
+          pointarrayParams: pointarrayParams,
+          gridlinesParams: gridlinesParams,
+          slantededgeParams: slantededgeParams,
+          ringsraysParams: ringsraysParams,
+          sceneFileParams: sceneFileParams,
+          sceneFileIlluminantData: sceneFileIlluminantData,
+          optics: selectedOptics,
+          opticsAnalytics: opticsAnalytics,
+          max_fov: max_fov,
+          sensor: selectedSensor,
+          sensorParams: sensorValues,
+          isp: selectedISP,
+          ispParams: ispValues,
+          algorithm: selectedAlgorithm
+        }),
+        signal: controller.signal
       });
 
       const reader = response.body.getReader();
@@ -1122,28 +1177,31 @@ const SimulatePro = () => {
         setIsSimulationRunning(false);
       }
 
-      try {
-        await fetch(`/api/log/simulation`, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            userId: localStorage.getItem('userEmail'),
-            plan: localStorage.getItem('userPlan'),
-            timestamp: new Date().toISOString(),
-            status: abortControllerRef.current.aborted ? "aborted" : (errorOccurred ? "failed" : "completed"),
-            inputs: {
-              illuminant: selectedIlluminant,
-              scene: selectedScene,
-              optics: selectedOptics,
-              sensor: selectedSensor,
-              isp: selectedISP,
-              algorithm: selectedAlgorithm
-            }
-          })
-        });
-      } catch(logErr){
-        console.warn("Failed to log simulation:", logErr);
+      if (process.env.NODE_ENV === 'production'){
+        try {
+          await fetch(`/api/log/simulation`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              userId: localStorage.getItem('userEmail'),
+              plan: localStorage.getItem('userPlan'),
+              timestamp: new Date().toISOString(),
+              status: abortControllerRef.current.aborted ? "aborted" : (errorOccurred ? "failed" : "completed"),
+              inputs: {
+                illuminant: selectedIlluminant,
+                scene: selectedScene,
+                optics: selectedOptics,
+                sensor: selectedSensor,
+                isp: selectedISP,
+                algorithm: selectedAlgorithm
+              }
+            })
+          });
+        } catch(logErr){
+          console.warn("Failed to log simulation:", logErr);
+        }
       }
+
     }
   };
 
@@ -2255,16 +2313,19 @@ const SimulatePro = () => {
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
             <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)} 
-              onExport={({filename, analytics}) => {
+              onExport={({filename, opticsPayload}) => {
                 setOptics(prev =>
                   prev.includes(filename) ? prev : [...prev, filename]
                 );
 
-                setSelectedOptics(filename);
-                setOpticsAnalytics(prev => ({
+                setOpticsData(prev => ({
                   ...prev,
-                  [filename]: analytics
-                }))
+                  [filename]:{
+                    opticsPayload: opticsPayload
+                  }
+                }));
+
+                setSelectedOptics(filename);
 
                 setActiveMenu("System Optimization");
               }}

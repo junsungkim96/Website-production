@@ -45,8 +45,8 @@ const Simulate = () => {
   const [showStageMenu, setShowStageMenu] = useState(false);
 
   const system_stages = ["Scene", "Optics", "Sensor", "ISP", "Algorithms"];
-  const optics_stages = ["Double-Gauss", "Cooke Triplet", "Fisheye"];
-  // const optics_stages = ["Double-Gauss", "Cooke Triplet"];
+  // const optics_stages = ["Double-Gauss", "Cooke Triplet", "Fisheye"];
+  const optics_stages = ["Double-Gauss", "Cooke Triplet"];
 
   const stageStepsMap = {
     Scene: [
@@ -133,6 +133,8 @@ const Simulate = () => {
     setRunTour(true);
     setShowStageMenu(false);
   };
+
+  const [showUpgradeTooltip, setShowUpgradeTooltip] = useState(false);
 
 
   const navigate = useNavigate();
@@ -1814,7 +1816,7 @@ const Simulate = () => {
 
                 </div>
 
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     value={sceneFile}
@@ -1837,7 +1839,69 @@ const Simulate = () => {
                     style={{ display: 'none' }}
                     onChange={(e) => e.target.files.length > 0 && setSceneFile(e.target.files[0].name)}
                   />
+                </div> */}
+
+                <div style={fileInputRowStyle}>
+                  <input
+                    type="text"
+                    value={sceneFile}
+                    readOnly
+                    placeholder=""
+                    disabled
+                    style={fileInputStyle}
+                  />
+
+                  <div
+                    style={{ position: "relative", display: "inline-block" }}
+                    onMouseEnter={() => setShowUpgradeTooltip(true)}
+                    onMouseLeave={() => setShowUpgradeTooltip(false)}
+                  >
+                    <button
+                      style={{
+                        ...iconButtonStyle,
+                        opacity: 0.5,
+                        cursor: "not-allowed",
+                      }}
+                      title="Upload"
+                      onClick={(e) => e.preventDefault()} // 업로드 막기
+                    >
+                      <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
+                    </button>
+
+                    {showUpgradeTooltip && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: "110%",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          background: "#1f1f1f",
+                          color: "#fff",
+                          padding: "8px 12px",
+                          borderRadius: "6px",
+                          fontSize: "12px",
+                          whiteSpace: "nowrap",
+                          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                          zIndex: 1000,
+                          pointerEvents: "none",
+                        }}
+                      >
+                        🔒 Upgrade to Basic or Pro to unlock scene upload
+                      </div>
+                    )}
+                  </div>
+
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    onChange={(e) =>
+                      e.target.files.length > 0 &&
+                      setSceneFile(e.target.files[0].name)
+                    }
+                  />
                 </div>
+
               </div>
 
               <div style={dividerStyle}></div>
@@ -1912,7 +1976,7 @@ const Simulate = () => {
                     />
                   )}
                 </div>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1930,7 +1994,7 @@ const Simulate = () => {
                       onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1939,7 +2003,7 @@ const Simulate = () => {
               <div style={sectionStyle}>
                 <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
                 <select id="algorithm-select" style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1957,7 +2021,7 @@ const Simulate = () => {
                       onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
