@@ -10,141 +10,169 @@ import {useNavigate} from 'react-router-dom';
 import linkedin from '../img/sns/linkedin_white.png';
 import youtube from '../img/sns/youtube_white.png';
 import medium from '../img/sns/medium_white.png';
-import {productItems, researchItems, companyItems} from '../data/Menu_data';
+import {productItems, researchItems, companyItems, legalItems} from '../data/Menu_data';
 
 const Footer = () => {
   const navigate = useNavigate();
 
-  return(
+  return (
     <>
-      <hr class="separator" style = {{marginBottom: '3vh'}}></hr>
-      
-      <Container className = "footer-container">
+      <hr className="separator" style={{ marginBottom: '3vh' }} />
+
+      <Container className="footer-container">
         <Row className="footer">
-          <Col xs={6} md={3} className="mb-5">
-            <div className = "footer-title">
-              PRODUCT
-            </div>
+          <Col xs={6} md className="mb-5">
+            <div className="footer-title">PRODUCT</div>
             {productItems.map((item, i) => (
               <div
                 key={i}
                 onClick={() => {
                   if (item === 'Features') {
                     navigate('/product_features');
-                  } 
-                  else if (item === 'Pricing')
-                  {
+                  } else if (item === 'Pricing') {
                     navigate('/product_pricing');
                   }
                 }}
-                className = "footer-font"
-                style={{fontFamily: 'Inter, sans-serif'}}
+                className="footer-font"
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'normal',
+                }}
               >
                 {item}
               </div>
             ))}
           </Col>
 
-          <Col xs={6} md={3} className="mb-5">
-            <div className = "footer-title">
-              RESEARCH
-            </div>
+          <Col xs={6} md className="mb-5">
+            <div className="footer-title">RESEARCH</div>
             {researchItems.map((item, i) => (
               <div
                 key={i}
                 onClick={() => {
                   if (item === 'Overview') {
                     navigate('/research');
-                  }
-                  else if (item === 'Illuminant') {
+                  } else if (item === 'Illuminant') {
                     navigate('/illuminant');
-                  }
-                  else if (item === 'Optics') {
+                  } else if (item === 'Optics') {
                     navigate('/optics');
-                  } 
-                  else if (item === 'Sensor') {
+                  } else if (item === 'Sensor') {
                     navigate('/sensor');
-                  }
-                  else if (item === 'ISP') {
+                  } else if (item === 'ISP') {
                     navigate('/isp');
-                  }
-                  else if (item === 'QPU') {
+                  } else if (item === 'QPU') {
                     navigate('/qpu');
                   }
                 }}
-                className = "footer-font"
-                style={{fontFamily: 'Inter, sans-serif'}}
+                className="footer-font"
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'normal',
+                }}
               >
                 {item}
               </div>
             ))}
           </Col>
-          
-          <Col xs={6} md={3}>
-            <div className = "footer-title">
-              COMPANY
-            </div>
+
+          <Col xs={6} md className="mb-5">
+            <div className="footer-title">COMPANY</div>
             {companyItems.map((item, i) => (
               <div
                 key={i}
                 onClick={() => {
                   if (item === 'About') {
                     navigate('/company');
-                  }
-                  else if (item === 'Blog'){
+                  } else if (item === 'Blog') {
                     navigate('/blog');
-                  }
-                  else if (item === 'Careers') {
+                  } else if (item === 'Careers') {
                     navigate('/careers');
-                  }
-                  else if (item === 'Customer Stories') {
+                  } else if (item === 'Customer Stories') {
                     navigate('/stories');
-                  }
-                  else if (item === 'Investor Relations') {
+                  } else if (item === 'Investor Relations') {
                     navigate('/ir');
-                  }
-                  else if (item === 'News') {
+                  } else if (item === 'News') {
                     navigate('/news');
-                  }
-                  else if (item === 'Contact'){
-                    navigate('/contact')
+                  } else if (item === 'Contact') {
+                    navigate('/contact');
                   }
                 }}
-                className = "footer-font"
-                style={{fontFamily: 'Inter, sans-serif'}}
+                className="footer-font"
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'normal',
+                }}
               >
                 {item}
               </div>
             ))}
           </Col>
 
-          <Col xs={6} md={3}>
-            <div className = "footer-title">
-              FOLLOW US
-            </div>
-            <div className = "footer-font">
-              <a href="https://www.linkedin.com/company/qblackai/" target="_blank" rel="noreferrer noopener">
+          <Col xs={6} md className="mb-5">
+            <div className="footer-title">LEGAL</div>
+            {legalItems.map((item, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  if (item === 'Terms of Service') {
+                    navigate('/terms');
+                  } else if (item === 'Privacy Policy') {
+                    navigate('/privacy');
+                  }
+                }}
+                className="footer-font"
+                style={{
+                  fontFamily: 'Inter, sans-serif',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'normal',
+                }}
+              >
+                {item}
+              </div>
+            ))}
+          </Col>
+
+          <Col xs={6} md className="mb-5">
+            <div className="footer-title">FOLLOW US</div>
+            <div className="footer-font">
+              <a
+                href="https://www.linkedin.com/company/qblackai/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <img className="social-media" src={linkedin} alt="LinkedIn" />
               </a>
-              <a href="https://medium.com/qblackai" target="_blank" rel="noreferrer noopener">
-                <img style = {{padding: '1%'}} className="social-media" src={medium} alt="YouTube" />
+              <a
+                href="https://medium.com/qblackai"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <img
+                  style={{ padding: '1%' }}
+                  className="social-media"
+                  src={medium}
+                  alt="Medium"
+                />
               </a>
-              <a href="https://www.youtube.com/@qblackai" target="_blank" rel="noreferrer noopener">
+              <a
+                href="https://www.youtube.com/@qblackai"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <img className="social-media" src={youtube} alt="YouTube" />
               </a>
             </div>
           </Col>
-
         </Row>
       </Container>
-
-
 
       <div style={{ backgroundColor: 'black', paddingBottom: '1vh' }}>
         <Container>
           <Row className="d-flex align-items-end">
-            {/* Left column */}
-            <Col xs={12} md={6} className = "mb-3 mb-md-0">
+            <Col xs={12} md={6} className="mb-3 mb-md-0">
               <div
                 style={{
                   color: '#aaa',
@@ -159,24 +187,21 @@ const Footer = () => {
                   <span className="d-none d-md-inline"> | </span>
                   <span className="d-block d-md-inline">CEO: Junsung Kim</span>
                 </div>
-
                 <div>
                   Business Registration Number: 469-81-04015
                   <span className="d-none d-md-inline"> | </span>
                   <span className="d-block d-md-inline">
-                    Mail Order Business Registration: 2026-Seoul-Mapo-0619
+                    Mail Order Business Registration: 2026-Gyeongbuk-Gyeongsan-0688
                   </span>
                 </div>
-
                 <div>
-                  3F, Building A, 92 Mapo-daero, Mapo-gu, Seoul, Republic of Korea
+                  1203A, 201 Daegudae-ro, Jillyang-eup, Gyeongsan-si, Gyeongsangbuk-do, Korea
                   <span className="d-none d-md-inline"> | </span>
                   <span className="d-block d-md-inline">Email: info@qblackai.com</span>
                 </div>
               </div>
             </Col>
 
-            {/* Right column */}
             <Col
               xs={12}
               md={6}
@@ -184,22 +209,27 @@ const Footer = () => {
             >
               <div
                 className="footer-right"
-                style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}
+                style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400 }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 Back to top
               </div>
-
-              <div className="footer-right" style={{ marginTop: '1vh', fontFamily: 'Inter, sans-serif', fontWeight: 300 }}>
+              <div
+                className="footer-right"
+                style={{
+                  marginTop: '1vh',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 300,
+                }}
+              >
                 © Copyright QblackAI Inc. All Rights Reserved
               </div>
             </Col>
           </Row>
         </Container>
       </div>
-
     </>
-  )
+  );
 };
 
 export default Footer;

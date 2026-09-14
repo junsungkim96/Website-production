@@ -112,11 +112,11 @@ const App = () => (
           <Route path="/qpu" element={<MainLayout>< QPU /></MainLayout>}/>
           
           {/* Company */}
-          <Route path="/company" element={<MainLayout>< Company /></MainLayout>} />
-          <Route path="/blog" element={<MainLayout>< Blog /></MainLayout>}/>
+          {/* <Route path="/company" element={<MainLayout>< Company /></MainLayout>} /> */}
+          {/* <Route path="/blog" element={<MainLayout>< Blog /></MainLayout>}/> */}
           <Route path="/careers" element={<MainLayout>< Careers /></MainLayout>} />
-          <Route path="/stories" element={<MainLayout>< Stories /></MainLayout>} />
-          <Route path="/ir" element={<MainLayout>< IR /></MainLayout>} />
+          {/* <Route path="/stories" element={<MainLayout>< Stories /></MainLayout>} /> */}
+          {/* <Route path="/ir" element={<MainLayout>< IR /></MainLayout>} /> */}
           <Route path="/news" element={<MainLayout>< News /></MainLayout>} />
 
           {/* Company Blog */}

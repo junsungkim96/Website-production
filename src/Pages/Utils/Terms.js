@@ -2,9 +2,13 @@ import '../../styles/desktop.css';
 import '../../styles/laptop.css';
 import '../../styles/tablet.css';
 import '../../styles/mobile.css';
-import React from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 
 const Terms = () => {
+  useLayoutEffect(()=>{
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '10vh', color: 'white', textAlign: 'left', fontSize: '0.9rem', lineHeight: '2.2', marginBottom: '2rem' }}>
       <div className="term-container" style={{ textAlign: 'left' }}>

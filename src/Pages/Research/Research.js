@@ -5,7 +5,7 @@ import '../../styles/mobile.css';
 import {useNavigate} from 'react-router-dom';
 import React, {useState, useEffect, useLayoutEffect} from 'react';
 import Button from 'react-bootstrap/Button';
-import imaging_pipeline from '../../img/research/research_overview.png';
+import imaging_pipeline from '../../img/research/research.jpg';
 // import light from '../../img/research/lamp.svg';
 // import optics from '../../img/research/optics.png';
 // import microchip from '../../img/research/microchip.png';
@@ -42,7 +42,7 @@ const Research = () => {
         <link rel="canonical" href="https://qblackai.com/research" />
       </Helmet>
       
-      <div style = {{marginBottom: '15vh'}}>
+      <div style = {{marginBottom: '10vh'}}>
         <div className="left-text" style = {{fontSize: '50px'}}>
           Cutting-edge Research
         </div>

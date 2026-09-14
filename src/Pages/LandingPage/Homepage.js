@@ -5,21 +5,22 @@ import '../../styles/mobile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
+import product from '../../img/research/research.jpg';
 import img1 from '../../img/homepage/autonomous.jpg';
-import img2 from '../../img/homepage/manufacturing.png';
-import img3 from '../../img/homepage/ar_vr.jpg';
-import career from '../../img/homepage/career.jpg';
+import img2 from '../../img/homepage/factory.jpg';
+import img3 from '../../img/homepage/arvr.jpg';
+import career from '../../img/homepage/prism.jpg';
 import {useNavigate} from 'react-router-dom';
 import {useLayoutEffect} from 'react';
 import AnimatedBackground from './Animation';
 import money from '../../img/homepage/cash_save.svg';
 import time from '../../img/homepage/hourglass.svg';
 import optimize from '../../img/homepage/optimization.svg';
-import img4 from '../../img/homepage/security-safe.svg';
+import img4 from '../../img/homepage/specificity.svg';
 import img5 from '../../img/homepage/settings-gear.svg';
-import img6 from '../../img/homepage/specificity.svg';
+import img6 from '../../img/homepage/security-safe.svg';
 import {company_name} from '../../data/Company_data';
-import product from '../../img/homepage/product_overview.png';
+// import product from '../../img/homepage/product_overview.png';
 import {Helmet} from "react-helmet";
 
 
@@ -80,7 +81,7 @@ const Homepage = () => {
           alt="End-to-End computer vision imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms"
         />
         <div className="product-center-text">
-          End-to-End imaging pipeline covering Illuminant, Scene, Optics, Sensor, ISP and Algorithms
+          End-to-End Virtual Simulation of the Imaging Pipeline
         </div>
 
         <div className="product-card" style={{ marginTop: '10vh', marginBottom: '10vh' }}>
@@ -183,16 +184,16 @@ const Homepage = () => {
               </div>
               <img className="use-case-image" src={img1} alt="Virtual hardware simulation for autonomous systems AI testing"/>
               <div className="use-case-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
-                Validate AI algorithms on a virtual hardware for testing system-level performance
+                Validate AI algorithms on virtual hardware to evaluate system-level performance
               </div>
             </div>
             <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
               <div className="use-case-text-title">
-                Visual Inspection in Manufacturing
+                Smart Factory
               </div>
               <img className="use-case-image" src={img2} alt = "Simulated visual inspection in manufacturing with different camera hardware and lighting"/>
               <div className="use-case-text" style={{fontFamily: 'Inter, sans-serif', fontWeight: 400}}>
-                Test the performance of inspection algorithms in different camera HW and light settings
+                Evaluate inspection algorithm performance across different camera hardware and lighting conditions
               </div>  
             </div>
             <div className="col-md-4" style = {{display: 'flex', flexDirection: 'column'}}>
@@ -222,7 +223,7 @@ const Homepage = () => {
           <div className="strengths-card">
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <div>
-                <img className="strength-image" src={img6} alt="Icon representing world class accuracy" />
+                <img className="strength-image" src={img4} alt="Icon representing world class accuracy" />
               </div>
               <p className="strength-title">World Class Accuracy</p>
             </div>
@@ -248,7 +249,7 @@ const Homepage = () => {
           <div className="strengths-card">
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
               <div>
-                <img className="strength-image" src={img4} alt="Icon representing secure and private cloud platform" />
+                <img className="strength-image" src={img6} alt="Icon representing secure and private cloud platform" />
               </div>
               <p className="strength-title">Secure and Private</p>
             </div>
