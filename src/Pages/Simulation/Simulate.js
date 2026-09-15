@@ -1144,7 +1144,7 @@ const Simulate = () => {
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden'}}>
       <Helmet>
-        <title>QuasarVision</title>
+        <title>QblackAI</title>
         <meta
           name="description"
           content="Premium simulator for computer vision"

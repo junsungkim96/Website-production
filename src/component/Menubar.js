@@ -219,7 +219,7 @@ const Menubar = () => {
                 >
                   {[
                     {
-                      label: 'QuasarVision →',
+                      label: 'Simulate →',
                       onClick: async() => {
                         setHoveredMenu(null);
                         
