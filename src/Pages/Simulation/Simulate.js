@@ -113,6 +113,8 @@ const Simulate = () => {
 
   const [opticsPreset, setOpticsPreset] = useState(null);
 
+  const [opticsAnalytics, setOpticsAnalytics] = useState({});
+
   const startTutorial = (stage) => {
     if (stage === "Double-Gauss"){
       setOpticsPreset("DOUBLE_GAUSS");
@@ -722,6 +724,7 @@ const Simulate = () => {
       selectedScene,
       sceneFile: "",
       selectedOptics,
+      opticsAnalytics: opticsAnalytics[selectedOptics] ?? null,
       macbethParams: macbeth,
       pointarrayParams: pointarray,
       gridlinesParams: gridlines,
@@ -1905,12 +1908,16 @@ const Simulate = () => {
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
             <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)} 
-              onExport={(filename) => {
+              onExport={({filename, analytics}) => {
                 setOptics(prev =>
                   prev.includes(filename) ? prev : [...prev, filename]
                 );
 
                 setSelectedOptics(filename);
+                setOpticsAnalytics(prev => ({
+                  ...prev,
+                  [filename]: analytics
+                }))
 
                 setActiveMenu("System Optimization");
               }}
