@@ -8,9 +8,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/qblackai_logo.png';
+import company_name from '../img/qblackai_logo_white.png'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { company_name } from '../data/Company_data';
 import {productItems, researchItems, companyItems} from '../data/Menu_data';
 
 
@@ -101,13 +101,10 @@ const Menubar = () => {
         }}
       >
         <Container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <div className="logo-container" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logo} alt="logo" style={{ width: '30px', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
-            <Navbar.Brand
-              style={{ color: 'white', marginLeft: '3px', cursor: 'pointer', transition: 'color 0.3s ease', fontSize: '20.5px'}}
-              onClick={() => closeOffcanvasAndNavigate('/')}
-            >
-              {company_name}
+          <div className="logo-container" style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <img src={logo} alt="logo" style={{ width: '30px', height: '30px', objectFit: 'contain', filter: scrolled ? 'invert(1)' : 'invert(0)', transition: 'filter 0.3s ease' }} />
+            <Navbar.Brand style={{ display: 'flex', alignItems: 'center', margin: 0, padding: 0, cursor: 'pointer' }} onClick={() => closeOffcanvasAndNavigate('/')}>
+              <img src={company_name} alt="QblackAI" style={{ height: '16px', width: 'auto', objectFit: 'contain', display: 'block' }} />
             </Navbar.Brand>
           </div>
           
