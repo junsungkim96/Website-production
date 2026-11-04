@@ -176,7 +176,7 @@ const Footer = () => {
               <div
                 style={{
                   color: '#aaa',
-                  fontSize: '0.65rem',
+                  fontSize: '0.7rem',
                   lineHeight: '2',
                   textAlign: 'left',
                   marginBottom: '0.5vh',
@@ -218,6 +218,7 @@ const Footer = () => {
                 className="footer-right"
                 style={{
                   marginTop: '1vh',
+                  marginBottom: '0.5vh',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 300,
                 }}
