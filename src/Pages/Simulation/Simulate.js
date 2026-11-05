@@ -1580,7 +1580,15 @@ const Simulate = () => {
                   >
                     <img src={newpage} alt="New" style={{ width: 20, height: 20 }} onClick={handleNewPage}/>
                   </button>
-                  <button title="Save" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
+                  <button
+                    title="Save"
+                    onClick={() => {
+                      if (window.confirm("Unlock this feature with a paid plan. Would you like to explore our plans?")) {
+                        window.location.href = '/product_pricing';
+                      }
+                    }}
+                    style={{...iconButtonStyle, opacity: 0.5, cursor: 'pointer'}}
+                  >
                     <img src={save} alt="Save" style={{ width: 20, height: 20 }} />
                   </button>
                   <button title="Back" style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}>
@@ -1741,19 +1749,15 @@ const Simulate = () => {
                 </div>
 
                 <div style={fileInputRowStyle}>
-                  <input
-                    type="text"
-                    value={sceneFile}
-                    readOnly
-                    placeholder=""
-                    disabled
-                    style={fileInputStyle}
-                  />
+                  <input type="text" value={sceneFile} readOnly placeholder="" disabled style={fileInputStyle} />
                   <button
-                    style={{...iconButtonStyle, opacity: 0.5, cursor: 'not-allowed'}}
+                    style={{...iconButtonStyle, opacity: 0.5, cursor: 'pointer'}}
                     title="Upload"
-                    disabled
-                    onClick={() => fileInputRef.current.click()}
+                    onClick={() => {
+                      if (window.confirm("Unlock this feature with a paid plan. Would you like to explore our plans?")) {
+                        window.location.href = '/product_pricing';
+                      }
+                    }}
                   >
                     <img src={upload} alt="Upload" style={{ width: 20, height: 20 }} />
                   </button>
@@ -1772,7 +1776,7 @@ const Simulate = () => {
               <div style={sectionStyle}>
                 <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Optics</label>
                 <select id="optics-select" style={selectStyle} value={selectedOptics} onChange={(e) => setSelectedOptics(e.target.value)}>{optics.map((o, idx) => <option key={idx}>{o}</option>)}</select>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1792,7 +1796,7 @@ const Simulate = () => {
                       }
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1838,7 +1842,7 @@ const Simulate = () => {
                     />
                   )}
                 </div>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1856,7 +1860,7 @@ const Simulate = () => {
                       onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
@@ -1865,7 +1869,7 @@ const Simulate = () => {
               <div style={sectionStyle}>
                 <label style={{ textAlign: 'center', width: '100%', fontSize: '14px', fontWeight: 'bold' }}>Algorithms</label>
                 <select id="algorithm-select" style={selectStyle} value={selectedAlgorithm} onChange={(e) => setSelectedAlgorithm(e.target.value)}>{algorithms.map((a, idx) => <option key={idx}>{a}</option>)}</select>
-                <div style={fileInputRowStyle}>
+                {/* <div style={fileInputRowStyle}>
                   <input
                     type="text"
                     disabled
@@ -1883,7 +1887,7 @@ const Simulate = () => {
                       onChange={(e) => e.target.files.length > 0 && setAlgorithmFile(e.target.files[0].name)}
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={dividerStyle}></div>
