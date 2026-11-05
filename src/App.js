@@ -43,6 +43,7 @@ import SimulatePro from './Pages/Simulation/SimulatePro.js';
 import DesktopInfo from './Pages/Utils/DesktopLogin.js';
 import Dashboard from './Pages/Utils/Dashboard.js';
 import User from './Pages/Utils/User.js';
+import CompanyProfile from './Pages/Utils/CompanyProfile.js';
 
 import {Analytics} from '@vercel/analytics/react';
 
@@ -92,6 +93,7 @@ const App = () => (
         <Routes>
           {/* Homepage */}
           <Route path="/" element={<MainLayout>< Homepage /></MainLayout>} />
+          <Route path="/company_profile" element={<MainLayout><CompanyProfile/></MainLayout>} />
           
           {/* Product */}
           <Route path="/product_features" element={<MainLayout>< Product /></MainLayout>}/>

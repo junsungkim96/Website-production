@@ -133,8 +133,8 @@ const ParticleBackground = () => {
           </Button>
           
           <Button variant = "light" size = "md"
-          onClick = {()=> navigate('/contact')} style = {{borderRadius: '12px'}}>
-            <div className = "career-button">Contact Us →</div> 
+          onClick = {()=> navigate('/company_profile')} style = {{borderRadius: '12px'}}>
+            <div className = "career-button">Company Profile →</div> 
           </Button>
         </div>
 
