@@ -403,7 +403,7 @@ const SimulatePro = () => {
   const [optics, setOptics] = useState(["", "Cooke Triplet", "Double-Gauss", "Fisheye"]);
   const sensors = ["", "Bayer-grbg", "Bayer-rggb", "Bayer-bggr", "Bayer-gbrg"];
   const isps = ["", "OpenISP"];
-  const algorithms = ["", "DETR", "MiDaS_DPT_Small"];
+  const algorithms = ["", "DETR", "SAM_ViT_B", "MiDaS_DPT_Small"];
 
   // Main UI logic
 
