@@ -65,7 +65,7 @@ const SimulatePro = () => {
       { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
       { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
       { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
-      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optics.", placement: "bottom" },
       { target: "#run-button", content: "Run the simulation.", placement: "bottom" }
     ],
     Sensor: [
@@ -75,7 +75,7 @@ const SimulatePro = () => {
       { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
       { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
       { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
-      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optics.", placement: "bottom" },
       { target: "#sensor-select", content: "Select a sensor type.", placement: "bottom" },
       { target: "#sensor-param-select", content: "Configure the sensor parameters.", placement: "bottom" },
       { target: "#run-button", content: "Run the simulation.", placement: "bottom" }
@@ -87,7 +87,7 @@ const SimulatePro = () => {
       { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
       { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
       { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
-      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optics.", placement: "bottom" },
       { target: "#sensor-select", content: "Select a sensor type.", placement: "bottom" },
       { target: "#sensor-param-select", content: "Configure the sensor parameters.", placement: "bottom" },
       { target: "#isp-select", content: "Select an ISP algorithm.", placement: "bottom" },
@@ -101,7 +101,7 @@ const SimulatePro = () => {
       { target: "#scene-select", content: "Choose a scene.", placement: "bottom" },
       { target: "#scene-param-select", content: (<div>Adjust scene parameters.<br/><br/> Diagonal FoV (calculated from HFoV) must be smaller than optics FoV. This will be checked after optics selection.</div>), placement: "bottom" },
       { target: "#scene-luminance-select", content: (<div>Set scene luminance (try a value of 100).<br/>Skip if illuminant luminance is already defined.</div>), placement: "bottom" },
-      { target: "#optics-select", content: "Pick a pre-designed optic.", placement: "bottom" },
+      { target: "#optics-select", content: "Pick a pre-designed optics.", placement: "bottom" },
       { target: "#sensor-select", content: "Select a sensor type.", placement: "bottom" },
       { target: "#sensor-param-select", content: "Configure the sensor parameters.", placement: "bottom" },
       { target: "#isp-select", content: "Select an ISP algorithm.", placement: "bottom" },
@@ -117,20 +117,28 @@ const SimulatePro = () => {
 
   
   const startTutorial = (stage) => {
-    if (stage === "Double-Gauss"){
+    if (stage === "Double-Gauss") {
       setOpticsPreset("DOUBLE_GAUSS");
       setShowStageMenu(false);
       return;
-    }
-    else if (stage === "Cooke Triplet"){
+    } else if (stage === "Cooke Triplet") {
       setOpticsPreset("COOKE TRIPLET");
       setShowStageMenu(false);
       return;
     }
-    setTutorialSteps(stageStepsMap[stage]);
+
+    setTutorialSteps(
+      (stageStepsMap[stage] || []).map(step => ({
+        ...step,
+        disableBeacon: true,
+        hideCloseButton: true,
+      }))
+    );
+
     setRunTour(true);
     setShowStageMenu(false);
   };
+
 
   const [simulationHistory, setSimulationHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);

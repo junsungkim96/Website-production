@@ -94,7 +94,7 @@ Industry: ${industry}
 Thank you for your interest in QblackAI.
 
 Please find our company profile attached.
-If you have any questions or would like to learn more about our technology, please feel free to contact us.
+If you have any questions or would like to learn more about our technology, feel free to contact us.
 
 Best regards,
 QblackAI Team`,
