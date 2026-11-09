@@ -7,6 +7,7 @@ const SensorDialog = ({ onSubmit, onClose, initialValues }) => {
   const [inputs, setInputs] = useState({
     voltage_swing: "1.15",
     well_capacity: "9000",
+    exposure_time: "0.01",
     fill_factor: "0.45",
     pixel_size: "2.2",
     dark_voltage: "10",
@@ -58,6 +59,7 @@ const SensorDialog = ({ onSubmit, onClose, initialValues }) => {
   const labels = [
     { key: "voltage_swing", text: "Voltage Swing (V)" },
     { key: "well_capacity", text: "Well Capacity (e)" },
+    { key: "exposure_time", text: "Exposure Time (s)" },
     { key: "fill_factor", text: "Fill Factor" },
     { key: "pixel_size", text: "Pixel Size (µm)" },
     { key: "dark_voltage", text: "Dark Voltage (µV/s)" },

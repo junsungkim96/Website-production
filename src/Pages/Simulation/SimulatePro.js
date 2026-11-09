@@ -565,6 +565,7 @@ const SimulatePro = () => {
       ],
       voltage_swing: "1.15",          // Voltage Swing (V)
       well_capacity: "9000",          // Well Capacity (e)
+      exposure_time: "0.01",          // Exposure time (s)
       fill_factor: "0.45",            // Fill Factor
       pixel_size: "2.2",              // Pixel Size (µm)
       dark_voltage: "10",             // Dark Voltage (µV/s)
@@ -573,8 +574,8 @@ const SimulatePro = () => {
       dsnu: "1",                      // DSNU (mV)
       analog_gain: "1",               // Analog Gain
       analog_offset: "0",             // Analog Offset
-      rows: "450",                    // Rows
-      cols: "650",                    // Cols
+      rows: "1080",                    // Rows
+      cols: "1920",                    // Cols
   });
 
   const handleSensorSubmit = (values) => {
@@ -771,6 +772,7 @@ const SimulatePro = () => {
       ],
       voltage_swing: "1.15",          // Voltage Swing (V)
       well_capacity: "9000",          // Well Capacity (e)
+      exposure_time: "0.01",          // Exposure time (s)
       fill_factor: "0.45",            // Fill Factor
       pixel_size: "2.2",              // Pixel Size (µm)
       dark_voltage: "10",             // Dark Voltage (µV/s)
