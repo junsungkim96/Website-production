@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+// import { FaPlus, FaMinus } from 'react-icons/fa';
 
 import { API_BASE_URL } from '../../config';
 
@@ -12,46 +12,11 @@ import plus from '../../img/simulate/plus.svg';
 import minus from '../../img/simulate/minus.svg';
 // import stop from '../../img/simulate/stop.svg';
 import upload from '../../img/simulate/upload.svg';
-import lens from '../../img/simulate/lens.png';
+// import lens from '../../img/simulate/lens.png';
 import raytrace from '../../img/simulate/optics.png';
 import analytics from '../../img/simulate/analytics.png';
 
 const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
-  // const DOUBLE_GAUSS_PRESET = [
-  //   // 0 Object
-  //   { surf: 0, type: 'Object', curvature: 0.0, thickness: Infinity, material: 'AIR', clearAperture: Infinity },
-
-  //   // Lens 1
-  //   { surf: 1, type: 'Refractive', curvature: 75.05, thickness: 9.0, material: 'BK7', clearAperture: 33.0 },
-  //   { surf: 2, type: 'Refractive', curvature: 270.7, thickness: 0.1, material: 'AIR', clearAperture: 33.0 },
-
-  //   // Lens 2
-  //   { surf: 3, type: 'Refractive', curvature: 39.27, thickness: 16.51, material: 'BK7', clearAperture: 27.5 },
-  //   { surf: 4, type: 'Refractive', curvature: 0.0, thickness: 0.1, material: 'AIR', clearAperture: 27.5 },
-
-  //   // Lens 3
-  //   { surf: 5, type: 'Refractive', curvature: 0.0, thickness: 2.0, material: 'BK7', clearAperture: 24.5 },
-  //   { surf: 6, type: 'Refractive', curvature: 25.65, thickness: 10.99, material: 'AIR', clearAperture: 19.5 },
-
-  //   // Stop
-  //   { surf: 7, type: 'Stop', curvature: 0.0, thickness: 13.0, material: 'AIR', clearAperture: 18.0 },
-
-  //   // Lens 4
-  //   { surf: 8, type: 'Refractive', curvature: -31.87, thickness: 7.03, material: 'BK7', clearAperture: 16.5 },
-  //   { surf: 9, type: 'Refractive', curvature: 0.0, thickness: 0.1, material: 'AIR', clearAperture: 18.5 },
-
-  //   // Lens 5
-  //   { surf: 10, type: 'Refractive', curvature: 0.0, thickness: 8.98, material: 'BK7', clearAperture: 21.0 },
-  //   { surf: 11, type: 'Refractive', curvature: -43.51, thickness: 0.1, material: 'AIR', clearAperture: 21.0 },
-
-  //   // Lens 6
-  //   { surf: 12, type: 'Refractive', curvature: 221.14, thickness: 7.98, material: 'BK7', clearAperture: 23.0 },
-  //   { surf: 13, type: 'Refractive', curvature: -88.79, thickness: 61.42, material: 'AIR', clearAperture: 23.0 },
-
-  //   // Image
-  //   { surf: 14, type: 'Image', curvature: 0.0, thickness: 0.0, material: 'AIR', clearAperture: Infinity },
-  // ];
-
   const DOUBLE_GAUSS_PRESET = [
     // 0 Object
     { surf: 0, type: 'Object', curvature: 0.0, thickness: Infinity, material: 'AIR', clearAperture: Infinity },
@@ -87,18 +52,56 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
     { surf: 14, type: 'Image', curvature: 0.0, thickness: 0.0, material: 'AIR', clearAperture: Infinity },
   ];
 
+  // const COOKE_TRIPLET_PRESET = [
+  //   { surf: 0, type: 'Object',      curvature: 0.0,         thickness: Infinity, material: 'AIR',   clearAperture: 'auto' },
+  //   { surf: 1, type: 'Refractive', curvature: 22.01359,    thickness: 3.25896,  material: 'SK16',  clearAperture: 'auto' },
+  //   { surf: 2, type: 'Refractive', curvature: -435.76044,  thickness: 6.00755,  material: 'AIR',   clearAperture: 'auto' },
+  //   { surf: 3, type: 'Refractive', curvature: -22.21328,   thickness: 0.99997,  material: 'F2',    clearAperture: 'auto' },
+  //   { surf: 4, type: 'Stop',       curvature: 20.29192,    thickness: 4.75041,  material: 'AIR',   clearAperture: 10.0 },
+  //   { surf: 5, type: 'Refractive', curvature: 79.68360,    thickness: 2.95208,  material: 'SK16',  clearAperture: 'auto' },
+  //   { surf: 6, type: 'Refractive', curvature: -18.39533,   thickness: 42.20778, material: 'AIR',   clearAperture: 'auto' },
+  //   { surf: 7, type: 'Image',      curvature: 0.0,         thickness: 0.0,      material: 'AIR',   clearAperture: 'auto' },
+  // ];
+
   const COOKE_TRIPLET_PRESET = [
-    { surf: 0, type: 'Object',      curvature: 0.0,         thickness: Infinity, material: 'AIR',   clearAperture: 'auto' },
-    { surf: 1, type: 'Refractive', curvature: 22.01359,    thickness: 3.25896,  material: 'SK16',  clearAperture: 'auto' },
-    { surf: 2, type: 'Refractive', curvature: -435.76044,  thickness: 6.00755,  material: 'AIR',   clearAperture: 'auto' },
-    { surf: 3, type: 'Refractive', curvature: -22.21328,   thickness: 0.99997,  material: 'F2',    clearAperture: 'auto' },
-    { surf: 4, type: 'Stop',       curvature: 20.29192,    thickness: 4.75041,  material: 'AIR',   clearAperture: 10.0 },
-    { surf: 5, type: 'Refractive', curvature: 79.68360,    thickness: 2.95208,  material: 'SK16',  clearAperture: 'auto' },
-    { surf: 6, type: 'Refractive', curvature: -18.39533,   thickness: 42.20778, material: 'AIR',   clearAperture: 'auto' },
-    { surf: 7, type: 'Image',      curvature: 0.0,         thickness: 0.0,      material: 'AIR',   clearAperture: 'auto' },
+    { surf: 0, type: 'Object',      curvature: 0.0,          thickness: Infinity, material: 'AIR',   clearAperture: 25.0 },
+    { surf: 1, type: 'Refractive', curvature: 22.01359,     thickness: 3.25896,   material: 'SK16',  clearAperture: 12.5 },
+    { surf: 2, type: 'Refractive', curvature: -435.76044,   thickness: 6.00755,   material: 'AIR',   clearAperture: 11.5 },
+    { surf: 3, type: 'Refractive', curvature: -22.21328,    thickness: 0.99997,   material: 'F2',    clearAperture: 10.8 },
+    { surf: 4, type: 'Stop',       curvature: 20.29192,     thickness: 4.75041,   material: 'AIR',   clearAperture: 10.0 },
+    { surf: 5, type: 'Refractive', curvature: 79.68360,     thickness: 2.95208,   material: 'SK16',  clearAperture: 10.8 },
+    { surf: 6, type: 'Refractive', curvature: -18.39533,    thickness: 42.20778,  material: 'AIR',   clearAperture: 11.8 },
+    { surf: 7, type: 'Image',      curvature: 0.0,           thickness: 0.0,       material: 'AIR',   clearAperture: 15.0 },
   ];
 
-
+  const FISHEYE_PRESET = [
+    { surf: 0,  type: 'Object',      curvature: 0.0,       thickness: Infinity, material: 'AIR',    clearAperture: 'auto' },
+    { surf: 1,  type: 'Refractive', curvature: 28.2482,   thickness: 0.5000,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 2,  type: 'Refractive', curvature: 2.2027,    thickness: 1.4379,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 3,  type: 'Refractive', curvature: 2.7819,    thickness: 1.1174,   material: 'SF1',    clearAperture: 'auto' },
+    { surf: 4,  type: 'Refractive', curvature: -10.4886,  thickness: 0.3022,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 5,  type: 'Refractive', curvature: 1.2417,    thickness: 0.7247,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 6,  type: 'Refractive', curvature: -2.8768,   thickness: 0.5088,   material: 'SF1',    clearAperture: 'auto' },
+    { surf: 7,  type: 'Refractive', curvature: -2.0989,   thickness: 0.4998,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 8,  type: 'Refractive', curvature: -4.2448,   thickness: 0.0150,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 9,  type: 'Refractive', curvature: 8.4162,    thickness: 1.1279,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 10, type: 'Refractive', curvature: -1.6294,   thickness: 0.2486,   material: 'SF1',    clearAperture: 'auto' },
+    { surf: 11, type: 'Refractive', curvature: -4.5056,   thickness: 0.5412,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 12, type: 'Stop',        curvature: 0.0,       thickness: 0.0200,   material: 'AIR',    clearAperture: 0.5 },
+    { surf: 13, type: 'Refractive', curvature: 0.0,       thickness: 0.1689,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 14, type: 'Refractive', curvature: -3.8691,   thickness: 0.1065,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 15, type: 'Refractive', curvature: -6.6827,   thickness: 0.2007,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 16, type: 'Refractive', curvature: -2.2167,   thickness: 0.2822,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 17, type: 'Refractive', curvature: -1.6444,   thickness: 0.1827,   material: 'SF1',    clearAperture: 'auto' },
+    { surf: 18, type: 'Refractive', curvature: -3.3466,   thickness: 0.0149,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 19, type: 'Refractive', curvature: -36.4599,  thickness: 0.5235,   material: 'SF1',    clearAperture: 'auto' },
+    { surf: 20, type: 'Refractive', curvature: 5.3765,    thickness: 0.0373,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 21, type: 'Refractive', curvature: 6.4204,    thickness: 0.6243,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 22, type: 'Refractive', curvature: -2.7537,   thickness: 0.0150,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 23, type: 'Refractive', curvature: 5.1876,    thickness: 0.8475,   material: 'N-SK4', clearAperture: 'auto' },
+    { surf: 24, type: 'Refractive', curvature: 0.0,       thickness: 2.0000,   material: 'AIR',    clearAperture: 'auto' },
+    { surf: 25, type: 'Image',       curvature: 0.0,       thickness: 0.0,      material: 'AIR',    clearAperture: 'auto' }
+  ];
 
   useEffect(() => {
     if (preset === 'DOUBLE_GAUSS') {
@@ -106,6 +109,10 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
       onPresetConsumed?.();
     } else if (preset === 'COOKE TRIPLET'){
       setLensTable(COOKE_TRIPLET_PRESET);
+      onPresetConsumed?.();
+    } 
+    else if (preset === 'FISHEYE'){
+      setLensTable(FISHEYE_PRESET);
       onPresetConsumed?.();
     }
   }, [preset, onPresetConsumed]);
@@ -158,7 +165,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
 
   const [expanded, setExpanded] = useState(true);
 
-  const [isDrawLensRunning, setIsDrawLensRunning] = useState(false);
+  // const [isDrawLensRunning, setIsDrawLensRunning] = useState(false);
   const [isRaytraceRunning, setIsRaytraceRunning] = useState(false);
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
   const [rayTracePreview, setRayTracePreview] = useState(null);
@@ -231,7 +238,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
     setFields([0, 10, 14]);
     setWavelengths([0.4861, 0.5876, 0.6563]);
     
-    setIsDrawLensRunning(false);
+    // setIsDrawLensRunning(false);
     setIsRaytraceRunning(false);
     setIsSimulationRunning(false);
     setPsfPlot(emptyPlots);
@@ -292,91 +299,91 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
   };
 
 
-  const drawLens = async () => {
-    setRayTracePreview(null);
-    setPsfPlot(emptyPlots);
-    setSpotPlot(emptyPlots);
-    setMtfPlot(null);
+  // const drawLens = async () => {
+  //   setRayTracePreview(null);
+  //   setPsfPlot(emptyPlots);
+  //   setSpotPlot(emptyPlots);
+  //   setMtfPlot(null);
 
-    // 렌즈 Layout만 그리는 코드
-    setIsDrawLensRunning(true);
-    setRayTracePreview(null);
-    try {
-      const payload = {
-        lensTable: lensTable.map(row => ({
-          surf: row.surf,
-          type: row.type || "",
-          curvature: row.curvature === Infinity ? "Infinity" : String(row.curvature),
-          thickness: row.thickness === Infinity ? "Infinity" : String(row.thickness),
-          material: row.material || "",
-          clearAperture: row.clearAperture === Infinity ? "Infinity" : String(row.clearAperture)
-        })),
+  //   // 렌즈 Layout만 그리는 코드
+  //   setIsDrawLensRunning(true);
+  //   setRayTracePreview(null);
+  //   try {
+  //     const payload = {
+  //       lensTable: lensTable.map(row => ({
+  //         surf: row.surf,
+  //         type: row.type || "",
+  //         curvature: row.curvature === Infinity ? "Infinity" : String(row.curvature),
+  //         thickness: row.thickness === Infinity ? "Infinity" : String(row.thickness),
+  //         material: row.material || "",
+  //         clearAperture: row.clearAperture === Infinity ? "Infinity" : String(row.clearAperture)
+  //       })),
 
-        system: {
-          fields: fields
-            .filter(v => v !=="" && v !== null)
-            .map(v => ({angle: Number(v), weight: 1.0})),
+  //       system: {
+  //         fields: fields
+  //           .filter(v => v !=="" && v !== null)
+  //           .map(v => ({angle: Number(v), weight: 1.0})),
           
-          wavelengths: wavelengths
-            .filter(v => v !=="" && v !== null)
-            .map(v => Number(v))
-        }
-      };
-      const response = await fetch(`${API_BASE_URL}/draw_lens`, {  // 필요하면 별도 엔드포인트
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) {
-        let errorMessage = "Lens drawing failed";
+  //         wavelengths: wavelengths
+  //           .filter(v => v !=="" && v !== null)
+  //           .map(v => Number(v))
+  //       }
+  //     };
+  //     const response = await fetch(`${API_BASE_URL}/draw_lens`, {  // 필요하면 별도 엔드포인트
+  //       method: 'POST',
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(payload)
+  //     });
+  //     if (!response.ok) {
+  //       let errorMessage = "Lens drawing failed";
 
-        try {
-          const errData = await response.json();
-          if (errData.detail) errorMessage = errData.detail;
-        } catch (_) {}
+  //       try {
+  //         const errData = await response.json();
+  //         if (errData.detail) errorMessage = errData.detail;
+  //       } catch (_) {}
 
-        throw new Error(errorMessage);
-      }
+  //       throw new Error(errorMessage);
+  //     }
 
-      const data = await response.json();
-      setRayTracePreview(
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-          }}
-        >
-          <img
-            src={data.lens_img} // 또는 data.raytrace_img
-            alt="Ray Trace Preview"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-            }}
-          />
-        </div>
-      );
+  //     const data = await response.json();
+  //     setRayTracePreview(
+  //       <div
+  //         style={{
+  //           width: '100%',
+  //           height: '100%',
+  //           display: 'flex',
+  //           alignItems: 'center',
+  //           justifyContent: 'center',
+  //           overflow: 'hidden',
+  //         }}
+  //       >
+  //         <img
+  //           src={data.lens_img} // 또는 data.raytrace_img
+  //           alt="Ray Trace Preview"
+  //           style={{
+  //             width: '100%',
+  //             height: '100%',
+  //             objectFit: 'contain',
+  //           }}
+  //         />
+  //       </div>
+  //     );
 
-      if (data.warnings && data.warnings.length > 0) {
-        setTimeout(() => {
-          alert(
-            "⚠️ Error: Invalid surface parameter\n\n" +
-            data.warnings.join("\n\n")
-          );
-        }, 0);
-      }
+  //     if (data.warnings && data.warnings.length > 0) {
+  //       setTimeout(() => {
+  //         alert(
+  //           "⚠️ Error: Invalid surface parameter\n\n" +
+  //           data.warnings.join("\n\n")
+  //         );
+  //       }, 0);
+  //     }
             
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsDrawLensRunning(false);
-    }
-  };
+  //   } catch (err) {
+  //     console.error(err);
+  //   } finally {
+  //     setIsDrawLensRunning(false);
+  //   }
+  // };
 
   const runRayTrace = async () => {
     setIsRaytraceRunning(true);
@@ -601,8 +608,8 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
 
   const exportDesign = () => {
     // Wavefront 결과 체크 (0F 기준)
-    if (!spotPlot || !spotPlot["0F"]) {
-      alert("Please run Ray Trace & Analytics for lens design export");
+    if (!rayTracePreview) {
+      alert("Please run Ray Trace or Ray Trace & Analytics for lens design export");
       return;
     }
 
@@ -610,15 +617,36 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
     const filename = prompt("Enter optics file name");
     if (!filename) return;
 
-    if (!analyticsData){
-      alert("No analytics data to export");
-      return;
-    }
+    // if (!analyticsData){
+    //   alert("No analytics data to export");
+    //   return;
+    // }
+
+    const opticsPayload = {
+      lensTable: lensTable.map(row => ({
+        surf: row.surf,
+        type: row.type || "",
+        curvature: row.curvature === Infinity ? "Infinity" : String(row.curvature),
+        thickness: row.thickness === Infinity ? "Infinity" : String(row.thickness),
+        material: row.material || "",
+        clearAperture: row.clearAperture === Infinity ? "Infinity" : String(row.clearAperture)
+      })),
+
+      system: {
+        fields: fields
+          .filter(v => v !== "" && v !== null)
+          .map(v => ({ angle: Number(v), weight: 1.0 })),
+
+        wavelengths: wavelengths
+          .filter(v => v !== "" && v !== null)
+          .map(v => Number(v))
+      }
+    };
 
     // 부모로 파일 이름과 데이터 전달
     onExport({
       filename,
-      analytics: analyticsData
+      opticsPayload
     });
   };
 
@@ -980,8 +1008,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                 padding: '10px',
                 overflow: 'hidden',
                 background: '#fff',
-                minWidth: 0,
-                overflow: 'hidden'
+                minWidth: 0
               }}
             >
               <h6 style={{ marginBottom: '6px' }}>Lens Data</h6>
@@ -1084,6 +1111,8 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
                               <option value="N-BAK4">N-BAK4</option>
                               <option value="N-K5">N-K5</option>
                               <option value="SK16">SK16</option>
+                              <option value="SF1">SF1</option>
+                              <option value="N-SK4">N-SK4</option>
 
                               {/* Flint glasses */}
                               <option value="N-SF5">N-SF5</option>

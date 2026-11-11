@@ -1,8 +1,9 @@
+
 const SpectrumPlot = (wave, qe) => {
   if (!wave || !qe) return;
 
-  const width = 900;
-  const height = 700;
+  const width = 1000;
+  const height = 750;
 
   const left = window.screenX + (window.outerWidth - width) / 2;
   const top = window.screenY + (window.outerHeight - height) / 2;
@@ -30,6 +31,7 @@ const SpectrumPlot = (wave, qe) => {
         margin: 0;
         padding: 0;
         overflow: hidden;
+        font-family: Arial, sans-serif;
       }
       #container {
         width: 100%;
@@ -58,21 +60,21 @@ const SpectrumPlot = (wave, qe) => {
               label: 'R',
               data: ${JSON.stringify(qe.R)},
               borderColor: 'red',
-              borderWidth: 1.5,
+              borderWidth: 2.5,
               pointRadius: 0
             },
             {
               label: 'G',
               data: ${JSON.stringify(qe.G)},
               borderColor: 'green',
-              borderWidth: 1.5,
+              borderWidth: 2.5,
               pointRadius: 0
             },
             {
               label: 'B',
               data: ${JSON.stringify(qe.B)},
               borderColor: 'blue',
-              borderWidth: 1.5,
+              borderWidth: 2.5,
               pointRadius: 0
             }
           ]
@@ -80,34 +82,66 @@ const SpectrumPlot = (wave, qe) => {
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          layout: { padding: 6 },
+          layout: { padding: 20 },
           plugins: {
             legend: {
-              labels: { font: { size: 5 } }
+              position: 'top',
+              labels: {
+                font: { size: 16 },
+                boxWidth: 25,
+                padding: 20
+              }
             },
             title: {
               display: true,
               text: 'Quantum Efficiency vs Wavelength',
-              font: { size: 8 }
+              font: {
+                size: 20,
+                weight: 'bold'
+              },
+              padding: {
+                top: 10,
+                bottom: 25
+              }
             }
           },
           scales: {
             x: {
-              ticks: { font: { size: 7 } },
+              ticks: {
+                font: { size: 14 },
+                maxRotation: 0
+              },
               title: {
                 display: true,
                 text: 'Wavelength (nm)',
-                font: { size: 7 }
+                font: {
+                  size: 17,
+                  weight: 'bold'
+                },
+                padding: 12
+              },
+              grid: {
+                color: '#e5e5e5'
               }
             },
             y: {
               min: 0,
               max: 1,
-              ticks: { font: { size: 7 } },
+              ticks: {
+                font: { size: 14 },
+                stepSize: 0.1
+              },
               title: {
                 display: true,
                 text: 'Quantum Efficiency',
-                font: { size: 7 }
+                font: {
+                  size: 17,
+                  weight: 'bold'
+                },
+                padding: 12
+              },
+              grid: {
+                color: '#e5e5e5'
               }
             }
           }
