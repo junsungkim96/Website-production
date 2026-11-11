@@ -402,8 +402,8 @@ const Simulate = () => {
       dsnu: "1",                      // DSNU (mV)
       analog_gain: "1",               // Analog Gain
       analog_offset: "0",             // Analog Offset
-      rows: "450",                    // Rows
-      cols: "650",                    // Cols
+      rows: "1080",                    // Rows
+      cols: "1920",                    // Cols
   });
 
   const handleSensorSubmit = (values) => {
@@ -1876,7 +1876,7 @@ const Simulate = () => {
                       style={{
                         ...iconButtonStyle,
                         opacity: 0.5,
-                        cursor: "not-allowed",
+                        cursor: 'pointer',
                       }}
                       title="Upload"
                       onClick={() => {

@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const SpectrumPlot = (wave, energy) => {
@@ -32,6 +33,7 @@ const SpectrumPlot = (wave, energy) => {
         margin: 0;
         padding: 0;
         overflow: hidden;
+        font-family: Arial, sans-serif;
       }
       #container {
         width: 100%;
@@ -60,7 +62,7 @@ const SpectrumPlot = (wave, energy) => {
               label: 'Energy',
               data: ${JSON.stringify(energy)},
               borderColor: 'rgba(75,192,192,1)',
-              borderWidth: 1.5,
+              borderWidth: 2.5,
               pointRadius: 0,
               fill: false
             }
@@ -69,39 +71,70 @@ const SpectrumPlot = (wave, energy) => {
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          layout: { padding: 6 },
+          layout: { padding: 20 },
           plugins: {
             legend: {
-              labels: { font: { size: 5 } }
+              position: 'top',
+              labels: {
+                font: { size: 16 },
+                boxWidth: 25,
+                padding: 20
+              }
             },
             title: {
               display: true,
               text: 'Energy vs Wavelength',
-              font: { size: 8 }
+              font: {
+                size: 20,
+                weight: 'bold'
+              },
+              padding: {
+                top: 10,
+                bottom: 25
+              }
             },
             tooltip: {
-              titleFont: { size: 7 },
-              bodyFont: { size: 7 },
-              footerFont: { size: 7 },
-              padding: 4,
-              caretSize: 4
+              titleFont: { size: 14 },
+              bodyFont: { size: 14 },
+              footerFont: { size: 12 },
+              padding: 10,
+              caretSize: 6
             }
           },
           scales: {
             x: {
-              ticks: { font: { size: 7 } },
+              ticks: {
+                font: { size: 14 },
+                maxRotation: 0
+              },
               title: {
                 display: true,
                 text: 'Wavelength (nm)',
-                font: { size: 7 }
+                font: {
+                  size: 17,
+                  weight: 'bold'
+                },
+                padding: 12
+              },
+              grid: {
+                color: '#e5e5e5'
               }
             },
             y: {
-              ticks: { font: { size: 7 } },
+              ticks: {
+                font: { size: 14 }
+              },
               title: {
                 display: true,
                 text: 'Energy (a.u.)',
-                font: { size: 7 }
+                font: {
+                  size: 17,
+                  weight: 'bold'
+                },
+                padding: 12
+              },
+              grid: {
+                color: '#e5e5e5'
               }
             }
           }
