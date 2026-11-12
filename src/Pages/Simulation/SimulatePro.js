@@ -459,7 +459,7 @@ const SimulatePro = () => {
   const fileInputRef = useRef(null);
   const [selectedScene, setSelectedScene] = useState('');
   const [sceneFile, setSceneFile] = useState('');
-  const [sceneFileObj, setSceneFileObj] = useState(null);
+  const [sceneFileObj, setSceneFileObj] = useState('');
   const [sceneLuminanceValue, setSceneLuminanceValue] = useState('');
 
   const [isMacbethDialogOpen, setIsMacbethDialogOpen] = useState(false);
@@ -484,6 +484,11 @@ const SimulatePro = () => {
   }
 
   const sceneButtonClick = () => {
+    if (sceneFile){
+      setIsSceneFileDialogOpen(true);
+      return;
+    }
+
     if (selectedScene === '') return;
     else if (selectedScene === 'Macbeth') setIsMacbethDialogOpen(true);
     else if (selectedScene === 'Point Array') setIsPointArrayDialogOpen(true);
@@ -524,7 +529,7 @@ const SimulatePro = () => {
 
   const handleSceneFileSubmit = (values) => {
     setSceneFileValues(values);
-    fovCheck({sceneFile: values});
+    fovCheck({sceneParams: values});
   }
 
   // Optics 
@@ -737,6 +742,7 @@ const SimulatePro = () => {
     setSceneFileValues({'hfov': 10, 'illuminant': ''});
     setSceneFileIlluminantData(Array.from({length: 31}, () => ["",""]));
     setSceneFile('');
+    setSceneFileObj('');
 
     // Optics
     setSelectedOptics('');
@@ -912,9 +918,9 @@ const SimulatePro = () => {
     gridlines = gridlinesParams,
     slantededge = slantededgeParams,
     ringsrays = ringsraysParams,
-    sceneFile = sceneFileParams,
+    sceneParams = sceneFileParams,
   } = {}) => {
-    if (!(selectedScene && selectedOptics)) return;
+    if (!(selectedScene || sceneFile) || !selectedOptics) return;
 
     let max_fov = null;
 
@@ -929,7 +935,7 @@ const SimulatePro = () => {
         });
 
         if (!response.ok)
-          throw new Error("Failed to optics max fov");
+          throw new Error("Failed to get optics max fov");
 
         max_fov = await response.json();
       }
@@ -939,7 +945,7 @@ const SimulatePro = () => {
     
     const payload = {
       selectedScene,
-      sceneFile: "",
+      sceneFile: sceneFileObj,
       selectedOptics,
       max_fov: max_fov,
       macbethParams: macbeth,
@@ -947,7 +953,7 @@ const SimulatePro = () => {
       gridlinesParams: gridlines,
       slantededgeParams: slantededge,
       ringsraysParams: ringsrays,
-      sceneFileParams: sceneFile,
+      sceneFileParams: sceneParams,
     };
 
     fetch(`${API_BASE_URL}/fov_check`, {
@@ -970,7 +976,7 @@ const SimulatePro = () => {
 
   useEffect(()=>{
     fovCheck();
-  }, [selectedScene, selectedOptics]);
+  }, [selectedScene, sceneFileObj, selectedOptics]);
 
   const detectDevice = () => {
     fetch(`${API_BASE_URL}/get_device`, { method: "POST" })
@@ -1117,6 +1123,7 @@ const SimulatePro = () => {
           illuminantCustomPhotons: photonValues,
           scene: selectedScene,
           sceneFile: sceneFile,
+          sceneFileObj: sceneFileObj,
           sceneLuminance: sceneLuminanceValue,
           macbethParams: macbethParams,
           pointarrayParams: pointarrayParams,
@@ -2065,7 +2072,7 @@ const SimulatePro = () => {
                     onChange = {(e) => {
                       setSelectedScene(e.target.value);
                       setSceneFile('');
-                      setSceneFileObj(null);
+                      setSceneFileObj('');
                     }}
                   >
                     {scenes.map((s, idx) => <option key={idx} value = {s}>{s}</option>)}
@@ -2128,13 +2135,18 @@ const SimulatePro = () => {
                     type="file"
                     ref={fileInputRef}
                     style={{ display: 'none' }}
-                    onChange={(e) => {
-                      if(e.target.files.length > 0){
-                        setSceneFile(e.target.files[0].name);
-                        setSceneFileObj(e.target.files[0]);
-                        setSelectedScene('');    
-                      }
-                    }}
+                    onChange={async (e) => {
+                    if (e.target.files.length > 0) {
+                      const file = e.target.files[0];
+                      setSceneFile(file.name);
+                      const reader = new FileReader();
+                      reader.onload = () => {
+                        setSceneFileObj(reader.result);
+                      };
+                      reader.readAsDataURL(file);
+                      setSelectedScene('');
+                    }
+                  }}
                   />
                 </div>
               </div>

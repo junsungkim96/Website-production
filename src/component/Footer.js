@@ -186,6 +186,8 @@ const Footer = () => {
                   QblackAI Inc.
                   <span className="d-none d-md-inline"> | </span>
                   <span className="d-block d-md-inline">CEO: Junsung Kim</span>
+                  <span className="d-none d-md-inline"> | </span>
+                  <span className="d-block d-md-inline">Tel: 82-02-6332-0211</span>
                 </div>
                 <div>
                   Business Registration Number: 469-81-04015
