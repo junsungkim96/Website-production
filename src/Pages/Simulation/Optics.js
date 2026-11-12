@@ -16,7 +16,7 @@ import upload from '../../img/simulate/upload.svg';
 import raytrace from '../../img/simulate/optics.png';
 import analytics from '../../img/simulate/analytics.png';
 
-const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
+const OpticsDesign = ({preset, currentPlan, onPresetConsumed, onExport}) => {
   const DOUBLE_GAUSS_PRESET = [
     // 0 Object
     { surf: 0, type: 'Object', curvature: 0.0, thickness: Infinity, material: 'AIR', clearAperture: Infinity },
@@ -609,7 +609,7 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
   const exportDesign = () => {
     // Wavefront 결과 체크 (0F 기준)
     if (!rayTracePreview) {
-      alert("Please run Ray Trace or Ray Trace & Analytics for lens design export");
+      alert('Please run "Ray Trace" or "Ray Trace & Analytics" for lens design export');
       return;
     }
 
@@ -732,11 +732,31 @@ const OpticsDesign = ({preset, onPresetConsumed, onExport}) => {
         >
           <img src={analytics} alt="Analytics" style={{ width: 20, height: 20 }} />
         </button>
-        <button
+        {/* <button
           onClick={exportDesign}
           style={{ ...iconButtonStyle}}
           title="Export Lens Design to System Optimization menu"
           // disabled
+        >
+          <img src={upload} alt="Export" style={{ width: 20, height: 20 }} />
+        </button> */}
+
+        <button
+          onClick={() => {
+            if (currentPlan === "Free Trial") {
+              if (window.confirm("Unlock this feature with a paid plan. Would you like to explore our plans?")) {
+                window.location.href = '/product_pricing';
+              }
+              return;
+            }
+
+            exportDesign();
+          }}
+          style={{
+            ...iconButtonStyle,
+            opacity: currentPlan === "Free Trial" ? 0.5 : 1
+          }}
+          title="Export Lens Design to System Optimization menu"
         >
           <img src={upload} alt="Export" style={{ width: 20, height: 20 }} />
         </button>

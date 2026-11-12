@@ -2050,7 +2050,7 @@ const Simulate = () => {
 
         {activeMenu === 'Optics Design' && (
           <div style={mainContentStyle}>
-            <OpticsDesign preset={opticsPreset} onPresetConsumed = {() => setOpticsPreset(null)} 
+            <OpticsDesign preset={opticsPreset} currentPlan = {currentPlan} onPresetConsumed = {() => setOpticsPreset(null)} 
               onExport={({filename, opticsPayload}) => {
                 setOptics(prev =>
                   prev.includes(filename) ? prev : [...prev, filename]
