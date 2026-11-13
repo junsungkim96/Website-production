@@ -1,5 +1,5 @@
 
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Form, Button, Row } from 'react-bootstrap';
@@ -29,6 +29,8 @@ const CompanyProfile = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
@@ -64,7 +66,7 @@ const CompanyProfile = () => {
 
       <div style={{ marginBottom: '10vh' }}>
         <div className="left-text" style={{ fontSize: '50px' }}>
-          Company Profile
+          Company {isSmallScreen ? <br/> : null} Profile
         </div>
         <br />
         <p className="company-text">
